@@ -15,3 +15,6 @@ H:\Tiger\V2\Tiger-demov2\bin\Debug\log4net.dll
 H:\Tiger\V2\Tiger-demov2\bin\Debug\ZedGraph.dll
 H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tige.exe
 H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tige.pdb
+H:\Tiger\V2-down\Tiger-demov2\bin\Debug\Tige.exe.config
+H:\Tiger\V2-down\Tiger-demov2\obj\x86\Debug\Tige.exe
+H:\Tiger\V2-down\Tiger-demov2\obj\x86\Debug\Tige.pdb
