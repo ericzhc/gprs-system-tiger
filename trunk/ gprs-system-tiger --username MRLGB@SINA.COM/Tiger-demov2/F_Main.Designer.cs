@@ -63,28 +63,28 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.textBox32 = new System.Windows.Forms.TextBox();
+            this.txt_Fee_effect = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.textBox28 = new System.Windows.Forms.TextBox();
+            this.txt_Energy_alternative = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.textBox19 = new System.Windows.Forms.TextBox();
-            this.textBox21 = new System.Windows.Forms.TextBox();
+            this.txt_Solar_assurance_year = new System.Windows.Forms.TextBox();
+            this.txt_Solar_assurance_day = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.textBox31 = new System.Windows.Forms.TextBox();
-            this.textBox29 = new System.Windows.Forms.TextBox();
-            this.textBox30 = new System.Windows.Forms.TextBox();
+            this.txt_Dust_emission = new System.Windows.Forms.TextBox();
+            this.txt_Sulfur_emission = new System.Windows.Forms.TextBox();
+            this.txt_Carbon_emission = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox27 = new System.Windows.Forms.TextBox();
+            this.txt_System_efficiency = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.txt_System_heat = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -153,7 +153,7 @@
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(946, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(958, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -172,7 +172,7 @@
             // 系统配置ToolStripMenuItem
             // 
             this.系统配置ToolStripMenuItem.Name = "系统配置ToolStripMenuItem";
-            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.系统配置ToolStripMenuItem.Text = "系统配置";
             this.系统配置ToolStripMenuItem.Click += new System.EventHandler(this.系统配置ToolStripMenuItem_Click);
             // 
@@ -185,7 +185,7 @@
             this.分离DTUToolStripMenuItem,
             this.服务参数设置ToolStripMenuItem});
             this.数据中心配置ToolStripMenuItem.Name = "数据中心配置ToolStripMenuItem";
-            this.数据中心配置ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.数据中心配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.数据中心配置ToolStripMenuItem.Text = "数据中心";
             // 
             // 中心参数设置ToolStripMenuItem
@@ -226,20 +226,20 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem2.Text = "系统重启";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // 刷新信息ToolStripMenuItem
             // 
             this.刷新信息ToolStripMenuItem.Name = "刷新信息ToolStripMenuItem";
-            this.刷新信息ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.刷新信息ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.刷新信息ToolStripMenuItem.Text = "刷新信息";
             // 
             // 系统退出ToolStripMenuItem
             // 
             this.系统退出ToolStripMenuItem.Name = "系统退出ToolStripMenuItem";
-            this.系统退出ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.系统退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.系统退出ToolStripMenuItem.Text = "系统退出";
             this.系统退出ToolStripMenuItem.Click += new System.EventHandler(this.系统退出ToolStripMenuItem_Click);
             // 
@@ -357,14 +357,14 @@
             // 
             // statusBar1
             // 
-            this.statusBar1.Location = new System.Drawing.Point(0, 578);
+            this.statusBar1.Location = new System.Drawing.Point(0, 668);
             this.statusBar1.Name = "statusBar1";
             this.statusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.statusBarPanel1,
             this.statusBarPanel2,
             this.statusBarPanel3});
             this.statusBar1.ShowPanels = true;
-            this.statusBar1.Size = new System.Drawing.Size(946, 22);
+            this.statusBar1.Size = new System.Drawing.Size(958, 22);
             this.statusBar1.TabIndex = 4;
             // 
             // splitContainer1
@@ -382,8 +382,8 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(946, 535);
-            this.splitContainer1.SplitterDistance = 428;
+            this.splitContainer1.Size = new System.Drawing.Size(958, 625);
+            this.splitContainer1.SplitterDistance = 433;
             this.splitContainer1.TabIndex = 3;
             // 
             // groupBox1
@@ -399,13 +399,13 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(428, 535);
+            this.groupBox1.Size = new System.Drawing.Size(433, 625);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.Color.Green;
             this.button1.Location = new System.Drawing.Point(116, 450);
             this.button1.Name = "button1";
@@ -420,23 +420,23 @@
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox8.AutoSize = true;
-            this.groupBox8.Controls.Add(this.textBox32);
+            this.groupBox8.Controls.Add(this.txt_Fee_effect);
             this.groupBox8.Controls.Add(this.label30);
             this.groupBox8.Location = new System.Drawing.Point(65, 376);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(299, 68);
+            this.groupBox8.Size = new System.Drawing.Size(304, 68);
             this.groupBox8.TabIndex = 49;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "项目费效比：";
             // 
-            // textBox32
+            // txt_Fee_effect
             // 
-            this.textBox32.ForeColor = System.Drawing.Color.Red;
-            this.textBox32.Location = new System.Drawing.Point(185, 19);
-            this.textBox32.Name = "textBox32";
-            this.textBox32.Size = new System.Drawing.Size(83, 21);
-            this.textBox32.TabIndex = 24;
-            this.textBox32.Text = "---------";
+            this.txt_Fee_effect.ForeColor = System.Drawing.Color.Red;
+            this.txt_Fee_effect.Location = new System.Drawing.Point(185, 19);
+            this.txt_Fee_effect.Name = "txt_Fee_effect";
+            this.txt_Fee_effect.Size = new System.Drawing.Size(83, 21);
+            this.txt_Fee_effect.TabIndex = 24;
+            this.txt_Fee_effect.Text = "---------";
             // 
             // label30
             // 
@@ -452,23 +452,23 @@
             this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox9.AutoSize = true;
-            this.groupBox9.Controls.Add(this.textBox28);
+            this.groupBox9.Controls.Add(this.txt_Energy_alternative);
             this.groupBox9.Controls.Add(this.label20);
             this.groupBox9.Location = new System.Drawing.Point(65, 314);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(299, 69);
+            this.groupBox9.Size = new System.Drawing.Size(304, 69);
             this.groupBox9.TabIndex = 48;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "常规能源替代量：";
             // 
-            // textBox28
+            // txt_Energy_alternative
             // 
-            this.textBox28.ForeColor = System.Drawing.Color.Red;
-            this.textBox28.Location = new System.Drawing.Point(185, 20);
-            this.textBox28.Name = "textBox28";
-            this.textBox28.Size = new System.Drawing.Size(80, 21);
-            this.textBox28.TabIndex = 24;
-            this.textBox28.Text = "---------";
+            this.txt_Energy_alternative.ForeColor = System.Drawing.Color.Red;
+            this.txt_Energy_alternative.Location = new System.Drawing.Point(185, 20);
+            this.txt_Energy_alternative.Name = "txt_Energy_alternative";
+            this.txt_Energy_alternative.Size = new System.Drawing.Size(80, 21);
+            this.txt_Energy_alternative.TabIndex = 24;
+            this.txt_Energy_alternative.Text = "---------";
             // 
             // label20
             // 
@@ -484,34 +484,34 @@
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox7.AutoSize = true;
-            this.groupBox7.Controls.Add(this.textBox19);
-            this.groupBox7.Controls.Add(this.textBox21);
+            this.groupBox7.Controls.Add(this.txt_Solar_assurance_year);
+            this.groupBox7.Controls.Add(this.txt_Solar_assurance_day);
             this.groupBox7.Controls.Add(this.label18);
             this.groupBox7.Controls.Add(this.label15);
             this.groupBox7.Location = new System.Drawing.Point(65, 225);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(299, 91);
+            this.groupBox7.Size = new System.Drawing.Size(304, 91);
             this.groupBox7.TabIndex = 47;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "系统太阳能保证率:";
             // 
-            // textBox19
+            // txt_Solar_assurance_year
             // 
-            this.textBox19.ForeColor = System.Drawing.Color.Red;
-            this.textBox19.Location = new System.Drawing.Point(185, 42);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(83, 21);
-            this.textBox19.TabIndex = 24;
-            this.textBox19.Text = "---------";
+            this.txt_Solar_assurance_year.ForeColor = System.Drawing.Color.Red;
+            this.txt_Solar_assurance_year.Location = new System.Drawing.Point(185, 42);
+            this.txt_Solar_assurance_year.Name = "txt_Solar_assurance_year";
+            this.txt_Solar_assurance_year.Size = new System.Drawing.Size(83, 21);
+            this.txt_Solar_assurance_year.TabIndex = 24;
+            this.txt_Solar_assurance_year.Text = "---------";
             // 
-            // textBox21
+            // txt_Solar_assurance_day
             // 
-            this.textBox21.ForeColor = System.Drawing.Color.Red;
-            this.textBox21.Location = new System.Drawing.Point(185, 16);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(83, 21);
-            this.textBox21.TabIndex = 24;
-            this.textBox21.Text = "---------";
+            this.txt_Solar_assurance_day.ForeColor = System.Drawing.Color.Red;
+            this.txt_Solar_assurance_day.Location = new System.Drawing.Point(185, 16);
+            this.txt_Solar_assurance_day.Name = "txt_Solar_assurance_day";
+            this.txt_Solar_assurance_day.Size = new System.Drawing.Size(83, 21);
+            this.txt_Solar_assurance_day.TabIndex = 24;
+            this.txt_Solar_assurance_day.Text = "---------";
             // 
             // label18
             // 
@@ -536,45 +536,45 @@
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.AutoSize = true;
-            this.groupBox5.Controls.Add(this.textBox31);
-            this.groupBox5.Controls.Add(this.textBox29);
-            this.groupBox5.Controls.Add(this.textBox30);
+            this.groupBox5.Controls.Add(this.txt_Dust_emission);
+            this.groupBox5.Controls.Add(this.txt_Sulfur_emission);
+            this.groupBox5.Controls.Add(this.txt_Carbon_emission);
             this.groupBox5.Controls.Add(this.label29);
             this.groupBox5.Controls.Add(this.label27);
             this.groupBox5.Controls.Add(this.label28);
             this.groupBox5.Location = new System.Drawing.Point(65, 128);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(299, 110);
+            this.groupBox5.Size = new System.Drawing.Size(304, 110);
             this.groupBox5.TabIndex = 44;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "环境效益";
             // 
-            // textBox31
+            // txt_Dust_emission
             // 
-            this.textBox31.ForeColor = System.Drawing.Color.Red;
-            this.textBox31.Location = new System.Drawing.Point(185, 61);
-            this.textBox31.Name = "textBox31";
-            this.textBox31.Size = new System.Drawing.Size(80, 21);
-            this.textBox31.TabIndex = 24;
-            this.textBox31.Text = "---------";
+            this.txt_Dust_emission.ForeColor = System.Drawing.Color.Red;
+            this.txt_Dust_emission.Location = new System.Drawing.Point(185, 61);
+            this.txt_Dust_emission.Name = "txt_Dust_emission";
+            this.txt_Dust_emission.Size = new System.Drawing.Size(80, 21);
+            this.txt_Dust_emission.TabIndex = 24;
+            this.txt_Dust_emission.Text = "---------";
             // 
-            // textBox29
+            // txt_Sulfur_emission
             // 
-            this.textBox29.ForeColor = System.Drawing.Color.Red;
-            this.textBox29.Location = new System.Drawing.Point(185, 37);
-            this.textBox29.Name = "textBox29";
-            this.textBox29.Size = new System.Drawing.Size(80, 21);
-            this.textBox29.TabIndex = 24;
-            this.textBox29.Text = "---------";
+            this.txt_Sulfur_emission.ForeColor = System.Drawing.Color.Red;
+            this.txt_Sulfur_emission.Location = new System.Drawing.Point(185, 37);
+            this.txt_Sulfur_emission.Name = "txt_Sulfur_emission";
+            this.txt_Sulfur_emission.Size = new System.Drawing.Size(80, 21);
+            this.txt_Sulfur_emission.TabIndex = 24;
+            this.txt_Sulfur_emission.Text = "---------";
             // 
-            // textBox30
+            // txt_Carbon_emission
             // 
-            this.textBox30.ForeColor = System.Drawing.Color.Red;
-            this.textBox30.Location = new System.Drawing.Point(185, 14);
-            this.textBox30.Name = "textBox30";
-            this.textBox30.Size = new System.Drawing.Size(80, 21);
-            this.textBox30.TabIndex = 24;
-            this.textBox30.Text = "---------";
+            this.txt_Carbon_emission.ForeColor = System.Drawing.Color.Red;
+            this.txt_Carbon_emission.Location = new System.Drawing.Point(185, 14);
+            this.txt_Carbon_emission.Name = "txt_Carbon_emission";
+            this.txt_Carbon_emission.Size = new System.Drawing.Size(80, 21);
+            this.txt_Carbon_emission.TabIndex = 24;
+            this.txt_Carbon_emission.Text = "---------";
             // 
             // label29
             // 
@@ -608,23 +608,23 @@
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.AutoSize = true;
-            this.groupBox4.Controls.Add(this.textBox27);
+            this.groupBox4.Controls.Add(this.txt_System_efficiency);
             this.groupBox4.Controls.Add(this.label19);
             this.groupBox4.Location = new System.Drawing.Point(65, 72);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(299, 63);
+            this.groupBox4.Size = new System.Drawing.Size(304, 63);
             this.groupBox4.TabIndex = 45;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "太阳能集热系统效率:";
             // 
-            // textBox27
+            // txt_System_efficiency
             // 
-            this.textBox27.ForeColor = System.Drawing.Color.Red;
-            this.textBox27.Location = new System.Drawing.Point(185, 14);
-            this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(80, 21);
-            this.textBox27.TabIndex = 24;
-            this.textBox27.Text = "---------";
+            this.txt_System_efficiency.ForeColor = System.Drawing.Color.Red;
+            this.txt_System_efficiency.Location = new System.Drawing.Point(185, 14);
+            this.txt_System_efficiency.Name = "txt_System_efficiency";
+            this.txt_System_efficiency.Size = new System.Drawing.Size(80, 21);
+            this.txt_System_efficiency.TabIndex = 24;
+            this.txt_System_efficiency.Text = "---------";
             // 
             // label19
             // 
@@ -640,23 +640,23 @@
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.AutoSize = true;
-            this.groupBox6.Controls.Add(this.textBox16);
+            this.groupBox6.Controls.Add(this.txt_System_heat);
             this.groupBox6.Controls.Add(this.label14);
             this.groupBox6.Location = new System.Drawing.Point(65, 18);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(299, 63);
+            this.groupBox6.Size = new System.Drawing.Size(304, 63);
             this.groupBox6.TabIndex = 46;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "系统有用得热量:";
             // 
-            // textBox16
+            // txt_System_heat
             // 
-            this.textBox16.ForeColor = System.Drawing.Color.Red;
-            this.textBox16.Location = new System.Drawing.Point(185, 14);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(80, 21);
-            this.textBox16.TabIndex = 24;
-            this.textBox16.Text = "---------";
+            this.txt_System_heat.ForeColor = System.Drawing.Color.Red;
+            this.txt_System_heat.Location = new System.Drawing.Point(185, 14);
+            this.txt_System_heat.Name = "txt_System_heat";
+            this.txt_System_heat.Size = new System.Drawing.Size(80, 21);
+            this.txt_System_heat.TabIndex = 24;
+            this.txt_System_heat.Text = "---------";
             // 
             // label14
             // 
@@ -682,7 +682,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(514, 535);
+            this.groupBox2.Size = new System.Drawing.Size(521, 625);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
@@ -962,7 +962,7 @@
             this.toolStripButton5});
             this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(946, 40);
+            this.toolStrip1.Size = new System.Drawing.Size(958, 40);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -990,7 +990,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 600);
+            this.ClientSize = new System.Drawing.Size(958, 690);
             this.Controls.Add(this.btn_Detach);
             this.Controls.Add(this.btn_Atach);
             this.Controls.Add(this.button3);
@@ -1088,28 +1088,28 @@
         private System.Windows.Forms.StatusBarPanel statusBarPanel1;
         private System.Windows.Forms.StatusBar statusBar1;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.TextBox textBox32;
+        private System.Windows.Forms.TextBox txt_Fee_effect;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.TextBox textBox28;
+        private System.Windows.Forms.TextBox txt_Energy_alternative;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.TextBox textBox19;
-        private System.Windows.Forms.TextBox textBox21;
+        private System.Windows.Forms.TextBox txt_Solar_assurance_year;
+        private System.Windows.Forms.TextBox txt_Solar_assurance_day;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox textBox31;
-        private System.Windows.Forms.TextBox textBox29;
-        private System.Windows.Forms.TextBox textBox30;
+        private System.Windows.Forms.TextBox txt_Dust_emission;
+        private System.Windows.Forms.TextBox txt_Sulfur_emission;
+        private System.Windows.Forms.TextBox txt_Carbon_emission;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox textBox27;
+        private System.Windows.Forms.TextBox txt_System_efficiency;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.TextBox txt_System_heat;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
