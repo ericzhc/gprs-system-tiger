@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_tigerModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="db_tigerModelStoreContainer">
+    <EntitySet Name="tb_union_list" EntityType="db_tigerModel.Store.tb_union_list" store:Type="Tables" Schema="db_tiger" />
+    <EntitySet Name="tb_unit_state" EntityType="db_tigerModel.Store.tb_unit_state" store:Type="Tables" Schema="db_tiger" />
+    <EntitySet Name="tb_unit_statistics" EntityType="db_tigerModel.Store.tb_unit_statistics" store:Type="Tables" Schema="db_tiger" />
+  </EntityContainer>
+  <EntityType Name="tb_union_list">
+    <Key>
+      <PropertyRef Name="UnitId" />
+    </Key>
+    <Property Name="UnitId" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="gprs_stat" Type="varchar" MaxLength="20" />
+    <Property Name="time_online" Type="varchar" MaxLength="45" />
+    <Property Name="alias" Type="varchar" Nullable="false" MaxLength="45" />
+    <Property Name="Aera_IrradiatedSum" Type="varchar" Nullable="false" MaxLength="45" />
+    <Property Name="Volumn_HeatingBox" Type="varchar" Nullable="false" MaxLength="45" />
+    <Property Name="Start_time" Type="datetime" />
+    <Property Name="Stop_time" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tb_unit_state">
+    <Key>
+      <PropertyRef Name="UnitId" />
+      <PropertyRef Name="DateTime_RecvDate" />
+    </Key>
+    <Property Name="Temp_HeatingBox" Type="varchar" MaxLength="20" />
+    <Property Name="Temp_CollectorBox" Type="varchar" MaxLength="20" />
+    <Property Name="Temp_CollectorIn" Type="varchar" MaxLength="20" />
+    <Property Name="Temp_CollectorOut" Type="varchar" MaxLength="20" />
+    <Property Name="Temp_Ambient" Type="varchar" MaxLength="20" />
+    <Property Name="Humidity_Ambient" Type="varchar" MaxLength="20" />
+    <Property Name="Speed_Wind" Type="varchar" MaxLength="20" />
+    <Property Name="SystemState" Type="varchar" MaxLength="20" />
+    <Property Name="ErrorState" Type="varchar" MaxLength="20" />
+    <Property Name="UnitId" Type="int" Nullable="false" />
+    <Property Name="DateTime_RecvDate" Type="datetime" Nullable="false" />
+    <Property Name="Amount_Irradiated" Type="varchar" MaxLength="45" />
+    <Property Name="Amount_IrradiatedSum" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="tb_unit_statistics">
+    <Key>
+      <PropertyRef Name="UnitId" />
+      <PropertyRef Name="DateTime_Statics" />
+    </Key>
+    <Property Name="UnitId" Type="int" Nullable="false" />
+    <Property Name="System_heat" Type="varchar" MaxLength="20" />
+    <Property Name="Conventional_energy" Type="varchar" MaxLength="20" />
+    <Property Name="Storage_tank" Type="varchar" MaxLength="20" />
+    <Property Name="System_efficiency" Type="varchar" MaxLength="20" />
+    <Property Name="Solar_assurance_day" Type="varchar" MaxLength="20" />
+    <Property Name="Solar_assurance_year" Type="varchar" MaxLength="20" />
+    <Property Name="Energy_alternative" Type="varchar" MaxLength="20" />
+    <Property Name="Carbon_emission" Type="varchar" MaxLength="20" />
+    <Property Name="Sulfur_emission" Type="varchar" MaxLength="20" />
+    <Property Name="Dust_emission" Type="varchar" MaxLength="20" />
+    <Property Name="Fee_effect" Type="varchar" MaxLength="20" />
+    <Property Name="DateTime_Statics" Type="datetime" Nullable="false" />
+  </EntityType>
+</Schema>

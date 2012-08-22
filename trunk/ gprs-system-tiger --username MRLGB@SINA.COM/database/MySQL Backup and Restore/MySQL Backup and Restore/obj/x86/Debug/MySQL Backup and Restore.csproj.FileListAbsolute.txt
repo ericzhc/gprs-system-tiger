@@ -1,0 +1,15 @@
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\obj\x86\Debug\MySQL_Backup_and_Restore.About.resources
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\obj\x86\Debug\MySQL_Backup_and_Restore.Form1.resources
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\obj\x86\Debug\MySQL_Backup_and_Restore.Properties.Resources.resources
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\obj\x86\Debug\GenerateResource-ResGen.read.6.tlog
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\bin\Debug\MySQL Backup and Restore.exe
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\bin\Debug\MySQL Backup and Restore.pdb
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\bin\Debug\MySql.Data.dll
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\bin\Debug\System.Data.dll
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\obj\x86\Debug\MySQL Backup and Restore.exe
+C:\Documents and Settings\LENOVO USER\桌面\MySQL Backup and Restore\MySQL Backup and Restore\obj\x86\Debug\MySQL Backup and Restore.pdb
+C:\Documents and Settings\LENOVO USER\桌面\mysql备份工具\MySQL Backup and Restore\MySQL Backup and Restore\obj\x86\Debug\MySQL Backup and Restore.exe
+C:\Documents and Settings\LENOVO USER\桌面\mysql备份工具\MySQL Backup and Restore\MySQL Backup and Restore\obj\x86\Debug\MySQL Backup and Restore.pdb

@@ -1,0 +1,17 @@
+H:\Tiger\V2\Tiger-demov2\bin\Debug\Tige.exe.config
+H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tiger-demov2.csprojResolveAssemblyReference.cache
+H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tiger.F_Configuration.resources
+H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tiger.F_Node.resources
+H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tiger.F_Backup.resources
+H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tiger.F_Main.resources
+H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tiger.F_Node_State.resources
+H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tiger.F_ServerInfo.resources
+H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tiger.F_SystemSet.resources
+H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tiger.Properties.Resources.resources
+H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tiger-demov2.csproj.GenerateResource.Cache
+H:\Tiger\V2\Tiger-demov2\bin\Debug\Tige.exe
+H:\Tiger\V2\Tiger-demov2\bin\Debug\Tige.pdb
+H:\Tiger\V2\Tiger-demov2\bin\Debug\log4net.dll
+H:\Tiger\V2\Tiger-demov2\bin\Debug\ZedGraph.dll
+H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tige.exe
+H:\Tiger\V2\Tiger-demov2\obj\x86\Debug\Tige.pdb
