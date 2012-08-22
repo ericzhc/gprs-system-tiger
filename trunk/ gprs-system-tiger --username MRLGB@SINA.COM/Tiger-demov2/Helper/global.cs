@@ -198,6 +198,55 @@ namespace Tiger
         }
     }
 
+    public class StatisticObject
+    { 
+        private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
+        public ushort  System_heat;  //集热系统得热量
+        public ushort  Conventional_energy;  //系统常规热源耗能量
+        public ushort  Storage_tank; //贮热水箱热损系数
+        public ushort  System_efficiency;  //集热系统效率
+        public ushort  Solar_assurance_day;  //日太阳能保证率
+        public ushort  Solar_assurance_year;  //全年太阳能保证率
+        public ushort  Energy_alternative;  //常规能源替代量
+        public ushort  Carbon_emission;  //二氧化碳减排量
+        public ushort  Sulfur_emission; //二氧化硫减排量
+        public ushort  Dust_emission;  //粉尘减排量
+        public ushort  Fee_effect;   //项目费效比
+        public ushort  Auxiliary_heat;//辅助热源加热量
+        public ushort Id;//ID
+
+        public StatisticObject() 
+        {
+            ;
+        }
+
+        public void UpdateStatisticObject(StatisticObject Inobject)
+        {
+            cacheLock.EnterWriteLock();
+            try
+            {
+               Id = Inobject.Id;
+               System_heat = Inobject.System_heat;//供热水箱温度
+               Conventional_energy = Inobject.Conventional_energy;  //系统常规热源耗能量
+               Storage_tank = Inobject.Storage_tank; //贮热水箱热损系数
+               System_efficiency = Inobject.System_efficiency;  //集热系统效率
+               Solar_assurance_day = Inobject.Solar_assurance_day;  //日太阳能保证率
+               Solar_assurance_year = Inobject.Solar_assurance_year;  //全年太阳能保证率
+               Energy_alternative = Inobject.Energy_alternative;  //常规能源替代量
+               Carbon_emission = Inobject.Carbon_emission;  //二氧化碳减排量
+               Sulfur_emission = Inobject.Sulfur_emission; //二氧化硫减排量
+               Dust_emission = Inobject.Dust_emission;  //粉尘减排量
+               Fee_effect = Inobject.Fee_effect;   //项目费效比
+               Auxiliary_heat = Inobject.Auxiliary_heat;//辅助热源加热量
+            }
+            finally
+            {
+                cacheLock.ExitWriteLock();
+            }
+         
+        }
+    }
+
     public class ThreadIdentity
     {
         public string threadName;
@@ -211,7 +260,11 @@ namespace Tiger
     public static class global
     {
        public static bool attached=true;
+
        public static SortedList<string, DTUObject> DTUList = new SortedList<string, DTUObject>();
+
+       public static SortedList<string, StatisticObject> DTUList = new SortedList<string, StatisticObject>();
+
        public static void checkTemp(string instr)
        {
            if (Convert.ToInt16(instr) < 0 || Convert.ToInt16(instr) > 100)
