@@ -8,7 +8,7 @@ namespace Tiger
     static class Program
     {
         /// <summary>
-        /// 应用程序的主入口点。
+        /// 应用程序的主入口点。http://code.google.com/p/gprs-system-tiger/source/checkout
         /// </summary>
         [STAThread]
         static void Main()

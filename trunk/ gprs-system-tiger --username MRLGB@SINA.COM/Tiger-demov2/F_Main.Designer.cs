@@ -118,6 +118,8 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.button4 = new System.Windows.Forms.Button();
+            this.btn_add_binding = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
@@ -172,7 +174,7 @@
             // 系统配置ToolStripMenuItem
             // 
             this.系统配置ToolStripMenuItem.Name = "系统配置ToolStripMenuItem";
-            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.系统配置ToolStripMenuItem.Text = "系统配置";
             this.系统配置ToolStripMenuItem.Click += new System.EventHandler(this.系统配置ToolStripMenuItem_Click);
             // 
@@ -185,7 +187,7 @@
             this.分离DTUToolStripMenuItem,
             this.服务参数设置ToolStripMenuItem});
             this.数据中心配置ToolStripMenuItem.Name = "数据中心配置ToolStripMenuItem";
-            this.数据中心配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.数据中心配置ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.数据中心配置ToolStripMenuItem.Text = "数据中心";
             // 
             // 中心参数设置ToolStripMenuItem
@@ -226,20 +228,20 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem2.Text = "系统重启";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // 刷新信息ToolStripMenuItem
             // 
             this.刷新信息ToolStripMenuItem.Name = "刷新信息ToolStripMenuItem";
-            this.刷新信息ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.刷新信息ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.刷新信息ToolStripMenuItem.Text = "刷新信息";
             // 
             // 系统退出ToolStripMenuItem
             // 
             this.系统退出ToolStripMenuItem.Name = "系统退出ToolStripMenuItem";
-            this.系统退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.系统退出ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.系统退出ToolStripMenuItem.Text = "系统退出";
             this.系统退出ToolStripMenuItem.Click += new System.EventHandler(this.系统退出ToolStripMenuItem_Click);
             // 
@@ -850,7 +852,7 @@
             // 
             this.btnProduceData.BackColor = System.Drawing.Color.Transparent;
             this.btnProduceData.ForeColor = System.Drawing.Color.Maroon;
-            this.btnProduceData.Location = new System.Drawing.Point(501, 36);
+            this.btnProduceData.Location = new System.Drawing.Point(362, 36);
             this.btnProduceData.Margin = new System.Windows.Forms.Padding(2);
             this.btnProduceData.Name = "btnProduceData";
             this.btnProduceData.Size = new System.Drawing.Size(86, 24);
@@ -862,7 +864,7 @@
             // button3
             // 
             this.button3.ForeColor = System.Drawing.Color.DarkRed;
-            this.button3.Location = new System.Drawing.Point(600, 36);
+            this.button3.Location = new System.Drawing.Point(481, 36);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(86, 24);
@@ -873,7 +875,7 @@
             // 
             // btn_Atach
             // 
-            this.btn_Atach.Location = new System.Drawing.Point(702, 36);
+            this.btn_Atach.Location = new System.Drawing.Point(584, 36);
             this.btn_Atach.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Atach.Name = "btn_Atach";
             this.btn_Atach.Size = new System.Drawing.Size(73, 24);
@@ -884,7 +886,7 @@
             // 
             // btn_Detach
             // 
-            this.btn_Detach.Location = new System.Drawing.Point(794, 36);
+            this.btn_Detach.Location = new System.Drawing.Point(683, 36);
             this.btn_Detach.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Detach.Name = "btn_Detach";
             this.btn_Detach.Size = new System.Drawing.Size(67, 24);
@@ -986,11 +988,33 @@
             this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton5.ToolTipText = "退出系统";
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(854, 36);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(92, 23);
+            this.button4.TabIndex = 32;
+            this.button4.Text = "binding test";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // btn_add_binding
+            // 
+            this.btn_add_binding.Location = new System.Drawing.Point(769, 36);
+            this.btn_add_binding.Name = "btn_add_binding";
+            this.btn_add_binding.Size = new System.Drawing.Size(75, 23);
+            this.btn_add_binding.TabIndex = 33;
+            this.btn_add_binding.Text = "add bind";
+            this.btn_add_binding.UseVisualStyleBackColor = true;
+            this.btn_add_binding.Click += new System.EventHandler(this.btn_add_binding_Click);
+            // 
             // F_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 690);
+            this.Controls.Add(this.btn_add_binding);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.btn_Detach);
             this.Controls.Add(this.btn_Atach);
             this.Controls.Add(this.button3);
@@ -1140,6 +1164,8 @@
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripMenuItem 中心参数设置ToolStripMenuItem;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btn_add_binding;
     }
 }
 

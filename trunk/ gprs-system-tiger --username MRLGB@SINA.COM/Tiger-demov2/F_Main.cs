@@ -41,6 +41,9 @@ namespace Tiger
         //protected static readonly log4net.ILog m_Log =LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected log4net.ILog m_Log;
         private string logPath;
+
+        BindingSource bsSystem = new BindingSource(); // System object
+        //BindingSource bsP = new BindingSource(); // Passengers
         #endregion
 
         public F_Main()
@@ -50,6 +53,7 @@ namespace Tiger
             InitQueue();
             UpdateDTUListFromDB();
             staticcount = 0;
+        
         }
 
         private void LoadConfiguration()
@@ -76,6 +80,30 @@ namespace Tiger
             global.attached = true;
             btn_Atach.Enabled = false;
             Dqueue.Run();
+        }
+
+        //add main ui control binding
+        private void InitUIDataBinding()
+        {
+            //add data binding
+            txt_System_heat.DataBindings.Add(new Binding("Text", global.osystem, "System_heat", false, DataSourceUpdateMode.Never));
+            //SystemObject S1;
+            //bsSystem.Add(S1 = new SystemObject());
+            //txt_System_heat.DataBindings.Add(new Binding("Text", global.osystem, "System_heat", false, DataSourceUpdateMode.Never));
+            //"Text", global.osystem, "System_heat", false, DataSourceUpdateMode.OnPropertyChanged);
+
+
+            //txt_System_heat.DataBindings.Add("Text", bsSystem, "System_heat");
+
+            //txt_System_heat.DataBindings.Add(new Binding("Text", bs, "System_heat"));
+            //txt_System_efficiency.DataBindings.Add(new Binding("Text", global.SatisticSum, "System_efficiency"));
+            //txt_Carbon_emission.DataBindings.Add(new Binding("Text", global.SatisticSum, "Carbon_emission"));
+            //txt_Sulfur_emission.DataBindings.Add(new Binding("Text", global.SatisticSum, "Sulfur_emission"));
+            //txt_Dust_emission.DataBindings.Add(new Binding("Text", global.SatisticSum, "Dust_emission"));
+            //txt_Solar_assurance_year.DataBindings.Add(new Binding("Text", global.SatisticSum, "Solar_assurance_year"));
+            //txt_Solar_assurance_day.DataBindings.Add(new Binding("Text", global.SatisticSum, "Solar_assurance_day"));
+            //txt_Energy_alternative.DataBindings.Add(new Binding("Text", global.SatisticSum, "Energy_alternative"));
+            //txt_Fee_effect.DataBindings.Add(new Binding("Text", global.SatisticSum, "Fee_effect"));
         }
 
         void UpdateDTUListFromDB()
@@ -433,6 +461,9 @@ namespace Tiger
             serv_port = int.Parse(ini.IniReadValue("Section", "serv_port", "5002"));
             serv_type = int.Parse(ini.IniReadValue("Section", "serv_type", "0"));
             serv_mode = int.Parse(ini.IniReadValue("Section", "serv_mode", "2"));
+            
+            //add data binding
+            //txt_System_heat.DataBindings.Add(new Binding("Text", global.osystem, "System_heat", false, DataSourceUpdateMode.Never));
         }
 
         //********************************************
@@ -908,6 +939,36 @@ namespace Tiger
         private void button3_Click(object sender, EventArgs e)
         {
             m_Log.Info("click once!.");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            global.osystem.System_heat = (ushort)rand.Next(0, 100);
+            MessageBox.Show("System_heat: " + global.osystem.System_heat.ToString());
+            //global.osystem.System_heat = (ushort)rand.Next(0, 100);//供热水箱温度
+            //global.SatisticSum.Conventional_energy = (ushort)rand.Next(0, 100);  //系统常规热源耗能量
+            //global.SatisticSum.Storage_tank = (ushort)rand.Next(0, 100); //贮热水箱热损系数
+            //global.SatisticSum.System_efficiency = (ushort)rand.Next(0, 100);  //集热系统效率
+            //global.SatisticSum.Solar_assurance_day = (ushort)rand.Next(0, 100);  //日太阳能保证率
+            //global.SatisticSum.Solar_assurance_year = (ushort)rand.Next(0, 100);  //全年太阳能保证率
+            //global.SatisticSum.Energy_alternative = (ushort)rand.Next(0, 100);  //常规能源替代量
+            //global.SatisticSum.Carbon_emission = (ushort)rand.Next(0, 100);  //二氧化碳减排量
+            //global.SatisticSum.Sulfur_emission = (ushort)rand.Next(0, 100); //二氧化硫减排量
+            //global.SatisticSum.Dust_emission = (ushort)rand.Next(0, 100);  //粉尘减排量
+            //global.SatisticSum.Fee_effect = (ushort)rand.Next(0, 100);   //项目费效比
+            //global.SatisticSum.Auxiliary_heat = (ushort)rand.Next(0, 100);//辅助热源加热量
+
+        }
+
+        private void btn_add_binding_Click(object sender, EventArgs e)
+        {
+            InitUIDataBinding();
+            this.btn_add_binding.Enabled = false;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            global.osystem.System_heat++;
         }
 
     }

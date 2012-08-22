@@ -6,6 +6,8 @@ using System.Data;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using System.ComponentModel;
+using System.Linq.Expressions;
 
 namespace Tiger
 {
@@ -85,7 +87,12 @@ namespace Tiger
         public ushort SystemState;//系统状态
         public ushort ErrorState;//系统故障状态
         public DateTime RecvDate;//接收时间
-        public ushort Id;//ID
+        private ushort _Id;//ID
+        public ushort Id
+        {
+            get { return _Id; }
+            set { _Id = value; }
+        }
 
         private bool online;
         public bool Online
@@ -198,52 +205,158 @@ namespace Tiger
         }
     }
 
-    public class StatisticObject
+    public class SystemObject : INotifyPropertyChanged
     { 
         private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
-        public ushort  System_heat;  //集热系统得热量
-        public ushort  Conventional_energy;  //系统常规热源耗能量
-        public ushort  Storage_tank; //贮热水箱热损系数
-        public ushort  System_efficiency;  //集热系统效率
-        public ushort  Solar_assurance_day;  //日太阳能保证率
-        public ushort  Solar_assurance_year;  //全年太阳能保证率
-        public ushort  Energy_alternative;  //常规能源替代量
-        public ushort  Carbon_emission;  //二氧化碳减排量
-        public ushort  Sulfur_emission; //二氧化硫减排量
-        public ushort  Dust_emission;  //粉尘减排量
-        public ushort  Fee_effect;   //项目费效比
-        public ushort  Auxiliary_heat;//辅助热源加热量
-        public ushort Id;//ID
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public StatisticObject() 
+        private ushort _System_heat;  //集热系统得热量
+        public ushort System_heat
         {
-            ;
+            get { return _System_heat; }
+            set
+            {
+                if (_System_heat != value)
+                {
+                    _System_heat = value;
+                    OnPropertyChanged("System_heat");
+                }
+            }
         }
 
-        public void UpdateStatisticObject(StatisticObject Inobject)
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private ushort _Conventional_energy;  //系统常规热源耗能量
+        public ushort Conventional_energy
+        {
+            get { return _Conventional_energy; }
+            set { 
+                    _Conventional_energy = value;
+                    OnPropertyChanged("Conventional_energy");
+                }
+        }
+        private ushort _Storage_tank; //贮热水箱热损系数
+        public ushort Storage_tank
+        {
+            get { return Storage_tank; }
+            set { 
+                    Storage_tank = value;
+                    OnPropertyChanged("Storage_tank");
+                }
+        }
+        private ushort _System_efficiency;  //集热系统效率
+
+        public ushort System_efficiency
+        {
+            get { return _System_efficiency; }
+            set { 
+                    _System_efficiency = value;
+                    OnPropertyChanged("System_efficiency");
+                }
+        }
+        private ushort _Solar_assurance_day;  //日太阳能保证率
+
+        public ushort Solar_assurance_day
+        {
+            get { return _Solar_assurance_day; }
+            set { _Solar_assurance_day = value; OnPropertyChanged("Solar_assurance_day"); }
+        }
+        private ushort _Solar_assurance_year;  //全年太阳能保证率
+
+        public ushort Solar_assurance_year
+        {
+            get { return _Solar_assurance_year; }
+            set { _Solar_assurance_year = value; OnPropertyChanged("Solar_assurance_year"); }
+        }
+        private ushort _Energy_alternative;  //常规能源替代量
+
+        public ushort Energy_alternative
+        {
+            get { return _Energy_alternative; }
+            set { _Energy_alternative = value; OnPropertyChanged("Energy_alternative"); }
+        }
+        private ushort _Carbon_emission; //二氧化碳减排量
+
+        public ushort Carbon_emission
+        {
+            get { return _Carbon_emission; }
+            set { _Carbon_emission = value; OnPropertyChanged("Carbon_emission"); }
+        }
+        private ushort _Sulfur_emission; //二氧化硫减排量
+
+        public ushort Sulfur_emission
+        {
+            get { return Sulfur_emission; }
+            set { Sulfur_emission = value; OnPropertyChanged("Sulfur_emission"); }
+        }
+        private ushort _Dust_emission;  //粉尘减排量
+
+        public ushort Dust_emission
+        {
+            get { return Dust_emission; }
+            set { Dust_emission = value; OnPropertyChanged("Dust_emission"); }
+        }
+        private ushort _Fee_effect; //项目费效比
+
+        public ushort Fee_effect
+        {
+            get { return _Fee_effect; }
+            set { _Fee_effect = value; OnPropertyChanged("Fee_effect"); }
+        }
+        private ushort _Auxiliary_heat;//辅助热源加热量
+
+        public ushort Auxiliary_heat
+        {
+            get { return _Auxiliary_heat; }
+            set { _Auxiliary_heat = value; OnPropertyChanged("Auxiliary_heat"); }
+        }
+
+        public ushort Id { get; set; } //ID
+
+        public SystemObject() 
+        {
+            DTUList.Add("new id1",new DTUObject());
+            DTUList.Add("new id2", new DTUObject());
+            DTUList.Add("new id3", new DTUObject());
+              
+        }
+
+        public void UpdateSystemObject(SystemObject Inobject)
         {
             cacheLock.EnterWriteLock();
             try
             {
-               Id = Inobject.Id;
-               System_heat = Inobject.System_heat;//供热水箱温度
-               Conventional_energy = Inobject.Conventional_energy;  //系统常规热源耗能量
-               Storage_tank = Inobject.Storage_tank; //贮热水箱热损系数
-               System_efficiency = Inobject.System_efficiency;  //集热系统效率
-               Solar_assurance_day = Inobject.Solar_assurance_day;  //日太阳能保证率
-               Solar_assurance_year = Inobject.Solar_assurance_year;  //全年太阳能保证率
-               Energy_alternative = Inobject.Energy_alternative;  //常规能源替代量
-               Carbon_emission = Inobject.Carbon_emission;  //二氧化碳减排量
-               Sulfur_emission = Inobject.Sulfur_emission; //二氧化硫减排量
-               Dust_emission = Inobject.Dust_emission;  //粉尘减排量
-               Fee_effect = Inobject.Fee_effect;   //项目费效比
-               Auxiliary_heat = Inobject.Auxiliary_heat;//辅助热源加热量
+                Id = Inobject.Id;
+                System_heat = Inobject.System_heat;//供热水箱温度
+                Conventional_energy = Inobject.Conventional_energy;  //系统常规热源耗能量
+                Storage_tank = Inobject.Storage_tank; //贮热水箱热损系数
+                System_efficiency = Inobject.System_efficiency;  //集热系统效率
+                Solar_assurance_day = Inobject.Solar_assurance_day;  //日太阳能保证率
+                Solar_assurance_year = Inobject.Solar_assurance_year;  //全年太阳能保证率
+                Energy_alternative = Inobject.Energy_alternative;  //常规能源替代量
+                Carbon_emission = Inobject.Carbon_emission;  //二氧化碳减排量
+                Sulfur_emission = Inobject.Sulfur_emission; //二氧化硫减排量
+                Dust_emission = Inobject.Dust_emission;  //粉尘减排量
+                Fee_effect = Inobject.Fee_effect;   //项目费效比
+                Auxiliary_heat = Inobject.Auxiliary_heat;//辅助热源加热量
             }
             finally
             {
                 cacheLock.ExitWriteLock();
             }
-         
+
+        }
+
+        private static SortedList<string, DTUObject> _DTUList = new SortedList<string, DTUObject>();
+
+        public static SortedList<string, DTUObject> DTUList
+        {
+            get { return SystemObject._DTUList; }
+            set { SystemObject._DTUList = value; }
         }
     }
 
@@ -263,7 +376,9 @@ namespace Tiger
 
        public static SortedList<string, DTUObject> DTUList = new SortedList<string, DTUObject>();
 
-       public static SortedList<string, StatisticObject> DTUList = new SortedList<string, StatisticObject>();
+       //public static SortedList<string, SystemObject> SatisticList = new SortedList<string, SystemObject>();
+
+       public static SystemObject osystem = new SystemObject();
 
        public static void checkTemp(string instr)
        {
