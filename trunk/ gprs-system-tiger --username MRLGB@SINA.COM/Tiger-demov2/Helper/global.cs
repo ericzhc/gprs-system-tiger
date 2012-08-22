@@ -210,7 +210,7 @@ namespace Tiger
         private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ushort _System_heat;  //集热系统得热量
+        private ushort _System_heat;  //集热系统得热量1
         public ushort System_heat
         {
             get { return _System_heat; }
@@ -230,7 +230,7 @@ namespace Tiger
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ushort _Conventional_energy;  //系统常规热源耗能量
+        private ushort _Conventional_energy;  //系统常规热源耗能量2
         public ushort Conventional_energy
         {
             get { return _Conventional_energy; }
@@ -239,16 +239,16 @@ namespace Tiger
                     OnPropertyChanged("Conventional_energy");
                 }
         }
-        private ushort _Storage_tank; //贮热水箱热损系数
+        private ushort _Storage_tank; //贮热水箱热损系数3
         public ushort Storage_tank
         {
-            get { return Storage_tank; }
+            get { return _Storage_tank; }
             set { 
-                    Storage_tank = value;
+                    _Storage_tank = value;
                     OnPropertyChanged("Storage_tank");
                 }
         }
-        private ushort _System_efficiency;  //集热系统效率
+        private ushort _System_efficiency;  //集热系统效率4
 
         public ushort System_efficiency
         {
@@ -258,56 +258,56 @@ namespace Tiger
                     OnPropertyChanged("System_efficiency");
                 }
         }
-        private ushort _Solar_assurance_day;  //日太阳能保证率
+        private ushort _Solar_assurance_day;  //日太阳能保证率5
 
         public ushort Solar_assurance_day
         {
             get { return _Solar_assurance_day; }
             set { _Solar_assurance_day = value; OnPropertyChanged("Solar_assurance_day"); }
         }
-        private ushort _Solar_assurance_year;  //全年太阳能保证率
+        private ushort _Solar_assurance_year;  //全年太阳能保证率6
 
         public ushort Solar_assurance_year
         {
             get { return _Solar_assurance_year; }
             set { _Solar_assurance_year = value; OnPropertyChanged("Solar_assurance_year"); }
         }
-        private ushort _Energy_alternative;  //常规能源替代量
+        private ushort _Energy_alternative;  //常规能源替代量7
 
         public ushort Energy_alternative
         {
             get { return _Energy_alternative; }
             set { _Energy_alternative = value; OnPropertyChanged("Energy_alternative"); }
         }
-        private ushort _Carbon_emission; //二氧化碳减排量
+        private ushort _Carbon_emission; //二氧化碳减排量8
 
         public ushort Carbon_emission
         {
             get { return _Carbon_emission; }
             set { _Carbon_emission = value; OnPropertyChanged("Carbon_emission"); }
         }
-        private ushort _Sulfur_emission; //二氧化硫减排量
+        private ushort _Sulfur_emission; //二氧化硫减排量9
 
         public ushort Sulfur_emission
         {
-            get { return Sulfur_emission; }
-            set { Sulfur_emission = value; OnPropertyChanged("Sulfur_emission"); }
+            get { return _Sulfur_emission; }
+            set { _Sulfur_emission = value; OnPropertyChanged("Sulfur_emission"); }
         }
-        private ushort _Dust_emission;  //粉尘减排量
+        private ushort _Dust_emission;  //粉尘减排量10
 
         public ushort Dust_emission
         {
-            get { return Dust_emission; }
-            set { Dust_emission = value; OnPropertyChanged("Dust_emission"); }
+            get { return _Dust_emission; }
+            set { _Dust_emission = value; OnPropertyChanged("Dust_emission"); }
         }
-        private ushort _Fee_effect; //项目费效比
+        private ushort _Fee_effect; //项目费效比11
 
         public ushort Fee_effect
         {
             get { return _Fee_effect; }
             set { _Fee_effect = value; OnPropertyChanged("Fee_effect"); }
         }
-        private ushort _Auxiliary_heat;//辅助热源加热量
+        private ushort _Auxiliary_heat;//辅助热源加热量12
 
         public ushort Auxiliary_heat
         {

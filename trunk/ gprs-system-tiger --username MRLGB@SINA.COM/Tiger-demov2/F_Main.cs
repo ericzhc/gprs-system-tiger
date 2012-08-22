@@ -87,23 +87,14 @@ namespace Tiger
         {
             //add data binding
             txt_System_heat.DataBindings.Add(new Binding("Text", global.osystem, "System_heat", false, DataSourceUpdateMode.Never));
-            //SystemObject S1;
-            //bsSystem.Add(S1 = new SystemObject());
-            //txt_System_heat.DataBindings.Add(new Binding("Text", global.osystem, "System_heat", false, DataSourceUpdateMode.Never));
-            //"Text", global.osystem, "System_heat", false, DataSourceUpdateMode.OnPropertyChanged);
-
-
-            //txt_System_heat.DataBindings.Add("Text", bsSystem, "System_heat");
-
-            //txt_System_heat.DataBindings.Add(new Binding("Text", bs, "System_heat"));
-            //txt_System_efficiency.DataBindings.Add(new Binding("Text", global.SatisticSum, "System_efficiency"));
-            //txt_Carbon_emission.DataBindings.Add(new Binding("Text", global.SatisticSum, "Carbon_emission"));
-            //txt_Sulfur_emission.DataBindings.Add(new Binding("Text", global.SatisticSum, "Sulfur_emission"));
-            //txt_Dust_emission.DataBindings.Add(new Binding("Text", global.SatisticSum, "Dust_emission"));
-            //txt_Solar_assurance_year.DataBindings.Add(new Binding("Text", global.SatisticSum, "Solar_assurance_year"));
-            //txt_Solar_assurance_day.DataBindings.Add(new Binding("Text", global.SatisticSum, "Solar_assurance_day"));
-            //txt_Energy_alternative.DataBindings.Add(new Binding("Text", global.SatisticSum, "Energy_alternative"));
-            //txt_Fee_effect.DataBindings.Add(new Binding("Text", global.SatisticSum, "Fee_effect"));
+            txt_System_efficiency.DataBindings.Add(new Binding("Text", global.osystem, "System_efficiency", false, DataSourceUpdateMode.Never));
+            txt_Carbon_emission.DataBindings.Add(new Binding("Text", global.osystem, "Carbon_emission", false, DataSourceUpdateMode.Never));
+            txt_Sulfur_emission.DataBindings.Add(new Binding("Text", global.osystem, "Sulfur_emission", false, DataSourceUpdateMode.Never));
+            txt_Dust_emission.DataBindings.Add(new Binding("Text", global.osystem, "Dust_emission", false, DataSourceUpdateMode.Never));
+            txt_Solar_assurance_year.DataBindings.Add(new Binding("Text", global.osystem, "Solar_assurance_year", false, DataSourceUpdateMode.Never));
+            txt_Solar_assurance_day.DataBindings.Add(new Binding("Text", global.osystem, "Solar_assurance_day", false, DataSourceUpdateMode.Never));
+            txt_Energy_alternative.DataBindings.Add(new Binding("Text", global.osystem, "Energy_alternative", false, DataSourceUpdateMode.Never));
+            txt_Fee_effect.DataBindings.Add(new Binding("Text", global.osystem, "Fee_effect", false, DataSourceUpdateMode.Never));
         }
 
         void UpdateDTUListFromDB()
