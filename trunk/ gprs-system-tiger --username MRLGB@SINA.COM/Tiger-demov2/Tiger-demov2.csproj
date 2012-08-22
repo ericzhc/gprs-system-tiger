@@ -112,13 +112,13 @@
     <Compile Include="Helper\DoubleQueue.cs" />
     <Compile Include="Helper\global.cs" />
     <Compile Include="Helper\Module.cs" />
-    <Compile Include="Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tiger.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tiger.edmx</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="F_Configuration.resx">
       <DependentUpon>F_Configuration.cs</DependentUpon>
     </EmbeddedResource>
@@ -151,13 +151,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.Config" />
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </None>
     <None Include="Properties\DataSources\db_tigerEntities.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -168,6 +161,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EntityDeploy Include="Tiger.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Tiger.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
