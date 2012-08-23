@@ -47,7 +47,7 @@
             // 
             // closeForm
             // 
-            this.closeForm.Location = new System.Drawing.Point(38, 189);
+            this.closeForm.Location = new System.Drawing.Point(142, 189);
             this.closeForm.Name = "closeForm";
             this.closeForm.Size = new System.Drawing.Size(75, 23);
             this.closeForm.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(349, 189);
+            this.button2.Location = new System.Drawing.Point(407, 189);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
