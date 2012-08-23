@@ -33,6 +33,7 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new EFWinforms.EntityDataSource(this.components);
@@ -47,16 +48,16 @@
             this.chart1.DataSource = this.chartBindingSource;
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(12, 110);
+            this.chart1.Location = new System.Drawing.Point(12, 65);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
-            series1.Name = "Series1";
+            series1.Name = "Time_online ";
             series1.XValueMember = "UnitID";
             series1.YValueMembers = "time_online ";
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
-            series2.Name = "Series2";
+            series2.Name = "Gprs_state ";
             series2.XValueMember = "UnitID";
             series2.YValueMembers = "gprs_state ";
             this.chart1.Series.Add(series1);
@@ -64,6 +65,11 @@
             this.chart1.Size = new System.Drawing.Size(890, 300);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
+            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title1.ForeColor = System.Drawing.Color.Maroon;
+            title1.Name = "Title1";
+            title1.Text = "采集单元在线时间统计图表";
+            this.chart1.Titles.Add(title1);
             // 
             // chartBindingSource
             // 
