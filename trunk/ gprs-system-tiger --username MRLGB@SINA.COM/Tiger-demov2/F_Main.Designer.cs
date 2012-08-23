@@ -112,14 +112,14 @@
             this.timerProduce = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.button4 = new System.Windows.Forms.Button();
+            this.btn_add_binding = new System.Windows.Forms.Button();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.button4 = new System.Windows.Forms.Button();
-            this.btn_add_binding = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
@@ -279,20 +279,20 @@
             // 数据备份ToolStripMenuItem
             // 
             this.数据备份ToolStripMenuItem.Name = "数据备份ToolStripMenuItem";
-            this.数据备份ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.数据备份ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.数据备份ToolStripMenuItem.Text = "数据备份";
             this.数据备份ToolStripMenuItem.Click += new System.EventHandler(this.数据备份ToolStripMenuItem_Click);
             // 
             // 数据恢复ToolStripMenuItem
             // 
             this.数据恢复ToolStripMenuItem.Name = "数据恢复ToolStripMenuItem";
-            this.数据恢复ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.数据恢复ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.数据恢复ToolStripMenuItem.Text = "数据恢复";
             // 
             // 数据清除ToolStripMenuItem
             // 
             this.数据清除ToolStripMenuItem.Name = "数据清除ToolStripMenuItem";
-            this.数据清除ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.数据清除ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.数据清除ToolStripMenuItem.Text = "数据清除";
             this.数据清除ToolStripMenuItem.Click += new System.EventHandler(this.数据清除ToolStripMenuItem_Click);
             // 
@@ -326,17 +326,18 @@
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
             this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.帮助ToolStripMenuItem.Text = "帮助";
+            this.帮助ToolStripMenuItem.Click += new System.EventHandler(this.帮助ToolStripMenuItem_Click);
             // 
             // 帮助ToolStripMenuItem1
             // 
             this.帮助ToolStripMenuItem1.Name = "帮助ToolStripMenuItem1";
-            this.帮助ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.帮助ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.帮助ToolStripMenuItem1.Text = "帮助";
             // 
             // 关于ToolStripMenuItem
             // 
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.关于ToolStripMenuItem.Text = "关于";
             // 
             // statusBarPanel3
@@ -927,6 +928,40 @@
             this.imageList1.Images.SetKeyName(6, "");
             this.imageList1.Images.SetKeyName(7, "");
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripButton2,
+            this.toolStripButton3,
+            this.toolStripButton4,
+            this.toolStripButton5});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(958, 40);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(854, 36);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(92, 23);
+            this.button4.TabIndex = 32;
+            this.button4.Text = "binding test";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // btn_add_binding
+            // 
+            this.btn_add_binding.Location = new System.Drawing.Point(769, 36);
+            this.btn_add_binding.Name = "btn_add_binding";
+            this.btn_add_binding.Size = new System.Drawing.Size(75, 23);
+            this.btn_add_binding.TabIndex = 33;
+            this.btn_add_binding.Text = "add bind";
+            this.btn_add_binding.UseVisualStyleBackColor = true;
+            this.btn_add_binding.Click += new System.EventHandler(this.btn_add_binding_Click);
+            // 
             // toolStripButton1
             // 
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
@@ -955,20 +990,6 @@
             this.toolStripButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton3.ToolTipText = "分离终端";
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton3,
-            this.toolStripButton4,
-            this.toolStripButton5});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(958, 40);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
             // toolStripButton4
             // 
             this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
@@ -988,26 +1009,6 @@
             this.toolStripButton5.Text = "退出";
             this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton5.ToolTipText = "退出系统";
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(854, 36);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(92, 23);
-            this.button4.TabIndex = 32;
-            this.button4.Text = "binding test";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // btn_add_binding
-            // 
-            this.btn_add_binding.Location = new System.Drawing.Point(769, 36);
-            this.btn_add_binding.Name = "btn_add_binding";
-            this.btn_add_binding.Size = new System.Drawing.Size(75, 23);
-            this.btn_add_binding.TabIndex = 33;
-            this.btn_add_binding.Text = "add bind";
-            this.btn_add_binding.UseVisualStyleBackColor = true;
-            this.btn_add_binding.Click += new System.EventHandler(this.btn_add_binding_Click);
             // 
             // F_Main
             // 

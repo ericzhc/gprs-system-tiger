@@ -8,6 +8,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Linq;
 
 namespace Tiger
 {
@@ -82,13 +83,19 @@ namespace Tiger
         public ushort Amount_Irradiated;//太阳能辐照量
         public ushort Amount_IrradiatedSum;//总辐照量
         public ushort Speed_Wind;// 风速
-        public ushort Aera_IrradiatedSum;// 集热器面积
-        public ushort Amount_HeatingSum;// 辅助热源加热量
         public ushort SystemState;//系统状态
         public ushort ErrorState;//系统故障状态
         public DateTime RecvDate;//接收时间
-        private ushort _Id;//ID
-        public ushort Id
+
+        //用户输入参数
+        public ushort Aera_IrradiatedSum;// 集热器面积
+        public ushort Volumn_HeatingBox;//贮热水箱容量（供热水箱）
+        public ushort Amount_HeatingSum;// 辅助热源加热量
+        public DateTime starttest;//降温时间起始时间
+        public DateTime stoptest;//降温时间停止时间
+
+        private string _Id;//ID
+        public string Id
         {
             get { return _Id; }
             set { _Id = value; }
@@ -439,5 +446,21 @@ namespace Tiger
            }
            return hex;
        }
-    } 
+    }
+
+    public static class MyEntityFramework
+    {
+        public static IList<tb_union_list> GetAllUnits()
+        {
+            ///BlogDBEntities是继承于ObjectContext类，自动生成
+            ///可以打开Blog.Desgner.cs文件找到
+            ///原型： public partial class BlogDBEntities : ObjectContext
+            ///可以理解为 他代表了当前数据库环境对象
+            ///同时，在Blog.Desgner.cs里还可以找到两个实体BlogUser及Post
+            db_tigerEntities unitDB = new db_tigerEntities();
+            ///采用Linq语法读取数据
+            IList<tb_union_list> units = unitDB.tb_union_list.ToList<tb_union_list>();
+            return units;
+        }
+    }
 }

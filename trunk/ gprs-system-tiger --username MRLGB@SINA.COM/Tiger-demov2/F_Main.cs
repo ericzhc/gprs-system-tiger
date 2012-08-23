@@ -99,33 +99,21 @@ namespace Tiger
 
         void UpdateDTUListFromDB()
         {
-            //DataTable dt = new DataTable();
-            //da = new DataAccess();
-            //dt.Clear();
-            //// dt = da.GetDataTable("select unit_ip, plc_hmi_category, region from tb_unit");
-            //dt = da.GetDataTable("select * from tb_unit");
-            //if (dt.Rows.Count > 0)
+            IList<tb_union_list> Union = MyEntityFramework.GetAllUnits();
+
+            ///遍历所有查询结果
+            foreach (var Unit in Union)
             {
-                //foreach (DataRow row in dt.Rows)
-                {
-                    //DTU ID相同，只添加一次。
-                    //
-                    for (int j = 0; j < 10; j++)
-                    {
-                        if (!global.DTUList.ContainsKey(j.ToString()))
+                if (!global.DTUList.ContainsKey(Unit.UnitId))
                         {
                             DTUObject dtu = new DTUObject();
-                            dtu.Id = (ushort)j;
-                            dtu.Online = false;
-                            global.DTUList.Add(dtu.Id.ToString(), dtu);
+                            dtu.Id = Unit.UnitId;
+                            //dtu.Online = false;
+                            global.DTUList.Add(dtu.Id, dtu);
                         }
-                    }
-
-                }
+            
             }
-            //dt.Dispose();
-            //dt = null;
-            //da = null;
+          
         }
 
         private void DoubleQueue_OnResponseData(ushort ID, GPRS_DATA_RECORD values)
@@ -966,6 +954,11 @@ namespace Tiger
         {
             F_History fhistory = new F_History();
             fhistory.ShowDialog();
+        }
+
+        private void 帮助ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
