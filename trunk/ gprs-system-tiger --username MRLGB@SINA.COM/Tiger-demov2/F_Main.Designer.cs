@@ -310,6 +310,7 @@
             this.统计要素历史数据ToolStripMenuItem.Name = "统计要素历史数据ToolStripMenuItem";
             this.统计要素历史数据ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.统计要素历史数据ToolStripMenuItem.Text = "统计要素历史数据";
+            this.统计要素历史数据ToolStripMenuItem.Click += new System.EventHandler(this.统计要素历史数据ToolStripMenuItem_Click);
             // 
             // 显示要素历史数据ToolStripMenuItem
             // 

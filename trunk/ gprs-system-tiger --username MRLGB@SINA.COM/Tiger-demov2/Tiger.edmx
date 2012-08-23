@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="db_tigerModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="db_tigerModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="db_tigerModelStoreContainer">
           <EntitySet Name="tb_union_list" EntityType="db_tigerModel.Store.tb_union_list" store:Type="Tables" Schema="db_tiger" />
           <EntitySet Name="tb_unit_state" EntityType="db_tigerModel.Store.tb_unit_state" store:Type="Tables" Schema="db_tiger" />
@@ -15,13 +15,13 @@
             <PropertyRef Name="UnitId" />
           </Key>
           <Property Name="UnitId" Type="varchar" Nullable="false" MaxLength="20" />
-          <Property Name="gprs_stat" Type="varchar" MaxLength="20" />
-          <Property Name="time_online" Type="varchar" MaxLength="45" />
+          <Property Name="gprs_state" Type="int" />
           <Property Name="alias" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="Aera_IrradiatedSum" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="Volumn_HeatingBox" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Aera_IrradiatedSum" Type="int" Nullable="false" />
+          <Property Name="Volumn_HeatingBox" Type="int" Nullable="false" />
           <Property Name="Start_time" Type="datetime" />
           <Property Name="Stop_time" Type="datetime" />
+          <Property Name="time_online" Type="int" />
         </EntityType>
         <EntityType Name="tb_unit_state">
           <Key>
@@ -61,8 +61,7 @@
           <Property Name="Fee_effect" Type="varchar" MaxLength="20" />
           <Property Name="DateTime_Statics" Type="datetime" Nullable="false" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="db_tigerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -75,33 +74,33 @@
           <Key>
             <PropertyRef Name="UnitId" />
           </Key>
-          <Property Name="UnitId" Type="String" Nullable="false" />
-          <Property Name="gprs_stat" Type="String" />
-          <Property Name="time_online" Type="String" />
-          <Property Name="alias" Type="String" Nullable="false" />
-          <Property Name="Aera_IrradiatedSum" Type="String" Nullable="false" />
-          <Property Name="Volumn_HeatingBox" Type="String" Nullable="false" />
-          <Property Name="Start_time" Type="DateTime" />
-          <Property Name="Stop_time" Type="DateTime" />
+          <Property Name="UnitId" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="time_online" Type="Int32" />
+          <Property Name="alias" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Aera_IrradiatedSum" Type="Int32" Nullable="false" />
+          <Property Name="Volumn_HeatingBox" Type="Int32" Nullable="false" />
+          <Property Name="Start_time" Type="DateTime" Precision="3" />
+          <Property Name="Stop_time" Type="DateTime" Precision="3" />
+          <Property Type="Int32" Name="gprs_state" />
         </EntityType>
         <EntityType Name="tb_unit_state">
           <Key>
             <PropertyRef Name="UnitId" />
             <PropertyRef Name="DateTime_RecvDate" />
           </Key>
-          <Property Name="Temp_HeatingBox" Type="String" />
-          <Property Name="Temp_CollectorBox" Type="String" />
-          <Property Name="Temp_CollectorIn" Type="String" />
-          <Property Name="Temp_CollectorOut" Type="String" />
-          <Property Name="Temp_Ambient" Type="String" />
-          <Property Name="Humidity_Ambient" Type="String" />
-          <Property Name="Speed_Wind" Type="String" />
-          <Property Name="SystemState" Type="String" />
-          <Property Name="ErrorState" Type="String" />
+          <Property Name="Temp_HeatingBox" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Temp_CollectorBox" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Temp_CollectorIn" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Temp_CollectorOut" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Temp_Ambient" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Humidity_Ambient" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Speed_Wind" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="SystemState" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="ErrorState" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="UnitId" Type="Int32" Nullable="false" />
-          <Property Name="DateTime_RecvDate" Type="DateTime" Nullable="false" />
-          <Property Name="Amount_Irradiated" Type="String" />
-          <Property Name="Amount_IrradiatedSum" Type="String" />
+          <Property Name="DateTime_RecvDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount_Irradiated" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Amount_IrradiatedSum" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="tb_unit_statistics">
           <Key>
@@ -109,18 +108,18 @@
             <PropertyRef Name="DateTime_Statics" />
           </Key>
           <Property Name="UnitId" Type="Int32" Nullable="false" />
-          <Property Name="System_heat" Type="String" />
-          <Property Name="Conventional_energy" Type="String" />
-          <Property Name="Storage_tank" Type="String" />
-          <Property Name="System_efficiency" Type="String" />
-          <Property Name="Solar_assurance_day" Type="String" />
-          <Property Name="Solar_assurance_year" Type="String" />
-          <Property Name="Energy_alternative" Type="String" />
-          <Property Name="Carbon_emission" Type="String" />
-          <Property Name="Sulfur_emission" Type="String" />
-          <Property Name="Dust_emission" Type="String" />
-          <Property Name="Fee_effect" Type="String" />
-          <Property Name="DateTime_Statics" Type="DateTime" Nullable="false" />
+          <Property Name="System_heat" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Conventional_energy" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Storage_tank" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="System_efficiency" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Solar_assurance_day" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Solar_assurance_year" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Energy_alternative" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Carbon_emission" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Sulfur_emission" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Dust_emission" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Fee_effect" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="DateTime_Statics" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -129,8 +128,8 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="db_tigerModelStoreContainer" CdmEntityContainer="db_tigerEntities">
           <EntitySetMapping Name="tb_union_list"><EntityTypeMapping TypeName="db_tigerModel.tb_union_list"><MappingFragment StoreEntitySet="tb_union_list">
-            <ScalarProperty Name="UnitId" ColumnName="UnitId" />
-            <ScalarProperty Name="gprs_stat" ColumnName="gprs_stat" />
+            <ScalarProperty Name="gprs_state" ColumnName="gprs_state" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
             <ScalarProperty Name="time_online" ColumnName="time_online" />
             <ScalarProperty Name="alias" ColumnName="alias" />
             <ScalarProperty Name="Aera_IrradiatedSum" ColumnName="Aera_IrradiatedSum" />

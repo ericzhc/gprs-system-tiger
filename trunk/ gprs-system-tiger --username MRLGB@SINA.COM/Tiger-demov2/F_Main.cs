@@ -962,5 +962,11 @@ namespace Tiger
             global.osystem.System_heat++;
         }
 
+        private void 统计要素历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            F_History fhistory = new F_History();
+            fhistory.ShowDialog();
+        }
+
     }
 }

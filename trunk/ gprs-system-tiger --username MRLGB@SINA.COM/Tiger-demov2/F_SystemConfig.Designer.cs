@@ -57,12 +57,13 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(309, 191);
+            this.button2.Location = new System.Drawing.Point(349, 189);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
             this.button2.Text = "更新";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // unitGridView
             // 
@@ -70,14 +71,14 @@
             this.unitGridView.Location = new System.Drawing.Point(12, 38);
             this.unitGridView.Name = "unitGridView";
             this.unitGridView.RowTemplate.Height = 23;
-            this.unitGridView.Size = new System.Drawing.Size(419, 145);
+            this.unitGridView.Size = new System.Drawing.Size(608, 145);
             this.unitGridView.TabIndex = 3;
             // 
             // F_SystemSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(443, 224);
+            this.ClientSize = new System.Drawing.Size(632, 224);
             this.Controls.Add(this.unitGridView);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.closeForm);
