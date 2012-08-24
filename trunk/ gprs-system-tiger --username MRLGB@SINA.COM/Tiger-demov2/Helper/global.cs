@@ -227,24 +227,28 @@ namespace Tiger
                 // 
                     string HexString = StrToHex(RecvMessage.m_data_buf, RecvMessage.m_data_len);
 
-                    foreach (Field1NO s in Enum.GetValues(typeof(Field1NO)))
+                    foreach (Field1NO s in Enum.GetValues(typeof(Field1NO)))//枚举所有字段-有冗余!!!
                     {
-                        Regex rx = new Regex(global.patternstr[(ushort)s], RegexOptions.Compiled | RegexOptions.IgnoreCase);
-                        Match matchetemp = rx.Match(HexString);
+						 if (!s.Equals(Field1NO.MAX))
+						 {
+							Regex rx = new Regex(global.patternstr[(ushort)s], RegexOptions.Compiled | RegexOptions.IgnoreCase);
+							Match matchetemp = rx.Match(HexString);
 
-                        cacheLock.EnterWriteLock();
-                        try
-                        {
-                            Field1[(ushort)s] = float.Parse(matchetemp.Groups[0].Value);
-                        }
-                        catch 
-                        {
+							cacheLock.EnterWriteLock();
+							try
+							{
+								Field1[(ushort)s] = float.Parse(matchetemp.Groups[s.ToString()].Value);
+							}
+							catch 
+							{
                             //
-                        }
-                        finally
-                        {
-                            cacheLock.ExitWriteLock();
-                        }
+							}
+							finally
+							{
+								cacheLock.ExitWriteLock();
+							}
+						 }
+                        
                     }
 
                     //foreach (Field2NO s in Enum.GetValues(typeof(Field2NO)))
@@ -543,8 +547,14 @@ namespace Tiger
             @"[T][4][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
             @"[T][5][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
             @"[T][6][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-            @"[T][7][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-            @"[T][8][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+            @"[F][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+            @"[F][2][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+			@"[A][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+            @"[A][2][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+			@"[S][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+            @"[E][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+			@"[P][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+            @"[W][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))"
        };
            
 
