@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Tiger
 {
@@ -69,30 +70,87 @@ namespace Tiger
         }
     }
 
+    public enum Field1NO
+    {
+        T1=0,
+        Temp_HeatingBox = T1 ,
+        T2,
+        Temp_CollectorBox = T2,
+        T3,
+        Temp_CollectorIn = T3,
+        T4,
+        Temp_CollectorOut=T4,
+        T5,
+        Temp_Ambient=T5,
+        T6,
+        Humidity_Ambient=T6,
+        F1,
+        Flow_CollectorSys=F1,
+        F2,
+        Flow_HeatUsing=F2,
+        A1,
+        Amount_Irradiated=A1,
+        A2,
+        Amount_IrradiatedSum=A2,   
+        A3,
+        Aera_IrradiatedSum=A3,
+        P1,
+        Auxiliary_power=P1,
+        W1,
+        Speed_Wind=W1,
+        V1,
+        Volumn_HeatingBox=V1,
+        MAX
+    }
+
+    public enum Field2NO
+    {
+        S1 = 0,
+        SystemState = S1,
+        E1,
+        ErrorState = E1,
+        MAX
+    }
+
+    public enum FieldTimeNO
+    {
+        Recv_Time=0,
+        D0 = Recv_Time,
+        Start_Time,
+        D1=Start_Time,
+        Stop_Time, 
+        D2=Stop_Time,
+        MAX
+    }
+
     public class DTUObject
     {
         private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
-        public ushort Temp_HeatingBox;//供热水箱温度
-        public ushort Temp_CollectorBox;//集热水箱温度
-        public ushort Temp_CollectorIn;//集热系统进口温度
-        public ushort Temp_CollectorOut;//集热系统出口温度
-        public ushort Temp_Ambient;//环境温度
-        public ushort Humidity_Ambient; //环境湿度
-        public ushort Flow_CollectorSys;//集热系统流量
-        public ushort Flow_HeatUsing;//热用户端出水流量
-        public ushort Amount_Irradiated;//太阳能辐照量
-        public ushort Amount_IrradiatedSum;//总辐照量
-        public ushort Speed_Wind;// 风速
-        public ushort SystemState;//系统状态
-        public ushort ErrorState;//系统故障状态
-        public DateTime RecvDate;//接收时间
+        public float[] Field1;
+        public ushort[] Field2;
+        public DateTime[] FieldTime;
+        //public ushort Temp_HeatingBox;//供热水箱温度1-T1
+        //public ushort Temp_CollectorBox;//集热水箱温度2-T2
+        //public ushort Temp_CollectorIn;//集热系统进口温度3-T3
+        //public ushort Temp_CollectorOut;//集热系统出口温度4-T4
+        //public ushort Temp_Ambient;//环境温度-T5
+        //public ushort Humidity_Ambient; //环境湿度6-T6
+        //public ushort Flow_CollectorSys;//集热系统流量7-F1
+        //public ushort Flow_HeatUsing;//热用户端出水流量8-F2
+        //public ushort Amount_Irradiated;//太阳能辐照量9-A1
+        //public ushort Amount_IrradiatedSum;//总辐照量10-A2
+        //public ushort Speed_Wind;// 风速11-W1  
+        //public ushort Auxiliary_power;//功率12-P1
 
+        //public ushort SystemState;//系统状态13-S1
+        //public ushort ErrorState;//系统故障状态14 -E1   
         //用户输入参数
-        public ushort Aera_IrradiatedSum;// 集热器面积
-        public ushort Volumn_HeatingBox;//贮热水箱容量（供热水箱）
-        public ushort Amount_HeatingSum;// 辅助热源加热量
-        public DateTime starttest;//降温时间起始时间
-        public DateTime stoptest;//降温时间停止时间
+        //public ushort Aera_IrradiatedSum;// 集热器面积1-A3
+        //public ushort Volumn_HeatingBox;//贮热水箱容量（供热水箱）-V1
+        //public DateTime starttest;//降温时间起始时间3
+        //public DateTime stoptest;//降温时间停止时间4
+
+        //public DateTime RecvDate;//接收时间
 
         private string _Id;//ID
         public string Id
@@ -110,7 +168,9 @@ namespace Tiger
 
         public DTUObject() 
         {
-            ;
+            Field1 = new float[(ushort)Field1NO.MAX];
+            Field2 = new ushort[(ushort)Field2NO.MAX];
+            FieldTime = new DateTime[(ushort)FieldTimeNO.MAX];
         }
         public void UpdateDTUOnline(bool on)
         {
@@ -125,56 +185,84 @@ namespace Tiger
             }
            
         }
-        public void UpdateDTUObject(DTUObject Inobject )
+
+        public bool  UpdateAll(float[] InputArr1 = null, ushort[] InputArr2 = null, DateTime[] InputArr3 = null)
         {
-            cacheLock.EnterWriteLock();
-            try
+            if ((InputArr1 == null) || (InputArr2 == null) || (InputArr3 == null))
             {
-               Id = Inobject.Id;
-               Online = Inobject.Online;
-               Temp_HeatingBox= Inobject.Temp_HeatingBox;//供热水箱温度
-               Temp_CollectorBox= Inobject.Temp_CollectorBox;//集热水箱温度
-               Temp_CollectorIn= Inobject.Temp_CollectorIn;//集热系统进口温度
-               Temp_CollectorOut= Inobject.Temp_CollectorOut;//集热系统出口温度
-               Temp_Ambient= Inobject.Temp_Ambient;//环境温度
-               Humidity_Ambient= Inobject.Humidity_Ambient; //环境湿度
-               Flow_CollectorSys= Inobject.Flow_CollectorSys;//集热系统流量
-               Flow_HeatUsing= Inobject.Flow_HeatUsing;//热用户端出水流量
-               Amount_Irradiated= Inobject.Amount_Irradiated;//太阳能辐照量
-               Amount_IrradiatedSum= Inobject.Amount_IrradiatedSum;//总辐照量
-               Speed_Wind= Inobject.Speed_Wind;// 风速
-               Aera_IrradiatedSum= Inobject.Aera_IrradiatedSum;// 集热器面积
-               Amount_HeatingSum= Inobject.Amount_HeatingSum;// 辅助热源加热量
-               SystemState= Inobject.SystemState;//系统状态
-               ErrorState= Inobject.ErrorState;//系统故障状态
-               RecvDate= Inobject.RecvDate;//接收时间
-            }
-            finally
-            {
-                cacheLock.ExitWriteLock();
-            }
-         
-        }
-        public void UpdateDTUObject(GPRS_DATA_RECORD RecvMessage, ref DTUObject DTUObject)
-        {
-            if (DTUObject!=null)
-            {
-                string HexString=StrToHex(RecvMessage.m_data_buf, RecvMessage.m_data_len);
-                //解析消息，构建DTUObject
-                // 
                 cacheLock.EnterWriteLock();
                 try
                 {
-                    //DTUObject.Temp_HeatingBox = 1;
-                    //DTUObject.Temp_CollectorBox = 2;
+                    Array.Clear(Field1, 0, Field1.Length);
+                    Array.Clear(Field2, 0, Field2.Length);
+                    Array.Clear(FieldTime, 0, FieldTime.Length);
                 }
                 finally
                 {
                     cacheLock.ExitWriteLock();
                 }
-            
+                return false;
+            }
+
+            cacheLock.EnterWriteLock();
+            try
+            {
+                Array.Copy(InputArr1, Field1, InputArr1.Length);
+                Array.Copy(InputArr2, Field2, InputArr2.Length);
+                Array.Copy(InputArr3, FieldTime, InputArr3.Length);
+            }
+            finally
+            {
+                cacheLock.ExitWriteLock();
+            }
+            return true;
+
+        }
+
+        public void UpdateDTUObject(GPRS_DATA_RECORD RecvMessage)
+        {
+            if (!RecvMessage.Equals(null))
+            {
+                //解析消息，构建DTUObject
+                // 
+                    string HexString = StrToHex(RecvMessage.m_data_buf, RecvMessage.m_data_len);
+
+                    foreach (Field1NO s in Enum.GetValues(typeof(Field1NO)))
+                    {
+                        Regex rx = new Regex(global.patternstr[(ushort)s], RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                        Match matchetemp = rx.Match(HexString);
+
+                        cacheLock.EnterWriteLock();
+                        try
+                        {
+                            Field1[(ushort)s] = float.Parse(matchetemp.Groups[0].Value);
+                        }
+                        catch 
+                        {
+                            //
+                        }
+                        finally
+                        {
+                            cacheLock.ExitWriteLock();
+                        }
+                    }
+
+                    //foreach (Field2NO s in Enum.GetValues(typeof(Field2NO)))
+                    //{
+                    //    Regex rx = new Regex(global.patternstr[(ushort)s], RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                    //    Match matchetemp = rx.Match(HexString);
+                    //    DTUObject.Field2[(ushort)s] = ushort.Parse(matchetemp.Groups[0].Value);
+                    //}
+
+                    //foreach (FieldTimeNO s in Enum.GetValues(typeof(FieldTimeNO)))
+                    //{
+                    //    Regex rx = new Regex(global.patternstr[(ushort)s], RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                    //    Match matchetemp = rx.Match(HexString);
+                    //    DTUObject.FieldTime[(ushort)s] = DateTime.Parse(matchetemp.Groups[0].Value);
+                    //}     
             }    
         }
+
         private string StrToHex(byte[] str, int len)//将BYTE数组里的数据转换为16进制，参数是BYTE数组，和数组里的数据长度
         {
             string hex = "";
@@ -446,6 +534,20 @@ namespace Tiger
            }
            return hex;
        }
+
+       public static string[]  patternstr=
+       {
+            @"[T][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+            @"[T][2][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+            @"[T][3][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+            @"[T][4][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+            @"[T][5][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+            @"[T][6][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+            @"[T][7][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+            @"[T][8][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
+       };
+           
+
     }
 
     public static class MyEntityFramework

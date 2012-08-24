@@ -53,7 +53,7 @@ namespace Tiger
             InitQueue();
             UpdateDTUListFromDB();
             staticcount = 0;
-        
+            InitUIDataBinding();
         }
 
         private void LoadConfiguration()
@@ -135,22 +135,18 @@ namespace Tiger
 
         // This thread procedure performs the task specified by the 
         // ThreadPool.QueueUserWorkItem
-        static void ThreadPoolProc(Object DTUinfo)
+        static void ThreadPoolProc(GPRS_DATA_RECORD message)
         {
-            //假设已经获得  DTU Object
-            DTUObject DtuIn = (DTUObject)DTUinfo;
-            global.DTUList[DtuIn.Id.ToString()].UpdateDTUObject(DtuIn);//更新DTUList实时状态
-            Thread.Sleep(2000);
+            //global.DTUList[message.m_userid.ToString()].UpdateDTUObject(message);//更新DTUList实时状态
+            //Thread.Sleep(2000);
+
+
             //DateTime now = DateTime.Now;
             //DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
             //format.DateSeparator = "-";
             //format.ShortDatePattern = @"yyyy/MM/dd";
             //string timestring = now.ToString("d", format);
             MessageBox.Show((staticcount++).ToString());
-
-            //ParseDTUMessage();
-            StoreDTUstate();
-            ComputeStatistic();
 
         }
 
@@ -942,7 +938,7 @@ namespace Tiger
         private void btn_add_binding_Click(object sender, EventArgs e)
         {
             InitUIDataBinding();
-            this.btn_add_binding.Enabled = false;
+            //this.btn_add_binding.Enabled = false;
         }
 
         private void button5_Click(object sender, EventArgs e)
