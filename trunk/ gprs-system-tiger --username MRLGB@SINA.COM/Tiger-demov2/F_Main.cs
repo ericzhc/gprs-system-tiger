@@ -11,6 +11,7 @@ using System.Text;
 using System.Net;
 using System.Threading;
 using System.Globalization;
+using System.Diagnostics;
 using log4net;
 using log4net.Config;
 
@@ -485,43 +486,59 @@ namespace Tiger
         //
         private void timerProduce_Tick(object sender, EventArgs e)
         {
-            GPRS_DATA_RECORD record = new GPRS_DATA_RECORD();
-            cacheLock.EnterWriteLock();
-            try
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
             {
-               
-                record.Initialize();
-                record.m_userid = "136";
-                DateTime now = DateTime.Now;
-                DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
-                format.DateSeparator = "-";
-                format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
-                record.m_recv_date = now.ToString("d", format);
+                GPRS_DATA_RECORD record = new GPRS_DATA_RECORD();
+                cacheLock.EnterWriteLock();
+                try
+                {
 
-                string allstring = "T1-" + ((ushort)rand.Next(0, 100) * 0.89).ToString()+" ";
-                allstring += "T2-" + ((ushort)rand.Next(0, 100) * 0.89).ToString() + " ";
-                allstring += "T3-" + ((ushort)rand.Next(0, 100) * 0.8).ToString() + " ";
-                allstring += "T4-" + ((ushort)rand.Next(0, 100) * 0.79).ToString() + " ";
-                allstring += "T5-" + ((ushort)rand.Next(0, 100) * 0.99).ToString() + " ";
-                allstring += "T6-" + ((ushort)rand.Next(0, 100) * 0.89).ToString() + " ";
-                allstring += "F1-" + ((ushort)rand.Next(1000, 30000) * 6.7).ToString() + " ";
-                allstring += "F2-" + ((ushort)rand.Next(2000, 7700) * 0.89).ToString() + " ";
-                allstring += "A1-" + ((ushort)rand.Next(0, 100) * 0.89).ToString() + " ";
-                allstring += "A2-" + ((ushort)rand.Next(0, 100) * 0.89).ToString() + " ";
-                allstring += "A3-" + ((ushort)rand.Next(0, 100) * 0.89).ToString() + " ";
-                allstring += "P1-" + ((ushort)rand.Next(0, 1000) * 0.89).ToString() + " ";
-                allstring += "W1-" + ((ushort)rand.Next(0, 100) * 0.89).ToString() + " ";
-                allstring += "v1-" + ((ushort)rand.Next(0, 10000) * 0.89).ToString() + " ";
-                record.m_data_len = (ushort)allstring.Length;
-                //byte[] byteArray =;
-                record.m_data_buf = System.Text.Encoding.Default.GetBytes(string.Copy(allstring));
-            }
-          
-             finally
+                    record.Initialize();
+                    record.m_userid = item.Key;
+                    DateTime now = DateTime.Now;
+                    DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
+                    format.DateSeparator = "-";
+                    format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
+                    record.m_recv_date = now.ToString("d", format);
+
+                    string allstring = "T1-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "T2-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "T3-" + ((ushort)rand.Next(1, 100) * 0.8).ToString() + " ";
+                    allstring += "T4-" + ((ushort)rand.Next(1, 100) * 0.79).ToString() + " ";
+                    allstring += "T5-" + ((ushort)rand.Next(1, 100) * 0.99).ToString() + " ";
+                    allstring += "T6-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "F1-" + ((ushort)rand.Next(1000, 30000) * 6.7).ToString() + " ";
+                    allstring += "F2-" + ((ushort)rand.Next(2000, 7700) * 0.89).ToString() + " ";
+                    allstring += "A1-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "A2-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "A3-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "P1-" + ((ushort)rand.Next(1, 1000) * 0.89).ToString() + " ";
+                    allstring += "W1-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "v1-" + ((ushort)rand.Next(1, 10000) * 0.89).ToString() + " ";
+                    record.m_data_len = (ushort)allstring.Length;
+                    //byte[] byteArray =;
+                    record.m_data_buf = System.Text.Encoding.Default.GetBytes(string.Copy(allstring));
+                }
+
+                finally
                 {
                     cacheLock.ExitWriteLock();
                 }
-            Dqueue.EnQueueItem(record);
+                Dqueue.EnQueueItem(record);
+            
+            }
+            stopWatch.Stop();
+            // Get the elapsed time as a TimeSpan value.
+            TimeSpan ts = stopWatch.Elapsed;
+
+             //Format and display the TimeSpan value. 
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+            MessageBox.Show("produce time:"+elapsedTime.ToString());
+            
         }
 
         //**********************************
@@ -981,34 +998,62 @@ namespace Tiger
         private void timer_store_Tick(object sender, EventArgs e)
         {
             
+        }
 
-            //using (var context = new db_tigerEntities())
-            //{
-            //    IList<tb_unit_state> Union = MyEntityFramework.GetAllUnits();
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            using (var context = new db_tigerEntities())
+            {
+                ///遍历所有list元素
+                foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
+                {
+                    try
+                    {
+                        DateTime now = DateTime.Now;
+                        //DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
+                        //format.DateSeparator = "-";
+                        //format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
 
-            //    ///遍历所有查询结果
-            //    foreach (KeyValuePair<string ,DTUObject> item in global.DTUList)
-            //    {
-            //        try
-            //        {
-            //            tb_unit_state unitstate = new tb_unit_state
-            //            {
-            //                UnitId = item.Key;
-            //                Temp_HeatingBox =item.Value.Field1[(Feild1NO.T1)]
-                            
+                        tb_unit_state unitstate = new tb_unit_state
+                        {
+                            UnitId = item.Key,
+                            DateTime_RecvDate = now,
+                            Temp_HeatingBox = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_HeatingBox)]),
+                            Temp_CollectorBox = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorBox)]),
+                            Temp_CollectorIn = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorIn)]),
+                            Temp_CollectorOut = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorOut)]),
+                            Temp_Ambient = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_Ambient)]),
+                            Humidity_Ambient = (decimal)(item.Value.Field1[(ushort)(Field1NO.Humidity_Ambient)]),
+                            Flow_CollectorSys = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_CollectorSys)]),
+                            Flow_HeatUsing = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_HeatUsing)]),
+                            Amount_Irradiated = (decimal)(item.Value.Field1[(ushort)(Field1NO.Amount_Irradiated)]),
+                            Amount_IrradiatedSum = (decimal)(item.Value.Field1[(ushort)(Field1NO.Amount_IrradiatedSum)]),
+                            Aera_IrradiatedSum = (decimal)(item.Value.Field1[(ushort)(Field1NO.Aera_IrradiatedSum)]),
+                            Speed_Wind = (decimal)(item.Value.Field1[(ushort)(Field1NO.Speed_Wind)]),
+                            Volumn_HeatingBox = (decimal)(item.Value.Field1[(ushort)(Field1NO.Volumn_HeatingBox)])
 
+                        };
+                        context.tb_unit_state.AddObject(unitstate);
+                        context.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.InnerException.ToString());
+                    }
 
-            //            };
-            //            context.tb_union_list.AddObject(unitstate);
-            //            context.SaveChanges();
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            MessageBox.Show(ex.InnerException.ToString());
-            //        }
+                }
+            }
+            stopWatch.Stop();
+            // Get the elapsed time as a TimeSpan value.
+            TimeSpan ts = stopWatch.Elapsed;
 
-            //    }
-            //}
+            //Format and display the TimeSpan value. 
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+            MessageBox.Show("store in db time:" + elapsedTime.ToString());
         }
 
     }

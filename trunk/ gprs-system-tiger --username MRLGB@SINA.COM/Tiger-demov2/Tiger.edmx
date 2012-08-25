@@ -30,17 +30,21 @@
           </Key>
           <Property Name="UnitId" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="DateTime_RecvDate" Type="datetime" Nullable="false" />
-          <Property Name="Temp_HeatingBox" Type="varchar" MaxLength="20" />
-          <Property Name="Temp_CollectorBox" Type="varchar" MaxLength="20" />
-          <Property Name="Temp_CollectorIn" Type="varchar" MaxLength="20" />
-          <Property Name="Temp_CollectorOut" Type="varchar" MaxLength="20" />
-          <Property Name="Temp_Ambient" Type="varchar" MaxLength="20" />
-          <Property Name="Humidity_Ambient" Type="varchar" MaxLength="20" />
-          <Property Name="Speed_Wind" Type="varchar" MaxLength="20" />
-          <Property Name="SystemState" Type="varchar" MaxLength="20" />
-          <Property Name="ErrorState" Type="varchar" MaxLength="20" />
-          <Property Name="Amount_Irradiated" Type="varchar" MaxLength="45" />
-          <Property Name="Amount_IrradiatedSum" Type="varchar" MaxLength="45" />
+          <Property Name="Temp_HeatingBox" Type="decimal" />
+          <Property Name="Temp_CollectorBox" Type="decimal" />
+          <Property Name="Temp_CollectorIn" Type="decimal" />
+          <Property Name="Temp_CollectorOut" Type="decimal" />
+          <Property Name="Temp_Ambient" Type="decimal" />
+          <Property Name="Humidity_Ambient" Type="decimal" />
+          <Property Name="Speed_Wind" Type="decimal" />
+          <Property Name="SystemState" Type="int" />
+          <Property Name="ErrorState" Type="int" />
+          <Property Name="Amount_Irradiated" Type="decimal" />
+          <Property Name="Amount_IrradiatedSum" Type="decimal" />
+          <Property Name="Aera_IrradiatedSum" Type="decimal" />
+          <Property Name="Volumn_HeatingBox" Type="decimal" />
+          <Property Name="Flow_CollectorSys" Type="decimal" />
+          <Property Name="Flow_HeatUsing" Type="decimal" />
         </EntityType>
         <EntityType Name="tb_unit_statistics">
           <Key>
@@ -88,19 +92,23 @@
             <PropertyRef Name="UnitId" />
             <PropertyRef Name="DateTime_RecvDate" />
           </Key>
-          <Property Name="Temp_HeatingBox" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Temp_CollectorBox" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Temp_CollectorIn" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Temp_CollectorOut" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Temp_Ambient" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Humidity_Ambient" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="Speed_Wind" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="SystemState" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="ErrorState" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="UnitId" Type="String" Nullable="false" />
+          <Property Name="Temp_HeatingBox" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Temp_CollectorBox" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Temp_CollectorIn" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Temp_CollectorOut" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Temp_Ambient" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Humidity_Ambient" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Speed_Wind" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="SystemState" Type="Int32" />
+          <Property Name="ErrorState" Type="Int32" />
+          <Property Name="UnitId" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="DateTime_RecvDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Amount_Irradiated" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="Amount_IrradiatedSum" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Amount_Irradiated" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Amount_IrradiatedSum" Type="Decimal" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="Volumn_HeatingBox" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="Flow_CollectorSys" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="Flow_HeatUsing" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="Aera_IrradiatedSum" Precision="10" Scale="0" />
         </EntityType>
         <EntityType Name="tb_unit_statistics">
           <Key>
@@ -138,13 +146,17 @@
             <ScalarProperty Name="Stop_time" ColumnName="Stop_time" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="tb_unit_state"><EntityTypeMapping TypeName="db_tigerModel.tb_unit_state"><MappingFragment StoreEntitySet="tb_unit_state">
-            <ScalarProperty Name="Temp_HeatingBox" ColumnName="Temp_HeatingBox" />
+                <ScalarProperty Name="Aera_IrradiatedSum" ColumnName="Aera_IrradiatedSum" />
+                <ScalarProperty Name="Flow_HeatUsing" ColumnName="Flow_HeatUsing" />
+                <ScalarProperty Name="Flow_CollectorSys" ColumnName="Flow_CollectorSys" />
+                <ScalarProperty Name="Volumn_HeatingBox" ColumnName="Volumn_HeatingBox" />
+                <ScalarProperty Name="Speed_Wind" ColumnName="Speed_Wind" />
+                <ScalarProperty Name="Temp_HeatingBox" ColumnName="Temp_HeatingBox" />
             <ScalarProperty Name="Temp_CollectorBox" ColumnName="Temp_CollectorBox" />
             <ScalarProperty Name="Temp_CollectorIn" ColumnName="Temp_CollectorIn" />
             <ScalarProperty Name="Temp_CollectorOut" ColumnName="Temp_CollectorOut" />
             <ScalarProperty Name="Temp_Ambient" ColumnName="Temp_Ambient" />
             <ScalarProperty Name="Humidity_Ambient" ColumnName="Humidity_Ambient" />
-            <ScalarProperty Name="Speed_Wind" ColumnName="Speed_Wind" />
             <ScalarProperty Name="SystemState" ColumnName="SystemState" />
             <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
             <ScalarProperty Name="UnitId" ColumnName="UnitId" />

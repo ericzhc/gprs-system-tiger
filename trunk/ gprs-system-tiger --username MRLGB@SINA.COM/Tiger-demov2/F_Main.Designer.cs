@@ -120,6 +120,7 @@
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.button4 = new System.Windows.Forms.Button();
             this.timer_store = new System.Windows.Forms.Timer(this.components);
+            this.button5 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
@@ -854,7 +855,7 @@
             // 
             this.btnProduceData.BackColor = System.Drawing.Color.Transparent;
             this.btnProduceData.ForeColor = System.Drawing.Color.Maroon;
-            this.btnProduceData.Location = new System.Drawing.Point(362, 36);
+            this.btnProduceData.Location = new System.Drawing.Point(300, 36);
             this.btnProduceData.Margin = new System.Windows.Forms.Padding(2);
             this.btnProduceData.Name = "btnProduceData";
             this.btnProduceData.Size = new System.Drawing.Size(86, 24);
@@ -1006,16 +1007,27 @@
             this.timer_store.Interval = 10000;
             this.timer_store.Tick += new System.EventHandler(this.timer_store_Tick);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(401, 36);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 33;
+            this.button5.Text = "记录数据";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            // 
             // F_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(958, 690);
+            this.Controls.Add(this.btnProduceData);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.btn_Detach);
             this.Controls.Add(this.btn_Atach);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.btnProduceData);
             this.Controls.Add(this.statusBar1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
@@ -1163,6 +1175,7 @@
         private System.Windows.Forms.ToolStripMenuItem 中心参数设置ToolStripMenuItem;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Timer timer_store;
+        private System.Windows.Forms.Button button5;
     }
 }
 

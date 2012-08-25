@@ -412,7 +412,7 @@ namespace Tiger
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Temp_HeatingBox
+        public Nullable<global::System.Decimal> Temp_HeatingBox
         {
             get
             {
@@ -422,13 +422,13 @@ namespace Tiger
             {
                 OnTemp_HeatingBoxChanging(value);
                 ReportPropertyChanging("Temp_HeatingBox");
-                _Temp_HeatingBox = StructuralObject.SetValidValue(value, true);
+                _Temp_HeatingBox = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Temp_HeatingBox");
                 OnTemp_HeatingBoxChanged();
             }
         }
-        private global::System.String _Temp_HeatingBox;
-        partial void OnTemp_HeatingBoxChanging(global::System.String value);
+        private Nullable<global::System.Decimal> _Temp_HeatingBox;
+        partial void OnTemp_HeatingBoxChanging(Nullable<global::System.Decimal> value);
         partial void OnTemp_HeatingBoxChanged();
     
         /// <summary>
@@ -436,7 +436,7 @@ namespace Tiger
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Temp_CollectorBox
+        public Nullable<global::System.Decimal> Temp_CollectorBox
         {
             get
             {
@@ -446,13 +446,13 @@ namespace Tiger
             {
                 OnTemp_CollectorBoxChanging(value);
                 ReportPropertyChanging("Temp_CollectorBox");
-                _Temp_CollectorBox = StructuralObject.SetValidValue(value, true);
+                _Temp_CollectorBox = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Temp_CollectorBox");
                 OnTemp_CollectorBoxChanged();
             }
         }
-        private global::System.String _Temp_CollectorBox;
-        partial void OnTemp_CollectorBoxChanging(global::System.String value);
+        private Nullable<global::System.Decimal> _Temp_CollectorBox;
+        partial void OnTemp_CollectorBoxChanging(Nullable<global::System.Decimal> value);
         partial void OnTemp_CollectorBoxChanged();
     
         /// <summary>
@@ -460,7 +460,7 @@ namespace Tiger
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Temp_CollectorIn
+        public Nullable<global::System.Decimal> Temp_CollectorIn
         {
             get
             {
@@ -470,13 +470,13 @@ namespace Tiger
             {
                 OnTemp_CollectorInChanging(value);
                 ReportPropertyChanging("Temp_CollectorIn");
-                _Temp_CollectorIn = StructuralObject.SetValidValue(value, true);
+                _Temp_CollectorIn = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Temp_CollectorIn");
                 OnTemp_CollectorInChanged();
             }
         }
-        private global::System.String _Temp_CollectorIn;
-        partial void OnTemp_CollectorInChanging(global::System.String value);
+        private Nullable<global::System.Decimal> _Temp_CollectorIn;
+        partial void OnTemp_CollectorInChanging(Nullable<global::System.Decimal> value);
         partial void OnTemp_CollectorInChanged();
     
         /// <summary>
@@ -484,7 +484,7 @@ namespace Tiger
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Temp_CollectorOut
+        public Nullable<global::System.Decimal> Temp_CollectorOut
         {
             get
             {
@@ -494,13 +494,13 @@ namespace Tiger
             {
                 OnTemp_CollectorOutChanging(value);
                 ReportPropertyChanging("Temp_CollectorOut");
-                _Temp_CollectorOut = StructuralObject.SetValidValue(value, true);
+                _Temp_CollectorOut = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Temp_CollectorOut");
                 OnTemp_CollectorOutChanged();
             }
         }
-        private global::System.String _Temp_CollectorOut;
-        partial void OnTemp_CollectorOutChanging(global::System.String value);
+        private Nullable<global::System.Decimal> _Temp_CollectorOut;
+        partial void OnTemp_CollectorOutChanging(Nullable<global::System.Decimal> value);
         partial void OnTemp_CollectorOutChanged();
     
         /// <summary>
@@ -508,7 +508,7 @@ namespace Tiger
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Temp_Ambient
+        public Nullable<global::System.Decimal> Temp_Ambient
         {
             get
             {
@@ -518,13 +518,13 @@ namespace Tiger
             {
                 OnTemp_AmbientChanging(value);
                 ReportPropertyChanging("Temp_Ambient");
-                _Temp_Ambient = StructuralObject.SetValidValue(value, true);
+                _Temp_Ambient = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Temp_Ambient");
                 OnTemp_AmbientChanged();
             }
         }
-        private global::System.String _Temp_Ambient;
-        partial void OnTemp_AmbientChanging(global::System.String value);
+        private Nullable<global::System.Decimal> _Temp_Ambient;
+        partial void OnTemp_AmbientChanging(Nullable<global::System.Decimal> value);
         partial void OnTemp_AmbientChanged();
     
         /// <summary>
@@ -532,7 +532,7 @@ namespace Tiger
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Humidity_Ambient
+        public Nullable<global::System.Decimal> Humidity_Ambient
         {
             get
             {
@@ -542,13 +542,13 @@ namespace Tiger
             {
                 OnHumidity_AmbientChanging(value);
                 ReportPropertyChanging("Humidity_Ambient");
-                _Humidity_Ambient = StructuralObject.SetValidValue(value, true);
+                _Humidity_Ambient = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Humidity_Ambient");
                 OnHumidity_AmbientChanged();
             }
         }
-        private global::System.String _Humidity_Ambient;
-        partial void OnHumidity_AmbientChanging(global::System.String value);
+        private Nullable<global::System.Decimal> _Humidity_Ambient;
+        partial void OnHumidity_AmbientChanging(Nullable<global::System.Decimal> value);
         partial void OnHumidity_AmbientChanged();
     
         /// <summary>
@@ -556,7 +556,7 @@ namespace Tiger
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Speed_Wind
+        public Nullable<global::System.Decimal> Speed_Wind
         {
             get
             {
@@ -566,13 +566,13 @@ namespace Tiger
             {
                 OnSpeed_WindChanging(value);
                 ReportPropertyChanging("Speed_Wind");
-                _Speed_Wind = StructuralObject.SetValidValue(value, true);
+                _Speed_Wind = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Speed_Wind");
                 OnSpeed_WindChanged();
             }
         }
-        private global::System.String _Speed_Wind;
-        partial void OnSpeed_WindChanging(global::System.String value);
+        private Nullable<global::System.Decimal> _Speed_Wind;
+        partial void OnSpeed_WindChanging(Nullable<global::System.Decimal> value);
         partial void OnSpeed_WindChanged();
     
         /// <summary>
@@ -580,7 +580,7 @@ namespace Tiger
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String SystemState
+        public Nullable<global::System.Int32> SystemState
         {
             get
             {
@@ -590,13 +590,13 @@ namespace Tiger
             {
                 OnSystemStateChanging(value);
                 ReportPropertyChanging("SystemState");
-                _SystemState = StructuralObject.SetValidValue(value, true);
+                _SystemState = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("SystemState");
                 OnSystemStateChanged();
             }
         }
-        private global::System.String _SystemState;
-        partial void OnSystemStateChanging(global::System.String value);
+        private Nullable<global::System.Int32> _SystemState;
+        partial void OnSystemStateChanging(Nullable<global::System.Int32> value);
         partial void OnSystemStateChanged();
     
         /// <summary>
@@ -604,7 +604,7 @@ namespace Tiger
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String ErrorState
+        public Nullable<global::System.Int32> ErrorState
         {
             get
             {
@@ -614,13 +614,13 @@ namespace Tiger
             {
                 OnErrorStateChanging(value);
                 ReportPropertyChanging("ErrorState");
-                _ErrorState = StructuralObject.SetValidValue(value, true);
+                _ErrorState = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("ErrorState");
                 OnErrorStateChanged();
             }
         }
-        private global::System.String _ErrorState;
-        partial void OnErrorStateChanging(global::System.String value);
+        private Nullable<global::System.Int32> _ErrorState;
+        partial void OnErrorStateChanging(Nullable<global::System.Int32> value);
         partial void OnErrorStateChanged();
     
         /// <summary>
@@ -682,7 +682,7 @@ namespace Tiger
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Amount_Irradiated
+        public Nullable<global::System.Decimal> Amount_Irradiated
         {
             get
             {
@@ -692,13 +692,13 @@ namespace Tiger
             {
                 OnAmount_IrradiatedChanging(value);
                 ReportPropertyChanging("Amount_Irradiated");
-                _Amount_Irradiated = StructuralObject.SetValidValue(value, true);
+                _Amount_Irradiated = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Amount_Irradiated");
                 OnAmount_IrradiatedChanged();
             }
         }
-        private global::System.String _Amount_Irradiated;
-        partial void OnAmount_IrradiatedChanging(global::System.String value);
+        private Nullable<global::System.Decimal> _Amount_Irradiated;
+        partial void OnAmount_IrradiatedChanging(Nullable<global::System.Decimal> value);
         partial void OnAmount_IrradiatedChanged();
     
         /// <summary>
@@ -706,7 +706,7 @@ namespace Tiger
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Amount_IrradiatedSum
+        public Nullable<global::System.Decimal> Amount_IrradiatedSum
         {
             get
             {
@@ -716,14 +716,110 @@ namespace Tiger
             {
                 OnAmount_IrradiatedSumChanging(value);
                 ReportPropertyChanging("Amount_IrradiatedSum");
-                _Amount_IrradiatedSum = StructuralObject.SetValidValue(value, true);
+                _Amount_IrradiatedSum = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Amount_IrradiatedSum");
                 OnAmount_IrradiatedSumChanged();
             }
         }
-        private global::System.String _Amount_IrradiatedSum;
-        partial void OnAmount_IrradiatedSumChanging(global::System.String value);
+        private Nullable<global::System.Decimal> _Amount_IrradiatedSum;
+        partial void OnAmount_IrradiatedSumChanging(Nullable<global::System.Decimal> value);
         partial void OnAmount_IrradiatedSumChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Volumn_HeatingBox
+        {
+            get
+            {
+                return _Volumn_HeatingBox;
+            }
+            set
+            {
+                OnVolumn_HeatingBoxChanging(value);
+                ReportPropertyChanging("Volumn_HeatingBox");
+                _Volumn_HeatingBox = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Volumn_HeatingBox");
+                OnVolumn_HeatingBoxChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Volumn_HeatingBox;
+        partial void OnVolumn_HeatingBoxChanging(Nullable<global::System.Decimal> value);
+        partial void OnVolumn_HeatingBoxChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Flow_CollectorSys
+        {
+            get
+            {
+                return _Flow_CollectorSys;
+            }
+            set
+            {
+                OnFlow_CollectorSysChanging(value);
+                ReportPropertyChanging("Flow_CollectorSys");
+                _Flow_CollectorSys = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Flow_CollectorSys");
+                OnFlow_CollectorSysChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Flow_CollectorSys;
+        partial void OnFlow_CollectorSysChanging(Nullable<global::System.Decimal> value);
+        partial void OnFlow_CollectorSysChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Flow_HeatUsing
+        {
+            get
+            {
+                return _Flow_HeatUsing;
+            }
+            set
+            {
+                OnFlow_HeatUsingChanging(value);
+                ReportPropertyChanging("Flow_HeatUsing");
+                _Flow_HeatUsing = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Flow_HeatUsing");
+                OnFlow_HeatUsingChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Flow_HeatUsing;
+        partial void OnFlow_HeatUsingChanging(Nullable<global::System.Decimal> value);
+        partial void OnFlow_HeatUsingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Aera_IrradiatedSum
+        {
+            get
+            {
+                return _Aera_IrradiatedSum;
+            }
+            set
+            {
+                OnAera_IrradiatedSumChanging(value);
+                ReportPropertyChanging("Aera_IrradiatedSum");
+                _Aera_IrradiatedSum = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Aera_IrradiatedSum");
+                OnAera_IrradiatedSumChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Aera_IrradiatedSum;
+        partial void OnAera_IrradiatedSumChanging(Nullable<global::System.Decimal> value);
+        partial void OnAera_IrradiatedSumChanged();
 
         #endregion
 
