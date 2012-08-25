@@ -113,14 +113,14 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.button4 = new System.Windows.Forms.Button();
+            this.timer_store = new System.Windows.Forms.Timer(this.components);
+            this.button5 = new System.Windows.Forms.Button();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.button4 = new System.Windows.Forms.Button();
-            this.timer_store = new System.Windows.Forms.Timer(this.components);
-            this.button5 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
@@ -318,6 +318,7 @@
             this.显示要素历史数据ToolStripMenuItem.Name = "显示要素历史数据ToolStripMenuItem";
             this.显示要素历史数据ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.显示要素历史数据ToolStripMenuItem.Text = "显示要素历史数据";
+            this.显示要素历史数据ToolStripMenuItem.Click += new System.EventHandler(this.显示要素历史数据ToolStripMenuItem_Click);
             // 
             // 帮助ToolStripMenuItem
             // 
@@ -410,7 +411,7 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.Color.Green;
             this.button1.Location = new System.Drawing.Point(306, 450);
             this.button1.Name = "button1";
@@ -422,8 +423,8 @@
             // 
             // groupBox8
             // 
-            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox8.AutoSize = true;
             this.groupBox8.Controls.Add(this.txt_Fee_effect);
             this.groupBox8.Controls.Add(this.label30);
@@ -454,8 +455,8 @@
             // 
             // groupBox9
             // 
-            this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox9.AutoSize = true;
             this.groupBox9.Controls.Add(this.txt_Energy_alternative);
             this.groupBox9.Controls.Add(this.label20);
@@ -486,8 +487,8 @@
             // 
             // groupBox7
             // 
-            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox7.AutoSize = true;
             this.groupBox7.Controls.Add(this.txt_Solar_assurance_year);
             this.groupBox7.Controls.Add(this.txt_Solar_assurance_day);
@@ -538,8 +539,8 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.AutoSize = true;
             this.groupBox5.Controls.Add(this.txt_Dust_emission);
             this.groupBox5.Controls.Add(this.txt_Sulfur_emission);
@@ -610,8 +611,8 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.AutoSize = true;
             this.groupBox4.Controls.Add(this.txt_System_efficiency);
             this.groupBox4.Controls.Add(this.label19);
@@ -642,8 +643,8 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.AutoSize = true;
             this.groupBox6.Controls.Add(this.txt_System_heat);
             this.groupBox6.Controls.Add(this.label14);
@@ -943,6 +944,32 @@
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(781, 37);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(114, 23);
+            this.button4.TabIndex = 32;
+            this.button4.Text = "binding test";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // timer_store
+            // 
+            this.timer_store.Enabled = true;
+            this.timer_store.Interval = 10000;
+            this.timer_store.Tick += new System.EventHandler(this.timer_store_Tick);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(401, 36);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 33;
+            this.button5.Text = "记录数据";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            // 
             // toolStripButton1
             // 
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
@@ -990,32 +1017,6 @@
             this.toolStripButton5.Text = "退出";
             this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton5.ToolTipText = "退出系统";
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(781, 37);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(114, 23);
-            this.button4.TabIndex = 32;
-            this.button4.Text = "binding test";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // timer_store
-            // 
-            this.timer_store.Enabled = true;
-            this.timer_store.Interval = 10000;
-            this.timer_store.Tick += new System.EventHandler(this.timer_store_Tick);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(401, 36);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 33;
-            this.button5.Text = "记录数据";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
             // F_Main
             // 

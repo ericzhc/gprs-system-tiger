@@ -82,6 +82,12 @@
     <Compile Include="F_History.Designer.cs">
       <DependentUpon>F_History.cs</DependentUpon>
     </Compile>
+    <Compile Include="F_History_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_History_View.Designer.cs">
+      <DependentUpon>F_History_View.cs</DependentUpon>
+    </Compile>
     <Compile Include="F_Node.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="F_History.resx">
       <DependentUpon>F_History.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_History_View.resx">
+      <DependentUpon>F_History_View.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="F_Node.resx">
       <DependentUpon>F_Node.cs</DependentUpon>
