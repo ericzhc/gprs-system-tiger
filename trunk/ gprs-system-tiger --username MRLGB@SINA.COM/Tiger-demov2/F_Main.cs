@@ -227,8 +227,9 @@ namespace Tiger
 
         private void 系统配置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            F_SystemSet f_systemset = new F_SystemSet();
-            f_systemset.ShowDialog();
+            //F_SystemSet f_systemset = new F_SystemSet();
+            F_SystemConfig f_systemconfig = new F_SystemConfig();
+            f_systemconfig.ShowDialog();
         }
 
         //**********************************************************
