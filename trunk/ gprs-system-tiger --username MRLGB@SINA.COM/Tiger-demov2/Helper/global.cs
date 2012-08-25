@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Linq;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace Tiger
@@ -73,33 +74,33 @@ namespace Tiger
     public enum Field1NO
     {
         T1=0,
-        Temp_HeatingBox = T1 ,
+        //Temp_HeatingBox = T1 ,
         T2,
-        Temp_CollectorBox = T2,
+        //Temp_CollectorBox = T2,
         T3,
-        Temp_CollectorIn = T3,
+        //Temp_CollectorIn = T3,
         T4,
-        Temp_CollectorOut=T4,
+        //Temp_CollectorOut=T4,
         T5,
-        Temp_Ambient=T5,
+        //Temp_Ambient=T5,
         T6,
-        Humidity_Ambient=T6,
+        //Humidity_Ambient=T6,
         F1,
-        Flow_CollectorSys=F1,
+        //Flow_CollectorSys=F1,
         F2,
-        Flow_HeatUsing=F2,
+        //Flow_HeatUsing=F2,
         A1,
-        Amount_Irradiated=A1,
+        //Amount_Irradiated=A1,
         A2,
-        Amount_IrradiatedSum=A2,   
+        //Amount_IrradiatedSum=A2,   
         A3,
-        Aera_IrradiatedSum=A3,
+        //Aera_IrradiatedSum=A3,
         P1,
-        Auxiliary_power=P1,
+        //Auxiliary_power=P1,
         W1,
-        Speed_Wind=W1,
+        //Speed_Wind=W1,
         V1,
-        Volumn_HeatingBox=V1,
+        //Volumn_HeatingBox=V1,
         MAX
     }
 
@@ -166,8 +167,9 @@ namespace Tiger
             set { online = value; }
         }
 
-        public DTUObject() 
+        public DTUObject(string useid) 
         {
+            Id = useid;
             Field1 = new float[(ushort)Field1NO.MAX];
             Field2 = new ushort[(ushort)Field2NO.MAX];
             FieldTime = new DateTime[(ushort)FieldTimeNO.MAX];
@@ -186,7 +188,7 @@ namespace Tiger
            
         }
 
-        public bool  UpdateAll(float[] InputArr1 = null, ushort[] InputArr2 = null, DateTime[] InputArr3 = null)
+        public bool UpdateAll(float[] InputArr1 = null, ushort[] InputArr2 = null, DateTime[] InputArr3 = null)
         {
             if ((InputArr1 == null) || (InputArr2 == null) || (InputArr3 == null))
             {
@@ -221,23 +223,29 @@ namespace Tiger
 
         public void UpdateDTUObject(GPRS_DATA_RECORD RecvMessage)
         {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+          
             if (!RecvMessage.Equals(null))
             {
                 //解析消息，构建DTUObject
                 // 
-                    string HexString = StrToHex(RecvMessage.m_data_buf, RecvMessage.m_data_len);
-
+                    //string HexString = StrToHex(RecvMessage.m_data_buf, RecvMessage.m_data_len);
+                    string HexString = System.Text.Encoding.Default.GetString(RecvMessage.m_data_buf);
                     foreach (Field1NO s in Enum.GetValues(typeof(Field1NO)))//枚举所有字段-有冗余!!!
                     {
 						 if (!s.Equals(Field1NO.MAX))
-						 {
-							Regex rx = new Regex(global.patternstr[(ushort)s], RegexOptions.Compiled | RegexOptions.IgnoreCase);
+						 {		
+                            string strpa = global.patternstr[(ushort)s];
+                            Regex rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 							Match matchetemp = rx.Match(HexString);
 
 							cacheLock.EnterWriteLock();
 							try
 							{
-								Field1[(ushort)s] = float.Parse(matchetemp.Groups[s.ToString()].Value);
+                                float x= float.Parse(matchetemp.Groups[s.ToString()].Value);
+                                ushort y = (ushort)s;
+                                Field1[y] = x;
 							}
 							catch 
 							{
@@ -264,7 +272,16 @@ namespace Tiger
                     //    Match matchetemp = rx.Match(HexString);
                     //    DTUObject.FieldTime[(ushort)s] = DateTime.Parse(matchetemp.Groups[0].Value);
                     //}     
-            }    
+            }
+            stopWatch.Stop();
+            // Get the elapsed time as a TimeSpan value.
+            TimeSpan ts = stopWatch.Elapsed;
+
+            // Format and display the TimeSpan value. 
+            //string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+            //    ts.Hours, ts.Minutes, ts.Seconds,
+            //    ts.Milliseconds / 10);
+            //MessageBox.Show(elapsedTime.ToString());
         }
 
         private string StrToHex(byte[] str, int len)//将BYTE数组里的数据转换为16进制，参数是BYTE数组，和数组里的数据长度
@@ -302,6 +319,148 @@ namespace Tiger
             }
             return hex;
         }
+    }
+
+    public class DTUStatisticObject : INotifyPropertyChanged
+    {
+        private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string _Id;//ID
+        public string Id
+        {
+            get { return _Id; }
+            set { _Id = value; }
+        }
+
+        private ushort _System_heat;  //集热系统得热量1
+        public ushort System_heat
+        {
+            get { return _System_heat; }
+            set
+            {
+                if (_System_heat != value)
+                {
+                    _System_heat = value;
+                    OnPropertyChanged("System_heat");
+                }
+            }
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private ushort _Conventional_energy;  //系统常规热源耗能量2
+        public ushort Conventional_energy
+        {
+            get { return _Conventional_energy; }
+            set
+            {
+                _Conventional_energy = value;
+                OnPropertyChanged("Conventional_energy");
+            }
+        }
+        private ushort _Storage_tank; //贮热水箱热损系数3
+        public ushort Storage_tank
+        {
+            get { return _Storage_tank; }
+            set
+            {
+                _Storage_tank = value;
+                OnPropertyChanged("Storage_tank");
+            }
+        }
+        private ushort _System_efficiency;  //集热系统效率4
+
+        public ushort System_efficiency
+        {
+            get { return _System_efficiency; }
+            set
+            {
+                _System_efficiency = value;
+                OnPropertyChanged("System_efficiency");
+            }
+        }
+        private ushort _Solar_assurance_day;  //日太阳能保证率5
+
+        public ushort Solar_assurance_day
+        {
+            get { return _Solar_assurance_day; }
+            set { _Solar_assurance_day = value; OnPropertyChanged("Solar_assurance_day"); }
+        }
+        private ushort _Solar_assurance_year;  //全年太阳能保证率6
+
+        public ushort Solar_assurance_year
+        {
+            get { return _Solar_assurance_year; }
+            set { _Solar_assurance_year = value; OnPropertyChanged("Solar_assurance_year"); }
+        }
+        private ushort _Energy_alternative;  //常规能源替代量7
+
+        public ushort Energy_alternative
+        {
+            get { return _Energy_alternative; }
+            set { _Energy_alternative = value; OnPropertyChanged("Energy_alternative"); }
+        }
+        private ushort _Carbon_emission; //二氧化碳减排量8
+
+        public ushort Carbon_emission
+        {
+            get { return _Carbon_emission; }
+            set { _Carbon_emission = value; OnPropertyChanged("Carbon_emission"); }
+        }
+        private ushort _Sulfur_emission; //二氧化硫减排量9
+
+        public ushort Sulfur_emission
+        {
+            get { return _Sulfur_emission; }
+            set { _Sulfur_emission = value; OnPropertyChanged("Sulfur_emission"); }
+        }
+        private ushort _Dust_emission;  //粉尘减排量10
+
+        public ushort Dust_emission
+        {
+            get { return _Dust_emission; }
+            set { _Dust_emission = value; OnPropertyChanged("Dust_emission"); }
+        }
+        private ushort _Fee_effect; //项目费效比11
+
+        public ushort Fee_effect
+        {
+            get { return _Fee_effect; }
+            set { _Fee_effect = value; OnPropertyChanged("Fee_effect"); }
+        }
+        private ushort _Auxiliary_heat;//辅助热源加热量12
+
+        public ushort Auxiliary_heat
+        {
+            get { return _Auxiliary_heat; }
+            set { _Auxiliary_heat = value; OnPropertyChanged("Auxiliary_heat"); }
+        }
+
+
+        public DTUStatisticObject()
+        {
+            
+        }
+
+        public void UpdateSystemObject(SystemObject Inobject)
+        {
+            cacheLock.EnterWriteLock();
+            try
+            {
+                
+            }
+            finally
+            {
+                cacheLock.ExitWriteLock();
+            }
+
+        }
+       
     }
 
     public class SystemObject : INotifyPropertyChanged
@@ -418,45 +577,9 @@ namespace Tiger
 
         public SystemObject() 
         {
-            DTUList.Add("new id1",new DTUObject());
-            DTUList.Add("new id2", new DTUObject());
-            DTUList.Add("new id3", new DTUObject());
-              
+            
         }
 
-        public void UpdateSystemObject(SystemObject Inobject)
-        {
-            cacheLock.EnterWriteLock();
-            try
-            {
-                Id = Inobject.Id;
-                System_heat = Inobject.System_heat;//供热水箱温度
-                Conventional_energy = Inobject.Conventional_energy;  //系统常规热源耗能量
-                Storage_tank = Inobject.Storage_tank; //贮热水箱热损系数
-                System_efficiency = Inobject.System_efficiency;  //集热系统效率
-                Solar_assurance_day = Inobject.Solar_assurance_day;  //日太阳能保证率
-                Solar_assurance_year = Inobject.Solar_assurance_year;  //全年太阳能保证率
-                Energy_alternative = Inobject.Energy_alternative;  //常规能源替代量
-                Carbon_emission = Inobject.Carbon_emission;  //二氧化碳减排量
-                Sulfur_emission = Inobject.Sulfur_emission; //二氧化硫减排量
-                Dust_emission = Inobject.Dust_emission;  //粉尘减排量
-                Fee_effect = Inobject.Fee_effect;   //项目费效比
-                Auxiliary_heat = Inobject.Auxiliary_heat;//辅助热源加热量
-            }
-            finally
-            {
-                cacheLock.ExitWriteLock();
-            }
-
-        }
-
-        private static SortedList<string, DTUObject> _DTUList = new SortedList<string, DTUObject>();
-
-        public static SortedList<string, DTUObject> DTUList
-        {
-            get { return SystemObject._DTUList; }
-            set { SystemObject._DTUList = value; }
-        }
     }
 
     public class ThreadIdentity
@@ -473,13 +596,17 @@ namespace Tiger
     {
        public static bool attached=true;
 
-       public static SortedList<string, DTUObject> DTUList = new SortedList<string, DTUObject>();
+       public static ushort Timer_store = 60;
+       public static ushort Timer_Statistic = 60;
+       public static ushort Timer_Sum = 60;
 
-       //public static SortedList<string, SystemObject> SatisticList = new SortedList<string, SystemObject>();
+       public static SortedList<string, DTUObject> DTUList = new SortedList<string, DTUObject>();//实时状态LIST
 
-       public static SystemObject osystem = new SystemObject();
+       public static SortedList<string, DTUStatisticObject> SatisticList = new SortedList<string, DTUStatisticObject>();//实时统计数据LIST
 
-       public static void checkTemp(string instr)
+       public static SystemObject osystem = new SystemObject();//实时汇总统计对象
+
+       public static void checkTemp(string instr)//验证温度值
        {
            if (Convert.ToInt16(instr) < 0 || Convert.ToInt16(instr) > 100)
            {
@@ -487,7 +614,7 @@ namespace Tiger
            }
        }
 
-       public static void checkHour(string instr)
+       public static void checkHour(string instr)//验证时间小时值
        {
            if (Convert.ToInt16(instr) < 0 || Convert.ToInt16(instr) > 23)
            {
@@ -495,7 +622,7 @@ namespace Tiger
            }
        }
 
-       public static void checkMinute(string instr)
+       public static void checkMinute(string instr)//验证时间分钟值
        {
            if (Convert.ToInt16(instr) < 0 || Convert.ToInt16(instr) > 59)
            {
@@ -541,20 +668,20 @@ namespace Tiger
 
        public static string[]  patternstr=
        {
-            @"[T][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-            @"[T][2][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-            @"[T][3][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-            @"[T][4][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-            @"[T][5][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-            @"[T][6][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-            @"[F][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-            @"[F][2][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-			@"[A][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-            @"[A][2][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-			@"[S][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-            @"[E][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-			@"[P][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",
-            @"[W][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))"
+            @"[T][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//T1
+            @"[T][2][-]+(?<T2>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//T2
+            @"[T][3][-]+(?<T3>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//T3
+            @"[T][4][-]+(?<T4>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//T4
+            @"[T][5][-]+(?<T5>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//T5
+            @"[T][6][-]+(?<T6>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//T6
+            @"[F][1][-]+(?<F1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//F1
+            @"[F][2][-]+(?<F1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//F2
+			@"[A][1][-]+(?<A1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//A1
+            @"[A][2][-]+(?<A2>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//A2
+            @"[A][3][-]+(?<A3>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//A3		
+			@"[P][1][-]+(?<P1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//P1
+            @"[W][1][-]+(?<W1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//W1
+            @"[V][1][-]+(?<V1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))"//V1
        };
            
 
@@ -574,5 +701,18 @@ namespace Tiger
             IList<tb_union_list> units = unitDB.tb_union_list.ToList<tb_union_list>();
             return units;
         }
+
+        //public static IList<tb_unit_state> GetAllUnitStates()
+        //{
+            /////BlogDBEntities是继承于ObjectContext类，自动生成
+            /////可以打开Blog.Desgner.cs文件找到
+            /////原型： public partial class BlogDBEntities : ObjectContext
+            /////可以理解为 他代表了当前数据库环境对象
+            /////同时，在Blog.Desgner.cs里还可以找到两个实体BlogUser及Post
+            //db_tigerEntities unitDB = new db_tigerEntities();
+            /////采用Linq语法读取数据
+            //IList<tb_unit_state> unitstates = unitDB.tb_union_list.ToList<tb_unit_state>();
+            //return unitstates;
+        //}
     }
 }

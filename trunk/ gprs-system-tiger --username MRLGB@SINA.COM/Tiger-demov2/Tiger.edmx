@@ -28,6 +28,8 @@
             <PropertyRef Name="UnitId" />
             <PropertyRef Name="DateTime_RecvDate" />
           </Key>
+          <Property Name="UnitId" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="DateTime_RecvDate" Type="datetime" Nullable="false" />
           <Property Name="Temp_HeatingBox" Type="varchar" MaxLength="20" />
           <Property Name="Temp_CollectorBox" Type="varchar" MaxLength="20" />
           <Property Name="Temp_CollectorIn" Type="varchar" MaxLength="20" />
@@ -37,8 +39,6 @@
           <Property Name="Speed_Wind" Type="varchar" MaxLength="20" />
           <Property Name="SystemState" Type="varchar" MaxLength="20" />
           <Property Name="ErrorState" Type="varchar" MaxLength="20" />
-          <Property Name="UnitId" Type="int" Nullable="false" />
-          <Property Name="DateTime_RecvDate" Type="datetime" Nullable="false" />
           <Property Name="Amount_Irradiated" Type="varchar" MaxLength="45" />
           <Property Name="Amount_IrradiatedSum" Type="varchar" MaxLength="45" />
         </EntityType>
@@ -97,7 +97,7 @@
           <Property Name="Speed_Wind" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="SystemState" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="ErrorState" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="UnitId" Type="Int32" Nullable="false" />
+          <Property Name="UnitId" Type="String" Nullable="false" />
           <Property Name="DateTime_RecvDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Amount_Irradiated" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
           <Property Name="Amount_IrradiatedSum" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
@@ -189,8 +189,8 @@
     <Diagrams>
       <Diagram Name="Tiger">
         <EntityTypeShape EntityType="db_tigerModel.tb_union_list" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5430916341145835" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_tigerModel.tb_unit_state" Width="1.5" PointX="2.75" PointY="0.75" Height="3.4981901041666656" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_tigerModel.tb_unit_statistics" Width="1.5" PointX="4.75" PointY="0.75" Height="3.4981901041666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_tigerModel.tb_unit_state" Width="2.375" PointX="3.375" PointY="0.75" Height="3.4981901041666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_tigerModel.tb_unit_statistics" Width="1.5" PointX="7.75" PointY="0.875" Height="3.4981901041666656" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>

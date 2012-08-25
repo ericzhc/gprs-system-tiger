@@ -395,7 +395,7 @@ namespace Tiger
         /// </summary>
         /// <param name="unitId">Initial value of the UnitId property.</param>
         /// <param name="dateTime_RecvDate">Initial value of the DateTime_RecvDate property.</param>
-        public static tb_unit_state Createtb_unit_state(global::System.Int32 unitId, global::System.DateTime dateTime_RecvDate)
+        public static tb_unit_state Createtb_unit_state(global::System.String unitId, global::System.DateTime dateTime_RecvDate)
         {
             tb_unit_state tb_unit_state = new tb_unit_state();
             tb_unit_state.UnitId = unitId;
@@ -628,7 +628,7 @@ namespace Tiger
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 UnitId
+        public global::System.String UnitId
         {
             get
             {
@@ -640,14 +640,14 @@ namespace Tiger
                 {
                     OnUnitIdChanging(value);
                     ReportPropertyChanging("UnitId");
-                    _UnitId = StructuralObject.SetValidValue(value);
+                    _UnitId = StructuralObject.SetValidValue(value, false);
                     ReportPropertyChanged("UnitId");
                     OnUnitIdChanged();
                 }
             }
         }
-        private global::System.Int32 _UnitId;
-        partial void OnUnitIdChanging(global::System.Int32 value);
+        private global::System.String _UnitId;
+        partial void OnUnitIdChanging(global::System.String value);
         partial void OnUnitIdChanged();
     
         /// <summary>

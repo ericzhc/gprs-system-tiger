@@ -30,7 +30,7 @@ namespace Tiger
         public int serv_mode;      
         public int serv_start = 0;
         public int sign;
-        private static int staticcount = 0;
+        //private static int staticcount = 0;
 
         public bool recvdata;
         public bool threadrun;//控制线程
@@ -44,6 +44,8 @@ namespace Tiger
 
         BindingSource bsSystem = new BindingSource(); // System object
         //BindingSource bsP = new BindingSource(); // Passengers
+
+        private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();//
         #endregion
 
         public F_Main()
@@ -52,7 +54,7 @@ namespace Tiger
             LoadConfiguration();
             InitQueue();
             UpdateDTUListFromDB();
-            staticcount = 0;
+            //staticcount = 0;
             InitUIDataBinding();
         }
 
@@ -105,12 +107,10 @@ namespace Tiger
             foreach (var Unit in Union)
             {
                 if (!global.DTUList.ContainsKey(Unit.UnitId))
-                        {
-                            DTUObject dtu = new DTUObject();
-                            dtu.Id = Unit.UnitId;
-                            //dtu.Online = false;
-                            global.DTUList.Add(dtu.Id, dtu);
-                        }
+                {
+                      DTUObject dtu = new DTUObject(Unit.UnitId);
+                      global.DTUList.Add(dtu.Id, dtu);
+                }
             
             }
           
@@ -127,17 +127,20 @@ namespace Tiger
             //format.ShortDatePattern = @"yyyy/MM/dd";
             //string timestring = now.ToString("d", format);
             //m_Log.Info(timestring + "_" + values.Id.ToString());//LOG4 
-            m_Log.Info(values.m_userid + "---" + values.m_recv_date + "---" + values.m_data_len.ToString() + "\r\n" + global.StrToHex(values.m_data_buf, values.m_data_len) + "\r\n");//LOG4 
-            //ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadPoolProc), values);
+            //m_Log.Info(values.m_userid + "---" + values.m_recv_date + "---" + values.m_data_len.ToString() + "\r\n" + global.StrToHex(values.m_data_buf, values.m_data_len) + "\r\n");//LOG4 
+
+
+            ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadPoolTask), values);
             ////++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         }
 
         // This thread procedure performs the task specified by the 
         // ThreadPool.QueueUserWorkItem
-        static void ThreadPoolProc(GPRS_DATA_RECORD message)
+        public void ThreadPoolTask(object message)
         {
-            //global.DTUList[message.m_userid.ToString()].UpdateDTUObject(message);//更新DTUList实时状态
+            GPRS_DATA_RECORD gprsrecord = (GPRS_DATA_RECORD)message;
+            global.DTUList[gprsrecord.m_userid].UpdateDTUObject(gprsrecord);//更新DTUList实时状态
             //Thread.Sleep(2000);
 
 
@@ -146,7 +149,7 @@ namespace Tiger
             //format.DateSeparator = "-";
             //format.ShortDatePattern = @"yyyy/MM/dd";
             //string timestring = now.ToString("d", format);
-            MessageBox.Show((staticcount++).ToString());
+            //MessageBox.Show((staticcount++).ToString());
 
         }
 
@@ -482,26 +485,43 @@ namespace Tiger
         //
         private void timerProduce_Tick(object sender, EventArgs e)
         {
-            //DTUObject state = new DTUObject();
-            //state.Temp_Ambient = (ushort)rand.Next(0, 100);//供热水箱温度
-            //state.Temp_CollectorBox = (ushort)rand.Next(0, 100);//集热水箱温度
-            //state.Temp_CollectorIn = (ushort)rand.Next(0, 100);//集热系统进口温度
-            //state.Temp_CollectorOut = (ushort)rand.Next(0, 100);//集热系统出口温度
-            //state.Temp_Ambient = (ushort)rand.Next(0, 100);//环境温度
-            //state.Humidity_Ambient = (ushort)rand.Next(0, 100); //环境湿度
-            //state.Flow_CollectorSys = (ushort)rand.Next(0, 100);//集热系统流量
+            GPRS_DATA_RECORD record = new GPRS_DATA_RECORD();
+            cacheLock.EnterWriteLock();
+            try
+            {
+               
+                record.Initialize();
+                record.m_userid = "136";
+                DateTime now = DateTime.Now;
+                DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
+                format.DateSeparator = "-";
+                format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
+                record.m_recv_date = now.ToString("d", format);
 
-            //state.Flow_HeatUsing = (ushort)rand.Next(0, 100);//热用户端出水流量
-            //state.Amount_Irradiated = (ushort)rand.Next(0, 100);//太阳能辐照量
-            //state.Amount_IrradiatedSum = (ushort)rand.Next(0, 100);//总辐照量
-            //state.Speed_Wind = (ushort)rand.Next(0, 100);// 风速
-            //state.Aera_IrradiatedSum = (ushort)rand.Next(0, 100);// 集热器面积
-            //state.Amount_HeatingSum = (ushort)rand.Next(0, 100);// 辅助热源加热量
-            //state.SystemState = (ushort)rand.Next(0, 64);//系统状态
-            //state.ErrorState = (ushort)rand.Next(0, 64);//系统故障状态
-            //state.Id = (ushort)rand.Next(0, 10);//ID
-            //state.RecvDate = DateTime.Now;//接收时间
-            //Dqueue.EnQueueItem(state);
+                string allstring = "T1-" + ((ushort)rand.Next(0, 100) * 0.89).ToString()+" ";
+                allstring += "T2-" + ((ushort)rand.Next(0, 100) * 0.89).ToString() + " ";
+                allstring += "T3-" + ((ushort)rand.Next(0, 100) * 0.8).ToString() + " ";
+                allstring += "T4-" + ((ushort)rand.Next(0, 100) * 0.79).ToString() + " ";
+                allstring += "T5-" + ((ushort)rand.Next(0, 100) * 0.99).ToString() + " ";
+                allstring += "T6-" + ((ushort)rand.Next(0, 100) * 0.89).ToString() + " ";
+                allstring += "F1-" + ((ushort)rand.Next(1000, 30000) * 6.7).ToString() + " ";
+                allstring += "F2-" + ((ushort)rand.Next(2000, 7700) * 0.89).ToString() + " ";
+                allstring += "A1-" + ((ushort)rand.Next(0, 100) * 0.89).ToString() + " ";
+                allstring += "A2-" + ((ushort)rand.Next(0, 100) * 0.89).ToString() + " ";
+                allstring += "A3-" + ((ushort)rand.Next(0, 100) * 0.89).ToString() + " ";
+                allstring += "P1-" + ((ushort)rand.Next(0, 1000) * 0.89).ToString() + " ";
+                allstring += "W1-" + ((ushort)rand.Next(0, 100) * 0.89).ToString() + " ";
+                allstring += "v1-" + ((ushort)rand.Next(0, 10000) * 0.89).ToString() + " ";
+                record.m_data_len = (ushort)allstring.Length;
+                //byte[] byteArray =;
+                record.m_data_buf = System.Text.Encoding.Default.GetBytes(string.Copy(allstring));
+            }
+          
+             finally
+                {
+                    cacheLock.ExitWriteLock();
+                }
+            Dqueue.EnQueueItem(record);
         }
 
         //**********************************
@@ -843,7 +863,8 @@ namespace Tiger
 
         private void btnProduceData_Click(object sender, EventArgs e)
         {
-            timerProduce.Enabled = !timerProduce.Enabled;
+            //timerProduce.Enabled = !timerProduce.Enabled;
+            timerProduce_Tick(null,null);
         }
 
         private void btn_Atach_Click(object sender, EventArgs e)
@@ -955,6 +976,39 @@ namespace Tiger
         private void 帮助ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer_store_Tick(object sender, EventArgs e)
+        {
+            
+
+            //using (var context = new db_tigerEntities())
+            //{
+            //    IList<tb_unit_state> Union = MyEntityFramework.GetAllUnits();
+
+            //    ///遍历所有查询结果
+            //    foreach (KeyValuePair<string ,DTUObject> item in global.DTUList)
+            //    {
+            //        try
+            //        {
+            //            tb_unit_state unitstate = new tb_unit_state
+            //            {
+            //                UnitId = item.Key;
+            //                Temp_HeatingBox =item.Value.Field1[(Feild1NO.T1)]
+                            
+
+
+            //            };
+            //            context.tb_union_list.AddObject(unitstate);
+            //            context.SaveChanges();
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            MessageBox.Show(ex.InnerException.ToString());
+            //        }
+
+            //    }
+            //}
         }
 
     }
