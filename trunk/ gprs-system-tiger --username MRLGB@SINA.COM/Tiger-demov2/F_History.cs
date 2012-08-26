@@ -22,7 +22,6 @@ namespace Tiger
 
         private void chartBindingSource_ListChanged(object sender, ListChangedEventArgs e)
         {
-            ApplyFilter();
             chart1.DataBind();
         }
 
@@ -35,27 +34,27 @@ namespace Tiger
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{0:g}";
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
 
-            chartArea1.Area3DStyle.Inclination = 15;
-            chartArea1.Area3DStyle.IsClustered = true;
-            chartArea1.Area3DStyle.IsRightAngleAxes = false;
-            chartArea1.Area3DStyle.Perspective = 10;
-            chartArea1.Area3DStyle.Rotation = 10;
-            chartArea1.Area3DStyle.WallWidth = 0;
-            chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            chartArea1.AxisX.LabelStyle.Format = "MMM dd";
-            chartArea1.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.AxisY.IsStartedFromZero = false;
-            chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            chartArea1.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.BackColor = System.Drawing.Color.OldLace;
-            chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-            chartArea1.BackSecondaryColor = System.Drawing.Color.White;
-            chartArea1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            chartArea1.Name = "Default";
-            chartArea1.ShadowColor = System.Drawing.Color.Transparent;
-            this.chart1.ChartAreas.Add(chartArea1);
+            //chartArea1.Area3DStyle.Inclination = 15;
+            //chartArea1.Area3DStyle.IsClustered = true;
+            //chartArea1.Area3DStyle.IsRightAngleAxes = false;
+            //chartArea1.Area3DStyle.Perspective = 10;
+            //chartArea1.Area3DStyle.Rotation = 10;
+            //chartArea1.Area3DStyle.WallWidth = 0;
+            //chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            //chartArea1.AxisX.LabelStyle.Format = "MMM dd";
+            //chartArea1.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            //chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            //chartArea1.AxisY.IsStartedFromZero = false;
+            //chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+            //chartArea1.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            //chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            //chartArea1.BackColor = System.Drawing.Color.OldLace;
+            //chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            //chartArea1.BackSecondaryColor = System.Drawing.Color.White;
+            //chartArea1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            //chartArea1.Name = "Default";
+            //chartArea1.ShadowColor = System.Drawing.Color.Transparent;
+            //this.chart1.ChartAreas.Add(chartArea1);
 
             context = new db_tigerEntities();
 
@@ -76,43 +75,32 @@ namespace Tiger
             }
         }
 
-        // apply the filter
-        private void ApplyFilter()
+        private void btn_refresh_Click(object sender, EventArgs e)
         {
-            //// never show discontinued products
-            //var filter = " ";
-
-            //// apply minimum price condition
-            //var minPrice = _txtMin.Text.Trim();
-            //if (!string.IsNullOrEmpty(minPrice))
-            //{
-            //    double d;
-            //    if (!double.TryParse(minPrice, out d))
-            //    {
-            //        MessageBox.Show("Invalid Minimum Unit Price, please try again.");
-            //    }
-            //    else
-            //    {
-            //        filter += string.Format("(Temp_HeatingBox >= {0})", minPrice);
-            //    }
-            //}
-
-            //// set the filter
-            //chartBindingSource.Filter = filter;
-        }
-
-        private void _txtMin_Validated(object sender, EventArgs e)
-        {
-            ApplyFilter();
-        }
-
-        private void _txtMin_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13)
+            if ((checkBox1.Checked) &&(!comboBox1.SelectedItem.Equals(null)))
             {
-                ApplyFilter();
-                e.Handled = true;
+                context = new db_tigerEntities();
+
+                try
+                {
+                    // Create a query for orders and related items.
+                    var orderQuery = context.tb_unit_state
+                        .Where("it.UnitID = '" + comboBox1.SelectedItem.ToString() + "'");
+
+                    // Set the data source of the binding source to the ObjectResult 
+                    // returned when the query is executed.
+                    chartBindingSource.DataSource =
+                        orderQuery.Execute(MergeOption.AppendOnly);
+                }
+                catch (EntitySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                chart1.Invalidate();
             }
+           
         }
+
+       
     }
 }
