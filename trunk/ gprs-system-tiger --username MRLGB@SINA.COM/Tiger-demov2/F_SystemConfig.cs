@@ -15,25 +15,5 @@ namespace Tiger
         {
             InitializeComponent();
         }
-
-        private void RefreshData_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SaveData_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void closeForm_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Cancel_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

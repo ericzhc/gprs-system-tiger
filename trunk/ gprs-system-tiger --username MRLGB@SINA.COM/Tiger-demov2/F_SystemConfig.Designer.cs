@@ -29,116 +29,212 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_SystemConfig));
-            this.Cancel = new System.Windows.Forms.Button();
-            this.SaveData = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.unitGridView = new System.Windows.Forms.DataGridView();
-            this.RefreshData = new System.Windows.Forms.Button();
-            this.closeForm = new System.Windows.Forms.Button();
-            this.config_entityDataSource = new EFWinforms.EntityDataSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.unitGridView)).BeginInit();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.unitIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timeonlineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aliasDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeraIrradiatedSumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.volumnHeatingBoxDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.starttimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stoptimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gprsstateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entityDataSource1 = new EFWinforms.EntityDataSource(this.components);
+            this.entityBindingNavigator1 = new EFWinforms.EntityBindingNavigator();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // Cancel
+            // textBox4
             // 
-            this.Cancel.Location = new System.Drawing.Point(398, 258);
-            this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(75, 23);
-            this.Cancel.TabIndex = 14;
-            this.Cancel.Text = "Cancel";
-            this.Cancel.UseVisualStyleBackColor = true;
-            this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
+            this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "tb_union_list.Volumn_HeatingBox", true));
+            this.textBox4.Location = new System.Drawing.Point(398, 87);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 21);
+            this.textBox4.TabIndex = 7;
             // 
-            // SaveData
+            // textBox3
             // 
-            this.SaveData.Location = new System.Drawing.Point(170, 258);
-            this.SaveData.Name = "SaveData";
-            this.SaveData.Size = new System.Drawing.Size(75, 23);
-            this.SaveData.TabIndex = 13;
-            this.SaveData.Text = "Save";
-            this.SaveData.UseVisualStyleBackColor = true;
-            this.SaveData.Click += new System.EventHandler(this.SaveData_Click);
+            this.textBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "tb_union_list.alias", true));
+            this.textBox3.Location = new System.Drawing.Point(134, 93);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 21);
+            this.textBox3.TabIndex = 8;
+            // 
+            // textBox2
+            // 
+            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "tb_union_list.Aera_IrradiatedSum", true));
+            this.textBox2.Location = new System.Drawing.Point(398, 53);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.TabIndex = 9;
+            // 
+            // textBox1
+            // 
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.entityDataSource1, "tb_union_list.UnitId", true));
+            this.textBox1.Location = new System.Drawing.Point(134, 53);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(268, 90);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(107, 12);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Volumn_HeatingBox";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(494, 97);
+            this.label3.Location = new System.Drawing.Point(63, 96);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(137, 12);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "数据统计汇总时间间隔：";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Name";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(494, 59);
+            this.label2.Location = new System.Drawing.Point(268, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 12);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "数据统计时间间隔：";
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Aera_IrradiatedSum";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(494, 19);
+            this.label1.Location = new System.Drawing.Point(63, 56);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 12);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "数据存储时间间隔：";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "UnitID";
             // 
-            // unitGridView
+            // label5
             // 
-            this.unitGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.unitGridView.Location = new System.Drawing.Point(12, 12);
-            this.unitGridView.Name = "unitGridView";
-            this.unitGridView.RowTemplate.Height = 23;
-            this.unitGridView.Size = new System.Drawing.Size(447, 228);
-            this.unitGridView.TabIndex = 9;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(65, 129);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Details:";
             // 
-            // RefreshData
+            // dataGridView1
             // 
-            this.RefreshData.Location = new System.Drawing.Point(35, 258);
-            this.RefreshData.Name = "RefreshData";
-            this.RefreshData.Size = new System.Drawing.Size(75, 23);
-            this.RefreshData.TabIndex = 8;
-            this.RefreshData.Text = "Refresh";
-            this.RefreshData.UseVisualStyleBackColor = true;
-            this.RefreshData.Click += new System.EventHandler(this.RefreshData_Click);
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.unitIdDataGridViewTextBoxColumn,
+            this.timeonlineDataGridViewTextBoxColumn,
+            this.aliasDataGridViewTextBoxColumn,
+            this.aeraIrradiatedSumDataGridViewTextBoxColumn,
+            this.volumnHeatingBoxDataGridViewTextBoxColumn,
+            this.starttimeDataGridViewTextBoxColumn,
+            this.stoptimeDataGridViewTextBoxColumn,
+            this.gprsstateDataGridViewTextBoxColumn});
+            this.dataGridView1.DataMember = "tb_union_list";
+            this.dataGridView1.DataSource = this.entityDataSource1;
+            this.dataGridView1.Location = new System.Drawing.Point(42, 168);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(508, 150);
+            this.dataGridView1.TabIndex = 12;
             // 
-            // closeForm
+            // unitIdDataGridViewTextBoxColumn
             // 
-            this.closeForm.Location = new System.Drawing.Point(282, 258);
-            this.closeForm.Name = "closeForm";
-            this.closeForm.Size = new System.Drawing.Size(75, 23);
-            this.closeForm.TabIndex = 7;
-            this.closeForm.Text = "Close";
-            this.closeForm.UseVisualStyleBackColor = true;
-            this.closeForm.Click += new System.EventHandler(this.closeForm_Click);
+            this.unitIdDataGridViewTextBoxColumn.DataPropertyName = "UnitId";
+            this.unitIdDataGridViewTextBoxColumn.HeaderText = "UnitId";
+            this.unitIdDataGridViewTextBoxColumn.Name = "unitIdDataGridViewTextBoxColumn";
             // 
-            // config_entityDataSource
+            // timeonlineDataGridViewTextBoxColumn
             // 
-            this.config_entityDataSource.ObjectContextType = null;
+            this.timeonlineDataGridViewTextBoxColumn.DataPropertyName = "time_online";
+            this.timeonlineDataGridViewTextBoxColumn.HeaderText = "time_online";
+            this.timeonlineDataGridViewTextBoxColumn.Name = "timeonlineDataGridViewTextBoxColumn";
+            this.timeonlineDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // aliasDataGridViewTextBoxColumn
+            // 
+            this.aliasDataGridViewTextBoxColumn.DataPropertyName = "alias";
+            this.aliasDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.aliasDataGridViewTextBoxColumn.Name = "aliasDataGridViewTextBoxColumn";
+            // 
+            // aeraIrradiatedSumDataGridViewTextBoxColumn
+            // 
+            this.aeraIrradiatedSumDataGridViewTextBoxColumn.DataPropertyName = "Aera_IrradiatedSum";
+            this.aeraIrradiatedSumDataGridViewTextBoxColumn.HeaderText = "Aera_IrradiatedSum";
+            this.aeraIrradiatedSumDataGridViewTextBoxColumn.Name = "aeraIrradiatedSumDataGridViewTextBoxColumn";
+            // 
+            // volumnHeatingBoxDataGridViewTextBoxColumn
+            // 
+            this.volumnHeatingBoxDataGridViewTextBoxColumn.DataPropertyName = "Volumn_HeatingBox";
+            this.volumnHeatingBoxDataGridViewTextBoxColumn.HeaderText = "Volumn_HeatingBox";
+            this.volumnHeatingBoxDataGridViewTextBoxColumn.Name = "volumnHeatingBoxDataGridViewTextBoxColumn";
+            // 
+            // starttimeDataGridViewTextBoxColumn
+            // 
+            this.starttimeDataGridViewTextBoxColumn.DataPropertyName = "Start_time";
+            this.starttimeDataGridViewTextBoxColumn.HeaderText = "Start_time";
+            this.starttimeDataGridViewTextBoxColumn.Name = "starttimeDataGridViewTextBoxColumn";
+            this.starttimeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // stoptimeDataGridViewTextBoxColumn
+            // 
+            this.stoptimeDataGridViewTextBoxColumn.DataPropertyName = "Stop_time";
+            this.stoptimeDataGridViewTextBoxColumn.HeaderText = "Stop_time";
+            this.stoptimeDataGridViewTextBoxColumn.Name = "stoptimeDataGridViewTextBoxColumn";
+            this.stoptimeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // gprsstateDataGridViewTextBoxColumn
+            // 
+            this.gprsstateDataGridViewTextBoxColumn.DataPropertyName = "gprs_state";
+            this.gprsstateDataGridViewTextBoxColumn.HeaderText = "gprs_state";
+            this.gprsstateDataGridViewTextBoxColumn.Name = "gprsstateDataGridViewTextBoxColumn";
+            this.gprsstateDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.ObjectContextType = typeof(Tiger.db_tigerEntities);
+            // 
+            // entityBindingNavigator1
+            // 
+            this.entityBindingNavigator1.DataMember = "tb_union_list";
+            this.entityBindingNavigator1.DataSource = this.entityDataSource1;
+            this.entityBindingNavigator1.Location = new System.Drawing.Point(0, 0);
+            this.entityBindingNavigator1.Name = "entityBindingNavigator1";
+            this.entityBindingNavigator1.Size = new System.Drawing.Size(591, 25);
+            this.entityBindingNavigator1.TabIndex = 0;
+            this.entityBindingNavigator1.Text = "entityBindingNavigator1";
             // 
             // F_SystemConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 300);
-            this.Controls.Add(this.Cancel);
-            this.Controls.Add(this.SaveData);
+            this.ClientSize = new System.Drawing.Size(591, 354);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.unitGridView);
-            this.Controls.Add(this.RefreshData);
-            this.Controls.Add(this.closeForm);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Controls.Add(this.entityBindingNavigator1);
             this.Name = "F_SystemConfig";
             this.Text = "F_SystemConfig";
-            ((System.ComponentModel.ISupportInitialize)(this.unitGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,14 +242,26 @@
 
         #endregion
 
-        private System.Windows.Forms.Button Cancel;
-        private System.Windows.Forms.Button SaveData;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView unitGridView;
-        private System.Windows.Forms.Button RefreshData;
-        private System.Windows.Forms.Button closeForm;
-        private EFWinforms.EntityDataSource config_entityDataSource;
+        private EFWinforms.EntityBindingNavigator entityBindingNavigator1;
+        private EFWinforms.EntityDataSource entityDataSource1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn timeonlineDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aliasDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aeraIrradiatedSumDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn volumnHeatingBoxDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn starttimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stoptimeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gprsstateDataGridViewTextBoxColumn;
+
     }
 }
