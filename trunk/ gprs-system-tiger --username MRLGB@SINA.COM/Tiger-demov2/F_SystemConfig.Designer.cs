@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_SystemConfig));
             this.Cancel = new System.Windows.Forms.Button();
             this.SaveData = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -134,6 +135,7 @@
             this.Controls.Add(this.unitGridView);
             this.Controls.Add(this.RefreshData);
             this.Controls.Add(this.closeForm);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "F_SystemConfig";
             this.Text = "F_SystemConfig";
             ((System.ComponentModel.ISupportInitialize)(this.unitGridView)).EndInit();

@@ -56,7 +56,7 @@ namespace Tiger
             InitQueue();
             UpdateDTUListFromDB();
             //staticcount = 0;
-            InitUIDataBinding();
+            //InitUIDataBinding();
         }
 
         private void LoadConfiguration()
@@ -112,6 +112,12 @@ namespace Tiger
                       DTUObject dtu = new DTUObject(Unit.UnitId);
                       global.DTUList.Add(dtu.Id, dtu);
                 }
+
+                if (!global.SatisticList.ContainsKey(Unit.UnitId))
+                {
+                    DTUStatisticObject dtustatistic = new DTUStatisticObject(Unit.UnitId);
+                    global.SatisticList.Add(dtustatistic.Id, dtustatistic);
+                }
             
             }
           
@@ -153,23 +159,6 @@ namespace Tiger
             //MessageBox.Show((staticcount++).ToString());
 
         }
-
-        static void ParseDTUMessage()
-        {
-            //解析数据包
-        }
-
-        static void StoreDTUstate()
-        {
-            //更新列表+++
-            //存储到数据库
-        }
-
-        static void ComputeStatistic()
-        {
-            //统计计算
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             F_Node fnode = new F_Node();

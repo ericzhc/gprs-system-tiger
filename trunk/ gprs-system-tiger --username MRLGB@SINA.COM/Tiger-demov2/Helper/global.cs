@@ -236,7 +236,7 @@ namespace Tiger
                     {
 						 if (!s.Equals(Field1NO.MAX))
 						 {		
-                            string strpa = global.patternstr[(ushort)s];
+                            string strpa = global.patternstrfloat[(ushort)s];
                             Regex rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
 							Match matchetemp = rx.Match(HexString);
 
@@ -255,23 +255,60 @@ namespace Tiger
 							{
 								cacheLock.ExitWriteLock();
 							}
-						 }
-                        
+						 }                      
                     }
 
-                    //foreach (Field2NO s in Enum.GetValues(typeof(Field2NO)))
-                    //{
-                    //    Regex rx = new Regex(global.patternstr[(ushort)s], RegexOptions.Compiled | RegexOptions.IgnoreCase);
-                    //    Match matchetemp = rx.Match(HexString);
-                    //    DTUObject.Field2[(ushort)s] = ushort.Parse(matchetemp.Groups[0].Value);
-                    //}
+                    foreach (Field2NO s in Enum.GetValues(typeof(Field2NO)))//枚举所有字段-有冗余!!!
+                    {
+                        if (!s.Equals(Field2NO.MAX))
+                        {
+                            string strpa = global.patternstrint[(ushort)s];
+                            Regex rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                            Match matchetemp = rx.Match(HexString);
 
-                    //foreach (FieldTimeNO s in Enum.GetValues(typeof(FieldTimeNO)))
-                    //{
-                    //    Regex rx = new Regex(global.patternstr[(ushort)s], RegexOptions.Compiled | RegexOptions.IgnoreCase);
-                    //    Match matchetemp = rx.Match(HexString);
-                    //    DTUObject.FieldTime[(ushort)s] = DateTime.Parse(matchetemp.Groups[0].Value);
-                    //}     
+                            cacheLock.EnterWriteLock();
+                            try
+                            {
+                                ushort x = ushort.Parse(matchetemp.Groups[s.ToString()].Value);
+                                ushort y = (ushort)s;
+                                Field2[y] = x;
+                            }
+                            catch
+                            {
+                                //
+                            }
+                            finally
+                            {
+                                cacheLock.ExitWriteLock();
+                            }
+                        }
+                    }
+
+                    foreach (FieldTimeNO s in Enum.GetValues(typeof(FieldTimeNO)))//枚举所有字段-有冗余!!!
+                    {
+                        if (!s.Equals(FieldTimeNO.MAX))
+                        {
+                            string strpa = global.patternstrdatatime[(ushort)s];
+                            Regex rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                            Match matchetemp = rx.Match(HexString);
+
+                            cacheLock.EnterWriteLock();
+                            try
+                            {
+                                DateTime x = DateTime.Parse(matchetemp.Groups[s.ToString()].Value);
+                                ushort y = (ushort)s;
+                                FieldTime[y] = x;
+                            }
+                            catch
+                            {
+                                //
+                            }
+                            finally
+                            {
+                                cacheLock.ExitWriteLock();
+                            }
+                        }
+                    }
             }
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
@@ -444,7 +481,12 @@ namespace Tiger
 
         public DTUStatisticObject()
         {
-            
+            ;
+        }
+
+        public DTUStatisticObject(string unitid)
+        {
+            Id=unitid;
         }
 
         public void UpdateSystemObject(SystemObject Inobject)
@@ -666,7 +708,7 @@ namespace Tiger
            return hex;
        }
 
-       public static string[]  patternstr=
+       public static string[]  patternstrfloat=
        {
             @"[T][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//T1
             @"[T][2][-]+(?<T2>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//T2
@@ -682,6 +724,19 @@ namespace Tiger
 			@"[P][1][-]+(?<P1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//P1
             @"[W][1][-]+(?<W1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//W1
             @"[V][1][-]+(?<V1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))"//V1
+       };
+
+       public static string[] patternstrint =
+       {
+            @"[S][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//S1
+            @"[E][1][-]+(?<T2>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))"//E1
+       };
+
+       public static string[] patternstrdatatime =
+       {
+            @"[D][0][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//D0
+            @"[D][1][-]+(?<T2>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//D1
+            @"[D][2][-]+(?<T3>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))"//D2
        };
            
 
