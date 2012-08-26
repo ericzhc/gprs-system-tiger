@@ -38,6 +38,10 @@
             this.chartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dateTimePicker_to = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_from = new System.Windows.Forms.DateTimePicker();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.btn_refresh = new System.Windows.Forms.Button();
@@ -85,6 +89,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.dateTimePicker_to);
+            this.groupBox1.Controls.Add(this.dateTimePicker_from);
+            this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Controls.Add(this.comboBox1);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -94,6 +102,40 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "数据筛选：";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(341, 63);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "——";
+            // 
+            // dateTimePicker_to
+            // 
+            this.dateTimePicker_to.Location = new System.Drawing.Point(400, 57);
+            this.dateTimePicker_to.Name = "dateTimePicker_to";
+            this.dateTimePicker_to.Size = new System.Drawing.Size(200, 21);
+            this.dateTimePicker_to.TabIndex = 4;
+            // 
+            // dateTimePicker_from
+            // 
+            this.dateTimePicker_from.Location = new System.Drawing.Point(135, 58);
+            this.dateTimePicker_from.Name = "dateTimePicker_from";
+            this.dateTimePicker_from.Size = new System.Drawing.Size(200, 21);
+            this.dateTimePicker_from.TabIndex = 3;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(43, 58);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(60, 16);
+            this.checkBox2.TabIndex = 2;
+            this.checkBox2.Text = "时间：";
+            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // comboBox1
             // 
@@ -186,5 +228,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_to;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_from;
     }
 }

@@ -73,6 +73,13 @@ namespace Tiger
             {
                 MessageBox.Show(ex.Message);
             }
+
+            dateTimePicker_from.Format = DateTimePickerFormat.Long;
+            dateTimePicker_from.CustomFormat="MM/dd/yyyy HHH:mm";
+
+            dateTimePicker_to.Format = DateTimePickerFormat.Long;
+            dateTimePicker_to.CustomFormat = "MM/dd/yyyy HHH:mm";
+            
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)

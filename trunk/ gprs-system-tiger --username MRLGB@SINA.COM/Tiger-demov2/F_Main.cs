@@ -56,7 +56,7 @@ namespace Tiger
             InitQueue();
             UpdateDTUListFromDB();
             //staticcount = 0;
-            //InitUIDataBinding();
+            InitUIDataBinding();
         }
 
         private void LoadConfiguration()
@@ -947,19 +947,20 @@ namespace Tiger
         private void button4_Click(object sender, EventArgs e)
         {
             global.osystem.System_heat = (ushort)rand.Next(0, 100);
-            MessageBox.Show("System_heat: " + global.osystem.System_heat.ToString());
-            //global.osystem.System_heat = (ushort)rand.Next(0, 100);//供热水箱温度
-            //global.SatisticSum.Conventional_energy = (ushort)rand.Next(0, 100);  //系统常规热源耗能量
-            //global.SatisticSum.Storage_tank = (ushort)rand.Next(0, 100); //贮热水箱热损系数
-            //global.SatisticSum.System_efficiency = (ushort)rand.Next(0, 100);  //集热系统效率
-            //global.SatisticSum.Solar_assurance_day = (ushort)rand.Next(0, 100);  //日太阳能保证率
-            //global.SatisticSum.Solar_assurance_year = (ushort)rand.Next(0, 100);  //全年太阳能保证率
-            //global.SatisticSum.Energy_alternative = (ushort)rand.Next(0, 100);  //常规能源替代量
-            //global.SatisticSum.Carbon_emission = (ushort)rand.Next(0, 100);  //二氧化碳减排量
-            //global.SatisticSum.Sulfur_emission = (ushort)rand.Next(0, 100); //二氧化硫减排量
-            //global.SatisticSum.Dust_emission = (ushort)rand.Next(0, 100);  //粉尘减排量
-            //global.SatisticSum.Fee_effect = (ushort)rand.Next(0, 100);   //项目费效比
-            //global.SatisticSum.Auxiliary_heat = (ushort)rand.Next(0, 100);//辅助热源加热量
+            global.osystem.System_heat = (ushort)rand.Next(0, 100);//供热水箱温度
+            global.osystem.Conventional_energy = (ushort)rand.Next(0, 100);  //系统常规热源耗能量
+            global.osystem.Storage_tank = (ushort)rand.Next(0, 100); //贮热水箱热损系数
+            global.osystem.System_efficiency = (ushort)rand.Next(0, 100);  //集热系统效率
+            global.osystem.Solar_assurance_day = (ushort)rand.Next(0, 100);  //日太阳能保证率
+            global.osystem.Solar_assurance_year = (ushort)rand.Next(0, 100);  //全年太阳能保证率
+            global.osystem.Energy_alternative = (ushort)rand.Next(0, 100);  //常规能源替代量
+            global.osystem.Carbon_emission = (ushort)rand.Next(0, 100);  //二氧化碳减排量
+            global.osystem.Sulfur_emission = (ushort)rand.Next(0, 100); //二氧化硫减排量
+            global.osystem.Dust_emission = (ushort)rand.Next(0, 100);  //粉尘减排量
+            global.osystem.Fee_effect = (ushort)rand.Next(0, 100);   //项目费效比
+            global.osystem.Auxiliary_heat = (ushort)rand.Next(0, 100);//辅助热源加热量
+            MessageBox.Show("刷新一次！");
+            
 
         }
 
@@ -1050,6 +1051,11 @@ namespace Tiger
         {
             F_History_View f_history_view = new F_History_View();
             f_history_view.ShowDialog();
+        }
+
+        private void ledBulb1_Click(object sender, EventArgs e)
+        {
+            //((LedBulb)sender).On = !((LedBulb)sender).On;
         }
 
     }

@@ -87,6 +87,7 @@
             this.txt_System_heat = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -440,6 +441,7 @@
             this.txt_Fee_effect.ForeColor = System.Drawing.Color.Red;
             this.txt_Fee_effect.Location = new System.Drawing.Point(185, 19);
             this.txt_Fee_effect.Name = "txt_Fee_effect";
+            this.txt_Fee_effect.ReadOnly = true;
             this.txt_Fee_effect.Size = new System.Drawing.Size(83, 21);
             this.txt_Fee_effect.TabIndex = 24;
             this.txt_Fee_effect.Text = "---------";
@@ -472,6 +474,7 @@
             this.txt_Energy_alternative.ForeColor = System.Drawing.Color.Red;
             this.txt_Energy_alternative.Location = new System.Drawing.Point(185, 20);
             this.txt_Energy_alternative.Name = "txt_Energy_alternative";
+            this.txt_Energy_alternative.ReadOnly = true;
             this.txt_Energy_alternative.Size = new System.Drawing.Size(80, 21);
             this.txt_Energy_alternative.TabIndex = 24;
             this.txt_Energy_alternative.Text = "---------";
@@ -506,6 +509,7 @@
             this.txt_Solar_assurance_year.ForeColor = System.Drawing.Color.Red;
             this.txt_Solar_assurance_year.Location = new System.Drawing.Point(185, 42);
             this.txt_Solar_assurance_year.Name = "txt_Solar_assurance_year";
+            this.txt_Solar_assurance_year.ReadOnly = true;
             this.txt_Solar_assurance_year.Size = new System.Drawing.Size(83, 21);
             this.txt_Solar_assurance_year.TabIndex = 24;
             this.txt_Solar_assurance_year.Text = "---------";
@@ -515,6 +519,7 @@
             this.txt_Solar_assurance_day.ForeColor = System.Drawing.Color.Red;
             this.txt_Solar_assurance_day.Location = new System.Drawing.Point(185, 16);
             this.txt_Solar_assurance_day.Name = "txt_Solar_assurance_day";
+            this.txt_Solar_assurance_day.ReadOnly = true;
             this.txt_Solar_assurance_day.Size = new System.Drawing.Size(83, 21);
             this.txt_Solar_assurance_day.TabIndex = 24;
             this.txt_Solar_assurance_day.Text = "---------";
@@ -560,6 +565,7 @@
             this.txt_Dust_emission.ForeColor = System.Drawing.Color.Red;
             this.txt_Dust_emission.Location = new System.Drawing.Point(185, 61);
             this.txt_Dust_emission.Name = "txt_Dust_emission";
+            this.txt_Dust_emission.ReadOnly = true;
             this.txt_Dust_emission.Size = new System.Drawing.Size(80, 21);
             this.txt_Dust_emission.TabIndex = 24;
             this.txt_Dust_emission.Text = "---------";
@@ -569,6 +575,7 @@
             this.txt_Sulfur_emission.ForeColor = System.Drawing.Color.Red;
             this.txt_Sulfur_emission.Location = new System.Drawing.Point(185, 37);
             this.txt_Sulfur_emission.Name = "txt_Sulfur_emission";
+            this.txt_Sulfur_emission.ReadOnly = true;
             this.txt_Sulfur_emission.Size = new System.Drawing.Size(80, 21);
             this.txt_Sulfur_emission.TabIndex = 24;
             this.txt_Sulfur_emission.Text = "---------";
@@ -578,6 +585,7 @@
             this.txt_Carbon_emission.ForeColor = System.Drawing.Color.Red;
             this.txt_Carbon_emission.Location = new System.Drawing.Point(185, 14);
             this.txt_Carbon_emission.Name = "txt_Carbon_emission";
+            this.txt_Carbon_emission.ReadOnly = true;
             this.txt_Carbon_emission.Size = new System.Drawing.Size(80, 21);
             this.txt_Carbon_emission.TabIndex = 24;
             this.txt_Carbon_emission.Text = "---------";
@@ -628,6 +636,7 @@
             this.txt_System_efficiency.ForeColor = System.Drawing.Color.Red;
             this.txt_System_efficiency.Location = new System.Drawing.Point(185, 14);
             this.txt_System_efficiency.Name = "txt_System_efficiency";
+            this.txt_System_efficiency.ReadOnly = true;
             this.txt_System_efficiency.Size = new System.Drawing.Size(80, 21);
             this.txt_System_efficiency.TabIndex = 24;
             this.txt_System_efficiency.Text = "---------";
@@ -660,6 +669,7 @@
             this.txt_System_heat.ForeColor = System.Drawing.Color.Red;
             this.txt_System_heat.Location = new System.Drawing.Point(185, 14);
             this.txt_System_heat.Name = "txt_System_heat";
+            this.txt_System_heat.ReadOnly = true;
             this.txt_System_heat.Size = new System.Drawing.Size(80, 21);
             this.txt_System_heat.TabIndex = 24;
             this.txt_System_heat.Text = "---------";
@@ -675,6 +685,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.textBox3);
             this.groupBox2.Controls.Add(this.textBox2);
             this.groupBox2.Controls.Add(this.textBox1);
@@ -692,9 +703,20 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.ForeColor = System.Drawing.Color.Green;
+            this.label7.Location = new System.Drawing.Point(72, 450);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(50, 24);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "正常";
+            // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(28, 556);
+            this.textBox3.Location = new System.Drawing.Point(55, 588);
             this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(404, 21);
@@ -702,7 +724,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(28, 518);
+            this.textBox2.Location = new System.Drawing.Point(55, 550);
             this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(404, 21);
@@ -710,7 +732,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(28, 480);
+            this.textBox1.Location = new System.Drawing.Point(55, 512);
             this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(404, 21);
@@ -846,7 +868,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.Green;
-            this.label1.Location = new System.Drawing.Point(22, 48);
+            this.label1.Location = new System.Drawing.Point(44, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 24);
             this.label1.TabIndex = 0;
@@ -1177,6 +1199,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Timer timer_store;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label7;
     }
 }
 
