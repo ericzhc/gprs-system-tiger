@@ -40,18 +40,17 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBox24 = new System.Windows.Forms.TextBox();
+            this.textBox33 = new System.Windows.Forms.TextBox();
+            this.textBox34 = new System.Windows.Forms.TextBox();
+            this.textBox35 = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
@@ -68,15 +67,6 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox24 = new System.Windows.Forms.TextBox();
-            this.textBox33 = new System.Windows.Forms.TextBox();
-            this.textBox34 = new System.Windows.Forms.TextBox();
-            this.textBox35 = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
             this.btn_send = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -87,14 +77,11 @@
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
-            this.splitContainer4.Panel2.SuspendLayout();
-            this.splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -102,6 +89,7 @@
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
@@ -116,7 +104,7 @@
             // 
             // treeView1
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
@@ -138,8 +126,9 @@
             treeNode4,
             treeNode5});
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(293, 730);
-            this.treeView1.TabIndex = 2;
+            this.treeView1.Size = new System.Drawing.Size(259, 293);
+            this.treeView1.TabIndex = 3;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // imageList1
             // 
@@ -161,146 +150,145 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer3.Size = new System.Drawing.Size(711, 730);
-            this.splitContainer3.SplitterDistance = 417;
+            this.splitContainer3.Size = new System.Drawing.Size(1008, 433);
+            this.splitContainer3.SplitterDistance = 77;
             this.splitContainer3.TabIndex = 0;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.splitContainer4);
+            this.groupBox3.Controls.Add(this.dataGridView1);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(711, 417);
+            this.groupBox3.Size = new System.Drawing.Size(1008, 77);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "测试要素：";
             // 
-            // splitContainer4
-            // 
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer4.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer4.Location = new System.Drawing.Point(3, 17);
-            this.splitContainer4.Name = "splitContainer4";
-            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer4.Panel2
-            // 
-            this.splitContainer4.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer4.Size = new System.Drawing.Size(705, 397);
-            this.splitContainer4.SplitterDistance = 336;
-            this.splitContainer4.TabIndex = 0;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column9,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6,
-            this.Column7,
-            this.Column8});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 17);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(705, 57);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column1.FillWeight = 50F;
-            this.Column1.HeaderText = "供热水箱温度";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 72;
-            // 
-            // Column9
-            // 
-            this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column9.FillWeight = 50F;
-            this.Column9.HeaderText = "集热器采光面上太阳能辐照量";
-            this.Column9.Name = "Column9";
-            this.Column9.Width = 115;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column2.FillWeight = 50F;
-            this.Column2.HeaderText = "集热水箱温度";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 72;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column3.FillWeight = 50F;
-            this.Column3.HeaderText = "集热水箱温度";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 72;
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column4.FillWeight = 50F;
-            this.Column4.HeaderText = "出口温度";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 61;
-            // 
-            // Column5
-            // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column5.FillWeight = 50F;
-            this.Column5.HeaderText = "环境温度";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 61;
-            // 
-            // Column6
-            // 
-            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column6.FillWeight = 50F;
-            this.Column6.HeaderText = "环境湿度";
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 61;
-            // 
-            // Column7
-            // 
-            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column7.FillWeight = 50F;
-            this.Column7.HeaderText = "进出口流";
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 61;
-            // 
-            // Column8
-            // 
-            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Column8.FillWeight = 50F;
-            this.Column8.HeaderText = "热用户端出水流量";
-            this.Column8.Name = "Column8";
-            this.Column8.Width = 83;
+            this.dataGridView1.Size = new System.Drawing.Size(1002, 57);
+            this.dataGridView1.TabIndex = 1;
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.groupBox6);
             this.groupBox2.Controls.Add(this.groupBox5);
-            this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.btn_send);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(716, 309);
-            this.groupBox2.TabIndex = 0;
+            this.groupBox2.Size = new System.Drawing.Size(1008, 352);
+            this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "远程控制";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.textBox24);
+            this.groupBox4.Controls.Add(this.textBox33);
+            this.groupBox4.Controls.Add(this.textBox34);
+            this.groupBox4.Controls.Add(this.textBox35);
+            this.groupBox4.Controls.Add(this.label31);
+            this.groupBox4.Controls.Add(this.label32);
+            this.groupBox4.Controls.Add(this.label33);
+            this.groupBox4.Controls.Add(this.label34);
+            this.groupBox4.Location = new System.Drawing.Point(35, 20);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(272, 223);
+            this.groupBox4.TabIndex = 47;
+            this.groupBox4.TabStop = false;
+            // 
+            // textBox24
+            // 
+            this.textBox24.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox24.ForeColor = System.Drawing.Color.Red;
+            this.textBox24.Location = new System.Drawing.Point(157, 171);
+            this.textBox24.Name = "textBox24";
+            this.textBox24.Size = new System.Drawing.Size(67, 21);
+            this.textBox24.TabIndex = 39;
+            this.textBox24.Text = "--------------";
+            // 
+            // textBox33
+            // 
+            this.textBox33.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox33.ForeColor = System.Drawing.Color.Red;
+            this.textBox33.Location = new System.Drawing.Point(157, 122);
+            this.textBox33.Name = "textBox33";
+            this.textBox33.Size = new System.Drawing.Size(67, 21);
+            this.textBox33.TabIndex = 40;
+            this.textBox33.Text = "--------------";
+            // 
+            // textBox34
+            // 
+            this.textBox34.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox34.ForeColor = System.Drawing.Color.Red;
+            this.textBox34.Location = new System.Drawing.Point(157, 60);
+            this.textBox34.Name = "textBox34";
+            this.textBox34.Size = new System.Drawing.Size(67, 21);
+            this.textBox34.TabIndex = 41;
+            this.textBox34.Text = "--------------";
+            // 
+            // textBox35
+            // 
+            this.textBox35.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox35.ForeColor = System.Drawing.Color.Red;
+            this.textBox35.Location = new System.Drawing.Point(157, 28);
+            this.textBox35.Name = "textBox35";
+            this.textBox35.Size = new System.Drawing.Size(67, 21);
+            this.textBox35.TabIndex = 42;
+            this.textBox35.Text = "--------------";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label31.Location = new System.Drawing.Point(4, 98);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(185, 12);
+            this.label31.TabIndex = 36;
+            this.label31.Text = "温控起始时间设定值十进制范围：";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label32.Location = new System.Drawing.Point(9, 147);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(185, 12);
+            this.label32.TabIndex = 35;
+            this.label32.Text = "温控结束时间设定值十进制范围：";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label33.Location = new System.Drawing.Point(6, 63);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(119, 12);
+            this.label33.TabIndex = 37;
+            this.label33.Text = "温差循环结束设定值:";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label34.Location = new System.Drawing.Point(6, 31);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(119, 12);
+            this.label34.TabIndex = 38;
+            this.label34.Text = "温差循环开始设定值:";
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(616, 251);
+            this.button1.Location = new System.Drawing.Point(834, 229);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(77, 26);
             this.button1.TabIndex = 45;
@@ -312,9 +300,9 @@
             this.groupBox6.Controls.Add(this.checkBox4);
             this.groupBox6.Controls.Add(this.checkBox5);
             this.groupBox6.Controls.Add(this.checkBox6);
-            this.groupBox6.Location = new System.Drawing.Point(496, 21);
+            this.groupBox6.Location = new System.Drawing.Point(603, 17);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(208, 204);
+            this.groupBox6.Size = new System.Drawing.Size(272, 204);
             this.groupBox6.TabIndex = 44;
             this.groupBox6.TabStop = false;
             // 
@@ -363,15 +351,15 @@
             this.groupBox5.Controls.Add(this.label24);
             this.groupBox5.Controls.Add(this.label25);
             this.groupBox5.Controls.Add(this.label26);
-            this.groupBox5.Location = new System.Drawing.Point(243, 21);
+            this.groupBox5.Location = new System.Drawing.Point(324, 20);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(246, 283);
+            this.groupBox5.Size = new System.Drawing.Size(272, 223);
             this.groupBox5.TabIndex = 43;
             this.groupBox5.TabStop = false;
             // 
             // textBox17
             // 
-            this.textBox17.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox17.ForeColor = System.Drawing.Color.Red;
             this.textBox17.Location = new System.Drawing.Point(159, 135);
             this.textBox17.Name = "textBox17";
@@ -382,7 +370,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label16.Location = new System.Drawing.Point(5, 138);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(131, 12);
@@ -391,7 +379,7 @@
             // 
             // textBox18
             // 
-            this.textBox18.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox18.ForeColor = System.Drawing.Color.Red;
             this.textBox18.Location = new System.Drawing.Point(160, 108);
             this.textBox18.Name = "textBox18";
@@ -401,7 +389,7 @@
             // 
             // textBox20
             // 
-            this.textBox20.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox20.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox20.ForeColor = System.Drawing.Color.Red;
             this.textBox20.Location = new System.Drawing.Point(160, 80);
             this.textBox20.Name = "textBox20";
@@ -411,7 +399,7 @@
             // 
             // textBox22
             // 
-            this.textBox22.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox22.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox22.ForeColor = System.Drawing.Color.Red;
             this.textBox22.Location = new System.Drawing.Point(160, 47);
             this.textBox22.Name = "textBox22";
@@ -421,7 +409,7 @@
             // 
             // textBox23
             // 
-            this.textBox23.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox23.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox23.ForeColor = System.Drawing.Color.Red;
             this.textBox23.Location = new System.Drawing.Point(160, 20);
             this.textBox23.Name = "textBox23";
@@ -432,7 +420,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label23.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label23.Location = new System.Drawing.Point(6, 51);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(83, 12);
@@ -442,7 +430,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label24.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label24.Location = new System.Drawing.Point(6, 107);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(59, 12);
@@ -452,7 +440,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label25.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label25.Location = new System.Drawing.Point(6, 80);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(71, 12);
@@ -462,113 +450,16 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label26.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label26.Location = new System.Drawing.Point(6, 24);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(83, 12);
             this.label26.TabIndex = 52;
             this.label26.Text = "时钟小时设置:";
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.textBox24);
-            this.groupBox4.Controls.Add(this.textBox33);
-            this.groupBox4.Controls.Add(this.textBox34);
-            this.groupBox4.Controls.Add(this.textBox35);
-            this.groupBox4.Controls.Add(this.label31);
-            this.groupBox4.Controls.Add(this.label32);
-            this.groupBox4.Controls.Add(this.label33);
-            this.groupBox4.Controls.Add(this.label34);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox4.Location = new System.Drawing.Point(3, 17);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(233, 289);
-            this.groupBox4.TabIndex = 42;
-            this.groupBox4.TabStop = false;
-            // 
-            // textBox24
-            // 
-            this.textBox24.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox24.ForeColor = System.Drawing.Color.Red;
-            this.textBox24.Location = new System.Drawing.Point(157, 171);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(67, 21);
-            this.textBox24.TabIndex = 39;
-            this.textBox24.Text = "--------------";
-            // 
-            // textBox33
-            // 
-            this.textBox33.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox33.ForeColor = System.Drawing.Color.Red;
-            this.textBox33.Location = new System.Drawing.Point(157, 122);
-            this.textBox33.Name = "textBox33";
-            this.textBox33.Size = new System.Drawing.Size(67, 21);
-            this.textBox33.TabIndex = 40;
-            this.textBox33.Text = "--------------";
-            // 
-            // textBox34
-            // 
-            this.textBox34.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox34.ForeColor = System.Drawing.Color.Red;
-            this.textBox34.Location = new System.Drawing.Point(157, 60);
-            this.textBox34.Name = "textBox34";
-            this.textBox34.Size = new System.Drawing.Size(67, 21);
-            this.textBox34.TabIndex = 41;
-            this.textBox34.Text = "--------------";
-            // 
-            // textBox35
-            // 
-            this.textBox35.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox35.ForeColor = System.Drawing.Color.Red;
-            this.textBox35.Location = new System.Drawing.Point(157, 28);
-            this.textBox35.Name = "textBox35";
-            this.textBox35.Size = new System.Drawing.Size(67, 21);
-            this.textBox35.TabIndex = 42;
-            this.textBox35.Text = "--------------";
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label31.Location = new System.Drawing.Point(4, 98);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(185, 12);
-            this.label31.TabIndex = 36;
-            this.label31.Text = "温控起始时间设定值十进制范围：";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label32.Location = new System.Drawing.Point(4, 152);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(185, 12);
-            this.label32.TabIndex = 35;
-            this.label32.Text = "温控结束时间设定值十进制范围：";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label33.Location = new System.Drawing.Point(6, 63);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(119, 12);
-            this.label33.TabIndex = 37;
-            this.label33.Text = "温差循环结束设定值:";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label34.Location = new System.Drawing.Point(6, 31);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(119, 12);
-            this.label34.TabIndex = 38;
-            this.label34.Text = "温差循环开始设定值:";
-            // 
             // btn_send
             // 
-            this.btn_send.Location = new System.Drawing.Point(515, 251);
+            this.btn_send.Location = new System.Drawing.Point(665, 229);
             this.btn_send.Name = "btn_send";
             this.btn_send.Size = new System.Drawing.Size(85, 28);
             this.btn_send.TabIndex = 41;
@@ -594,17 +485,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.splitContainer4.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
-            this.splitContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -613,21 +501,21 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.Button btn_send;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox textBox24;
+        private System.Windows.Forms.TextBox textBox33;
+        private System.Windows.Forms.TextBox textBox34;
+        private System.Windows.Forms.TextBox textBox35;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox5;
@@ -643,16 +531,6 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox textBox24;
-        private System.Windows.Forms.TextBox textBox33;
-        private System.Windows.Forms.TextBox textBox34;
-        private System.Windows.Forms.TextBox textBox35;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_send;
     }
 }

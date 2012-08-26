@@ -130,28 +130,6 @@ namespace Tiger
         public float[] Field1;
         public ushort[] Field2;
         public DateTime[] FieldTime;
-        //public ushort Temp_HeatingBox;//供热水箱温度1-T1
-        //public ushort Temp_CollectorBox;//集热水箱温度2-T2
-        //public ushort Temp_CollectorIn;//集热系统进口温度3-T3
-        //public ushort Temp_CollectorOut;//集热系统出口温度4-T4
-        //public ushort Temp_Ambient;//环境温度-T5
-        //public ushort Humidity_Ambient; //环境湿度6-T6
-        //public ushort Flow_CollectorSys;//集热系统流量7-F1
-        //public ushort Flow_HeatUsing;//热用户端出水流量8-F2
-        //public ushort Amount_Irradiated;//太阳能辐照量9-A1
-        //public ushort Amount_IrradiatedSum;//总辐照量10-A2
-        //public ushort Speed_Wind;// 风速11-W1  
-        //public ushort Auxiliary_power;//功率12-P1
-
-        //public ushort SystemState;//系统状态13-S1
-        //public ushort ErrorState;//系统故障状态14 -E1   
-        //用户输入参数
-        //public ushort Aera_IrradiatedSum;// 集热器面积1-A3
-        //public ushort Volumn_HeatingBox;//贮热水箱容量（供热水箱）-V1
-        //public DateTime starttest;//降温时间起始时间3
-        //public DateTime stoptest;//降温时间停止时间4
-
-        //public DateTime RecvDate;//接收时间
 
         private string _Id;//ID
         public string Id
@@ -165,6 +143,114 @@ namespace Tiger
         {
             get { return online; }
             set { online = value; }
+        }
+
+        private float _Temp_HeatingBox;//供热水箱温度1-T1
+        public float Temp_HeatingBox
+        {
+            get { return _Temp_HeatingBox; }
+            set { _Temp_HeatingBox = value; }
+        }
+        private float _Temp_CollectorBox;//集热水箱温度2-T2
+        public float Temp_CollectorBox
+        {
+            get { return _Temp_CollectorBox; }
+            set { _Temp_CollectorBox = value; }
+        }
+        private float _Temp_CollectorIn;//集热系统进口温度3-T3
+        public float Temp_CollectorIn
+        {
+            get { return _Temp_CollectorIn; }
+            set { _Temp_CollectorIn = value; }
+        }
+        private float _Temp_CollectorOut;//集热系统出口温度4-T4
+        public float Temp_CollectorOut
+        {
+            get { return _Temp_CollectorOut; }
+            set { _Temp_CollectorOut = value; }
+        }
+        private float _Temp_Ambient;//环境温度-T5
+        public float Temp_Ambient
+        {
+            get { return _Temp_Ambient; }
+            set { _Temp_Ambient = value; }
+        }
+        private float _Humidity_Ambient; //环境湿度6-T6
+        public float Humidity_Ambient
+        {
+            get { return _Humidity_Ambient; }
+            set { _Humidity_Ambient = value; }
+        }
+        private float _Flow_CollectorSys;//集热系统流量7-F1
+        public float Flow_CollectorSys
+        {
+            get { return _Flow_CollectorSys; }
+            set { _Flow_CollectorSys = value; }
+        }
+        private float _Flow_HeatUsing;//热用户端出水流量8-F2
+        public float Flow_HeatUsing
+        {
+            get { return _Flow_HeatUsing; }
+            set { _Flow_HeatUsing = value; }
+        }
+        private float _Amount_Irradiated;//太阳能辐照量9-A1
+        public float Amount_Irradiated
+        {
+            get { return _Amount_Irradiated; }
+            set { _Amount_Irradiated = value; }
+        }
+        private float _Amount_IrradiatedSum;//总辐照量10-A2
+        public float Amount_IrradiatedSum
+        {
+            get { return _Amount_IrradiatedSum; }
+            set { _Amount_IrradiatedSum = value; }
+        }
+        private float _Speed_Wind;// 风速11-W1  
+        public float Speed_Wind
+        {
+            get { return _Speed_Wind; }
+            set { _Speed_Wind = value; }
+        }
+        private float _Auxiliary_power;//功率12-P1
+        public float Auxiliary_power
+        {
+            get { return _Auxiliary_power; }
+            set { _Auxiliary_power = value; }
+        }
+
+        public ushort  _SystemState;//系统状态13-S1
+        public ushort _ErrorState;//系统故障状态14 -E1   
+        //用户输入参数
+        private float _Aera_IrradiatedSum;// 集热器面积1-A3
+        public float Aera_IrradiatedSum
+        {
+            get { return _Aera_IrradiatedSum; }
+            set { _Aera_IrradiatedSum = value; }
+        }
+        private float _Volumn_HeatingBox;//贮热水箱容量（供热水箱）-V1
+        public float Volumn_HeatingBox
+        {
+            get { return _Volumn_HeatingBox; }
+            set { _Volumn_HeatingBox = value; }
+        }
+        private DateTime _starttest;//降温时间起始时间3
+        public DateTime Starttest
+        {
+            get { return _starttest; }
+            set { _starttest = value; }
+        }
+        private DateTime _stoptest;//降温时间停止时间4
+        public DateTime Stoptest
+        {
+            get { return _stoptest; }
+            set { _stoptest = value; }
+        }
+
+        private DateTime _RecvDate;//接收时间
+        public DateTime RecvDate
+        {
+            get { return _RecvDate; }
+            set { _RecvDate = value; }
         }
 
         public DTUObject(string useid) 
@@ -217,6 +303,26 @@ namespace Tiger
             {
                 cacheLock.ExitWriteLock();
             }
+            return true;
+
+        }
+
+        public bool UpdateField()
+        {
+            //not null
+            Aera_IrradiatedSum = Field1[(ushort)Field1NO.Aera_IrradiatedSum];
+            Amount_Irradiated = Field1[(ushort)Field1NO.Amount_Irradiated];
+            Auxiliary_power = Field1[(ushort)Field1NO.Auxiliary_power];
+            Flow_CollectorSys = Field1[(ushort)Field1NO.Flow_CollectorSys];
+            Flow_HeatUsing = Field1[(ushort)Field1NO.Flow_HeatUsing];
+            Humidity_Ambient = Field1[(ushort)Field1NO.Humidity_Ambient];
+            Speed_Wind = Field1[(ushort)Field1NO.Speed_Wind];
+            Temp_Ambient = Field1[(ushort)Field1NO.Temp_Ambient];
+            Temp_CollectorBox = Field1[(ushort)Field1NO.Temp_CollectorBox];
+            Temp_CollectorIn = Field1[(ushort)Field1NO.Temp_CollectorIn];
+            Temp_CollectorOut = Field1[(ushort)Field1NO.Temp_CollectorOut];
+            Temp_HeatingBox = Field1[(ushort)Field1NO.Temp_HeatingBox];
+            Volumn_HeatingBox = Field1[(ushort)Field1NO.Volumn_HeatingBox];
             return true;
 
         }
