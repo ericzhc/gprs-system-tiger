@@ -200,9 +200,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Tiger">
-        <EntityTypeShape EntityType="db_tigerModel.tb_union_list" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5430916341145835" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_tigerModel.tb_unit_state" Width="2.375" PointX="3.375" PointY="0.75" Height="3.4981901041666656" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_tigerModel.tb_unit_statistics" Width="1.5" PointX="7.75" PointY="0.875" Height="3.4981901041666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_tigerModel.tb_union_list" Width="2.125" PointX="0.75" PointY="0.75" Height="2.5430916341145835" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_tigerModel.tb_unit_state" Width="2.375" PointX="4" PointY="0.625" Height="3.4981901041666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_tigerModel.tb_unit_statistics" Width="2.5" PointX="7.75" PointY="0.625" Height="3.4981901041666656" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>
