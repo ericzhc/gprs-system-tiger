@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_Main));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.系统管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.系统配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.数据中心配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,7 +102,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnProduceData = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.btn_Atach = new System.Windows.Forms.Button();
             this.btn_Detach = new System.Windows.Forms.Button();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
@@ -110,7 +109,7 @@
             this.timerProduce = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
@@ -119,7 +118,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.timer_store = new System.Windows.Forms.Timer(this.components);
             this.button5 = new System.Windows.Forms.Button();
-            this.menuStrip1.SuspendLayout();
+            this.checkBox_store = new System.Windows.Forms.CheckBox();
+            this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
@@ -141,22 +141,22 @@
             this.groupBox12.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.系统管理ToolStripMenuItem,
             this.用户管理ToolStripMenuItem,
             this.数据库管理ToolStripMenuItem,
             this.历史数据ToolStripMenuItem,
             this.帮助ToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1008, 25);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(1008, 25);
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "menuStrip1";
             // 
             // 系统管理ToolStripMenuItem
             // 
@@ -848,30 +848,18 @@
             // 
             this.btnProduceData.BackColor = System.Drawing.Color.Transparent;
             this.btnProduceData.ForeColor = System.Drawing.Color.Maroon;
-            this.btnProduceData.Location = new System.Drawing.Point(300, 36);
+            this.btnProduceData.Location = new System.Drawing.Point(247, 35);
             this.btnProduceData.Margin = new System.Windows.Forms.Padding(2);
             this.btnProduceData.Name = "btnProduceData";
-            this.btnProduceData.Size = new System.Drawing.Size(86, 24);
+            this.btnProduceData.Size = new System.Drawing.Size(105, 24);
             this.btnProduceData.TabIndex = 28;
-            this.btnProduceData.Text = "Produce Data.....";
+            this.btnProduceData.Text = "产生数据.....";
             this.btnProduceData.UseVisualStyleBackColor = false;
             this.btnProduceData.Click += new System.EventHandler(this.btnProduceData_Click);
             // 
-            // button3
-            // 
-            this.button3.ForeColor = System.Drawing.Color.DarkRed;
-            this.button3.Location = new System.Drawing.Point(481, 36);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(86, 24);
-            this.button3.TabIndex = 29;
-            this.button3.Text = "Log Once";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // btn_Atach
             // 
-            this.btn_Atach.Location = new System.Drawing.Point(584, 36);
+            this.btn_Atach.Location = new System.Drawing.Point(705, 33);
             this.btn_Atach.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Atach.Name = "btn_Atach";
             this.btn_Atach.Size = new System.Drawing.Size(73, 24);
@@ -882,7 +870,7 @@
             // 
             // btn_Detach
             // 
-            this.btn_Detach.Location = new System.Drawing.Point(683, 36);
+            this.btn_Detach.Location = new System.Drawing.Point(788, 32);
             this.btn_Detach.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Detach.Name = "btn_Detach";
             this.btn_Detach.Size = new System.Drawing.Size(67, 24);
@@ -922,19 +910,19 @@
             this.imageList1.Images.SetKeyName(6, "");
             this.imageList1.Images.SetKeyName(7, "");
             // 
-            // toolStrip1
+            // toolStrip
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripButton3,
             this.toolStripButton4,
             this.toolStripButton5});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1008, 40);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip.Location = new System.Drawing.Point(0, 25);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Size = new System.Drawing.Size(1008, 40);
+            this.toolStrip.TabIndex = 1;
+            this.toolStrip.Text = "toolStrip1";
             // 
             // toolStripButton1
             // 
@@ -986,54 +974,64 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(781, 37);
+            this.button4.Location = new System.Drawing.Point(866, 33);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(114, 23);
             this.button4.TabIndex = 32;
-            this.button4.Text = "binding test";
+            this.button4.Text = "绑定测试";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // timer_store
             // 
-            this.timer_store.Enabled = true;
             this.timer_store.Interval = 10000;
             this.timer_store.Tick += new System.EventHandler(this.timer_store_Tick);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(401, 36);
+            this.button5.Location = new System.Drawing.Point(513, 32);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 33;
             this.button5.Text = "记录数据";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // checkBox_store
+            // 
+            this.checkBox_store.AutoSize = true;
+            this.checkBox_store.Location = new System.Drawing.Point(435, 37);
+            this.checkBox_store.Name = "checkBox_store";
+            this.checkBox_store.Size = new System.Drawing.Size(72, 16);
+            this.checkBox_store.TabIndex = 34;
+            this.checkBox_store.Text = "定时记录";
+            this.checkBox_store.UseVisualStyleBackColor = true;
+            this.checkBox_store.CheckedChanged += new System.EventHandler(this.checkBox_store_CheckedChanged);
             // 
             // F_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 730);
+            this.Controls.Add(this.checkBox_store);
             this.Controls.Add(this.btnProduceData);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.btn_Detach);
             this.Controls.Add(this.btn_Atach);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.statusBar1);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.toolStrip);
+            this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "F_Main";
             this.Text = "安徽泰格太阳能供水评测系统V2.0";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.F_Main_Closing);
             this.Closed += new System.EventHandler(this.F_Main_Closed);
             this.Load += new System.EventHandler(this.F_Main_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).EndInit();
@@ -1069,8 +1067,8 @@
             this.groupBox10.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1078,7 +1076,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ToolStripMenuItem 系统管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 系统配置ToolStripMenuItem;
@@ -1148,7 +1146,6 @@
         private System.Windows.Forms.ToolStripMenuItem 分离DTUToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 服务参数设置ToolStripMenuItem;
         private System.Windows.Forms.Button btnProduceData;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btn_Atach;
         private System.Windows.Forms.Button btn_Detach;
         private System.Windows.Forms.Timer timer3;
@@ -1159,7 +1156,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripMenuItem 中心参数设置ToolStripMenuItem;
@@ -1167,6 +1164,7 @@
         private System.Windows.Forms.Timer timer_store;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox checkBox_store;
     }
 }
 

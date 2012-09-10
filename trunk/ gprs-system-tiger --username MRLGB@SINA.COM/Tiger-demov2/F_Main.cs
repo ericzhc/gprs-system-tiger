@@ -74,6 +74,8 @@ namespace Tiger
             m_Log.InfoFormat("________________________________");
             m_Log.InfoFormat("Application Star logging  at {0}", DateTime.Now);
 
+            timer_store.Interval = global.Timer_store;
+
         }
 
         public void InitQueue()
@@ -972,27 +974,6 @@ namespace Tiger
 
         private void button5_Click(object sender, EventArgs e)
         {
-            global.osystem.System_heat++;
-        }
-
-        private void 统计要素历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            F_History fhistory = new F_History();
-            fhistory.ShowDialog();
-        }
-
-        private void 帮助ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer_store_Tick(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button5_Click_1(object sender, EventArgs e)
-        {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             using (var context = new db_tigerEntities())
@@ -1047,6 +1028,22 @@ namespace Tiger
             MessageBox.Show("store in db time:" + elapsedTime.ToString());
         }
 
+        private void 统计要素历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            F_History fhistory = new F_History();
+            fhistory.ShowDialog();
+        }
+
+        private void 帮助ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer_store_Tick(object sender, EventArgs e)
+        {
+            button5_Click(null, null);
+        }
+
         private void 显示要素历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             F_History_View f_history_view = new F_History_View();
@@ -1056,6 +1053,11 @@ namespace Tiger
         private void ledBulb1_Click(object sender, EventArgs e)
         {
             //((LedBulb)sender).On = !((LedBulb)sender).On;
+        }
+
+        private void checkBox_store_CheckedChanged(object sender, EventArgs e)
+        {
+            timer_store.Enabled = checkBox_store.Checked;
         }
 
     }

@@ -15,5 +15,10 @@ namespace Tiger
         {
             InitializeComponent();
         }
+
+        private void button_ok_Click(object sender, EventArgs e)
+        {
+            global.Timer_store = (ushort)((numericUpDown1.Value > 0) ? numericUpDown1.Value * 1000 : 60 * 1000);
+        }
     }
 }

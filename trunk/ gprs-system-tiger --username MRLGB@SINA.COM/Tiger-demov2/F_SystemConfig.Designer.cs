@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.entityDataSource1 = new EFWinforms.EntityDataSource(this.components);
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -47,9 +48,12 @@
             this.starttimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stoptimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gprsstateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityDataSource1 = new EFWinforms.EntityDataSource(this.components);
             this.entityBindingNavigator1 = new EFWinforms.EntityBindingNavigator();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.button_ok = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox4
@@ -59,6 +63,10 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(100, 21);
             this.textBox4.TabIndex = 7;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.ObjectContextType = typeof(Tiger.db_tigerEntities);
             // 
             // textBox3
             // 
@@ -144,10 +152,10 @@
             this.gprsstateDataGridViewTextBoxColumn});
             this.dataGridView1.DataMember = "tb_union_list";
             this.dataGridView1.DataSource = this.entityDataSource1;
-            this.dataGridView1.Location = new System.Drawing.Point(42, 168);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 168);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(508, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(567, 150);
             this.dataGridView1.TabIndex = 12;
             // 
             // unitIdDataGridViewTextBoxColumn
@@ -202,25 +210,50 @@
             this.gprsstateDataGridViewTextBoxColumn.Name = "gprsstateDataGridViewTextBoxColumn";
             this.gprsstateDataGridViewTextBoxColumn.Visible = false;
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.ObjectContextType = typeof(Tiger.db_tigerEntities);
-            // 
             // entityBindingNavigator1
             // 
             this.entityBindingNavigator1.DataMember = "tb_union_list";
             this.entityBindingNavigator1.DataSource = this.entityDataSource1;
             this.entityBindingNavigator1.Location = new System.Drawing.Point(0, 0);
             this.entityBindingNavigator1.Name = "entityBindingNavigator1";
-            this.entityBindingNavigator1.Size = new System.Drawing.Size(591, 25);
+            this.entityBindingNavigator1.Size = new System.Drawing.Size(612, 25);
             this.entityBindingNavigator1.TabIndex = 0;
             this.entityBindingNavigator1.Text = "entityBindingNavigator1";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(50, 353);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(149, 12);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "定时记录时间间隔（秒）：";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(182, 351);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(85, 21);
+            this.numericUpDown1.TabIndex = 14;
+            // 
+            // button_ok
+            // 
+            this.button_ok.Location = new System.Drawing.Point(134, 386);
+            this.button_ok.Name = "button_ok";
+            this.button_ok.Size = new System.Drawing.Size(75, 23);
+            this.button_ok.TabIndex = 15;
+            this.button_ok.Text = "ok";
+            this.button_ok.UseVisualStyleBackColor = true;
+            this.button_ok.Click += new System.EventHandler(this.button_ok_Click);
             // 
             // F_SystemConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(591, 354);
+            this.ClientSize = new System.Drawing.Size(612, 430);
+            this.Controls.Add(this.button_ok);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox4);
@@ -235,6 +268,7 @@
             this.Name = "F_SystemConfig";
             this.Text = "F_SystemConfig";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,6 +296,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn starttimeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn stoptimeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn gprsstateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button button_ok;
 
     }
 }
