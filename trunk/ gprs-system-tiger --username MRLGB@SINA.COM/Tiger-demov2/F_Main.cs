@@ -333,17 +333,17 @@ namespace Tiger
         //*****************************************
         private void 分离DTUToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StringBuilder mess = new StringBuilder(500);
-            if (textBox2.Text.Length == 11)
-            {
-                if (MessageBox.Show("确定使该DTU下线？", "确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
-                    if (GPRS.do_close_one_user2(textBox2.Text, mess) == 0)//开发包函数，使某个DTU下线并发下线指令
-                    {
-                        RefreshList();//刷新终端登陆列表
-                    }
-            }
-            else
-                MessageBox.Show("请选择DTU！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //StringBuilder mess = new StringBuilder(500);
+            //if (textBox2.Text.Length == 11)
+            //{
+            //    if (MessageBox.Show("确定使该DTU下线？", "确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+            //        if (GPRS.do_close_one_user2(textBox2.Text, mess) == 0)//开发包函数，使某个DTU下线并发下线指令
+            //        {
+            //            RefreshList();//刷新终端登陆列表
+            //        }
+            //}
+            //else
+            //    MessageBox.Show("请选择DTU！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         //*************************************
