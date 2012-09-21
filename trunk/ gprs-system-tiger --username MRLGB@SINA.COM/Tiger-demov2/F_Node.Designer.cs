@@ -209,48 +209,48 @@
             // 
             // textBox24
             // 
-            this.textBox24.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox24.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox24.ForeColor = System.Drawing.Color.Red;
             this.textBox24.Location = new System.Drawing.Point(157, 171);
             this.textBox24.Name = "textBox24";
             this.textBox24.Size = new System.Drawing.Size(67, 21);
             this.textBox24.TabIndex = 39;
-            this.textBox24.Text = "--------------";
+            this.textBox24.Text = "0";
             // 
             // textBox33
             // 
-            this.textBox33.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox33.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox33.ForeColor = System.Drawing.Color.Red;
             this.textBox33.Location = new System.Drawing.Point(157, 122);
             this.textBox33.Name = "textBox33";
             this.textBox33.Size = new System.Drawing.Size(67, 21);
             this.textBox33.TabIndex = 40;
-            this.textBox33.Text = "--------------";
+            this.textBox33.Text = "0";
             // 
             // textBox34
             // 
-            this.textBox34.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox34.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox34.ForeColor = System.Drawing.Color.Red;
             this.textBox34.Location = new System.Drawing.Point(157, 60);
             this.textBox34.Name = "textBox34";
             this.textBox34.Size = new System.Drawing.Size(67, 21);
             this.textBox34.TabIndex = 41;
-            this.textBox34.Text = "--------------";
+            this.textBox34.Text = "0";
             // 
             // textBox35
             // 
-            this.textBox35.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox35.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox35.ForeColor = System.Drawing.Color.Red;
             this.textBox35.Location = new System.Drawing.Point(157, 28);
             this.textBox35.Name = "textBox35";
             this.textBox35.Size = new System.Drawing.Size(67, 21);
             this.textBox35.TabIndex = 42;
-            this.textBox35.Text = "--------------";
+            this.textBox35.Text = "0";
             // 
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label31.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label31.Location = new System.Drawing.Point(4, 98);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(185, 12);
@@ -260,7 +260,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label32.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label32.Location = new System.Drawing.Point(9, 147);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(185, 12);
@@ -270,7 +270,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label33.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label33.Location = new System.Drawing.Point(6, 63);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(119, 12);
@@ -280,7 +280,7 @@
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label34.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label34.Location = new System.Drawing.Point(6, 31);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(119, 12);
@@ -361,18 +361,18 @@
             // 
             // textBox17
             // 
-            this.textBox17.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox17.ForeColor = System.Drawing.Color.Red;
             this.textBox17.Location = new System.Drawing.Point(159, 135);
             this.textBox17.Name = "textBox17";
             this.textBox17.Size = new System.Drawing.Size(67, 21);
             this.textBox17.TabIndex = 58;
-            this.textBox17.Text = "--------------";
+            this.textBox17.Text = "0";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label16.Location = new System.Drawing.Point(5, 138);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(131, 12);
@@ -381,48 +381,48 @@
             // 
             // textBox18
             // 
-            this.textBox18.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox18.ForeColor = System.Drawing.Color.Red;
             this.textBox18.Location = new System.Drawing.Point(160, 108);
             this.textBox18.Name = "textBox18";
             this.textBox18.Size = new System.Drawing.Size(67, 21);
             this.textBox18.TabIndex = 53;
-            this.textBox18.Text = "--------------";
+            this.textBox18.Text = "0";
             // 
             // textBox20
             // 
-            this.textBox20.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox20.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox20.ForeColor = System.Drawing.Color.Red;
             this.textBox20.Location = new System.Drawing.Point(160, 80);
             this.textBox20.Name = "textBox20";
             this.textBox20.Size = new System.Drawing.Size(67, 21);
             this.textBox20.TabIndex = 54;
-            this.textBox20.Text = "--------------";
+            this.textBox20.Text = "0";
             // 
             // textBox22
             // 
-            this.textBox22.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox22.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox22.ForeColor = System.Drawing.Color.Red;
             this.textBox22.Location = new System.Drawing.Point(160, 47);
             this.textBox22.Name = "textBox22";
             this.textBox22.Size = new System.Drawing.Size(67, 21);
             this.textBox22.TabIndex = 55;
-            this.textBox22.Text = "--------------";
+            this.textBox22.Text = "0";
             // 
             // textBox23
             // 
-            this.textBox23.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox23.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox23.ForeColor = System.Drawing.Color.Red;
             this.textBox23.Location = new System.Drawing.Point(160, 20);
             this.textBox23.Name = "textBox23";
             this.textBox23.Size = new System.Drawing.Size(67, 21);
             this.textBox23.TabIndex = 56;
-            this.textBox23.Text = "--------------";
+            this.textBox23.Text = "0";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label23.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label23.Location = new System.Drawing.Point(6, 51);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(83, 12);
@@ -432,7 +432,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label24.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label24.Location = new System.Drawing.Point(6, 107);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(59, 12);
@@ -442,7 +442,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label25.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label25.Location = new System.Drawing.Point(6, 80);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(71, 12);
@@ -452,7 +452,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label26.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label26.Location = new System.Drawing.Point(6, 24);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(83, 12);

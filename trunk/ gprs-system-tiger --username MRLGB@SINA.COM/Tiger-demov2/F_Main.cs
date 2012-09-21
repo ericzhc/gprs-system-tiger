@@ -104,14 +104,14 @@ namespace Tiger
 
         void UpdateDTUListFromDB()
         {
-            IList<tb_union_list> Union = MyEntityFramework.GetAllUnits();
+            IList<union> Union = MyEntityFramework.GetAllUnits();
 
             ///遍历所有查询结果
             foreach (var Unit in Union)
             {
                 if (!global.DTUList.ContainsKey(Unit.UnitId))
                 {
-                      DTUObject dtu = new DTUObject(Unit.UnitId);
+                    DTUObject dtu = new DTUObject(Unit.UnitId);
                       global.DTUList.Add(dtu.Id, dtu);
                 }
 
@@ -187,11 +187,11 @@ namespace Tiger
             {
                 //try
                 //{
-                //    da.ExecuteCommand("delete from tb_login");
+                //    da.ExecuteCommand("delete from logininfor");
                 //    da.ExecuteCommand("delete from tb_unit");
                 //    da.ExecuteCommand("delete from tb_region");
                 //    da.ExecuteCommand("delete from tb_unit");
-                //    da.ExecuteCommand("insert into tb_login (name,pass,region_name) values('" + "admin" + "','" + "admin" + "','" + "管理员" + "')");
+                //    da.ExecuteCommand("insert into logininfor (name,pass,region_name) values('" + "admin" + "','" + "admin" + "','" + "管理员" + "')");
                 //    da.ExecuteCommand("insert into tb_region values('" + "管理员" + "')");
                 //}
                 //catch (System.Exception ex)
@@ -456,6 +456,7 @@ namespace Tiger
             }
             else
                 e.Cancel = true;
+            this.Dispose();
         }
 
         //*************************************
@@ -976,7 +977,7 @@ namespace Tiger
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
-            using (var context = new db_tigerEntities())
+            using (var context = new DbTigerEntities())
             {
                 ///遍历所有list元素
                 foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
@@ -988,7 +989,7 @@ namespace Tiger
                         //format.DateSeparator = "-";
                         //format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
 
-                        tb_unit_state unitstate = new tb_unit_state
+                        unitstate unitstate = new unitstate
                         {
                             UnitId = item.Key,
                             DateTime_RecvDate = now,
@@ -1007,7 +1008,7 @@ namespace Tiger
                             Volumn_HeatingBox = (decimal)(item.Value.Field1[(ushort)(Field1NO.Volumn_HeatingBox)])
 
                         };
-                        context.tb_unit_state.AddObject(unitstate);
+                        context.unitstates.Add(unitstate);
                         context.SaveChanges();
                     }
                     catch (Exception ex)
@@ -1058,6 +1059,12 @@ namespace Tiger
         private void checkBox_store_CheckedChanged(object sender, EventArgs e)
         {
             timer_store.Enabled = checkBox_store.Checked;
+        }
+
+        private void 用户添加ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            F_UserManager fuser = new F_UserManager();
+            fuser.ShowDialog();
         }
 
     }

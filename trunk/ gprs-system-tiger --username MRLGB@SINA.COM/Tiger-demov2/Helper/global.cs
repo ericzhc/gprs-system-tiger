@@ -850,16 +850,16 @@ namespace Tiger
 
     public static class MyEntityFramework
     {
-        public static IList<tb_union_list> GetAllUnits()
+        public static IList<union> GetAllUnits()
         {
             ///BlogDBEntities是继承于ObjectContext类，自动生成
             ///可以打开Blog.Desgner.cs文件找到
             ///原型： public partial class BlogDBEntities : ObjectContext
             ///可以理解为 他代表了当前数据库环境对象
             ///同时，在Blog.Desgner.cs里还可以找到两个实体BlogUser及Post
-            db_tigerEntities unitDB = new db_tigerEntities();
+            DbTigerEntities unitDB = new DbTigerEntities();
             ///采用Linq语法读取数据
-            IList<tb_union_list> units = unitDB.tb_union_list.ToList<tb_union_list>();
+            IList<union> units = unitDB.unions.ToList<union>();
             return units;
         }
 
@@ -872,7 +872,7 @@ namespace Tiger
             /////同时，在Blog.Desgner.cs里还可以找到两个实体BlogUser及Post
             //db_tigerEntities unitDB = new db_tigerEntities();
             /////采用Linq语法读取数据
-            //IList<tb_unit_state> unitstates = unitDB.tb_union_list.ToList<tb_unit_state>();
+            //IList<tb_unit_state> unitstates = unitDB.union.ToList<tb_unit_state>();
             //return unitstates;
         //}
     }

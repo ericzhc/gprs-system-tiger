@@ -39,6 +39,7 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.txt_Fee_effect1 = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
@@ -63,7 +64,6 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.txt_System_heat1 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -144,6 +144,16 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(622, 189);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 53;
+            this.button1.Text = "Test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // groupBox8
             // 
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -165,7 +175,7 @@
             this.txt_Fee_effect1.Name = "txt_Fee_effect1";
             this.txt_Fee_effect1.Size = new System.Drawing.Size(83, 21);
             this.txt_Fee_effect1.TabIndex = 24;
-            this.txt_Fee_effect1.Text = "---------";
+            this.txt_Fee_effect1.Text = "0";
             // 
             // label30
             // 
@@ -197,7 +207,7 @@
             this.txt_Energy_alternative1.Name = "txt_Energy_alternative1";
             this.txt_Energy_alternative1.Size = new System.Drawing.Size(80, 21);
             this.txt_Energy_alternative1.TabIndex = 24;
-            this.txt_Energy_alternative1.Text = "---------";
+            this.txt_Energy_alternative1.Text = "0";
             // 
             // label20
             // 
@@ -231,7 +241,7 @@
             this.txt_Solar_assurance_year1.Name = "txt_Solar_assurance_year1";
             this.txt_Solar_assurance_year1.Size = new System.Drawing.Size(83, 21);
             this.txt_Solar_assurance_year1.TabIndex = 24;
-            this.txt_Solar_assurance_year1.Text = "---------";
+            this.txt_Solar_assurance_year1.Text = "0";
             // 
             // txt_Solar_assurance_day1
             // 
@@ -240,7 +250,7 @@
             this.txt_Solar_assurance_day1.Name = "txt_Solar_assurance_day1";
             this.txt_Solar_assurance_day1.Size = new System.Drawing.Size(83, 21);
             this.txt_Solar_assurance_day1.TabIndex = 24;
-            this.txt_Solar_assurance_day1.Text = "---------";
+            this.txt_Solar_assurance_day1.Text = "0";
             // 
             // label18
             // 
@@ -285,7 +295,7 @@
             this.txt_Dust_emission1.Name = "txt_Dust_emission1";
             this.txt_Dust_emission1.Size = new System.Drawing.Size(80, 21);
             this.txt_Dust_emission1.TabIndex = 24;
-            this.txt_Dust_emission1.Text = "---------";
+            this.txt_Dust_emission1.Text = "0";
             // 
             // txt_Sulfur_emission1
             // 
@@ -294,7 +304,7 @@
             this.txt_Sulfur_emission1.Name = "txt_Sulfur_emission1";
             this.txt_Sulfur_emission1.Size = new System.Drawing.Size(80, 21);
             this.txt_Sulfur_emission1.TabIndex = 24;
-            this.txt_Sulfur_emission1.Text = "---------";
+            this.txt_Sulfur_emission1.Text = "0";
             // 
             // txt_Carbon_emission1
             // 
@@ -303,7 +313,7 @@
             this.txt_Carbon_emission1.Name = "txt_Carbon_emission1";
             this.txt_Carbon_emission1.Size = new System.Drawing.Size(80, 21);
             this.txt_Carbon_emission1.TabIndex = 24;
-            this.txt_Carbon_emission1.Text = "---------";
+            this.txt_Carbon_emission1.Text = "0";
             // 
             // label29
             // 
@@ -353,7 +363,7 @@
             this.txt_System_efficiency1.Name = "txt_System_efficiency1";
             this.txt_System_efficiency1.Size = new System.Drawing.Size(80, 21);
             this.txt_System_efficiency1.TabIndex = 24;
-            this.txt_System_efficiency1.Text = "---------";
+            this.txt_System_efficiency1.Text = "0";
             // 
             // label19
             // 
@@ -385,7 +395,7 @@
             this.txt_System_heat1.Name = "txt_System_heat1";
             this.txt_System_heat1.Size = new System.Drawing.Size(80, 21);
             this.txt_System_heat1.TabIndex = 24;
-            this.txt_System_heat1.Text = "---------";
+            this.txt_System_heat1.Text = "0";
             // 
             // label14
             // 
@@ -395,16 +405,6 @@
             this.label14.Size = new System.Drawing.Size(155, 12);
             this.label14.TabIndex = 0;
             this.label14.Text = "太阳能集热系统有用得热量:";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(651, 189);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 53;
-            this.button1.Text = "Test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // F_Node_State
             // 

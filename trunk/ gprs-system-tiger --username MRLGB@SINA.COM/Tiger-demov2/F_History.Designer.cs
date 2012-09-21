@@ -62,7 +62,7 @@
             // 
             // entityDataSource1
             // 
-            this.entityDataSource1.ObjectContextType = typeof(Tiger.db_tigerEntities);
+            this.entityDataSource1.ObjectContextType = typeof(Tiger.DbTigerEntities);
             // 
             // chartBindingSource
             // 
@@ -172,7 +172,7 @@
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(72, 16);
             this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "UnitID =";
+            this.checkBox1.Text = "unitid =";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // chart1

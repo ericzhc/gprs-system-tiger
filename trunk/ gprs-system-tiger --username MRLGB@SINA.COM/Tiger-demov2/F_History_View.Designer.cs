@@ -86,7 +86,7 @@
             // 
             // viewentityDataSource
             // 
-            this.viewentityDataSource.ObjectContextType = typeof(Tiger.db_tigerEntities);
+            this.viewentityDataSource.ObjectContextType = typeof(Tiger.DbTigerEntities);
             // 
             // F_History_View
             // 

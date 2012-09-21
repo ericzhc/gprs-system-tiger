@@ -16,11 +16,11 @@ namespace Tiger
         public void TreeInit(TreeView tv)
         {
             tv.Nodes.Clear();
-            using (var odbEntities = new db_tigerEntities())
+            using (var odbEntities = new DbTigerEntities())
             {
                 // 1. Easy example but not very flexible
                 //    Select all products without any constraints
-                foreach (var union in odbEntities.tb_union_list)
+                foreach (var union in odbEntities.unions)
                 {
                     TreeNode nod = new TreeNode(union.alias);
                     //增加节点TAG属性

@@ -13,7 +13,7 @@ namespace Tiger
 {
     public partial class F_History : Form
     {
-        private db_tigerEntities context;
+        private DbTigerEntities context;
 
         public F_History()
         {
@@ -56,13 +56,13 @@ namespace Tiger
             //chartArea1.ShadowColor = System.Drawing.Color.Transparent;
             //this.chart1.ChartAreas.Add(chartArea1);
 
-            context = new db_tigerEntities();
+            context = new DbTigerEntities();
 
             //try
             //{
             //    // Create a query for orders and related items.
             //    var orderQuery = context.tb_unit_state
-            //        .Where("it.UnitID = '13695655652'");
+            //        .Where("it.unitid = '13695655652'");
 
             //    // Set the data source of the binding source to the ObjectResult 
             //    // returned when the query is executed.
@@ -88,7 +88,7 @@ namespace Tiger
 
             //if ((checkBox1.Checked) &&(!comboBox1.SelectedItem.Equals(null)))
             //{
-            //    conditionstring.Append("it.UnitID = '" + comboBox1.SelectedItem.ToString() + "'");
+            //    conditionstring.Append("it.unitid = '" + comboBox1.SelectedItem.ToString() + "'");
             //}
             //if ((checkBox2.Checked) && (dateTimePicker_from.Value < dateTimePicker_to.Value))
             //{
@@ -104,7 +104,7 @@ namespace Tiger
             //    {
             //        // Create a query for orders and related items.
             //        var orderQuery = context.tb_unit_state
-            //            .Where("it.UnitID = '" + comboBox1.SelectedItem.ToString() + "'");
+            //            .Where("it.unitid = '" + comboBox1.SelectedItem.ToString() + "'");
 
             //        // Set the data source of the binding source to the ObjectResult 
             //        // returned when the query is executed.
@@ -132,7 +132,7 @@ namespace Tiger
             {
                 string id = comboBox1.SelectedItem.ToString();
                 var states =
-                   from state in context.tb_unit_state
+                   from state in context.unitstates
                    where (state.UnitId == id && state.DateTime_RecvDate > dateTimePicker_from.Value && state.DateTime_RecvDate < dateTimePicker_to.Value)
                    select new
                         {
@@ -159,7 +159,7 @@ namespace Tiger
                 {
                     string id = comboBox1.SelectedItem.ToString();
                     var states =
-                        from state in context.tb_unit_state
+                        from state in context.unitstates
                         where (state.UnitId == id)
                         select new
                         {
@@ -183,7 +183,7 @@ namespace Tiger
                 if ((checkBox2.Checked) && (dateTimePicker_from.Value < dateTimePicker_to.Value))
                 {
                     var states =
-                        from state in context.tb_unit_state
+                        from state in context.unitstates
                         where (state.DateTime_RecvDate > dateTimePicker_from.Value && state.DateTime_RecvDate < dateTimePicker_to.Value)
                         select new
                         {
