@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbTigerModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="DbTigerModelStoreContainer">
+          <EntitySet Name="logininfor" EntityType="DbTigerModel.Store.logininfor" store:Type="Tables" Schema="db_tiger" />
+          <EntitySet Name="union" EntityType="DbTigerModel.Store.union" store:Type="Tables" Schema="db_tiger" />
+          <EntitySet Name="unitstate" EntityType="DbTigerModel.Store.unitstate" store:Type="Tables" Schema="db_tiger" />
+          <EntitySet Name="unitstatistics" EntityType="DbTigerModel.Store.unitstatistics" store:Type="Tables" Schema="db_tiger" />
+        </EntityContainer>
+        <EntityType Name="logininfor">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="password" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="role" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="union">
+          <Key>
+            <PropertyRef Name="UnitId" />
+          </Key>
+          <Property Name="UnitId" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="alias" Type="varchar" Nullable="false" MaxLength="45" />
+          <Property Name="Aera_IrradiatedSum" Type="smallint" Nullable="false" />
+          <Property Name="Volumn_HeatingBox" Type="smallint" Nullable="false" />
+          <Property Name="gprsstate" Type="smallint" />
+          <Property Name="Star_time" Type="datetime" />
+          <Property Name="time_online" Type="int" />
+        </EntityType>
+        <EntityType Name="unitstate">
+          <Key>
+            <PropertyRef Name="UnitId" />
+            <PropertyRef Name="DateTime_RecvDate" />
+          </Key>
+          <Property Name="UnitId" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="DateTime_RecvDate" Type="datetime" Nullable="false" />
+          <Property Name="Temp_HeatingBox" Type="decimal" />
+          <Property Name="Temp_CollectorBox" Type="decimal" />
+          <Property Name="Temp_CollectorIn" Type="decimal" />
+          <Property Name="Temp_CollectorOut" Type="decimal" />
+          <Property Name="Temp_Ambient" Type="decimal" />
+          <Property Name="Humidity_Ambient" Type="decimal" />
+          <Property Name="Speed_Wind" Type="decimal" />
+          <Property Name="SystemState" Type="int" />
+          <Property Name="ErrorState" Type="int" />
+          <Property Name="Amount_Irradiated" Type="decimal" />
+          <Property Name="Amount_IrradiatedSum" Type="decimal" />
+          <Property Name="Aera_IrradiatedSum" Type="decimal" />
+          <Property Name="Volumn_HeatingBox" Type="decimal" />
+          <Property Name="Flow_CollectorSys" Type="decimal" />
+          <Property Name="Flow_HeatUsing" Type="decimal" />
+        </EntityType>
+        <EntityType Name="unitstatistics">
+          <Key>
+            <PropertyRef Name="UnitId" />
+            <PropertyRef Name="DateTime_Statics" />
+          </Key>
+          <Property Name="UnitId" Type="int" Nullable="false" />
+          <Property Name="System_heat" Type="varchar" MaxLength="20" />
+          <Property Name="Conventional_energy" Type="varchar" MaxLength="20" />
+          <Property Name="Storage_tank" Type="varchar" MaxLength="20" />
+          <Property Name="System_efficiency" Type="varchar" MaxLength="20" />
+          <Property Name="Solar_assurance_day" Type="varchar" MaxLength="20" />
+          <Property Name="Solar_assurance_year" Type="varchar" MaxLength="20" />
+          <Property Name="Energy_alternative" Type="varchar" MaxLength="20" />
+          <Property Name="Carbon_emission" Type="varchar" MaxLength="20" />
+          <Property Name="Sulfur_emission" Type="varchar" MaxLength="20" />
+          <Property Name="Dust_emission" Type="varchar" MaxLength="20" />
+          <Property Name="Fee_effect" Type="varchar" MaxLength="20" />
+          <Property Name="DateTime_Statics" Type="datetime" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbTigerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="DbTigerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="logininfors" EntityType="DbTigerModel.logininfor" />
+          <EntitySet Name="unions" EntityType="DbTigerModel.union" />
+          <EntitySet Name="unitstates" EntityType="DbTigerModel.unitstate" />
+          <EntitySet Name="unitstatistics" EntityType="DbTigerModel.unitstatistic" />
+        </EntityContainer>
+        <EntityType Name="logininfor">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="role" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="union">
+          <Key>
+            <PropertyRef Name="UnitId" />
+          </Key>
+          <Property Name="UnitId" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="alias" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
+          <Property Name="Aera_IrradiatedSum" Type="Int16" Nullable="false" />
+          <Property Name="Volumn_HeatingBox" Type="Int16" Nullable="false" />
+          <Property Name="gprsstate" Type="Int16" />
+          <Property Name="Star_time" Type="DateTime" Precision="3" />
+          <Property Name="time_online" Type="Int32" />
+        </EntityType>
+        <EntityType Name="unitstate">
+          <Key>
+            <PropertyRef Name="UnitId" />
+            <PropertyRef Name="DateTime_RecvDate" />
+          </Key>
+          <Property Name="UnitId" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="DateTime_RecvDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Temp_HeatingBox" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Temp_CollectorBox" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Temp_CollectorIn" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Temp_CollectorOut" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Temp_Ambient" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Humidity_Ambient" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Speed_Wind" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="SystemState" Type="Int32" />
+          <Property Name="ErrorState" Type="Int32" />
+          <Property Name="Amount_Irradiated" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Amount_IrradiatedSum" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Aera_IrradiatedSum" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Volumn_HeatingBox" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Flow_CollectorSys" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Flow_HeatUsing" Type="Decimal" Precision="10" Scale="0" />
+        </EntityType>
+        <EntityType Name="unitstatistic">
+          <Key>
+            <PropertyRef Name="UnitId" />
+            <PropertyRef Name="DateTime_Statics" />
+          </Key>
+          <Property Name="UnitId" Type="Int32" Nullable="false" />
+          <Property Name="System_heat" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Conventional_energy" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Storage_tank" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="System_efficiency" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Solar_assurance_day" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Solar_assurance_year" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Energy_alternative" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Carbon_emission" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Sulfur_emission" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Dust_emission" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Fee_effect" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="DateTime_Statics" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbTigerModelStoreContainer" CdmEntityContainer="DbTigerEntities">
+          <EntitySetMapping Name="logininfors">
+            <EntityTypeMapping TypeName="DbTigerModel.logininfor">
+              <MappingFragment StoreEntitySet="logininfor">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="unions">
+            <EntityTypeMapping TypeName="DbTigerModel.union">
+              <MappingFragment StoreEntitySet="union">
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
+                <ScalarProperty Name="Aera_IrradiatedSum" ColumnName="Aera_IrradiatedSum" />
+                <ScalarProperty Name="Volumn_HeatingBox" ColumnName="Volumn_HeatingBox" />
+                <ScalarProperty Name="gprsstate" ColumnName="gprsstate" />
+                <ScalarProperty Name="Star_time" ColumnName="Star_time" />
+                <ScalarProperty Name="time_online" ColumnName="time_online" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="unitstates">
+            <EntityTypeMapping TypeName="DbTigerModel.unitstate">
+              <MappingFragment StoreEntitySet="unitstate">
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="DateTime_RecvDate" ColumnName="DateTime_RecvDate" />
+                <ScalarProperty Name="Temp_HeatingBox" ColumnName="Temp_HeatingBox" />
+                <ScalarProperty Name="Temp_CollectorBox" ColumnName="Temp_CollectorBox" />
+                <ScalarProperty Name="Temp_CollectorIn" ColumnName="Temp_CollectorIn" />
+                <ScalarProperty Name="Temp_CollectorOut" ColumnName="Temp_CollectorOut" />
+                <ScalarProperty Name="Temp_Ambient" ColumnName="Temp_Ambient" />
+                <ScalarProperty Name="Humidity_Ambient" ColumnName="Humidity_Ambient" />
+                <ScalarProperty Name="Speed_Wind" ColumnName="Speed_Wind" />
+                <ScalarProperty Name="SystemState" ColumnName="SystemState" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="Amount_Irradiated" ColumnName="Amount_Irradiated" />
+                <ScalarProperty Name="Amount_IrradiatedSum" ColumnName="Amount_IrradiatedSum" />
+                <ScalarProperty Name="Aera_IrradiatedSum" ColumnName="Aera_IrradiatedSum" />
+                <ScalarProperty Name="Volumn_HeatingBox" ColumnName="Volumn_HeatingBox" />
+                <ScalarProperty Name="Flow_CollectorSys" ColumnName="Flow_CollectorSys" />
+                <ScalarProperty Name="Flow_HeatUsing" ColumnName="Flow_HeatUsing" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="unitstatistics">
+            <EntityTypeMapping TypeName="DbTigerModel.unitstatistic">
+              <MappingFragment StoreEntitySet="unitstatistics">
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="System_heat" ColumnName="System_heat" />
+                <ScalarProperty Name="Conventional_energy" ColumnName="Conventional_energy" />
+                <ScalarProperty Name="Storage_tank" ColumnName="Storage_tank" />
+                <ScalarProperty Name="System_efficiency" ColumnName="System_efficiency" />
+                <ScalarProperty Name="Solar_assurance_day" ColumnName="Solar_assurance_day" />
+                <ScalarProperty Name="Solar_assurance_year" ColumnName="Solar_assurance_year" />
+                <ScalarProperty Name="Energy_alternative" ColumnName="Energy_alternative" />
+                <ScalarProperty Name="Carbon_emission" ColumnName="Carbon_emission" />
+                <ScalarProperty Name="Sulfur_emission" ColumnName="Sulfur_emission" />
+                <ScalarProperty Name="Dust_emission" ColumnName="Dust_emission" />
+                <ScalarProperty Name="Fee_effect" ColumnName="Fee_effect" />
+                <ScalarProperty Name="DateTime_Statics" ColumnName="DateTime_Statics" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
