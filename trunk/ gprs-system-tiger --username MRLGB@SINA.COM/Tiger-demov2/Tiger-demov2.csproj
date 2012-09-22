@@ -86,11 +86,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbTigerModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="F_Configuration.cs">
+    <Compile Include="F_CenterConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="F_Configuration.Designer.cs">
-      <DependentUpon>F_Configuration.cs</DependentUpon>
+    <Compile Include="F_CenterConfig.Designer.cs">
+      <DependentUpon>F_CenterConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="F_History.cs">
       <SubType>Form</SubType>
@@ -103,6 +103,12 @@
     </Compile>
     <Compile Include="F_History_View.Designer.cs">
       <DependentUpon>F_History_View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_Login.Designer.cs">
+      <DependentUpon>F_Login.cs</DependentUpon>
     </Compile>
     <Compile Include="F_Node.cs">
       <SubType>Form</SubType>
@@ -134,11 +140,11 @@
     <Compile Include="F_ServerInfo.Designer.cs">
       <DependentUpon>F_ServerInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="F_SystemConfig.cs">
+    <Compile Include="F_NodeManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="F_SystemConfig.Designer.cs">
-      <DependentUpon>F_SystemConfig.cs</DependentUpon>
+    <Compile Include="F_NodeManager.Designer.cs">
+      <DependentUpon>F_NodeManager.cs</DependentUpon>
     </Compile>
     <Compile Include="F_UserManager.cs">
       <SubType>Form</SubType>
@@ -149,7 +155,9 @@
     <Compile Include="GPRS\Gprs.cs" />
     <Compile Include="Helper\DoubleQueue.cs" />
     <Compile Include="Helper\global.cs" />
+    <Compile Include="Helper\loginwork.cs" />
     <Compile Include="Helper\Module.cs" />
+    <Compile Include="LoginContext.cs" />
     <Compile Include="logininfor.cs">
       <DependentUpon>DbTigerModel.tt</DependentUpon>
     </Compile>
@@ -164,14 +172,17 @@
     <Compile Include="unitstatistic.cs">
       <DependentUpon>DbTigerModel.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="F_Configuration.resx">
-      <DependentUpon>F_Configuration.cs</DependentUpon>
+    <EmbeddedResource Include="F_CenterConfig.resx">
+      <DependentUpon>F_CenterConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="F_History.resx">
       <DependentUpon>F_History.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="F_History_View.resx">
       <DependentUpon>F_History_View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F_Login.resx">
+      <DependentUpon>F_Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="F_Node.resx">
       <DependentUpon>F_Node.cs</DependentUpon>
@@ -188,8 +199,8 @@
     <EmbeddedResource Include="F_ServerInfo.resx">
       <DependentUpon>F_ServerInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="F_SystemConfig.resx">
-      <DependentUpon>F_SystemConfig.cs</DependentUpon>
+    <EmbeddedResource Include="F_NodeManager.resx">
+      <DependentUpon>F_NodeManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="F_UserManager.resx">
       <DependentUpon>F_UserManager.cs</DependentUpon>
@@ -204,7 +215,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="DbTigerModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DbTigerModel.Designer.cs</LastGenOutput>

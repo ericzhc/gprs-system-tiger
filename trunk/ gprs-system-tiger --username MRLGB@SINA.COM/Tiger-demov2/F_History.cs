@@ -34,46 +34,17 @@ namespace Tiger
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{0:g}";
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
 
-            //chartArea1.Area3DStyle.Inclination = 15;
-            //chartArea1.Area3DStyle.IsClustered = true;
-            //chartArea1.Area3DStyle.IsRightAngleAxes = false;
-            //chartArea1.Area3DStyle.Perspective = 10;
-            //chartArea1.Area3DStyle.Rotation = 10;
-            //chartArea1.Area3DStyle.WallWidth = 0;
-            //chartArea1.AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            //chartArea1.AxisX.LabelStyle.Format = "MMM dd";
-            //chartArea1.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //chartArea1.AxisY.IsStartedFromZero = false;
-            //chartArea1.AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-            //chartArea1.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //chartArea1.BackColor = System.Drawing.Color.OldLace;
-            //chartArea1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-            //chartArea1.BackSecondaryColor = System.Drawing.Color.White;
-            //chartArea1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            //chartArea1.Name = "Default";
-            //chartArea1.ShadowColor = System.Drawing.Color.Transparent;
-            //this.chart1.ChartAreas.Add(chartArea1);
-
+         
             context = new DbTigerEntities();
-
-            //try
-            //{
-            //    // Create a query for orders and related items.
-            //    var orderQuery = context.tb_unit_state
-            //        .Where("it.unitid = '13695655652'");
-
-            //    // Set the data source of the binding source to the ObjectResult 
-            //    // returned when the query is executed.
-            //    chartBindingSource.DataSource =
-            //        orderQuery.Execute(MergeOption.AppendOnly);
-            //}
-            //catch (EntitySqlException ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-
+            //using (var odbEntities = new D())
+            {
+                // 1. Easy example but not very flexible
+                //    Select all products without any constraints
+                foreach (var union in context.unions)
+                {
+                    comboBox_ID.Items.Add(union.UnitId);
+                }
+            }
             dateTimePicker_from.Format = DateTimePickerFormat.Long;
             dateTimePicker_from.CustomFormat = "MM/dd/yyyy HHH:mm";
 
@@ -128,9 +99,9 @@ namespace Tiger
             chart1.Series[3].Points.Clear();
             chart1.Series[4].Points.Clear();
 
-            if ((checkBox1.Checked) && (!comboBox1.SelectedItem.Equals(null)) && (checkBox2.Checked) && (dateTimePicker_from.Value < dateTimePicker_to.Value))
+            if ((checkBox1.Checked) && (!comboBox_ID.SelectedItem.Equals(null)) && (checkBox2.Checked) && (dateTimePicker_from.Value < dateTimePicker_to.Value))
             {
-                string id = comboBox1.SelectedItem.ToString();
+                string id = comboBox_ID.SelectedItem.ToString();
                 var states =
                    from state in context.unitstates
                    where (state.UnitId == id && state.DateTime_RecvDate > dateTimePicker_from.Value && state.DateTime_RecvDate < dateTimePicker_to.Value)
@@ -155,9 +126,9 @@ namespace Tiger
             }
             else 
             {
-                if (((checkBox1.Checked) && (!comboBox1.SelectedItem.Equals(null))))
+                if (((checkBox1.Checked) && (!comboBox_ID.SelectedItem.Equals(null))))
                 {
-                    string id = comboBox1.SelectedItem.ToString();
+                    string id = comboBox_ID.SelectedItem.ToString();
                     var states =
                         from state in context.unitstates
                         where (state.UnitId == id)

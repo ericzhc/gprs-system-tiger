@@ -22,7 +22,7 @@ namespace Tiger
         #region 主窗口全局变量
         DataAccess da = new DataAccess();
         public F_ServerInfo serviceinfo = new F_ServerInfo();
-        public F_Configuration config;
+        public F_CenterConfig config;
         public string serv_ip;
         public int connect_time;
         public int refresh_time;
@@ -219,7 +219,7 @@ namespace Tiger
         private void 系统配置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //F_SystemSet f_systemset = new F_SystemSet();
-            F_SystemConfig f_systemconfig = new F_SystemConfig();
+            F_NodeManager f_systemconfig = new F_NodeManager();
             f_systemconfig.ShowDialog();
         }
 
@@ -401,7 +401,7 @@ namespace Tiger
         {
             uint i, iDtuAmount;
             GPRS_USER_INFO user_info = new GPRS_USER_INFO();
-            config = new F_Configuration();
+            config = new F_CenterConfig();
             iDtuAmount = GPRS.get_max_user_amount();
             for (i = 0; i < iDtuAmount; i++)
             {
@@ -435,6 +435,7 @@ namespace Tiger
             
             //add data binding
             //txt_System_heat.DataBindings.Add(new Binding("Text", global.osystem, "System_heat", false, DataSourceUpdateMode.Never));
+            //this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         //********************************************
@@ -456,7 +457,7 @@ namespace Tiger
             }
             else
                 e.Cancel = true;
-            this.Dispose();
+            Environment.Exit(0);
         }
 
         //*************************************

@@ -44,7 +44,6 @@
             this.系统退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.用户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.用户添加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.用户修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.数据库管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.数据备份ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.数据恢复ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -247,8 +246,7 @@
             // 用户管理ToolStripMenuItem
             // 
             this.用户管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.用户添加ToolStripMenuItem,
-            this.用户修改ToolStripMenuItem});
+            this.用户添加ToolStripMenuItem});
             this.用户管理ToolStripMenuItem.Name = "用户管理ToolStripMenuItem";
             this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.用户管理ToolStripMenuItem.Text = "用户管理";
@@ -257,14 +255,8 @@
             // 
             this.用户添加ToolStripMenuItem.Name = "用户添加ToolStripMenuItem";
             this.用户添加ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.用户添加ToolStripMenuItem.Text = "用户添加";
+            this.用户添加ToolStripMenuItem.Text = "用户信息管理";
             this.用户添加ToolStripMenuItem.Click += new System.EventHandler(this.用户添加ToolStripMenuItem_Click);
-            // 
-            // 用户修改ToolStripMenuItem
-            // 
-            this.用户修改ToolStripMenuItem.Name = "用户修改ToolStripMenuItem";
-            this.用户修改ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.用户修改ToolStripMenuItem.Text = "用户修改";
             // 
             // 数据库管理ToolStripMenuItem
             // 
@@ -1087,7 +1079,6 @@
         private System.Windows.Forms.ToolStripMenuItem 系统退出ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 用户管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 用户添加ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 用户修改ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 数据库管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 数据备份ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 数据恢复ToolStripMenuItem;

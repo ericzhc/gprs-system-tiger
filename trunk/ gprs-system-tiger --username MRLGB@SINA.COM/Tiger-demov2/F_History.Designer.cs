@@ -38,19 +38,19 @@
             System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_History));
-            this.entityDataSource1 = new EFWinforms.EntityDataSource(this.components);
             this.chartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.dateTimePicker_to = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_from = new System.Windows.Forms.DateTimePicker();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox_ID = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.button1 = new System.Windows.Forms.Button();
+            this.entityDataSource1 = new EFWinforms.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chartBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -60,13 +60,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.ObjectContextType = typeof(Tiger.DbTigerEntities);
-            // 
             // chartBindingSource
             // 
-            this.chartBindingSource.DataMember = "tb_unit_state";
             this.chartBindingSource.DataSource = this.entityDataSource1;
             this.chartBindingSource.Filter = "";
             this.chartBindingSource.Position = 0;
@@ -99,7 +94,7 @@
             this.groupBox1.Controls.Add(this.dateTimePicker_to);
             this.groupBox1.Controls.Add(this.dateTimePicker_from);
             this.groupBox1.Controls.Add(this.checkBox2);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.comboBox_ID);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
@@ -108,6 +103,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "数据筛选：";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(670, 63);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(142, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "自定义查询";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -153,17 +158,13 @@
             this.checkBox2.Text = "时间：";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // comboBox_ID
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "135",
-            "136",
-            "13695655652"});
-            this.comboBox1.Location = new System.Drawing.Point(135, 21);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 20);
-            this.comboBox1.TabIndex = 1;
+            this.comboBox_ID.FormattingEnabled = true;
+            this.comboBox_ID.Location = new System.Drawing.Point(135, 21);
+            this.comboBox_ID.Name = "comboBox_ID";
+            this.comboBox_ID.Size = new System.Drawing.Size(121, 20);
+            this.comboBox_ID.TabIndex = 1;
             // 
             // checkBox1
             // 
@@ -179,7 +180,7 @@
             // 
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.DataSource = this.chartBindingSource;
+            this.chart1.DataSource = this.entityDataSource1;
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
@@ -230,15 +231,9 @@
             title1.Text = "采集单元状态统计图表";
             this.chart1.Titles.Add(title1);
             // 
-            // button1
+            // entityDataSource1
             // 
-            this.button1.Location = new System.Drawing.Point(670, 63);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(142, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "自定义查询";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.entityDataSource1.ObjectContextType = typeof(Tiger.DbTigerEntities);
             // 
             // F_History
             // 
@@ -271,7 +266,7 @@
         private System.Windows.Forms.Button btn_refresh;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox_ID;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePicker_to;

@@ -124,6 +124,13 @@ namespace Tiger
         MAX
     }
 
+    public enum UserRole
+    {
+        Administrator = 0,
+        RegionAdmin,
+        RegionReader
+    }
+
     public class DTUObject
     {
         private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
@@ -743,7 +750,7 @@ namespace Tiger
     public static class global
     {
        public static bool attached=true;
-
+       public static string currentuser;
        public static ushort Timer_store = 60;
        public static ushort Timer_Statistic = 60;
        public static ushort Timer_Sum = 60;
@@ -843,6 +850,13 @@ namespace Tiger
             @"[D][0][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//D0
             @"[D][1][-]+(?<T2>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//D1
             @"[D][2][-]+(?<T3>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))"//D2
+       };
+
+       public static string[] userrolestring =
+       {
+            "超级管理员",//D0
+            "区域管理员",//D1
+            "区域查看员"//D2
        };
            
 
