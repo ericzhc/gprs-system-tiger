@@ -26,9 +26,9 @@ namespace Tiger
     {
         public string inipath;
         [DllImport("kernel32")]
-        private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
+        private static extern long WritePrivateProfileString(string Section, string key, string val, string filePath);
         [DllImport("kernel32")]
-        private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
+        private static extern int GetPrivateProfileString(string Section, string key, string def, StringBuilder retVal, int size, string filePath);
         /// <summary> 
         /// 构造方法 
         /// </summary> 

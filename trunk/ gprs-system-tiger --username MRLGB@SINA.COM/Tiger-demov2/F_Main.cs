@@ -32,6 +32,9 @@ namespace Tiger
         public int serv_start = 0;
         public int sign;
         //private static int staticcount = 0;
+        //public int Timer_store = 60*1000;
+        //public int Timer_Statistic = 60*1000;
+        //public int Timer_Sum = 60*1000;
 
         public bool recvdata;
         public bool threadrun;//控制线程
@@ -426,12 +429,12 @@ namespace Tiger
             string path = System.IO.Directory.GetCurrentDirectory();
             path = path + "\\Sysconfig.ini";
             IniFile ini = new IniFile(path);
-            serv_ip = ini.IniReadValue("Section", "serv_ip", "127.0.0.1");
-            connect_time = int.Parse(ini.IniReadValue("Section", "connect_time", "30"));
-            refresh_time = int.Parse(ini.IniReadValue("Section", "refresh_time", "3"));
-            serv_port = int.Parse(ini.IniReadValue("Section", "serv_port", "5002"));
-            serv_type = int.Parse(ini.IniReadValue("Section", "serv_type", "0"));
-            serv_mode = int.Parse(ini.IniReadValue("Section", "serv_mode", "2"));
+            serv_ip = ini.IniReadValue("ServerConfig", "serv_ip", "127.0.0.1");
+            connect_time = int.Parse(ini.IniReadValue("ServerConfig", "connect_time", "30"));
+            refresh_time = int.Parse(ini.IniReadValue("ServerConfig", "refresh_time", "3"));
+            serv_port = int.Parse(ini.IniReadValue("ServerConfig", "serv_port", "5002"));
+            serv_type = int.Parse(ini.IniReadValue("ServerConfig", "serv_type", "0"));
+            serv_mode = int.Parse(ini.IniReadValue("ServerConfig", "serv_mode", "2"));
             
             //add data binding
             //txt_System_heat.DataBindings.Add(new Binding("Text", global.osystem, "System_heat", false, DataSourceUpdateMode.Never));
@@ -469,12 +472,12 @@ namespace Tiger
             string path = System.IO.Directory.GetCurrentDirectory();
             path = path + "\\Sysconfig.ini";
             IniFile ini = new IniFile(path);
-            ini.IniWriteValue("Section", "serv_ip", serv_ip);
-            ini.IniWriteValue("Section", "connect_time", connect_time.ToString());
-            ini.IniWriteValue("Section", "refresh_time", refresh_time.ToString());
-            ini.IniWriteValue("Section", "serv_port", serv_port.ToString());
-            ini.IniWriteValue("Section", "serv_type", serv_type.ToString());
-            ini.IniWriteValue("Section", "serv_mode", serv_mode.ToString());
+            ini.IniWriteValue("ServerConfig", "serv_ip", serv_ip);
+            ini.IniWriteValue("ServerConfig", "connect_time", connect_time.ToString());
+            ini.IniWriteValue("ServerConfig", "refresh_time", refresh_time.ToString());
+            ini.IniWriteValue("ServerConfig", "serv_port", serv_port.ToString());
+            ini.IniWriteValue("ServerConfig", "serv_type", serv_type.ToString());
+            ini.IniWriteValue("ServerConfig", "serv_mode", serv_mode.ToString());
         }
 
         //

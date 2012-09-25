@@ -13,7 +13,7 @@ namespace Tiger
 {
     public partial class F_History : Form
     {
-        private DbTigerEntities context;
+        private DbTigerEntities context;//数据库的上下文。
 
         public F_History()
         {
@@ -34,7 +34,7 @@ namespace Tiger
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{0:g}";
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
 
-         
+            //读取手机电话号码列表
             context = new DbTigerEntities();
             //using (var odbEntities = new D())
             {
@@ -45,6 +45,7 @@ namespace Tiger
                     comboBox_ID.Items.Add(union.UnitId);
                 }
             }
+            //
             dateTimePicker_from.Format = DateTimePickerFormat.Long;
             dateTimePicker_from.CustomFormat = "MM/dd/yyyy HHH:mm";
 
@@ -93,15 +94,18 @@ namespace Tiger
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //清楚现有图标数据（5个温度值）
             chart1.Series[0].Points.Clear();
             chart1.Series[1].Points.Clear();
             chart1.Series[2].Points.Clear();
             chart1.Series[3].Points.Clear();
             chart1.Series[4].Points.Clear();
 
+            //选择了某个手机号码。同时选择其实时间。
             if ((checkBox1.Checked) && (!comboBox_ID.SelectedItem.Equals(null)) && (checkBox2.Checked) && (dateTimePicker_from.Value < dateTimePicker_to.Value))
             {
-                string id = comboBox_ID.SelectedItem.ToString();
+                string id = comboBox_ID.SelectedItem.ToString();//手机号
+                //LINQ 
                 var states =
                    from state in context.unitstates
                    where (state.UnitId == id && state.DateTime_RecvDate > dateTimePicker_from.Value && state.DateTime_RecvDate < dateTimePicker_to.Value)
@@ -124,8 +128,8 @@ namespace Tiger
                     }
                 
             }
-            else 
-            {
+            else
+            {//选择了某个手机号码
                 if (((checkBox1.Checked) && (!comboBox_ID.SelectedItem.Equals(null))))
                 {
                     string id = comboBox_ID.SelectedItem.ToString();
@@ -150,7 +154,7 @@ namespace Tiger
                         chart1.Series[4].Points.AddXY(state.DateTime_RecvDate, state.Temp_Ambient);
                     }
                 }
-
+                //。同时选择其实时间。
                 if ((checkBox2.Checked) && (dateTimePicker_from.Value < dateTimePicker_to.Value))
                 {
                     var states =
