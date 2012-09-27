@@ -41,20 +41,20 @@
             this.chartBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.checkBox_T_Ambient = new System.Windows.Forms.CheckBox();
+            this.checkBoxT_CollectorOut = new System.Windows.Forms.CheckBox();
+            this.checkBox_T_CollectorIn = new System.Windows.Forms.CheckBox();
+            this.checkBox_T_CollectorBox = new System.Windows.Forms.CheckBox();
+            this.checkBox_T_HeatingBox = new System.Windows.Forms.CheckBox();
+            this.button_Refrsh = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker_to = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_from = new System.Windows.Forms.DateTimePicker();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.comboBox_ID = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.checkBox_T_HeatingBox = new System.Windows.Forms.CheckBox();
-            this.checkBox_T_CollectorBox = new System.Windows.Forms.CheckBox();
-            this.checkBox_T_CollectorIn = new System.Windows.Forms.CheckBox();
-            this.checkBoxT_CollectorOut = new System.Windows.Forms.CheckBox();
-            this.checkBox_T_Ambient = new System.Windows.Forms.CheckBox();
             this.entityDataSource1 = new EFWinforms.EntityDataSource(this.components);
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.chartBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -97,7 +97,7 @@
             this.groupBox1.Controls.Add(this.checkBox_T_CollectorIn);
             this.groupBox1.Controls.Add(this.checkBox_T_CollectorBox);
             this.groupBox1.Controls.Add(this.checkBox_T_HeatingBox);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.button_Refrsh);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.dateTimePicker_to);
             this.groupBox1.Controls.Add(this.dateTimePicker_from);
@@ -112,15 +112,70 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "数据筛选：";
             // 
-            // button1
+            // checkBox_T_Ambient
             // 
-            this.button1.Location = new System.Drawing.Point(670, 63);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(142, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "自定义查询";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.checkBox_T_Ambient.AutoSize = true;
+            this.checkBox_T_Ambient.Location = new System.Drawing.Point(571, 98);
+            this.checkBox_T_Ambient.Name = "checkBox_T_Ambient";
+            this.checkBox_T_Ambient.Size = new System.Drawing.Size(78, 16);
+            this.checkBox_T_Ambient.TabIndex = 7;
+            this.checkBox_T_Ambient.Text = "T_Ambient";
+            this.checkBox_T_Ambient.UseVisualStyleBackColor = true;
+            this.checkBox_T_Ambient.CheckedChanged += new System.EventHandler(this.checkBox_T_Ambient_CheckedChanged);
+            // 
+            // checkBoxT_CollectorOut
+            // 
+            this.checkBoxT_CollectorOut.AutoSize = true;
+            this.checkBoxT_CollectorOut.Location = new System.Drawing.Point(438, 98);
+            this.checkBoxT_CollectorOut.Name = "checkBoxT_CollectorOut";
+            this.checkBoxT_CollectorOut.Size = new System.Drawing.Size(108, 16);
+            this.checkBoxT_CollectorOut.TabIndex = 7;
+            this.checkBoxT_CollectorOut.Text = "T_CollectorOut";
+            this.checkBoxT_CollectorOut.UseVisualStyleBackColor = true;
+            this.checkBoxT_CollectorOut.CheckedChanged += new System.EventHandler(this.checkBoxT_CollectorOut_CheckedChanged);
+            // 
+            // checkBox_T_CollectorIn
+            // 
+            this.checkBox_T_CollectorIn.AutoSize = true;
+            this.checkBox_T_CollectorIn.Location = new System.Drawing.Point(299, 98);
+            this.checkBox_T_CollectorIn.Name = "checkBox_T_CollectorIn";
+            this.checkBox_T_CollectorIn.Size = new System.Drawing.Size(102, 16);
+            this.checkBox_T_CollectorIn.TabIndex = 7;
+            this.checkBox_T_CollectorIn.Text = "T_CollectorIn";
+            this.checkBox_T_CollectorIn.UseVisualStyleBackColor = true;
+            this.checkBox_T_CollectorIn.CheckedChanged += new System.EventHandler(this.checkBox_T_CollectorIn_CheckedChanged);
+            // 
+            // checkBox_T_CollectorBox
+            // 
+            this.checkBox_T_CollectorBox.AutoSize = true;
+            this.checkBox_T_CollectorBox.Location = new System.Drawing.Point(160, 98);
+            this.checkBox_T_CollectorBox.Name = "checkBox_T_CollectorBox";
+            this.checkBox_T_CollectorBox.Size = new System.Drawing.Size(108, 16);
+            this.checkBox_T_CollectorBox.TabIndex = 7;
+            this.checkBox_T_CollectorBox.Text = "T_CollectorBox";
+            this.checkBox_T_CollectorBox.UseVisualStyleBackColor = true;
+            this.checkBox_T_CollectorBox.CheckedChanged += new System.EventHandler(this.checkBox_T_CollectorBox_CheckedChanged);
+            // 
+            // checkBox_T_HeatingBox
+            // 
+            this.checkBox_T_HeatingBox.AutoSize = true;
+            this.checkBox_T_HeatingBox.Location = new System.Drawing.Point(43, 98);
+            this.checkBox_T_HeatingBox.Name = "checkBox_T_HeatingBox";
+            this.checkBox_T_HeatingBox.Size = new System.Drawing.Size(96, 16);
+            this.checkBox_T_HeatingBox.TabIndex = 7;
+            this.checkBox_T_HeatingBox.Text = "T_HeatingBox";
+            this.checkBox_T_HeatingBox.UseVisualStyleBackColor = true;
+            this.checkBox_T_HeatingBox.CheckedChanged += new System.EventHandler(this.checkBox_T_HeatingBox_CheckedChanged);
+            // 
+            // button_Refrsh
+            // 
+            this.button_Refrsh.Location = new System.Drawing.Point(670, 63);
+            this.button_Refrsh.Name = "button_Refrsh";
+            this.button_Refrsh.Size = new System.Drawing.Size(142, 23);
+            this.button_Refrsh.TabIndex = 6;
+            this.button_Refrsh.Text = "自定义查询";
+            this.button_Refrsh.UseVisualStyleBackColor = true;
+            this.button_Refrsh.Click += new System.EventHandler(this.button_Refrsh_Click);
             // 
             // label1
             // 
@@ -174,6 +229,10 @@
             this.checkBox1.Text = "unitid =";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.ObjectContextType = typeof(Tiger.DbTigerEntities);
+            // 
             // chart1
             // 
             chartArea1.Name = "ChartArea1";
@@ -221,72 +280,13 @@
             this.chart1.Series.Add(series4);
             this.chart1.Series.Add(series5);
             this.chart1.Size = new System.Drawing.Size(1004, 467);
-            this.chart1.TabIndex = 1;
+            this.chart1.TabIndex = 2;
             this.chart1.Text = "chart1";
             title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             title1.ForeColor = System.Drawing.Color.Maroon;
             title1.Name = "Title1";
             title1.Text = "采集单元状态统计图表";
             this.chart1.Titles.Add(title1);
-            // 
-            // checkBox_T_HeatingBox
-            // 
-            this.checkBox_T_HeatingBox.AutoSize = true;
-            this.checkBox_T_HeatingBox.Location = new System.Drawing.Point(43, 98);
-            this.checkBox_T_HeatingBox.Name = "checkBox_T_HeatingBox";
-            this.checkBox_T_HeatingBox.Size = new System.Drawing.Size(96, 16);
-            this.checkBox_T_HeatingBox.TabIndex = 7;
-            this.checkBox_T_HeatingBox.Text = "T_HeatingBox";
-            this.checkBox_T_HeatingBox.UseVisualStyleBackColor = true;
-            this.checkBox_T_HeatingBox.CheckedChanged += new System.EventHandler(this.checkBox_T_HeatingBox_CheckedChanged);
-            // 
-            // checkBox_T_CollectorBox
-            // 
-            this.checkBox_T_CollectorBox.AutoSize = true;
-            this.checkBox_T_CollectorBox.Location = new System.Drawing.Point(160, 98);
-            this.checkBox_T_CollectorBox.Name = "checkBox_T_CollectorBox";
-            this.checkBox_T_CollectorBox.Size = new System.Drawing.Size(108, 16);
-            this.checkBox_T_CollectorBox.TabIndex = 7;
-            this.checkBox_T_CollectorBox.Text = "T_CollectorBox";
-            this.checkBox_T_CollectorBox.UseVisualStyleBackColor = true;
-            this.checkBox_T_CollectorBox.CheckedChanged += new System.EventHandler(this.checkBox_T_CollectorBox_CheckedChanged);
-            // 
-            // checkBox_T_CollectorIn
-            // 
-            this.checkBox_T_CollectorIn.AutoSize = true;
-            this.checkBox_T_CollectorIn.Location = new System.Drawing.Point(299, 98);
-            this.checkBox_T_CollectorIn.Name = "checkBox_T_CollectorIn";
-            this.checkBox_T_CollectorIn.Size = new System.Drawing.Size(102, 16);
-            this.checkBox_T_CollectorIn.TabIndex = 7;
-            this.checkBox_T_CollectorIn.Text = "T_CollectorIn";
-            this.checkBox_T_CollectorIn.UseVisualStyleBackColor = true;
-            this.checkBox_T_CollectorIn.CheckedChanged += new System.EventHandler(this.checkBox_T_CollectorIn_CheckedChanged);
-            // 
-            // checkBoxT_CollectorOut
-            // 
-            this.checkBoxT_CollectorOut.AutoSize = true;
-            this.checkBoxT_CollectorOut.Location = new System.Drawing.Point(438, 98);
-            this.checkBoxT_CollectorOut.Name = "checkBoxT_CollectorOut";
-            this.checkBoxT_CollectorOut.Size = new System.Drawing.Size(108, 16);
-            this.checkBoxT_CollectorOut.TabIndex = 7;
-            this.checkBoxT_CollectorOut.Text = "T_CollectorOut";
-            this.checkBoxT_CollectorOut.UseVisualStyleBackColor = true;
-            this.checkBoxT_CollectorOut.CheckedChanged += new System.EventHandler(this.checkBoxT_CollectorOut_CheckedChanged);
-            // 
-            // checkBox_T_Ambient
-            // 
-            this.checkBox_T_Ambient.AutoSize = true;
-            this.checkBox_T_Ambient.Location = new System.Drawing.Point(571, 98);
-            this.checkBox_T_Ambient.Name = "checkBox_T_Ambient";
-            this.checkBox_T_Ambient.Size = new System.Drawing.Size(78, 16);
-            this.checkBox_T_Ambient.TabIndex = 7;
-            this.checkBox_T_Ambient.Text = "T_Ambient";
-            this.checkBox_T_Ambient.UseVisualStyleBackColor = true;
-            this.checkBox_T_Ambient.CheckedChanged += new System.EventHandler(this.checkBox_T_Ambient_CheckedChanged);
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.ObjectContextType = typeof(Tiger.DbTigerEntities);
             // 
             // F_History
             // 
@@ -315,7 +315,6 @@
         private System.Windows.Forms.BindingSource chartBindingSource;
         private EFWinforms.EntityDataSource entityDataSource1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox comboBox_ID;
@@ -323,11 +322,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePicker_to;
         private System.Windows.Forms.DateTimePicker dateTimePicker_from;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_Refrsh;
         private System.Windows.Forms.CheckBox checkBox_T_HeatingBox;
         private System.Windows.Forms.CheckBox checkBox_T_CollectorIn;
         private System.Windows.Forms.CheckBox checkBox_T_CollectorBox;
         private System.Windows.Forms.CheckBox checkBoxT_CollectorOut;
         private System.Windows.Forms.CheckBox checkBox_T_Ambient;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

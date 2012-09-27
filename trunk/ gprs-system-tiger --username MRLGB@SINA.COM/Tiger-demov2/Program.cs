@@ -15,7 +15,8 @@ namespace Tiger
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginContext());
+            Application.Run(new F_HistoryUpdate());
+            //Application.Run(new LoginContext());
         }
     }
 }
