@@ -14,10 +14,22 @@ namespace Tiger
     public partial class F_History : Form
     {
         private DbTigerEntities context;//数据库的上下文。
+        private bool[] selectflag;
+        private enum NO 
+        {
+            T_Heating,
+            T_CollectBox,
+            T_CollectIn,
+            T_CollectOut,
+            T_Ambient
+        }
+        private decimal[] T;
 
         public F_History()
         {
             InitializeComponent();
+            selectflag = new bool[5];
+            T = new decimal[5];
         }
 
         private void chartBindingSource_ListChanged(object sender, ListChangedEventArgs e)
@@ -120,11 +132,13 @@ namespace Tiger
                         };
                     foreach (var state in states)
                     {
-                        chart1.Series[0].Points.AddXY(state.DateTime_RecvDate, state.Temp_HeatingBox);
-                        chart1.Series[1].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorBox);
-                        chart1.Series[2].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorIn);
-                        chart1.Series[3].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorOut);
-                        chart1.Series[4].Points.AddXY(state.DateTime_RecvDate, state.Temp_Ambient);
+                        showselcetview(state.DateTime_RecvDate, state.Temp_HeatingBox, state.Temp_CollectorBox, state.Temp_CollectorIn, state.Temp_CollectorOut, state.Temp_Ambient);
+
+                        //chart1.Series[0].Points.AddXY(state.DateTime_RecvDate, state.Temp_HeatingBox);
+                        //chart1.Series[1].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorBox);
+                        //chart1.Series[2].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorIn);
+                        //chart1.Series[3].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorOut);
+                        //chart1.Series[4].Points.AddXY(state.DateTime_RecvDate, state.Temp_Ambient);
                     }
                 
             }
@@ -147,11 +161,7 @@ namespace Tiger
                         };
                     foreach (var state in states)
                     {
-                        chart1.Series[0].Points.AddXY(state.DateTime_RecvDate, state.Temp_HeatingBox);
-                        chart1.Series[1].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorBox);
-                        chart1.Series[2].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorIn);
-                        chart1.Series[3].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorOut);
-                        chart1.Series[4].Points.AddXY(state.DateTime_RecvDate, state.Temp_Ambient);
+                        showselcetview(state.DateTime_RecvDate, state.Temp_HeatingBox, state.Temp_CollectorBox, state.Temp_CollectorIn, state.Temp_CollectorOut, state.Temp_Ambient);
                     }
                 }
                 //。同时选择其实时间。
@@ -171,11 +181,13 @@ namespace Tiger
                         };
                     foreach (var state in states)
                     {
-                        chart1.Series[0].Points.AddXY(state.DateTime_RecvDate, state.Temp_HeatingBox);
-                        chart1.Series[1].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorBox);
-                        chart1.Series[2].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorIn);
-                        chart1.Series[3].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorOut);
-                        chart1.Series[4].Points.AddXY(state.DateTime_RecvDate, state.Temp_Ambient);
+                        showselcetview(state.DateTime_RecvDate, state.Temp_HeatingBox, state.Temp_CollectorBox, state.Temp_CollectorIn, state.Temp_CollectorOut, state.Temp_Ambient);
+
+                        //chart1.Series[0].Points.AddXY(state.DateTime_RecvDate, state.Temp_HeatingBox);
+                        //chart1.Series[1].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorBox);
+                        //chart1.Series[2].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorIn);
+                        //chart1.Series[3].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorOut);
+                        //chart1.Series[4].Points.AddXY(state.DateTime_RecvDate, state.Temp_Ambient);
                     }
                     
                 }
@@ -186,6 +198,64 @@ namespace Tiger
 
                
             }
+
+        private void checkBox_T_HeatingBox_CheckedChanged(object sender, EventArgs e)
+        {
+            selectflag[(ushort)NO.T_Heating] = checkBox_T_HeatingBox.Checked;
         }
+
+        private void checkBox_T_CollectorBox_CheckedChanged(object sender, EventArgs e)
+        {
+            selectflag[(ushort)NO.T_CollectBox] = checkBox_T_CollectorBox.Checked;
+        }
+
+        private void checkBox_T_CollectorIn_CheckedChanged(object sender, EventArgs e)
+        {
+            selectflag[(ushort)NO.T_CollectIn] = checkBox_T_CollectorIn.Checked;
+        }
+
+        private void checkBoxT_CollectorOut_CheckedChanged(object sender, EventArgs e)
+        {
+            selectflag[(ushort)NO.T_CollectOut] = checkBoxT_CollectorOut.Checked;
+        }
+
+        private void checkBox_T_Ambient_CheckedChanged(object sender, EventArgs e)
+        {
+            selectflag[(ushort)NO.T_Ambient] = checkBox_T_Ambient.Checked;
+        }
+
+        private void showselcetview(object x, object y0, object y1, object y2, object y3, object y4) 
+        {
+            foreach (NO s in Enum.GetValues(typeof(NO)))//枚举所有字段
+            {
+                if (selectflag[(ushort)s] == true)
+                {
+                    switch (s)
+                    {
+                        case NO.T_Heating:
+                            chart1.Series[(ushort)s].Points.AddXY((System.DateTime)x, (decimal)y0);
+                            break;
+                        case NO.T_CollectBox:
+                            chart1.Series[(ushort)s].Points.AddXY((System.DateTime)x, (decimal)y1);
+                            break;
+                        case NO.T_CollectIn:
+                            chart1.Series[(ushort)s].Points.AddXY((System.DateTime)x, (decimal)y2);
+                            break;
+                        case NO.T_CollectOut:
+                            chart1.Series[(ushort)s].Points.AddXY((System.DateTime)x, (decimal)y3);
+                            break;
+                        case NO.T_Ambient:
+                            chart1.Series[(ushort)s].Points.AddXY((System.DateTime)x, (decimal)y4);
+                            break;
+                        default:              
+                            break;
+                    }
+                   
+                }
+            }
+     
+        }
+        
+    }
     }
    

@@ -43,13 +43,17 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btn_refresh = new System.Windows.Forms.Button();
             this.dateTimePicker_to = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_from = new System.Windows.Forms.DateTimePicker();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.comboBox_ID = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.checkBox_T_HeatingBox = new System.Windows.Forms.CheckBox();
+            this.checkBox_T_CollectorBox = new System.Windows.Forms.CheckBox();
+            this.checkBox_T_CollectorIn = new System.Windows.Forms.CheckBox();
+            this.checkBoxT_CollectorOut = new System.Windows.Forms.CheckBox();
+            this.checkBox_T_Ambient = new System.Windows.Forms.CheckBox();
             this.entityDataSource1 = new EFWinforms.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chartBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -88,9 +92,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox_T_Ambient);
+            this.groupBox1.Controls.Add(this.checkBoxT_CollectorOut);
+            this.groupBox1.Controls.Add(this.checkBox_T_CollectorIn);
+            this.groupBox1.Controls.Add(this.checkBox_T_CollectorBox);
+            this.groupBox1.Controls.Add(this.checkBox_T_HeatingBox);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.btn_refresh);
             this.groupBox1.Controls.Add(this.dateTimePicker_to);
             this.groupBox1.Controls.Add(this.dateTimePicker_from);
             this.groupBox1.Controls.Add(this.checkBox2);
@@ -123,16 +131,6 @@
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 5;
             this.label1.Text = "——";
-            // 
-            // btn_refresh
-            // 
-            this.btn_refresh.Location = new System.Drawing.Point(831, 63);
-            this.btn_refresh.Name = "btn_refresh";
-            this.btn_refresh.Size = new System.Drawing.Size(136, 23);
-            this.btn_refresh.TabIndex = 0;
-            this.btn_refresh.Text = "reload chart";
-            this.btn_refresh.UseVisualStyleBackColor = true;
-            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
             // dateTimePicker_to
             // 
@@ -231,6 +229,61 @@
             title1.Text = "采集单元状态统计图表";
             this.chart1.Titles.Add(title1);
             // 
+            // checkBox_T_HeatingBox
+            // 
+            this.checkBox_T_HeatingBox.AutoSize = true;
+            this.checkBox_T_HeatingBox.Location = new System.Drawing.Point(43, 98);
+            this.checkBox_T_HeatingBox.Name = "checkBox_T_HeatingBox";
+            this.checkBox_T_HeatingBox.Size = new System.Drawing.Size(96, 16);
+            this.checkBox_T_HeatingBox.TabIndex = 7;
+            this.checkBox_T_HeatingBox.Text = "T_HeatingBox";
+            this.checkBox_T_HeatingBox.UseVisualStyleBackColor = true;
+            this.checkBox_T_HeatingBox.CheckedChanged += new System.EventHandler(this.checkBox_T_HeatingBox_CheckedChanged);
+            // 
+            // checkBox_T_CollectorBox
+            // 
+            this.checkBox_T_CollectorBox.AutoSize = true;
+            this.checkBox_T_CollectorBox.Location = new System.Drawing.Point(160, 98);
+            this.checkBox_T_CollectorBox.Name = "checkBox_T_CollectorBox";
+            this.checkBox_T_CollectorBox.Size = new System.Drawing.Size(108, 16);
+            this.checkBox_T_CollectorBox.TabIndex = 7;
+            this.checkBox_T_CollectorBox.Text = "T_CollectorBox";
+            this.checkBox_T_CollectorBox.UseVisualStyleBackColor = true;
+            this.checkBox_T_CollectorBox.CheckedChanged += new System.EventHandler(this.checkBox_T_CollectorBox_CheckedChanged);
+            // 
+            // checkBox_T_CollectorIn
+            // 
+            this.checkBox_T_CollectorIn.AutoSize = true;
+            this.checkBox_T_CollectorIn.Location = new System.Drawing.Point(299, 98);
+            this.checkBox_T_CollectorIn.Name = "checkBox_T_CollectorIn";
+            this.checkBox_T_CollectorIn.Size = new System.Drawing.Size(102, 16);
+            this.checkBox_T_CollectorIn.TabIndex = 7;
+            this.checkBox_T_CollectorIn.Text = "T_CollectorIn";
+            this.checkBox_T_CollectorIn.UseVisualStyleBackColor = true;
+            this.checkBox_T_CollectorIn.CheckedChanged += new System.EventHandler(this.checkBox_T_CollectorIn_CheckedChanged);
+            // 
+            // checkBoxT_CollectorOut
+            // 
+            this.checkBoxT_CollectorOut.AutoSize = true;
+            this.checkBoxT_CollectorOut.Location = new System.Drawing.Point(438, 98);
+            this.checkBoxT_CollectorOut.Name = "checkBoxT_CollectorOut";
+            this.checkBoxT_CollectorOut.Size = new System.Drawing.Size(108, 16);
+            this.checkBoxT_CollectorOut.TabIndex = 7;
+            this.checkBoxT_CollectorOut.Text = "T_CollectorOut";
+            this.checkBoxT_CollectorOut.UseVisualStyleBackColor = true;
+            this.checkBoxT_CollectorOut.CheckedChanged += new System.EventHandler(this.checkBoxT_CollectorOut_CheckedChanged);
+            // 
+            // checkBox_T_Ambient
+            // 
+            this.checkBox_T_Ambient.AutoSize = true;
+            this.checkBox_T_Ambient.Location = new System.Drawing.Point(571, 98);
+            this.checkBox_T_Ambient.Name = "checkBox_T_Ambient";
+            this.checkBox_T_Ambient.Size = new System.Drawing.Size(78, 16);
+            this.checkBox_T_Ambient.TabIndex = 7;
+            this.checkBox_T_Ambient.Text = "T_Ambient";
+            this.checkBox_T_Ambient.UseVisualStyleBackColor = true;
+            this.checkBox_T_Ambient.CheckedChanged += new System.EventHandler(this.checkBox_T_Ambient_CheckedChanged);
+            // 
             // entityDataSource1
             // 
             this.entityDataSource1.ObjectContextType = typeof(Tiger.DbTigerEntities);
@@ -263,7 +316,6 @@
         private EFWinforms.EntityDataSource entityDataSource1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.Button btn_refresh;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox comboBox_ID;
@@ -272,5 +324,10 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker_to;
         private System.Windows.Forms.DateTimePicker dateTimePicker_from;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkBox_T_HeatingBox;
+        private System.Windows.Forms.CheckBox checkBox_T_CollectorIn;
+        private System.Windows.Forms.CheckBox checkBox_T_CollectorBox;
+        private System.Windows.Forms.CheckBox checkBoxT_CollectorOut;
+        private System.Windows.Forms.CheckBox checkBox_T_Ambient;
     }
 }
