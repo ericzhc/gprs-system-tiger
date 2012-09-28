@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_HistoryUpdate));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.itemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.item11ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -149,7 +149,7 @@
             this.toolStripButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(841, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1008, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -159,8 +159,8 @@
             this.btnPlot.Image = ((System.Drawing.Image)(resources.GetObject("btnPlot.Image")));
             this.btnPlot.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnPlot.Name = "btnPlot";
-            this.btnPlot.Size = new System.Drawing.Size(64, 22);
-            this.btnPlot.Text = "Plot Data";
+            this.btnPlot.Size = new System.Drawing.Size(59, 22);
+            this.btnPlot.Text = "描绘数据";
             this.btnPlot.Click += new System.EventHandler(this.btnPlot_Click);
             // 
             // btnClearDataFast
@@ -169,8 +169,8 @@
             this.btnClearDataFast.Image = ((System.Drawing.Image)(resources.GetObject("btnClearDataFast.Image")));
             this.btnClearDataFast.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnClearDataFast.Name = "btnClearDataFast";
-            this.btnClearDataFast.Size = new System.Drawing.Size(107, 22);
-            this.btnClearDataFast.Text = "Clear Data (Fast)";
+            this.btnClearDataFast.Size = new System.Drawing.Size(94, 22);
+            this.btnClearDataFast.Text = "清除数据 (Fast)";
             this.btnClearDataFast.Click += new System.EventHandler(this.btnClearDataFast_Click);
             // 
             // btnClearDataSlow
@@ -179,8 +179,8 @@
             this.btnClearDataSlow.Image = ((System.Drawing.Image)(resources.GetObject("btnClearDataSlow.Image")));
             this.btnClearDataSlow.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnClearDataSlow.Name = "btnClearDataSlow";
-            this.btnClearDataSlow.Size = new System.Drawing.Size(111, 22);
-            this.btnClearDataSlow.Text = "Clear Data (Slow)";
+            this.btnClearDataSlow.Size = new System.Drawing.Size(94, 22);
+            this.btnClearDataSlow.Text = "数据清除(Slow)";
             this.btnClearDataSlow.Click += new System.EventHandler(this.btnClearDataSlow_Click);
             // 
             // toolStripButton1
@@ -189,8 +189,9 @@
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(102, 22);
-            this.toolStripButton1.Text = "Annotation Test";
+            this.toolStripButton1.Size = new System.Drawing.Size(59, 22);
+            this.toolStripButton1.Tag = "";
+            this.toolStripButton1.Text = "添加标记";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripButton2
@@ -199,8 +200,8 @@
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(114, 22);
-            this.toolStripButton2.Text = "Clear Annotations";
+            this.toolStripButton2.Size = new System.Drawing.Size(59, 22);
+            this.toolStripButton2.Text = "清除标记";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // statusStrip1
@@ -208,9 +209,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.txtChartValue,
             this.txtChartSelect});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 499);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 705);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(841, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1008, 24);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -248,8 +249,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.chart1);
-            this.splitContainer1.Size = new System.Drawing.Size(841, 474);
-            this.splitContainer1.SplitterDistance = 134;
+            this.splitContainer1.Size = new System.Drawing.Size(1008, 680);
+            this.splitContainer1.SplitterDistance = 137;
             this.splitContainer1.TabIndex = 12;
             // 
             // groupBox1
@@ -269,7 +270,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(841, 134);
+            this.groupBox1.Size = new System.Drawing.Size(1008, 137);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "数据筛选：";
@@ -283,6 +284,7 @@
             this.checkBox_T_Ambient.TabIndex = 7;
             this.checkBox_T_Ambient.Text = "T_Ambient";
             this.checkBox_T_Ambient.UseVisualStyleBackColor = true;
+            this.checkBox_T_Ambient.CheckedChanged += new System.EventHandler(this.checkBox_T_Ambient_CheckedChanged);
             // 
             // checkBoxT_CollectorOut
             // 
@@ -293,6 +295,7 @@
             this.checkBoxT_CollectorOut.TabIndex = 7;
             this.checkBoxT_CollectorOut.Text = "T_CollectorOut";
             this.checkBoxT_CollectorOut.UseVisualStyleBackColor = true;
+            this.checkBoxT_CollectorOut.CheckedChanged += new System.EventHandler(this.checkBoxT_CollectorOut_CheckedChanged);
             // 
             // checkBox_T_CollectorIn
             // 
@@ -303,6 +306,7 @@
             this.checkBox_T_CollectorIn.TabIndex = 7;
             this.checkBox_T_CollectorIn.Text = "T_CollectorIn";
             this.checkBox_T_CollectorIn.UseVisualStyleBackColor = true;
+            this.checkBox_T_CollectorIn.CheckedChanged += new System.EventHandler(this.checkBox_T_CollectorIn_CheckedChanged);
             // 
             // checkBox_T_CollectorBox
             // 
@@ -313,6 +317,7 @@
             this.checkBox_T_CollectorBox.TabIndex = 7;
             this.checkBox_T_CollectorBox.Text = "T_CollectorBox";
             this.checkBox_T_CollectorBox.UseVisualStyleBackColor = true;
+            this.checkBox_T_CollectorBox.CheckedChanged += new System.EventHandler(this.checkBox_T_CollectorBox_CheckedChanged);
             // 
             // checkBox_T_HeatingBox
             // 
@@ -323,10 +328,11 @@
             this.checkBox_T_HeatingBox.TabIndex = 7;
             this.checkBox_T_HeatingBox.Text = "T_HeatingBox";
             this.checkBox_T_HeatingBox.UseVisualStyleBackColor = true;
+            this.checkBox_T_HeatingBox.CheckedChanged += new System.EventHandler(this.checkBox_T_HeatingBox_CheckedChanged);
             // 
             // button_Refrsh
             // 
-            this.button_Refrsh.Location = new System.Drawing.Point(693, 54);
+            this.button_Refrsh.Location = new System.Drawing.Point(718, 59);
             this.button_Refrsh.Name = "button_Refrsh";
             this.button_Refrsh.Size = new System.Drawing.Size(142, 23);
             this.button_Refrsh.TabIndex = 6;
@@ -388,47 +394,47 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Color = System.Drawing.Color.Red;
-            series1.MarkerBorderColor = System.Drawing.Color.Red;
-            series1.MarkerColor = System.Drawing.Color.Red;
-            series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Square;
-            series1.Name = "Series1";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Color = System.Drawing.Color.Blue;
-            series2.MarkerBorderColor = System.Drawing.Color.Blue;
-            series2.MarkerColor = System.Drawing.Color.Blue;
-            series2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
-            series2.Name = "Series2";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series3.MarkerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            series3.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            series3.Name = "Series3";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series4.MarkerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            series4.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            series4.Name = "Series4";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series5.MarkerBorderColor = System.Drawing.Color.Fuchsia;
-            series5.MarkerColor = System.Drawing.Color.Fuchsia;
-            series5.Name = "Series5";
-            this.chart1.Series.Add(series1);
-            this.chart1.Series.Add(series2);
-            this.chart1.Series.Add(series3);
-            this.chart1.Series.Add(series4);
-            this.chart1.Series.Add(series5);
-            this.chart1.Size = new System.Drawing.Size(841, 336);
+            series11.ChartArea = "ChartArea1";
+            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series11.Color = System.Drawing.Color.Red;
+            series11.MarkerBorderColor = System.Drawing.Color.Red;
+            series11.MarkerColor = System.Drawing.Color.Red;
+            series11.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Square;
+            series11.Name = "Series1";
+            series12.ChartArea = "ChartArea1";
+            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series12.Color = System.Drawing.Color.Blue;
+            series12.MarkerBorderColor = System.Drawing.Color.Blue;
+            series12.MarkerColor = System.Drawing.Color.Blue;
+            series12.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
+            series12.Name = "Series2";
+            series13.ChartArea = "ChartArea1";
+            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series13.MarkerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series13.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series13.Name = "Series3";
+            series14.ChartArea = "ChartArea1";
+            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series14.MarkerBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            series14.MarkerColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            series14.Name = "Series4";
+            series15.ChartArea = "ChartArea1";
+            series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series15.MarkerBorderColor = System.Drawing.Color.Fuchsia;
+            series15.MarkerColor = System.Drawing.Color.Fuchsia;
+            series15.Name = "Series5";
+            this.chart1.Series.Add(series11);
+            this.chart1.Series.Add(series12);
+            this.chart1.Series.Add(series13);
+            this.chart1.Series.Add(series14);
+            this.chart1.Series.Add(series15);
+            this.chart1.Size = new System.Drawing.Size(1008, 539);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
             // 
@@ -436,7 +442,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(841, 523);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);

@@ -49,20 +49,18 @@ namespace Tiger
             //读取手机电话号码列表
             context = new DbTigerEntities();
             //using (var odbEntities = new D())
-            //{
-            //     1. Easy example but not very flexible
-            //        Select all products without any constraints
-            //    foreach (var union in context.unions)
-            //    {
-            //        comboBox_ID.Items.Add(union.UnitId);
-            //    }
-            //}
+            {
+                foreach (var union in context.unions)
+                {
+                    comboBox_ID.Items.Add(union.UnitId);
+                }
+            }
             
-            //dateTimePicker_from.Format = DateTimePickerFormat.Long;
-            //dateTimePicker_from.CustomFormat = "MM/dd/yyyy HHH:mm";
+            dateTimePicker_from.Format = DateTimePickerFormat.Long;
+            dateTimePicker_from.CustomFormat = "MM/dd/yyyy HHH:mm";
 
-            //dateTimePicker_to.Format = DateTimePickerFormat.Long;
-            //dateTimePicker_to.CustomFormat = "MM/dd/yyyy HHH:mm";
+            dateTimePicker_to.Format = DateTimePickerFormat.Long;
+            dateTimePicker_to.CustomFormat = "MM/dd/yyyy HHH:mm";
 
         }
 

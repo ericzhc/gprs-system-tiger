@@ -1035,8 +1035,8 @@ namespace Tiger
 
         private void 统计要素历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            F_History fhistory = new F_History();
-            fhistory.ShowDialog();
+            F_HistoryUpdate f_history_view = new F_HistoryUpdate();
+            f_history_view.ShowDialog();
         }
 
         private void 帮助ToolStripMenuItem_Click(object sender, EventArgs e)
