@@ -354,5 +354,15 @@ namespace Tiger
         {
 
         }
+
+        private void checkBox_RefreshInTime_CheckedChanged(object sender, EventArgs e)
+        {
+            timer_Refesh.Enabled = checkBox_RefreshInTime.Checked;
+        }
+
+        private void timer_Refesh_Tick(object sender, EventArgs e)
+        {
+            button_Refrsh_Click(null, null);
+        }
     }
 }
