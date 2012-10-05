@@ -115,7 +115,7 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.btnBindingTest = new System.Windows.Forms.Button();
-            this.timer_store = new System.Windows.Forms.Timer(this.components);
+            this.timerStore2Db = new System.Windows.Forms.Timer(this.components);
             this.btnStore2Db = new System.Windows.Forms.Button();
             this.checkBox_store = new System.Windows.Forms.CheckBox();
             this.checkBox_Produce = new System.Windows.Forms.CheckBox();
@@ -976,10 +976,10 @@
             this.btnBindingTest.UseVisualStyleBackColor = true;
             this.btnBindingTest.Click += new System.EventHandler(this.btnBindingTest_Click);
             // 
-            // timer_store
+            // timerStore2Db
             // 
-            this.timer_store.Interval = 10000;
-            this.timer_store.Tick += new System.EventHandler(this.timer_store_Tick);
+            this.timerStore2Db.Interval = 10000;
+            this.timerStore2Db.Tick += new System.EventHandler(this.timerStore2Db_Tick);
             // 
             // btnStore2Db
             // 
@@ -1166,7 +1166,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripMenuItem 中心参数设置ToolStripMenuItem;
         private System.Windows.Forms.Button btnBindingTest;
-        private System.Windows.Forms.Timer timer_store;
+        private System.Windows.Forms.Timer timerStore2Db;
         private System.Windows.Forms.Button btnStore2Db;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox checkBox_store;

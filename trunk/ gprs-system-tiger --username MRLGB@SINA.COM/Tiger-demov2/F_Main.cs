@@ -77,7 +77,7 @@ namespace Tiger
             m_Log.InfoFormat("________________________________");
             m_Log.InfoFormat("Application Star logging  at {0}", DateTime.Now);
 
-            timer_store.Interval = global.Timer_store;
+            timerStore2Db.Interval = global.Timer_store;
 
         }
 
@@ -974,11 +974,6 @@ namespace Tiger
 
         }
 
-        private void timer_store_Tick(object sender, EventArgs e)
-        {
-           // btnStore2Db_Click(null, null);
-        }
-
         private void 显示要素历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             F_HistoryUpdate f_history_view = new F_HistoryUpdate();
@@ -992,7 +987,7 @@ namespace Tiger
 
         private void checkBox_store_CheckedChanged(object sender, EventArgs e)
         {
-            timer_store.Enabled = checkBox_store.Checked;
+            timerStore2Db.Enabled = checkBox_store.Checked;
         }
 
         private void checkBox_Produce_CheckedChanged(object sender, EventArgs e)
@@ -1077,6 +1072,11 @@ namespace Tiger
             global.osystem.Dust_emission = (ushort)rand.Next(0, 100);  //粉尘减排量
             global.osystem.Fee_effect = (ushort)rand.Next(0, 100);   //项目费效比
             global.osystem.Auxiliary_heat = (ushort)rand.Next(0, 100);//辅助热源加热量
+        }
+
+        private void timerStore2Db_Tick(object sender, EventArgs e)
+        {
+            // btnStore2Db_Click(null, null);
         }
 
        
