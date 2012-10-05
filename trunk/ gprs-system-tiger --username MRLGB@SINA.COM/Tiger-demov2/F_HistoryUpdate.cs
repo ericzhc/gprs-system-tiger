@@ -31,17 +31,9 @@ namespace Tiger
             selectflag = new bool[5];
             T = new decimal[5];
 
-            chart1.ChartAreas[0].AxisX.IsMarginVisible = true;
-            chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Seconds;
+            chart1.ChartAreas[0].AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;//FixedCount VariableCount
+            chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Hours;
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{0:g}";
-
-            // Set automatic zooming
-            chart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-            chart1.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
-
-            // Set automatic scrolling 
-            chart1.ChartAreas[0].CursorX.AutoScroll = true;
-            chart1.ChartAreas[0].CursorY.AutoScroll = true;
 
             {
                 foreach (var union in context.unions)

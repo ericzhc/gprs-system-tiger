@@ -39,6 +39,7 @@
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_History));
             this.chartBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource1 = new EFWinforms.EntityDataSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox_T_Ambient = new System.Windows.Forms.CheckBox();
@@ -54,7 +55,6 @@
             this.comboBox_ID = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.entityDataSource1 = new EFWinforms.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chartBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -71,6 +71,10 @@
             this.chartBindingSource.Position = 0;
             this.chartBindingSource.Sort = "";
             this.chartBindingSource.ListChanged += new System.ComponentModel.ListChangedEventHandler(this.chartBindingSource_ListChanged);
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.ObjectContextType = typeof(Tiger.DbTigerEntities);
             // 
             // splitContainer1
             // 
@@ -273,10 +277,6 @@
             title1.Name = "Title1";
             title1.Text = "采集单元状态统计图表";
             this.chart1.Titles.Add(title1);
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.ObjectContextType = typeof(Tiger.DbTigerEntities);
             // 
             // F_History
             // 

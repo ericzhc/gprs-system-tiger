@@ -986,7 +986,7 @@ namespace Tiger
         }
 
         private void checkBox_store_CheckedChanged(object sender, EventArgs e)
-        {
+        { 
             timerStore2Db.Enabled = checkBox_store.Checked;
         }
 

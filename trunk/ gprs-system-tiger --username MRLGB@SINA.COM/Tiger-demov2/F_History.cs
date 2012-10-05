@@ -42,15 +42,12 @@ namespace Tiger
             //chart1.EnableZoomAndPanControls(ChartCursorSelected, ChartCursorMoved);
             // show an X label every 3 Minute
 
-            chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Seconds;
+            chart1.ChartAreas[0].AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;//FixedCount VariableCount
+            chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Hours;
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{0:g}";
-            // Set automatic zooming
-            chart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
-            chart1.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
 
-            // Set automatic scrolling 
-            chart1.ChartAreas[0].CursorX.AutoScroll = true;
-            chart1.ChartAreas[0].CursorY.AutoScroll = true;
+            //chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Seconds;
+            //chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{0:g}";
 
             //读取手机电话号码列表
             context = new DbTigerEntities();
