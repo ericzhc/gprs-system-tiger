@@ -354,6 +354,7 @@ namespace Tiger
 							Match matchetemp = rx.Match(HexString);
 
 							cacheLock.EnterWriteLock();
+
 							try
 							{
                                 float x= float.Parse(matchetemp.Groups[s.ToString()].Value);
@@ -423,6 +424,23 @@ namespace Tiger
                         }
                     }
             }
+            //赋值消息接收时间
+            cacheLock.EnterWriteLock();
+            try
+            {
+                DateTime x = DateTime.Parse(RecvMessage.m_recv_date);
+                FieldTime[(ushort)FieldTimeNO.Recv_Time] = x;
+                RecvDate = x;
+            }
+            catch
+            {
+                //
+            }
+            finally
+            {
+                cacheLock.ExitWriteLock();
+            }
+
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;

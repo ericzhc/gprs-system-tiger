@@ -153,6 +153,7 @@ namespace Tiger
         {
             GPRS_DATA_RECORD gprsrecord = (GPRS_DATA_RECORD)message;
             global.DTUList[gprsrecord.m_userid].UpdateDTUObject(gprsrecord);//更新DTUList实时状态
+            btnStore2Db_Click(null, null);//Testing+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //Thread.Sleep(2000);
 
 
@@ -491,14 +492,14 @@ namespace Tiger
                 cacheLock.EnterWriteLock();
                 try
                 {
-
                     record.Initialize();
-                    record.m_userid = item.Key;
+                    record.m_userid = item.Key;//消息数据包设置GPRS号码
                     DateTime now = DateTime.Now;
                     DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
                     format.DateSeparator = "-";
                     format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
-                    record.m_recv_date = now.ToString("d", format);
+                    record.m_recv_date = now.ToString("d", format);//消息数据包设置上报时间
+                    item.Value.RecvDate = now;//产生数据时时间
 
                     string allstring = "T1-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
                     allstring += "T2-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
@@ -531,11 +532,11 @@ namespace Tiger
             TimeSpan ts = stopWatch.Elapsed;
 
              //Format and display the TimeSpan value. 
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                ts.Hours, ts.Minutes, ts.Seconds,
-                ts.Milliseconds / 10);
-            MessageBox.Show("produce time:"+elapsedTime.ToString());
-            
+            //string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+            //    ts.Hours, ts.Minutes, ts.Seconds,
+            //    ts.Milliseconds / 10);
+            //MessageBox.Show("produce time:"+elapsedTime.ToString());
+            btnBindingTest_Click(null, null);
         }
 
         //**********************************
@@ -953,22 +954,7 @@ namespace Tiger
 
         private void button4_Click(object sender, EventArgs e)
         {
-            global.osystem.System_heat = (ushort)rand.Next(0, 100);
-            global.osystem.System_heat = (ushort)rand.Next(0, 100);//供热水箱温度
-            global.osystem.Conventional_energy = (ushort)rand.Next(0, 100);  //系统常规热源耗能量
-            global.osystem.Storage_tank = (ushort)rand.Next(0, 100); //贮热水箱热损系数
-            global.osystem.System_efficiency = (ushort)rand.Next(0, 100);  //集热系统效率
-            global.osystem.Solar_assurance_day = (ushort)rand.Next(0, 100);  //日太阳能保证率
-            global.osystem.Solar_assurance_year = (ushort)rand.Next(0, 100);  //全年太阳能保证率
-            global.osystem.Energy_alternative = (ushort)rand.Next(0, 100);  //常规能源替代量
-            global.osystem.Carbon_emission = (ushort)rand.Next(0, 100);  //二氧化碳减排量
-            global.osystem.Sulfur_emission = (ushort)rand.Next(0, 100); //二氧化硫减排量
-            global.osystem.Dust_emission = (ushort)rand.Next(0, 100);  //粉尘减排量
-            global.osystem.Fee_effect = (ushort)rand.Next(0, 100);   //项目费效比
-            global.osystem.Auxiliary_heat = (ushort)rand.Next(0, 100);//辅助热源加热量
-            MessageBox.Show("刷新一次！");
             
-
         }
 
         private void btn_add_binding_Click(object sender, EventArgs e)
@@ -977,7 +963,50 @@ namespace Tiger
             //this.btn_add_binding.Enabled = false;
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void 统计要素历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            F_HistoryUpdate f_history_view = new F_HistoryUpdate();
+            f_history_view.ShowDialog();
+        }
+
+        private void 帮助ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer_store_Tick(object sender, EventArgs e)
+        {
+           // btnStore2Db_Click(null, null);
+        }
+
+        private void 显示要素历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            F_HistoryUpdate f_history_view = new F_HistoryUpdate();
+            f_history_view.ShowDialog();
+        }
+
+        private void ledBulb1_Click(object sender, EventArgs e)
+        {
+            //((LedBulb)sender).On = !((LedBulb)sender).On;
+        }
+
+        private void checkBox_store_CheckedChanged(object sender, EventArgs e)
+        {
+            timer_store.Enabled = checkBox_store.Checked;
+        }
+
+        private void checkBox_Produce_CheckedChanged(object sender, EventArgs e)
+        {
+            timerProduce.Enabled = checkBox_Produce.Checked;
+        }
+
+        private void 用户添加ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            F_UserManager fuser = new F_UserManager();
+            fuser.ShowDialog();
+        }
+
+        private void btnStore2Db_Click(object sender, EventArgs e)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -988,7 +1017,7 @@ namespace Tiger
                 {
                     try
                     {
-                        DateTime now = DateTime.Now;
+                        //DateTime now = DateTime.Now;
                         //DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
                         //format.DateSeparator = "-";
                         //format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
@@ -996,7 +1025,7 @@ namespace Tiger
                         unitstate unitstate = new unitstate
                         {
                             UnitId = item.Key,
-                            DateTime_RecvDate = now,
+                            DateTime_RecvDate = item.Value.RecvDate,//产生数据时时间
                             Temp_HeatingBox = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_HeatingBox)]),
                             Temp_CollectorBox = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorBox)]),
                             Temp_CollectorIn = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorIn)]),
@@ -1030,46 +1059,27 @@ namespace Tiger
             string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
                 ts.Hours, ts.Minutes, ts.Seconds,
                 ts.Milliseconds / 10);
-            MessageBox.Show("store in db time:" + elapsedTime.ToString());
+            //MessageBox.Show("store in db time:" + elapsedTime.ToString());
         }
 
-        private void 统计要素历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnBindingTest_Click(object sender, EventArgs e)
         {
-            F_HistoryUpdate f_history_view = new F_HistoryUpdate();
-            f_history_view.ShowDialog();
+            global.osystem.System_heat = (ushort)rand.Next(0, 100);
+            global.osystem.System_heat = (ushort)rand.Next(0, 100);//供热水箱温度
+            global.osystem.Conventional_energy = (ushort)rand.Next(0, 100);  //系统常规热源耗能量
+            global.osystem.Storage_tank = (ushort)rand.Next(0, 100); //贮热水箱热损系数
+            global.osystem.System_efficiency = (ushort)rand.Next(0, 100);  //集热系统效率
+            global.osystem.Solar_assurance_day = (ushort)rand.Next(0, 100);  //日太阳能保证率
+            global.osystem.Solar_assurance_year = (ushort)rand.Next(0, 100);  //全年太阳能保证率
+            global.osystem.Energy_alternative = (ushort)rand.Next(0, 100);  //常规能源替代量
+            global.osystem.Carbon_emission = (ushort)rand.Next(0, 100);  //二氧化碳减排量
+            global.osystem.Sulfur_emission = (ushort)rand.Next(0, 100); //二氧化硫减排量
+            global.osystem.Dust_emission = (ushort)rand.Next(0, 100);  //粉尘减排量
+            global.osystem.Fee_effect = (ushort)rand.Next(0, 100);   //项目费效比
+            global.osystem.Auxiliary_heat = (ushort)rand.Next(0, 100);//辅助热源加热量
         }
 
-        private void 帮助ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer_store_Tick(object sender, EventArgs e)
-        {
-            button5_Click(null, null);
-        }
-
-        private void 显示要素历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            F_HistoryUpdate f_history_view = new F_HistoryUpdate();
-            f_history_view.ShowDialog();
-        }
-
-        private void ledBulb1_Click(object sender, EventArgs e)
-        {
-            //((LedBulb)sender).On = !((LedBulb)sender).On;
-        }
-
-        private void checkBox_store_CheckedChanged(object sender, EventArgs e)
-        {
-            timer_store.Enabled = checkBox_store.Checked;
-        }
-
-        private void 用户添加ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            F_UserManager fuser = new F_UserManager();
-            fuser.ShowDialog();
-        }
+       
 
     }
 }

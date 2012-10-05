@@ -42,9 +42,15 @@ namespace Tiger
             //chart1.EnableZoomAndPanControls(ChartCursorSelected, ChartCursorMoved);
             // show an X label every 3 Minute
 
-            //chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Seconds;
-            //chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{0:g}";
-            //System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Seconds;
+            chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{0:g}";
+            // Set automatic zooming
+            chart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            chart1.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
+
+            // Set automatic scrolling 
+            chart1.ChartAreas[0].CursorX.AutoScroll = true;
+            chart1.ChartAreas[0].CursorY.AutoScroll = true;
 
             //读取手机电话号码列表
             context = new DbTigerEntities();
@@ -124,94 +130,94 @@ namespace Tiger
         private void button_Refrsh_Click(object sender, EventArgs e)
         {
             ////清楚现有图标数据（5个温度值）
-            //chart1.Series[0].Points.Clear();
-            //chart1.Series[1].Points.Clear();
-            //chart1.Series[2].Points.Clear();
-            //chart1.Series[3].Points.Clear();
-            //chart1.Series[4].Points.Clear();
+            chart1.Series[0].Points.Clear();
+            chart1.Series[1].Points.Clear();
+            chart1.Series[2].Points.Clear();
+            chart1.Series[3].Points.Clear();
+            chart1.Series[4].Points.Clear();
 
             ////选择了某个手机号码。同时选择其实时间。
-            //if ((checkBox1.Checked) && (!comboBox_ID.SelectedItem.Equals(null)) && (checkBox2.Checked) && (dateTimePicker_from.Value < dateTimePicker_to.Value))
-            //{
-            //    string id = comboBox_ID.SelectedItem.ToString();//手机号
-            //    //LINQ 
-            //    var states =
-            //       from state in context.unitstates
-            //       where (state.UnitId == id && state.DateTime_RecvDate > dateTimePicker_from.Value && state.DateTime_RecvDate < dateTimePicker_to.Value)
-            //       select new
-            //       {
-            //           Temp_HeatingBox = state.Temp_HeatingBox,
-            //           Temp_CollectorBox = state.Temp_CollectorBox,
-            //           Temp_CollectorIn = state.Temp_CollectorIn,
-            //           Temp_CollectorOut = state.Temp_CollectorOut,
-            //           Temp_Ambient = state.Temp_Ambient,
-            //           DateTime_RecvDate = state.DateTime_RecvDate,
-            //       };
-            //    foreach (var state in states)
-            //    {
-            //        showselcetview(state.DateTime_RecvDate, state.Temp_HeatingBox, state.Temp_CollectorBox, state.Temp_CollectorIn, state.Temp_CollectorOut, state.Temp_Ambient);
+            if ((checkBox1.Checked) && (!comboBox_ID.SelectedItem.Equals(null)) && (checkBox2.Checked) && (dateTimePicker_from.Value < dateTimePicker_to.Value))
+            {
+                string id = comboBox_ID.SelectedItem.ToString();//手机号
+                //LINQ 
+                var states =
+                   from state in context.unitstates
+                   where (state.UnitId == id && state.DateTime_RecvDate > dateTimePicker_from.Value && state.DateTime_RecvDate < dateTimePicker_to.Value)
+                   select new
+                   {
+                       Temp_HeatingBox = state.Temp_HeatingBox,
+                       Temp_CollectorBox = state.Temp_CollectorBox,
+                       Temp_CollectorIn = state.Temp_CollectorIn,
+                       Temp_CollectorOut = state.Temp_CollectorOut,
+                       Temp_Ambient = state.Temp_Ambient,
+                       DateTime_RecvDate = state.DateTime_RecvDate,
+                   };
+                foreach (var state in states)
+                {
+                    showselcetview(state.DateTime_RecvDate, state.Temp_HeatingBox, state.Temp_CollectorBox, state.Temp_CollectorIn, state.Temp_CollectorOut, state.Temp_Ambient);
 
-            //        //chart1.Series[0].Points.AddXY(state.DateTime_RecvDate, state.Temp_HeatingBox);
-            //        //chart1.Series[1].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorBox);
-            //        //chart1.Series[2].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorIn);
-            //        //chart1.Series[3].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorOut);
-            //        //chart1.Series[4].Points.AddXY(state.DateTime_RecvDate, state.Temp_Ambient);
-            //    }
+                    //chart1.Series[0].Points.AddXY(state.DateTime_RecvDate, state.Temp_HeatingBox);
+                    //chart1.Series[1].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorBox);
+                    //chart1.Series[2].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorIn);
+                    //chart1.Series[3].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorOut);
+                    //chart1.Series[4].Points.AddXY(state.DateTime_RecvDate, state.Temp_Ambient);
+                }
 
-            //}
-            //else
-            //{//选择了某个手机号码
-            //    if (((checkBox1.Checked) && (!comboBox_ID.SelectedItem.Equals(null))))
-            //    {
-            //        string id = comboBox_ID.SelectedItem.ToString();
-            //        var states =
-            //            from state in context.unitstates
-            //            where (state.UnitId == id)
-            //            select new
-            //            {
-            //                Temp_HeatingBox = state.Temp_HeatingBox,
-            //                Temp_CollectorBox = state.Temp_CollectorBox,
-            //                Temp_CollectorIn = state.Temp_CollectorIn,
-            //                Temp_CollectorOut = state.Temp_CollectorOut,
-            //                Temp_Ambient = state.Temp_Ambient,
-            //                DateTime_RecvDate = state.DateTime_RecvDate,
-            //            };
-            //        foreach (var state in states)
-            //        {
-            //            showselcetview(state.DateTime_RecvDate, state.Temp_HeatingBox, state.Temp_CollectorBox, state.Temp_CollectorIn, state.Temp_CollectorOut, state.Temp_Ambient);
-            //        }
-            //    }
-            //    //。同时选择其实时间。
-            //    if ((checkBox2.Checked) && (dateTimePicker_from.Value < dateTimePicker_to.Value))
-            //    {
-            //        var states =
-            //            from state in context.unitstates
-            //            where (state.DateTime_RecvDate > dateTimePicker_from.Value && state.DateTime_RecvDate < dateTimePicker_to.Value)
-            //            select new
-            //            {
-            //                Temp_HeatingBox = state.Temp_HeatingBox,
-            //                Temp_CollectorBox = state.Temp_CollectorBox,
-            //                Temp_CollectorIn = state.Temp_CollectorIn,
-            //                Temp_CollectorOut = state.Temp_CollectorOut,
-            //                Temp_Ambient = state.Temp_Ambient,
-            //                DateTime_RecvDate = state.DateTime_RecvDate,
-            //            };
-            //        foreach (var state in states)
-            //        {
-            //            showselcetview(state.DateTime_RecvDate, state.Temp_HeatingBox, state.Temp_CollectorBox, state.Temp_CollectorIn, state.Temp_CollectorOut, state.Temp_Ambient);
+            }
+            else
+            {//选择了某个手机号码
+                if (((checkBox1.Checked) && (!comboBox_ID.SelectedItem.Equals(null))))
+                {
+                    string id = comboBox_ID.SelectedItem.ToString();
+                    var states =
+                        from state in context.unitstates
+                        where (state.UnitId == id)
+                        select new
+                        {
+                            Temp_HeatingBox = state.Temp_HeatingBox,
+                            Temp_CollectorBox = state.Temp_CollectorBox,
+                            Temp_CollectorIn = state.Temp_CollectorIn,
+                            Temp_CollectorOut = state.Temp_CollectorOut,
+                            Temp_Ambient = state.Temp_Ambient,
+                            DateTime_RecvDate = state.DateTime_RecvDate,
+                        };
+                    foreach (var state in states)
+                    {
+                        showselcetview(state.DateTime_RecvDate, state.Temp_HeatingBox, state.Temp_CollectorBox, state.Temp_CollectorIn, state.Temp_CollectorOut, state.Temp_Ambient);
+                    }
+                }
+                //。同时选择其实时间。
+                if ((checkBox2.Checked) && (dateTimePicker_from.Value < dateTimePicker_to.Value))
+                {
+                    var states =
+                        from state in context.unitstates
+                        where (state.DateTime_RecvDate > dateTimePicker_from.Value && state.DateTime_RecvDate < dateTimePicker_to.Value)
+                        select new
+                        {
+                            Temp_HeatingBox = state.Temp_HeatingBox,
+                            Temp_CollectorBox = state.Temp_CollectorBox,
+                            Temp_CollectorIn = state.Temp_CollectorIn,
+                            Temp_CollectorOut = state.Temp_CollectorOut,
+                            Temp_Ambient = state.Temp_Ambient,
+                            DateTime_RecvDate = state.DateTime_RecvDate,
+                        };
+                    foreach (var state in states)
+                    {
+                        showselcetview(state.DateTime_RecvDate, state.Temp_HeatingBox, state.Temp_CollectorBox, state.Temp_CollectorIn, state.Temp_CollectorOut, state.Temp_Ambient);
 
-            //            //chart1.Series[0].Points.AddXY(state.DateTime_RecvDate, state.Temp_HeatingBox);
-            //            //chart1.Series[1].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorBox);
-            //            //chart1.Series[2].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorIn);
-            //            //chart1.Series[3].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorOut);
-            //            //chart1.Series[4].Points.AddXY(state.DateTime_RecvDate, state.Temp_Ambient);
-            //        }
+                        //chart1.Series[0].Points.AddXY(state.DateTime_RecvDate, state.Temp_HeatingBox);
+                        //chart1.Series[1].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorBox);
+                        //chart1.Series[2].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorIn);
+                        //chart1.Series[3].Points.AddXY(state.DateTime_RecvDate, state.Temp_CollectorOut);
+                        //chart1.Series[4].Points.AddXY(state.DateTime_RecvDate, state.Temp_Ambient);
+                    }
 
-            //    }
+                }
 
-            //}
+            }
 
-            //chart1.Invalidate();
+            chart1.Invalidate();
 
                
         }

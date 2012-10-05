@@ -35,19 +35,13 @@ namespace Tiger
             chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Seconds;
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{0:g}";
 
-            // Set scrollbar size
-            chart1.ChartAreas[0].AxisX.ScrollBar.Size = 10;
+            // Set automatic zooming
+            chart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
+            chart1.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
 
-            // Show small scroll buttons only
-            chart1.ChartAreas[0].AxisX.ScrollBar.ButtonStyle = ScrollBarButtonStyles.SmallScroll;
-
-            // Scrollbars position
-            chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
-
-            // Change scrollbar colors
-            chart1.ChartAreas[0].AxisX.ScrollBar.BackColor = Color.LightGray;
-            chart1.ChartAreas[0].AxisX.ScrollBar.ButtonColor = Color.Gray;
-            chart1.ChartAreas[0].AxisX.ScrollBar.LineColor = Color.Black;
+            // Set automatic scrolling 
+            chart1.ChartAreas[0].CursorX.AutoScroll = true;
+            chart1.ChartAreas[0].CursorY.AutoScroll = true;
 
             {
                 foreach (var union in context.unions)
@@ -72,11 +66,11 @@ namespace Tiger
             Series Ser4 = chart1.Series[3];
             Series Ser5 = chart1.Series[4];
 
-            Ser1.ChartType = SeriesChartType.FastLine;
-            Ser2.ChartType = SeriesChartType.FastLine;
-            Ser3.ChartType = SeriesChartType.FastLine;
-            Ser4.ChartType = SeriesChartType.FastLine;
-            Ser5.ChartType = SeriesChartType.FastLine;
+            Ser1.ChartType = SeriesChartType.Spline;
+            Ser2.ChartType = SeriesChartType.Spline;
+            Ser3.ChartType = SeriesChartType.Spline;
+            Ser4.ChartType = SeriesChartType.Spline;
+            Ser5.ChartType = SeriesChartType.Spline;
 
             string id ="";
             if((checkBox1.Checked) && (!comboBox_ID.SelectedItem.Equals(null)))

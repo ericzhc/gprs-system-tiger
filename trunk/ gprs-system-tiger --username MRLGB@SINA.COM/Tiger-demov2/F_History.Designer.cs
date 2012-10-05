@@ -53,8 +53,8 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.comboBox_ID = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.entityDataSource1 = new EFWinforms.EntityDataSource(this.components);
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.entityDataSource1 = new EFWinforms.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chartBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -229,10 +229,6 @@
             this.checkBox1.Text = "unitid =";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.ObjectContextType = typeof(Tiger.DbTigerEntities);
-            // 
             // chart1
             // 
             chartArea1.Name = "ChartArea1";
@@ -247,33 +243,23 @@
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Legend = "Legend1";
             series1.Name = "T_HeatingBox";
-            series1.XValueMember = "DateTime_RecvDate";
-            series1.YValueMembers = "Temp_HeatingBox";
             series1.YValuesPerPoint = 2;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series2.Legend = "Legend1";
             series2.Name = "T_CollectorBox";
-            series2.XValueMember = "DateTime_RecvDate";
-            series2.YValueMembers = "Temp_CollectorBox";
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series3.Legend = "Legend1";
             series3.Name = "T_CollectorIn";
-            series3.XValueMember = "DateTime_RecvDate";
-            series3.YValueMembers = "Temp_CollectorIn";
             series4.ChartArea = "ChartArea1";
             series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series4.Legend = "Legend1";
             series4.Name = "T_CollectorOut";
-            series4.XValueMember = "DateTime_RecvDate";
-            series4.YValueMembers = "Temp_CollectorOut";
             series5.ChartArea = "ChartArea1";
             series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series5.Legend = "Legend1";
             series5.Name = "T_Ambient";
-            series5.XValueMember = "DateTime_RecvDate";
-            series5.YValueMembers = "Temp_Ambient";
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
             this.chart1.Series.Add(series3);
@@ -287,6 +273,10 @@
             title1.Name = "Title1";
             title1.Text = "采集单元状态统计图表";
             this.chart1.Titles.Add(title1);
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.ObjectContextType = typeof(Tiger.DbTigerEntities);
             // 
             // F_History
             // 

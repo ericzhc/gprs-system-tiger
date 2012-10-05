@@ -47,7 +47,7 @@ namespace Tiger
             }
 
             //dataGridView1.Columns.Add("111");
-            global.DTUList[unitid].UpdateField();
+            global.DTUList[unitid].UpdateField();//从状态数组（归类后的数据）赋值给具体成员变量
             bs.Clear();
             bs.Add(global.DTUList[unitid]);
             dataGridView1.DataSource = bs;
