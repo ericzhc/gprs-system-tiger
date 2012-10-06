@@ -35,6 +35,23 @@ namespace Tiger
             chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Hours;
             chart1.ChartAreas[0].AxisX.LabelStyle.Format = "{0:g}";
 
+            
+
+            chart1.ChartAreas[0].AxisX.ScrollBar.Size = 10;
+
+            // Show small scroll buttons only
+            chart1.ChartAreas[0].AxisX.ScrollBar.ButtonStyle = ScrollBarButtonStyles.SmallScroll;
+
+            // Scrollbars position
+            chart1.ChartAreas[0].AxisX.ScrollBar.IsPositionedInside = true;
+
+            // Change scrollbar colors
+            chart1.ChartAreas[0].AxisX.ScrollBar.BackColor = Color.LightGray;
+            chart1.ChartAreas[0].AxisX.ScrollBar.ButtonColor = Color.Gray;
+            chart1.ChartAreas[0].AxisX.ScrollBar.LineColor = Color.Black;
+
+
+
             {
                 foreach (var union in context.unions)
                 {
