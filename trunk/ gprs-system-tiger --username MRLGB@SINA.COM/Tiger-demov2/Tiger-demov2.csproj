@@ -49,12 +49,16 @@
       <Private>True</Private>
       <HintPath>..\packages\MySql.Data.6.5.4\lib\net40\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="ObjectListView">
+      <HintPath>C:\Users\guobin\Downloads\ObjectListViewFull-2.5.1\ObjectListViewDemo\ObjectListView\bin\debug\ObjectListView.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />

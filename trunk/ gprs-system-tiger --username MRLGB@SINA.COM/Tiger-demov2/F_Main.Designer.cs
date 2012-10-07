@@ -403,11 +403,12 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.ForeColor = System.Drawing.Color.Green;
-            this.button1.Location = new System.Drawing.Point(306, 450);
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.button1.Location = new System.Drawing.Point(290, 472);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 23);
+            this.button1.Size = new System.Drawing.Size(101, 38);
             this.button1.TabIndex = 51;
             this.button1.Text = "详细";
             this.button1.UseVisualStyleBackColor = true;
@@ -420,7 +421,7 @@
             this.groupBox8.AutoSize = true;
             this.groupBox8.Controls.Add(this.txt_Fee_effect);
             this.groupBox8.Controls.Add(this.label30);
-            this.groupBox8.Location = new System.Drawing.Point(65, 376);
+            this.groupBox8.Location = new System.Drawing.Point(65, 395);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(326, 68);
             this.groupBox8.TabIndex = 49;
@@ -430,7 +431,7 @@
             // txt_Fee_effect
             // 
             this.txt_Fee_effect.ForeColor = System.Drawing.Color.Red;
-            this.txt_Fee_effect.Location = new System.Drawing.Point(185, 19);
+            this.txt_Fee_effect.Location = new System.Drawing.Point(192, 26);
             this.txt_Fee_effect.Name = "txt_Fee_effect";
             this.txt_Fee_effect.ReadOnly = true;
             this.txt_Fee_effect.Size = new System.Drawing.Size(83, 21);
@@ -440,7 +441,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(12, 23);
+            this.label30.Location = new System.Drawing.Point(110, 29);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(77, 12);
             this.label30.TabIndex = 0;
@@ -453,7 +454,7 @@
             this.groupBox9.AutoSize = true;
             this.groupBox9.Controls.Add(this.txt_Energy_alternative);
             this.groupBox9.Controls.Add(this.label20);
-            this.groupBox9.Location = new System.Drawing.Point(65, 314);
+            this.groupBox9.Location = new System.Drawing.Point(65, 333);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(326, 69);
             this.groupBox9.TabIndex = 48;
@@ -463,7 +464,7 @@
             // txt_Energy_alternative
             // 
             this.txt_Energy_alternative.ForeColor = System.Drawing.Color.Red;
-            this.txt_Energy_alternative.Location = new System.Drawing.Point(185, 20);
+            this.txt_Energy_alternative.Location = new System.Drawing.Point(193, 27);
             this.txt_Energy_alternative.Name = "txt_Energy_alternative";
             this.txt_Energy_alternative.ReadOnly = true;
             this.txt_Energy_alternative.Size = new System.Drawing.Size(80, 21);
@@ -473,7 +474,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(12, 23);
+            this.label20.Location = new System.Drawing.Point(86, 30);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(101, 12);
             this.label20.TabIndex = 0;
@@ -488,9 +489,9 @@
             this.groupBox7.Controls.Add(this.txt_Solar_assurance_day);
             this.groupBox7.Controls.Add(this.label18);
             this.groupBox7.Controls.Add(this.label15);
-            this.groupBox7.Location = new System.Drawing.Point(65, 225);
+            this.groupBox7.Location = new System.Drawing.Point(65, 244);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(326, 91);
+            this.groupBox7.Size = new System.Drawing.Size(326, 92);
             this.groupBox7.TabIndex = 47;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "系统太阳能保证率:";
@@ -498,7 +499,7 @@
             // txt_Solar_assurance_year
             // 
             this.txt_Solar_assurance_year.ForeColor = System.Drawing.Color.Red;
-            this.txt_Solar_assurance_year.Location = new System.Drawing.Point(185, 42);
+            this.txt_Solar_assurance_year.Location = new System.Drawing.Point(192, 51);
             this.txt_Solar_assurance_year.Name = "txt_Solar_assurance_year";
             this.txt_Solar_assurance_year.ReadOnly = true;
             this.txt_Solar_assurance_year.Size = new System.Drawing.Size(83, 21);
@@ -508,7 +509,7 @@
             // txt_Solar_assurance_day
             // 
             this.txt_Solar_assurance_day.ForeColor = System.Drawing.Color.Red;
-            this.txt_Solar_assurance_day.Location = new System.Drawing.Point(185, 16);
+            this.txt_Solar_assurance_day.Location = new System.Drawing.Point(192, 25);
             this.txt_Solar_assurance_day.Name = "txt_Solar_assurance_day";
             this.txt_Solar_assurance_day.ReadOnly = true;
             this.txt_Solar_assurance_day.Size = new System.Drawing.Size(83, 21);
@@ -518,7 +519,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(12, 42);
+            this.label18.Location = new System.Drawing.Point(80, 54);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(107, 12);
             this.label18.TabIndex = 0;
@@ -527,7 +528,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(12, 20);
+            this.label15.Location = new System.Drawing.Point(92, 28);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(95, 12);
             this.label15.TabIndex = 0;
@@ -554,7 +555,7 @@
             // txt_Dust_emission
             // 
             this.txt_Dust_emission.ForeColor = System.Drawing.Color.Red;
-            this.txt_Dust_emission.Location = new System.Drawing.Point(185, 61);
+            this.txt_Dust_emission.Location = new System.Drawing.Point(193, 67);
             this.txt_Dust_emission.Name = "txt_Dust_emission";
             this.txt_Dust_emission.ReadOnly = true;
             this.txt_Dust_emission.Size = new System.Drawing.Size(80, 21);
@@ -564,7 +565,7 @@
             // txt_Sulfur_emission
             // 
             this.txt_Sulfur_emission.ForeColor = System.Drawing.Color.Red;
-            this.txt_Sulfur_emission.Location = new System.Drawing.Point(185, 37);
+            this.txt_Sulfur_emission.Location = new System.Drawing.Point(193, 43);
             this.txt_Sulfur_emission.Name = "txt_Sulfur_emission";
             this.txt_Sulfur_emission.ReadOnly = true;
             this.txt_Sulfur_emission.Size = new System.Drawing.Size(80, 21);
@@ -574,7 +575,7 @@
             // txt_Carbon_emission
             // 
             this.txt_Carbon_emission.ForeColor = System.Drawing.Color.Red;
-            this.txt_Carbon_emission.Location = new System.Drawing.Point(185, 14);
+            this.txt_Carbon_emission.Location = new System.Drawing.Point(193, 20);
             this.txt_Carbon_emission.Name = "txt_Carbon_emission";
             this.txt_Carbon_emission.ReadOnly = true;
             this.txt_Carbon_emission.Size = new System.Drawing.Size(80, 21);
@@ -584,7 +585,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(12, 61);
+            this.label29.Location = new System.Drawing.Point(62, 67);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(125, 12);
             this.label29.TabIndex = 0;
@@ -593,7 +594,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(12, 40);
+            this.label27.Location = new System.Drawing.Point(38, 46);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(149, 12);
             this.label27.TabIndex = 0;
@@ -602,7 +603,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(12, 17);
+            this.label28.Location = new System.Drawing.Point(38, 23);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(149, 12);
             this.label28.TabIndex = 0;
@@ -617,7 +618,7 @@
             this.groupBox4.Controls.Add(this.label19);
             this.groupBox4.Location = new System.Drawing.Point(65, 72);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(326, 63);
+            this.groupBox4.Size = new System.Drawing.Size(326, 64);
             this.groupBox4.TabIndex = 45;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "太阳能集热系统效率:";
@@ -625,7 +626,7 @@
             // txt_System_efficiency
             // 
             this.txt_System_efficiency.ForeColor = System.Drawing.Color.Red;
-            this.txt_System_efficiency.Location = new System.Drawing.Point(185, 14);
+            this.txt_System_efficiency.Location = new System.Drawing.Point(193, 23);
             this.txt_System_efficiency.Name = "txt_System_efficiency";
             this.txt_System_efficiency.ReadOnly = true;
             this.txt_System_efficiency.Size = new System.Drawing.Size(80, 21);
@@ -635,11 +636,11 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(12, 23);
+            this.label19.Location = new System.Drawing.Point(68, 26);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(113, 12);
+            this.label19.Size = new System.Drawing.Size(119, 12);
             this.label19.TabIndex = 0;
-            this.label19.Text = "太阳能集热系统效率";
+            this.label19.Text = "太阳能集热系统效率:";
             // 
             // groupBox6
             // 
@@ -650,15 +651,17 @@
             this.groupBox6.Controls.Add(this.label14);
             this.groupBox6.Location = new System.Drawing.Point(65, 18);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(326, 63);
+            this.groupBox6.Size = new System.Drawing.Size(326, 65);
             this.groupBox6.TabIndex = 46;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "系统有用得热量:";
             // 
             // txt_System_heat
             // 
+            this.txt_System_heat.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txt_System_heat.ForeColor = System.Drawing.Color.Red;
-            this.txt_System_heat.Location = new System.Drawing.Point(185, 14);
+            this.txt_System_heat.Location = new System.Drawing.Point(193, 27);
             this.txt_System_heat.Name = "txt_System_heat";
             this.txt_System_heat.ReadOnly = true;
             this.txt_System_heat.Size = new System.Drawing.Size(80, 21);
@@ -668,7 +671,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(12, 23);
+            this.label14.Location = new System.Drawing.Point(32, 27);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(155, 12);
             this.label14.TabIndex = 0;
@@ -676,6 +679,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.groupBox13);
@@ -684,7 +690,6 @@
             this.groupBox2.Controls.Add(this.groupBox12);
             this.groupBox2.Controls.Add(this.groupBox10);
             this.groupBox2.Controls.Add(this.groupBox3);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(549, 668);
@@ -696,7 +701,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label7.ForeColor = System.Drawing.Color.Green;
-            this.label7.Location = new System.Drawing.Point(72, 450);
+            this.label7.Location = new System.Drawing.Point(78, 450);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 24);
             this.label7.TabIndex = 0;
@@ -704,9 +709,12 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(350, 449);
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.button2.Location = new System.Drawing.Point(379, 449);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(108, 24);
+            this.button2.Size = new System.Drawing.Size(129, 39);
             this.button2.TabIndex = 6;
             this.button2.Text = "详细";
             this.button2.UseVisualStyleBackColor = true;
