@@ -27,7 +27,8 @@ namespace Tiger
     
         public DbSet<logininfor> logininfors { get; set; }
         public DbSet<unitstate> unitstates { get; set; }
-        public DbSet<unitstatistic> unitstatistics { get; set; }
         public DbSet<union> unions { get; set; }
+        public DbSet<allunitstatistic> allunitstatistics { get; set; }
+        public DbSet<singleunitstatistic> singleunitstatistics { get; set; }
     }
 }

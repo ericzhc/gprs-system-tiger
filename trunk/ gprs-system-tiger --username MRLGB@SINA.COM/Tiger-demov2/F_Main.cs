@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Net;
 using System.Threading;
+using System.Linq;
 using System.Globalization;
 using System.Diagnostics;
 using log4net;
@@ -77,7 +78,7 @@ namespace Tiger
             m_Log.InfoFormat("________________________________");
             m_Log.InfoFormat("Application Star logging  at {0}", DateTime.Now);
 
-            timerStore2Db.Interval = global.Timer_store;
+            timerStore2Db.Interval = global.Timer_store; //记录实时状态到数据库的时间间隔
 
         }
 
@@ -115,6 +116,7 @@ namespace Tiger
                 if (!global.ParameterList.ContainsKey(Unit.UnitId))
                 {
                     ParameterObject parao = new ParameterObject(Unit.UnitId, Unit.Aera_IrradiatedSum, Unit.Auxiliary_power, Unit.Flow_CollectorSys, Unit.Flow_HeatUsing, Unit.Volumn_HeatingBox);
+                    parao.System_heat = Unit.System_heat;//赋给统计初值
                     global.ParameterList.Add(parao.Id, parao);
                 }
 
@@ -126,12 +128,13 @@ namespace Tiger
 
                 if (!global.SatisticList.ContainsKey(Unit.UnitId))
                 {
-                    DTUStatisticObject dtustatistic = new DTUStatisticObject(Unit.UnitId);
+                    StatisticObject dtustatistic = new StatisticObject(Unit.UnitId);
+                    dtustatistic.System_heat = Unit.System_heat;
                     global.SatisticList.Add(dtustatistic.Id, dtustatistic);
                 }
             
             }
-          
+   
         }
 
         private void DoubleQueue_OnResponseData(ushort ID, GPRS_DATA_RECORD values)
@@ -159,6 +162,7 @@ namespace Tiger
         {
             GPRS_DATA_RECORD gprsrecord = (GPRS_DATA_RECORD)message;
             global.DTUList[gprsrecord.m_userid].UpdateDTUObject(gprsrecord);//更新DTUList实时状态
+            ComputeStatistic();
             btnStore2Db_Click(null, null);//Testing+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //Thread.Sleep(2000);
 
@@ -463,6 +467,24 @@ namespace Tiger
                 {
                    停止服务ToolStripMenuItem.PerformClick(); 
                 }
+                ///遍历所有list元素
+                foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
+                {
+                    using (var context = new DbTigerEntities())
+                    {
+                        try
+                        {
+                            union c = context.unions.First(i => i.UnitId == item.Key);
+                            c.System_heat = global.SatisticList[item.Key].System_heat;//记录上次保存数据
+                            context.SaveChanges();
+
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    }
+                }
                 e.Cancel = false;
             }
             else
@@ -485,6 +507,9 @@ namespace Tiger
             ini.IniWriteValue("ServerConfig", "serv_port", serv_port.ToString());
             ini.IniWriteValue("ServerConfig", "serv_type", serv_type.ToString());
             ini.IniWriteValue("ServerConfig", "serv_mode", serv_mode.ToString());
+
+           
+           
         }
 
         //
@@ -502,7 +527,7 @@ namespace Tiger
                     record.m_userid = item.Key;//消息数据包设置GPRS号码
                     DateTime now = DateTime.Now;
                     DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
-                    format.DateSeparator = "-";
+                    format.DateSeparator = "/";
                     format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
                     record.m_recv_date = now.ToString("d", format);//消息数据包设置上报时间
                     item.Value.RecvDate = now;//产生数据时时间
@@ -1007,6 +1032,117 @@ namespace Tiger
             fuser.ShowDialog();
         }
 
+        private void StoreDtuState2Db()
+        {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            using (var context = new DbTigerEntities())
+            {
+                ///遍历所有list元素
+                foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
+                {
+                    try
+                    {
+                        //DateTime now = DateTime.Now;
+                        //DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
+                        //format.DateSeparator = "-";
+                        //format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
+
+                        unitstate unitstate = new unitstate
+                        {
+                            UnitId = item.Key,
+                            DateTime_RecvDate = item.Value.RecvDate,//产生数据时时间
+                            Temp_HeatingBox = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_HeatingBox)]),
+                            Temp_CollectorBox = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorBox)]),
+                            Temp_CollectorIn = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorIn)]),
+                            Temp_CollectorOut = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorOut)]),
+                            Temp_Ambient = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_Ambient)]),
+                            Humidity_Ambient = (float)(item.Value.Field1[(ushort)(Field1NO.Humidity_Ambient)]),
+                            //Flow_CollectorSys = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_CollectorSys)]),
+                            //Flow_HeatUsing = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_HeatUsing)]),
+                            Amount_Irradiated = (float)(item.Value.Field1[(ushort)(Field1NO.Amount_Irradiated)]),
+                            Amount_IrradiatedSum = (float)(item.Value.Field1[(ushort)(Field1NO.Amount_IrradiatedSum)]),
+                            //Aera_IrradiatedSum = (decimal)(item.Value.Field1[(ushort)(Field1NO.Aera_IrradiatedSum)]),
+                            Speed_Wind = (float)(item.Value.Field1[(ushort)(Field1NO.Speed_Wind)]),
+                            //Volumn_HeatingBox = (decimal)(item.Value.Field1[(ushort)(Field1NO.Volumn_HeatingBox)])
+
+                        };
+                        context.unitstates.Add(unitstate);
+                        context.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.InnerException.ToString());
+                    }
+
+                }
+            }
+            stopWatch.Stop();
+            // Get the elapsed time as a TimeSpan value.
+            TimeSpan ts = stopWatch.Elapsed;
+
+            //Format and display the TimeSpan value. 
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+            //MessageBox.Show("store in db time:" + elapsedTime.ToString());
+        }
+
+        private void ComputeStatistic() 
+        {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            using (var context = new DbTigerEntities())
+            {
+                ///遍历所有list元素
+                foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
+                {
+                    try
+                    {
+                        singleunitstatistic single = new singleunitstatistic
+                        {
+                            UnitId = item.Key,
+                            DateTime_Statics = item.Value.RecvDate,//产生数据时时间
+                            System_heat = (global.ParameterList[item.Key].System_heat)+(global.ParameterList[item.Key].Delta_time)*(global.DTUList[item.Key].Field1[(ushort)Field1NO.Flow_CollectorSys]),
+
+                        };
+                        global.SatisticList[item.Key].System_heat = single.System_heat;//保存统计数据到全局状态表
+                        context.singleunitstatistics.Add(single);
+                        context.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.InnerException.ToString());
+                    }
+
+                }
+
+                //所有DTU状态统计要素累积
+                //foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
+                //{
+                //    global.osystem.System_heat += global.SatisticList[item.Key].System_heat;
+                    
+                //}
+                //try
+                //{
+                //    allunitstatistic all = new allunitstatistic
+                //    {
+                //        DateTime_Statics = System.DateTime.Now,//产生数据时时间
+                //        System_heat = global.osystem.System_heat,
+
+                //    };
+                //    context.allunitstatistics.Add(all);
+                //    context.SaveChanges();
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.InnerException.ToString());
+                //}
+
+            }
+            stopWatch.Stop();
+        }
+
         private void btnStore2Db_Click(object sender, EventArgs e)
         {
             Stopwatch stopWatch = new Stopwatch();
@@ -1027,19 +1163,19 @@ namespace Tiger
                         {
                             UnitId = item.Key,
                             DateTime_RecvDate = item.Value.RecvDate,//产生数据时时间
-                            Temp_HeatingBox = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_HeatingBox)]),
-                            Temp_CollectorBox = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorBox)]),
-                            Temp_CollectorIn = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorIn)]),
-                            Temp_CollectorOut = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorOut)]),
-                            Temp_Ambient = (decimal)(item.Value.Field1[(ushort)(Field1NO.Temp_Ambient)]),
-                            Humidity_Ambient = (decimal)(item.Value.Field1[(ushort)(Field1NO.Humidity_Ambient)]),
-                            Flow_CollectorSys = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_CollectorSys)]),
-                            Flow_HeatUsing = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_HeatUsing)]),
-                            Amount_Irradiated = (decimal)(item.Value.Field1[(ushort)(Field1NO.Amount_Irradiated)]),
-                            Amount_IrradiatedSum = (decimal)(item.Value.Field1[(ushort)(Field1NO.Amount_IrradiatedSum)]),
-                            Aera_IrradiatedSum = (decimal)(item.Value.Field1[(ushort)(Field1NO.Aera_IrradiatedSum)]),
-                            Speed_Wind = (decimal)(item.Value.Field1[(ushort)(Field1NO.Speed_Wind)]),
-                            Volumn_HeatingBox = (decimal)(item.Value.Field1[(ushort)(Field1NO.Volumn_HeatingBox)])
+                            Temp_HeatingBox = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_HeatingBox)]),
+                            Temp_CollectorBox = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorBox)]),
+                            Temp_CollectorIn = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorIn)]),
+                            Temp_CollectorOut = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorOut)]),
+                            Temp_Ambient = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_Ambient)]),
+                            Humidity_Ambient = (float)(item.Value.Field1[(ushort)(Field1NO.Humidity_Ambient)]),
+                            //Flow_CollectorSys = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_CollectorSys)]),
+                            //Flow_HeatUsing = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_HeatUsing)]),
+                            Amount_Irradiated = (float)(item.Value.Field1[(ushort)(Field1NO.Amount_Irradiated)]),
+                            Amount_IrradiatedSum = (float)(item.Value.Field1[(ushort)(Field1NO.Amount_IrradiatedSum)]),
+                            //Aera_IrradiatedSum = (decimal)(item.Value.Field1[(ushort)(Field1NO.Aera_IrradiatedSum)]),
+                            Speed_Wind = (float)(item.Value.Field1[(ushort)(Field1NO.Speed_Wind)]),
+                            Delta_Time = global.ParameterList[item.Key].Delta_time,
 
                         };
                         context.unitstates.Add(unitstate);

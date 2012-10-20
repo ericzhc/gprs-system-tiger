@@ -40,6 +40,7 @@ namespace Tiger
         private void button_ok_Click(object sender, EventArgs e)
         {
             global.Timer_store = (ushort)((numericUpDown1.Value > 0) ? numericUpDown1.Value * 1000 : 60 * 1000);
+            global.Timer_Statistic=(ushort)((numericUpDown2.Value > 0) ? numericUpDown2.Value * 1000 : 60 * 1000);
             this.Close();
         }
 
@@ -61,11 +62,12 @@ namespace Tiger
                             {
                                 UnitId = textBox_Unitid.Text,
                                 alias = textBox_Alias.Text,
-                                Aera_IrradiatedSum = short.Parse(textBox_AreaIrr.Text),
-                                Flow_CollectorSys = int.Parse(textBox_Flow_CollectorSys.Text),
-                                Flow_HeatUsing = int.Parse(textBox_Flow_HeatUsing.Text),
-                                Auxiliary_power = int.Parse(textBox_Auxiliary_power.Text),
-                                Volumn_HeatingBox = short.Parse(textBox_VolumHeat.Text),
+                                Aera_IrradiatedSum = float.Parse(textBox_AreaIrr.Text),
+                                Flow_CollectorSys = float.Parse(textBox_Flow_CollectorSys.Text),
+                                Flow_HeatUsing = float.Parse(textBox_Flow_HeatUsing.Text),
+                                Auxiliary_power = float.Parse(textBox_Auxiliary_power.Text),
+                                Volumn_HeatingBox = float.Parse(textBox_VolumHeat.Text),
+                                System_heat = float.Parse(textBox_SystemHeat.Text),
                             };
                             context.unions.Add(unit);
                             context.SaveChanges();
@@ -92,8 +94,7 @@ namespace Tiger
                 {
                     try
                     {
-                        union c = context.unions
-                                       .First(i => i.UnitId == textBox_Unitid.Text);
+                        union c = context.unions.First(i => i.UnitId == textBox_Unitid.Text);
                         c.alias = textBox_Alias.Text;
                         c.Aera_IrradiatedSum = float.Parse(textBox_AreaIrr.Text);
                         c.Flow_CollectorSys = float.Parse(textBox_Flow_CollectorSys.Text);
@@ -101,7 +102,7 @@ namespace Tiger
                         c.Auxiliary_power = float.Parse(textBox_Auxiliary_power.Text);
                         c.Volumn_HeatingBox = float.Parse(textBox_VolumHeat.Text);
                         context.SaveChanges();
-                        Console.WriteLine("Customer Record Modified");
+                       
                     }
                     catch (Exception ex)
                     {
@@ -172,6 +173,7 @@ namespace Tiger
                 textBox_Flow_CollectorSys.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
                 textBox_Flow_HeatUsing.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
                 textBox_Auxiliary_power.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+                textBox_SystemHeat.Text = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
             }
             catch (System.Exception ex)
             {

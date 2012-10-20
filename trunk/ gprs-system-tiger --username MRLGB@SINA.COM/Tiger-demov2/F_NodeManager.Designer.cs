@@ -34,6 +34,12 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button_ok = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_Auxiliary_power = new System.Windows.Forms.TextBox();
+            this.textBox_Flow_CollectorSys = new System.Windows.Forms.TextBox();
+            this.textBox_Flow_HeatUsing = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.button_Del = new System.Windows.Forms.Button();
             this.button_Modify = new System.Windows.Forms.Button();
             this.button_ADD = new System.Windows.Forms.Button();
@@ -46,16 +52,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.textBox_Auxiliary_power = new System.Windows.Forms.TextBox();
-            this.textBox_Flow_CollectorSys = new System.Windows.Forms.TextBox();
-            this.textBox_Flow_HeatUsing = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.textBox_SystemHeat = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -71,7 +77,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(396, 38);
+            this.label6.Location = new System.Drawing.Point(372, 31);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(149, 12);
             this.label6.TabIndex = 13;
@@ -79,7 +85,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(551, 29);
+            this.numericUpDown1.Location = new System.Drawing.Point(552, 25);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(85, 21);
             this.numericUpDown1.TabIndex = 14;
@@ -96,10 +102,15 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox_SystemHeat);
             this.groupBox1.Controls.Add(this.textBox_Auxiliary_power);
             this.groupBox1.Controls.Add(this.textBox_Flow_CollectorSys);
+            this.groupBox1.Controls.Add(this.numericUpDown2);
             this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.textBox_Flow_HeatUsing);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label8);
@@ -121,6 +132,57 @@
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "详细设置：";
+            // 
+            // textBox_Auxiliary_power
+            // 
+            this.textBox_Auxiliary_power.Location = new System.Drawing.Point(182, 269);
+            this.textBox_Auxiliary_power.Name = "textBox_Auxiliary_power";
+            this.textBox_Auxiliary_power.Size = new System.Drawing.Size(100, 21);
+            this.textBox_Auxiliary_power.TabIndex = 43;
+            this.textBox_Auxiliary_power.Tag = "6";
+            // 
+            // textBox_Flow_CollectorSys
+            // 
+            this.textBox_Flow_CollectorSys.Location = new System.Drawing.Point(182, 188);
+            this.textBox_Flow_CollectorSys.Name = "textBox_Flow_CollectorSys";
+            this.textBox_Flow_CollectorSys.Size = new System.Drawing.Size(100, 21);
+            this.textBox_Flow_CollectorSys.TabIndex = 44;
+            this.textBox_Flow_CollectorSys.Tag = "4";
+            // 
+            // textBox_Flow_HeatUsing
+            // 
+            this.textBox_Flow_HeatUsing.Location = new System.Drawing.Point(182, 229);
+            this.textBox_Flow_HeatUsing.Name = "textBox_Flow_HeatUsing";
+            this.textBox_Flow_HeatUsing.Size = new System.Drawing.Size(100, 21);
+            this.textBox_Flow_HeatUsing.TabIndex = 45;
+            this.textBox_Flow_HeatUsing.Tag = "5";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(39, 235);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(137, 12);
+            this.label7.TabIndex = 40;
+            this.label7.Text = "热用户端出水流量(㎏/s)";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(75, 275);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(101, 12);
+            this.label8.TabIndex = 41;
+            this.label8.Text = "辅助热源功率(kw)";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(27, 195);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(149, 12);
+            this.label5.TabIndex = 42;
+            this.label5.Text = "集热系统进出口流量(㎏/s)";
             // 
             // button_Del
             // 
@@ -224,56 +286,47 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // textBox_Auxiliary_power
+            // label9
             // 
-            this.textBox_Auxiliary_power.Location = new System.Drawing.Point(182, 269);
-            this.textBox_Auxiliary_power.Name = "textBox_Auxiliary_power";
-            this.textBox_Auxiliary_power.Size = new System.Drawing.Size(100, 21);
-            this.textBox_Auxiliary_power.TabIndex = 43;
-            this.textBox_Auxiliary_power.Tag = "6";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(396, 62);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(125, 12);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "统计时间间隔（秒）：";
             // 
-            // textBox_Flow_CollectorSys
+            // numericUpDown2
             // 
-            this.textBox_Flow_CollectorSys.Location = new System.Drawing.Point(182, 188);
-            this.textBox_Flow_CollectorSys.Name = "textBox_Flow_CollectorSys";
-            this.textBox_Flow_CollectorSys.Size = new System.Drawing.Size(100, 21);
-            this.textBox_Flow_CollectorSys.TabIndex = 44;
-            this.textBox_Flow_CollectorSys.Tag = "4";
+            this.numericUpDown2.Location = new System.Drawing.Point(552, 60);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(85, 21);
+            this.numericUpDown2.TabIndex = 14;
             // 
-            // textBox_Flow_HeatUsing
+            // textBox_SystemHeat
             // 
-            this.textBox_Flow_HeatUsing.Location = new System.Drawing.Point(182, 229);
-            this.textBox_Flow_HeatUsing.Name = "textBox_Flow_HeatUsing";
-            this.textBox_Flow_HeatUsing.Size = new System.Drawing.Size(100, 21);
-            this.textBox_Flow_HeatUsing.TabIndex = 45;
-            this.textBox_Flow_HeatUsing.Tag = "5";
+            this.textBox_SystemHeat.Location = new System.Drawing.Point(537, 138);
+            this.textBox_SystemHeat.Name = "textBox_SystemHeat";
+            this.textBox_SystemHeat.Size = new System.Drawing.Size(100, 21);
+            this.textBox_SystemHeat.TabIndex = 43;
+            this.textBox_SystemHeat.Tag = "6";
             // 
-            // label7
+            // label10
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(39, 235);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(137, 12);
-            this.label7.TabIndex = 40;
-            this.label7.Text = "热用户端出水流量(㎏/s)";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(396, 62);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(125, 12);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "统计时间间隔（秒）：";
             // 
-            // label8
+            // label11
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(75, 275);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 12);
-            this.label8.TabIndex = 41;
-            this.label8.Text = "辅助热源功率(kw)";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(27, 195);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(149, 12);
-            this.label5.TabIndex = 42;
-            this.label5.Text = "集热系统进出口流量(㎏/s)";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(396, 145);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(149, 12);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "统计系统得热量初值（）：";
             // 
             // F_NodeManager
             // 
@@ -291,6 +344,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -320,6 +374,11 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.TextBox textBox_SystemHeat;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
 
     }
 }

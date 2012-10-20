@@ -11,6 +11,7 @@ using System.Linq.Expressions;
 using System.Linq;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace Tiger
 {
@@ -428,13 +429,15 @@ namespace Tiger
             cacheLock.EnterWriteLock();
             try
             {
-                DateTime x = DateTime.Parse(RecvMessage.m_recv_date);
+                DateTime x = DateTime.ParseExact(RecvMessage.m_recv_date, "yyyy/MM/dd/hh/mm/ss", new CultureInfo("en-US"));
                 FieldTime[(ushort)FieldTimeNO.Recv_Time] = x;
                 RecvDate = x;
+                global.ParameterList[RecvMessage.m_userid].Delta_time = (x - global.ParameterList[RecvMessage.m_userid].LastUpdatTime).Seconds;
+                global.ParameterList[RecvMessage.m_userid].LastUpdatTime = x;
             }
-            catch
+            catch (Exception ex)
             {
-                //
+                MessageBox.Show(ex.InnerException.ToString());
             }
             finally
             {
@@ -531,6 +534,29 @@ namespace Tiger
             set { _Volumn_HeatingBox = value; }
         }
 
+        private DateTime _time;//time
+        public DateTime LastUpdatTime
+        {
+            get { return _time; }
+            set { _time = value; }
+        }
+
+        private int _delta_time;//time
+
+        public int Delta_time
+        {
+            get { return _delta_time; }
+            set { _delta_time = value; }
+        }
+
+        private float _system_heat;//stattistic item1
+
+        public float System_heat
+        {
+            get { return _system_heat; }
+            set { _system_heat = value; }
+        }
+
         public ParameterObject(string useid,float A3,float P1,float F1,float F2,float V1) 
         {
             Id = useid;
@@ -553,7 +579,7 @@ namespace Tiger
         }
     }
 
-    public class DTUStatisticObject : INotifyPropertyChanged
+    public class StatisticObject : INotifyPropertyChanged
     {
         private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -565,8 +591,8 @@ namespace Tiger
             set { _Id = value; }
         }
 
-        private ushort _System_heat;  //集热系统得热量1
-        public ushort System_heat
+        private float _System_heat;  //集热系统得热量1
+        public float System_heat
         {
             get { return _System_heat; }
             set
@@ -585,8 +611,8 @@ namespace Tiger
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ushort _Conventional_energy;  //系统常规热源耗能量2
-        public ushort Conventional_energy
+        private float _Conventional_energy;  //系统常规热源耗能量2
+        public float Conventional_energy
         {
             get { return _Conventional_energy; }
             set
@@ -595,8 +621,8 @@ namespace Tiger
                 OnPropertyChanged("Conventional_energy");
             }
         }
-        private ushort _Storage_tank; //贮热水箱热损系数3
-        public ushort Storage_tank
+        private float _Storage_tank; //贮热水箱热损系数3
+        public float Storage_tank
         {
             get { return _Storage_tank; }
             set
@@ -605,9 +631,9 @@ namespace Tiger
                 OnPropertyChanged("Storage_tank");
             }
         }
-        private ushort _System_efficiency;  //集热系统效率4
+        private float _System_efficiency;  //集热系统效率4
 
-        public ushort System_efficiency
+        public float System_efficiency
         {
             get { return _System_efficiency; }
             set
@@ -616,70 +642,70 @@ namespace Tiger
                 OnPropertyChanged("System_efficiency");
             }
         }
-        private ushort _Solar_assurance_day;  //日太阳能保证率5
+        private float _Solar_assurance_day;  //日太阳能保证率5
 
-        public ushort Solar_assurance_day
+        public float Solar_assurance_day
         {
             get { return _Solar_assurance_day; }
             set { _Solar_assurance_day = value; OnPropertyChanged("Solar_assurance_day"); }
         }
-        private ushort _Solar_assurance_year;  //全年太阳能保证率6
+        private float _Solar_assurance_year;  //全年太阳能保证率6
 
-        public ushort Solar_assurance_year
+        public float Solar_assurance_year
         {
             get { return _Solar_assurance_year; }
             set { _Solar_assurance_year = value; OnPropertyChanged("Solar_assurance_year"); }
         }
-        private ushort _Energy_alternative;  //常规能源替代量7
+        private float _Energy_alternative;  //常规能源替代量7
 
-        public ushort Energy_alternative
+        public float Energy_alternative
         {
             get { return _Energy_alternative; }
             set { _Energy_alternative = value; OnPropertyChanged("Energy_alternative"); }
         }
-        private ushort _Carbon_emission; //二氧化碳减排量8
+        private float _Carbon_emission; //二氧化碳减排量8
 
-        public ushort Carbon_emission
+        public float Carbon_emission
         {
             get { return _Carbon_emission; }
             set { _Carbon_emission = value; OnPropertyChanged("Carbon_emission"); }
         }
-        private ushort _Sulfur_emission; //二氧化硫减排量9
+        private float _Sulfur_emission; //二氧化硫减排量9
 
-        public ushort Sulfur_emission
+        public float Sulfur_emission
         {
             get { return _Sulfur_emission; }
             set { _Sulfur_emission = value; OnPropertyChanged("Sulfur_emission"); }
         }
-        private ushort _Dust_emission;  //粉尘减排量10
+        private float _Dust_emission;  //粉尘减排量10
 
-        public ushort Dust_emission
+        public float Dust_emission
         {
             get { return _Dust_emission; }
             set { _Dust_emission = value; OnPropertyChanged("Dust_emission"); }
         }
-        private ushort _Fee_effect; //项目费效比11
+        private float _Fee_effect; //项目费效比11
 
-        public ushort Fee_effect
+        public float Fee_effect
         {
             get { return _Fee_effect; }
             set { _Fee_effect = value; OnPropertyChanged("Fee_effect"); }
         }
-        private ushort _Auxiliary_heat;//辅助热源加热量12
+        private float _Auxiliary_heat;//辅助热源加热量12
 
-        public ushort Auxiliary_heat
+        public float Auxiliary_heat
         {
             get { return _Auxiliary_heat; }
             set { _Auxiliary_heat = value; OnPropertyChanged("Auxiliary_heat"); }
         }
 
 
-        public DTUStatisticObject()
+        public StatisticObject()
         {
             ;
         }
 
-        public DTUStatisticObject(string unitid)
+        public StatisticObject(string unitid)
         {
             Id=unitid;
         }
@@ -705,8 +731,8 @@ namespace Tiger
         private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ushort _System_heat;  //集热系统得热量1
-        public ushort System_heat
+        private float _System_heat;  //集热系统得热量1
+        public float System_heat
         {
             get { return _System_heat; }
             set
@@ -721,12 +747,12 @@ namespace Tiger
 
         private void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            //if (PropertyChanged != null)
+            //    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ushort _Conventional_energy;  //系统常规热源耗能量2
-        public ushort Conventional_energy
+        private float _Conventional_energy;  //系统常规热源耗能量2
+        public float Conventional_energy
         {
             get { return _Conventional_energy; }
             set { 
@@ -734,8 +760,8 @@ namespace Tiger
                     OnPropertyChanged("Conventional_energy");
                 }
         }
-        private ushort _Storage_tank; //贮热水箱热损系数3
-        public ushort Storage_tank
+        private float _Storage_tank; //贮热水箱热损系数3
+        public float Storage_tank
         {
             get { return _Storage_tank; }
             set { 
@@ -743,9 +769,9 @@ namespace Tiger
                     OnPropertyChanged("Storage_tank");
                 }
         }
-        private ushort _System_efficiency;  //集热系统效率4
+        private float _System_efficiency;  //集热系统效率4
 
-        public ushort System_efficiency
+        public float System_efficiency
         {
             get { return _System_efficiency; }
             set { 
@@ -753,58 +779,58 @@ namespace Tiger
                     OnPropertyChanged("System_efficiency");
                 }
         }
-        private ushort _Solar_assurance_day;  //日太阳能保证率5
+        private float _Solar_assurance_day;  //日太阳能保证率5
 
-        public ushort Solar_assurance_day
+        public float Solar_assurance_day
         {
             get { return _Solar_assurance_day; }
             set { _Solar_assurance_day = value; OnPropertyChanged("Solar_assurance_day"); }
         }
-        private ushort _Solar_assurance_year;  //全年太阳能保证率6
+        private float _Solar_assurance_year;  //全年太阳能保证率6
 
-        public ushort Solar_assurance_year
+        public float Solar_assurance_year
         {
             get { return _Solar_assurance_year; }
             set { _Solar_assurance_year = value; OnPropertyChanged("Solar_assurance_year"); }
         }
-        private ushort _Energy_alternative;  //常规能源替代量7
+        private float _Energy_alternative;  //常规能源替代量7
 
-        public ushort Energy_alternative
+        public float Energy_alternative
         {
             get { return _Energy_alternative; }
             set { _Energy_alternative = value; OnPropertyChanged("Energy_alternative"); }
         }
-        private ushort _Carbon_emission; //二氧化碳减排量8
+        private float _Carbon_emission; //二氧化碳减排量8
 
-        public ushort Carbon_emission
+        public float Carbon_emission
         {
             get { return _Carbon_emission; }
             set { _Carbon_emission = value; OnPropertyChanged("Carbon_emission"); }
         }
-        private ushort _Sulfur_emission; //二氧化硫减排量9
+        private float _Sulfur_emission; //二氧化硫减排量9
 
-        public ushort Sulfur_emission
+        public float Sulfur_emission
         {
             get { return _Sulfur_emission; }
             set { _Sulfur_emission = value; OnPropertyChanged("Sulfur_emission"); }
         }
-        private ushort _Dust_emission;  //粉尘减排量10
+        private float _Dust_emission;  //粉尘减排量10
 
-        public ushort Dust_emission
+        public float Dust_emission
         {
             get { return _Dust_emission; }
             set { _Dust_emission = value; OnPropertyChanged("Dust_emission"); }
         }
-        private ushort _Fee_effect; //项目费效比11
+        private float _Fee_effect; //项目费效比11
 
-        public ushort Fee_effect
+        public float Fee_effect
         {
             get { return _Fee_effect; }
             set { _Fee_effect = value; OnPropertyChanged("Fee_effect"); }
         }
-        private ushort _Auxiliary_heat;//辅助热源加热量12
+        private float _Auxiliary_heat;//辅助热源加热量12
 
-        public ushort Auxiliary_heat
+        public float Auxiliary_heat
         {
             get { return _Auxiliary_heat; }
             set { _Auxiliary_heat = value; OnPropertyChanged("Auxiliary_heat"); }
@@ -842,7 +868,7 @@ namespace Tiger
        public static SortedList<string, ParameterObject> ParameterList = new SortedList<string, ParameterObject>();//实时输入参数LIST
        public static SortedList<string, DTUObject> DTUList = new SortedList<string, DTUObject>();//实时状态LIST
 
-       public static SortedList<string, DTUStatisticObject> SatisticList = new SortedList<string, DTUStatisticObject>();//实时统计数据LIST
+       public static SortedList<string, StatisticObject> SatisticList = new SortedList<string, StatisticObject>();//实时统计数据LIST
 
        public static SystemObject osystem = new SystemObject();//实时汇总统计对象
 

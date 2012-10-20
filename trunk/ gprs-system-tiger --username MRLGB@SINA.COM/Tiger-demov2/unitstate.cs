@@ -16,20 +16,17 @@ namespace Tiger
     {
         public string UnitId { get; set; }
         public System.DateTime DateTime_RecvDate { get; set; }
-        public Nullable<decimal> Temp_HeatingBox { get; set; }
-        public Nullable<decimal> Temp_CollectorBox { get; set; }
-        public Nullable<decimal> Temp_CollectorIn { get; set; }
-        public Nullable<decimal> Temp_CollectorOut { get; set; }
-        public Nullable<decimal> Temp_Ambient { get; set; }
-        public Nullable<decimal> Humidity_Ambient { get; set; }
-        public Nullable<decimal> Speed_Wind { get; set; }
+        public Nullable<float> Temp_HeatingBox { get; set; }
+        public Nullable<float> Temp_CollectorBox { get; set; }
+        public Nullable<float> Temp_CollectorIn { get; set; }
+        public Nullable<float> Temp_CollectorOut { get; set; }
+        public Nullable<float> Temp_Ambient { get; set; }
+        public Nullable<float> Humidity_Ambient { get; set; }
+        public Nullable<float> Speed_Wind { get; set; }
         public Nullable<int> SystemState { get; set; }
         public Nullable<int> ErrorState { get; set; }
-        public Nullable<decimal> Amount_Irradiated { get; set; }
-        public Nullable<decimal> Amount_IrradiatedSum { get; set; }
-        public Nullable<decimal> Aera_IrradiatedSum { get; set; }
-        public Nullable<decimal> Volumn_HeatingBox { get; set; }
-        public Nullable<decimal> Flow_CollectorSys { get; set; }
-        public Nullable<decimal> Flow_HeatUsing { get; set; }
+        public Nullable<float> Amount_Irradiated { get; set; }
+        public Nullable<float> Amount_IrradiatedSum { get; set; }
+        public int Delta_Time { get; set; }
     }
 }
