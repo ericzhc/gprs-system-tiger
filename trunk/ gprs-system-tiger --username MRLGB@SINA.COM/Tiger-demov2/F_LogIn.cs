@@ -125,22 +125,6 @@ namespace Tiger
     {
       this.Close();
     }
-
-    //private void linkLabel1_LinkClicked( object sender, LinkLabelLinkClickedEventArgs e )
-    //{
-    //  frmRegistration frmReg = new frmRegistration();
-
-    //  if (DialogResult.OK == frmReg.ShowDialog(this))
-    //  {
-    //    this.tbName.Text = frmReg.tbNikName.Text;
-    //    this.tbPassword.Text = frmReg.tbPassword.Text;
-    //    ValidateTextBox(tbName, new CancelEventArgs());
-    //    ValidateTextBox(tbPassword, new CancelEventArgs());
-
-    //  }
-
-    //}
-
     #endregion
 
 

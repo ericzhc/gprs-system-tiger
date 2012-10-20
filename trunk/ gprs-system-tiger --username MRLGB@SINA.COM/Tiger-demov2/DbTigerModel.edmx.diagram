@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a12cd3da7a8c454ab5323dadb649e2b4" Name="关系图1">
-        <EntityTypeShape EntityType="DbTigerModel.logininfor" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbTigerModel.union" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbTigerModel.unitstate" Width="4" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbTigerModel.unitstatistic" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="a12cd3da7a8c454ab5323dadb649e2b4" Name="关系图1" ZoomLevel="108">
+        <EntityTypeShape EntityType="DbTigerModel.logininfor" Width="2.375" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTigerModel.unitstate" Width="4" PointX="6.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTigerModel.unitstatistic" Width="2.375" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTigerModel.union" Width="2.625" PointX="3.625" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

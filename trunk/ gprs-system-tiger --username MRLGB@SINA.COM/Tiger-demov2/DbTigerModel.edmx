@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DbTigerModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="DbTigerModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="DbTigerModelStoreContainer">
           <EntitySet Name="logininfor" EntityType="DbTigerModel.Store.logininfor" store:Type="Tables" Schema="db_tiger" />
           <EntitySet Name="union" EntityType="DbTigerModel.Store.union" store:Type="Tables" Schema="db_tiger" />
@@ -25,8 +25,11 @@
           </Key>
           <Property Name="UnitId" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="alias" Type="varchar" Nullable="false" MaxLength="45" />
-          <Property Name="Aera_IrradiatedSum" Type="smallint" Nullable="false" />
-          <Property Name="Volumn_HeatingBox" Type="smallint" Nullable="false" />
+          <Property Name="Aera_IrradiatedSum" Type="float" Nullable="false" />
+          <Property Name="Volumn_HeatingBox" Type="float" Nullable="false" />
+          <Property Name="Flow_CollectorSys" Type="float" Nullable="false" />
+          <Property Name="Flow_HeatUsing" Type="float" Nullable="false" />
+          <Property Name="Auxiliary_power" Type="float" Nullable="false" />
           <Property Name="gprsstate" Type="smallint" />
           <Property Name="Star_time" Type="datetime" />
           <Property Name="time_online" Type="int" />
@@ -73,16 +76,15 @@
           <Property Name="Fee_effect" Type="varchar" MaxLength="20" />
           <Property Name="DateTime_Statics" Type="datetime" Nullable="false" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DbTigerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="DbTigerEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="logininfors" EntityType="DbTigerModel.logininfor" />
-          <EntitySet Name="unions" EntityType="DbTigerModel.union" />
           <EntitySet Name="unitstates" EntityType="DbTigerModel.unitstate" />
           <EntitySet Name="unitstatistics" EntityType="DbTigerModel.unitstatistic" />
+          <EntitySet Name="unions" EntityType="DbTigerModel.union" />
         </EntityContainer>
         <EntityType Name="logininfor">
           <Key>
@@ -91,18 +93,6 @@
           <Property Name="username" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="role" Type="Int16" Nullable="false" />
-        </EntityType>
-        <EntityType Name="union">
-          <Key>
-            <PropertyRef Name="UnitId" />
-          </Key>
-          <Property Name="UnitId" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="alias" Type="String" Nullable="false" MaxLength="45" Unicode="false" FixedLength="false" />
-          <Property Name="Aera_IrradiatedSum" Type="Int16" Nullable="false" />
-          <Property Name="Volumn_HeatingBox" Type="Int16" Nullable="false" />
-          <Property Name="gprsstate" Type="Int16" />
-          <Property Name="Star_time" Type="DateTime" Precision="3" />
-          <Property Name="time_online" Type="Int32" />
         </EntityType>
         <EntityType Name="unitstate">
           <Key>
@@ -146,6 +136,21 @@
           <Property Name="Fee_effect" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="DateTime_Statics" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="union">
+          <Key>
+            <PropertyRef Name="UnitId" />
+          </Key>
+          <Property Type="String" Name="UnitId" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="alias" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Single" Name="Aera_IrradiatedSum" Nullable="false" />
+          <Property Type="Single" Name="Volumn_HeatingBox" Nullable="false" />
+          <Property Type="Single" Name="Flow_CollectorSys" Nullable="false" />
+          <Property Type="Single" Name="Flow_HeatUsing" Nullable="false" />
+          <Property Type="Single" Name="Auxiliary_power" Nullable="false" />
+          <Property Type="Int16" Name="gprsstate" />
+          <Property Type="DateTime" Name="Star_time" Precision="3" />
+          <Property Type="Int32" Name="time_online" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -158,19 +163,6 @@
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="role" ColumnName="role" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="unions">
-            <EntityTypeMapping TypeName="DbTigerModel.union">
-              <MappingFragment StoreEntitySet="union">
-                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
-                <ScalarProperty Name="alias" ColumnName="alias" />
-                <ScalarProperty Name="Aera_IrradiatedSum" ColumnName="Aera_IrradiatedSum" />
-                <ScalarProperty Name="Volumn_HeatingBox" ColumnName="Volumn_HeatingBox" />
-                <ScalarProperty Name="gprsstate" ColumnName="gprsstate" />
-                <ScalarProperty Name="Star_time" ColumnName="Star_time" />
-                <ScalarProperty Name="time_online" ColumnName="time_online" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -216,6 +208,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="unions">
+            <EntityTypeMapping TypeName="DbTigerModel.union">
+              <MappingFragment StoreEntitySet="union">
+                <ScalarProperty Name="time_online" ColumnName="time_online" />
+                <ScalarProperty Name="Star_time" ColumnName="Star_time" />
+                <ScalarProperty Name="gprsstate" ColumnName="gprsstate" />
+                <ScalarProperty Name="Auxiliary_power" ColumnName="Auxiliary_power" />
+                <ScalarProperty Name="Flow_HeatUsing" ColumnName="Flow_HeatUsing" />
+                <ScalarProperty Name="Flow_CollectorSys" ColumnName="Flow_CollectorSys" />
+                <ScalarProperty Name="Volumn_HeatingBox" ColumnName="Volumn_HeatingBox" />
+                <ScalarProperty Name="Aera_IrradiatedSum" ColumnName="Aera_IrradiatedSum" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -230,7 +238,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
       </DesignerInfoPropertySet>

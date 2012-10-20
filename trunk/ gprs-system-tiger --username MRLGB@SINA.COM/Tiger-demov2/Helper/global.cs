@@ -228,7 +228,7 @@ namespace Tiger
         public ushort  _SystemState;//系统状态13-S1
         public ushort _ErrorState;//系统故障状态14 -E1   
         //用户输入参数
-        private float _Aera_IrradiatedSum;// 集热器面积1-A3
+        private float _Aera_IrradiatedSum;// 集热器面积-A3
         public float Aera_IrradiatedSum
         {
             get { return _Aera_IrradiatedSum; }
@@ -486,6 +486,70 @@ namespace Tiger
                     hex = hex + " ";
             }
             return hex;
+        }
+    }
+
+    public class ParameterObject 
+    {
+        private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
+        private string _Id;//ID
+        public string Id
+        {
+            get { return _Id; }
+            set { _Id = value; }
+        }
+
+        private float _Flow_CollectorSys;//集热系统流量7-F1
+        public float Flow_CollectorSys
+        {
+            get { return _Flow_CollectorSys; }
+            set { _Flow_CollectorSys = value; }
+        }
+        private float _Flow_HeatUsing;//热用户端出水流量8-F2
+        public float Flow_HeatUsing
+        {
+            get { return _Flow_HeatUsing; }
+            set { _Flow_HeatUsing = value; }
+        }
+        private float _Auxiliary_power;//功率-P1
+        public float Auxiliary_power
+        {
+            get { return _Auxiliary_power; }
+            set { _Auxiliary_power = value; }
+        }
+
+        private float _Aera_IrradiatedSum;// 集热器面积-A3
+        public float Aera_IrradiatedSum
+        {
+            get { return _Aera_IrradiatedSum; }
+            set { _Aera_IrradiatedSum = value; }
+        }
+        private float _Volumn_HeatingBox;//贮热水箱容量（供热水箱）-V1
+        public float Volumn_HeatingBox
+        {
+            get { return _Volumn_HeatingBox; }
+            set { _Volumn_HeatingBox = value; }
+        }
+
+        public ParameterObject(string useid,float A3,float P1,float F1,float F2,float V1) 
+        {
+            Id = useid;
+            Flow_CollectorSys = F1;
+            Flow_HeatUsing = F2;
+            Auxiliary_power = P1;
+            Aera_IrradiatedSum = A3;
+            Volumn_HeatingBox = V1;
+        }
+        public void UpateParameterObject(string useid, float A3, float P1, float F1, float F2, float V1)
+        {
+            cacheLock.EnterWriteLock();
+            Id = useid;
+            Flow_CollectorSys = F1;
+            Flow_HeatUsing = F2;
+            Auxiliary_power = P1;
+            Aera_IrradiatedSum = A3;
+            Volumn_HeatingBox = V1;
+            cacheLock.ExitWriteLock();
         }
     }
 
@@ -765,6 +829,8 @@ namespace Tiger
         }
     }
 
+
+
     public static class global
     {
        public static bool attached=true;
@@ -773,6 +839,7 @@ namespace Tiger
        public static ushort Timer_Statistic = 60;
        public static ushort Timer_Sum = 60;
 
+       public static SortedList<string, ParameterObject> ParameterList = new SortedList<string, ParameterObject>();//实时输入参数LIST
        public static SortedList<string, DTUObject> DTUList = new SortedList<string, DTUObject>();//实时状态LIST
 
        public static SortedList<string, DTUStatisticObject> SatisticList = new SortedList<string, DTUStatisticObject>();//实时统计数据LIST

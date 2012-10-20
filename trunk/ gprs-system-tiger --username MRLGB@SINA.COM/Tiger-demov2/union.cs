@@ -16,8 +16,11 @@ namespace Tiger
     {
         public string UnitId { get; set; }
         public string alias { get; set; }
-        public short Aera_IrradiatedSum { get; set; }
-        public short Volumn_HeatingBox { get; set; }
+        public float Aera_IrradiatedSum { get; set; }
+        public float Volumn_HeatingBox { get; set; }
+        public float Flow_CollectorSys { get; set; }
+        public float Flow_HeatUsing { get; set; }
+        public float Auxiliary_power { get; set; }
         public Nullable<short> gprsstate { get; set; }
         public Nullable<System.DateTime> Star_time { get; set; }
         public Nullable<int> time_online { get; set; }

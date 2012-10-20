@@ -119,6 +119,7 @@
             this.btnStore2Db = new System.Windows.Forms.Button();
             this.checkBox_store = new System.Windows.Forms.CheckBox();
             this.checkBox_Produce = new System.Windows.Forms.CheckBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
@@ -1021,11 +1022,22 @@
             this.checkBox_Produce.UseVisualStyleBackColor = true;
             this.checkBox_Produce.CheckedChanged += new System.EventHandler(this.checkBox_Produce_CheckedChanged);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(442, 33);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(37, 23);
+            this.button3.TabIndex = 35;
+            this.button3.Text = "2";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
             // F_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 730);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.checkBox_Produce);
             this.Controls.Add(this.checkBox_store);
             this.Controls.Add(this.btnProduceData);
@@ -1179,6 +1191,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox checkBox_store;
         private System.Windows.Forms.CheckBox checkBox_Produce;
+        private System.Windows.Forms.Button button3;
     }
 }
 
