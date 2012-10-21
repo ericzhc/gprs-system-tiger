@@ -36,7 +36,7 @@ namespace Tiger
             }
             catch (Exception ex)
             {
-                string errorMessage = "System error.\r\n\r\n" + ex.ToString();
+                string errorMessage = "System error.\r\n\r\n" + ex;
                 MessageBox.Show(errorMessage, "Error");
             }
 
@@ -55,7 +55,7 @@ namespace Tiger
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
        
     }

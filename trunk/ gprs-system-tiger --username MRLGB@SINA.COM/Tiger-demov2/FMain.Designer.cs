@@ -176,7 +176,7 @@
             this.系统配置ToolStripMenuItem.Name = "系统配置ToolStripMenuItem";
             this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.系统配置ToolStripMenuItem.Text = "系统配置";
-            this.系统配置ToolStripMenuItem.Click += new System.EventHandler(this.系统配置ToolStripMenuItem_Click);
+            this.系统配置ToolStripMenuItem.Click += new System.EventHandler(this.系统配置ToolStripMenuItemClick);
             // 
             // 数据中心配置ToolStripMenuItem
             // 
@@ -195,42 +195,42 @@
             this.中心参数设置ToolStripMenuItem.Name = "中心参数设置ToolStripMenuItem";
             this.中心参数设置ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.中心参数设置ToolStripMenuItem.Text = "中心参数设置";
-            this.中心参数设置ToolStripMenuItem.Click += new System.EventHandler(this.中心参数设置ToolStripMenuItem_Click);
+            this.中心参数设置ToolStripMenuItem.Click += new System.EventHandler(this.中心参数设置ToolStripMenuItemClick);
             // 
             // 启动数据中心ToolStripMenuItem
             // 
             this.启动数据中心ToolStripMenuItem.Name = "启动数据中心ToolStripMenuItem";
             this.启动数据中心ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.启动数据中心ToolStripMenuItem.Text = "启动服务";
-            this.启动数据中心ToolStripMenuItem.Click += new System.EventHandler(this.启动数据中心ToolStripMenuItem_Click);
+            this.启动数据中心ToolStripMenuItem.Click += new System.EventHandler(this.启动数据中心ToolStripMenuItemClick);
             // 
             // 停止服务ToolStripMenuItem
             // 
             this.停止服务ToolStripMenuItem.Name = "停止服务ToolStripMenuItem";
             this.停止服务ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.停止服务ToolStripMenuItem.Text = "停止服务";
-            this.停止服务ToolStripMenuItem.Click += new System.EventHandler(this.停止服务ToolStripMenuItem_Click);
+            this.停止服务ToolStripMenuItem.Click += new System.EventHandler(this.停止服务ToolStripMenuItemClick);
             // 
             // 分离DTUToolStripMenuItem
             // 
             this.分离DTUToolStripMenuItem.Name = "分离DTUToolStripMenuItem";
             this.分离DTUToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.分离DTUToolStripMenuItem.Text = "分离DTU";
-            this.分离DTUToolStripMenuItem.Click += new System.EventHandler(this.分离DTUToolStripMenuItem_Click);
+            this.分离DTUToolStripMenuItem.Click += new System.EventHandler(this.分离dtuToolStripMenuItemClick);
             // 
             // 服务参数设置ToolStripMenuItem
             // 
             this.服务参数设置ToolStripMenuItem.Name = "服务参数设置ToolStripMenuItem";
             this.服务参数设置ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.服务参数设置ToolStripMenuItem.Text = "远程参数配置";
-            this.服务参数设置ToolStripMenuItem.Click += new System.EventHandler(this.服务参数设置ToolStripMenuItem_Click);
+            this.服务参数设置ToolStripMenuItem.Click += new System.EventHandler(this.服务参数设置ToolStripMenuItemClick);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(122, 22);
             this.toolStripMenuItem2.Text = "系统重启";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.ToolStripMenuItem2Click);
             // 
             // 刷新信息ToolStripMenuItem
             // 
@@ -243,7 +243,7 @@
             this.系统退出ToolStripMenuItem.Name = "系统退出ToolStripMenuItem";
             this.系统退出ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.系统退出ToolStripMenuItem.Text = "系统退出";
-            this.系统退出ToolStripMenuItem.Click += new System.EventHandler(this.系统退出ToolStripMenuItem_Click);
+            this.系统退出ToolStripMenuItem.Click += new System.EventHandler(this.系统退出ToolStripMenuItemClick);
             // 
             // 用户管理ToolStripMenuItem
             // 
@@ -258,7 +258,7 @@
             this.用户添加ToolStripMenuItem.Name = "用户添加ToolStripMenuItem";
             this.用户添加ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.用户添加ToolStripMenuItem.Text = "用户信息管理";
-            this.用户添加ToolStripMenuItem.Click += new System.EventHandler(this.用户添加ToolStripMenuItem_Click);
+            this.用户添加ToolStripMenuItem.Click += new System.EventHandler(this.用户添加ToolStripMenuItemClick);
             // 
             // 数据库管理ToolStripMenuItem
             // 
@@ -275,7 +275,7 @@
             this.数据备份ToolStripMenuItem.Name = "数据备份ToolStripMenuItem";
             this.数据备份ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.数据备份ToolStripMenuItem.Text = "数据备份";
-            this.数据备份ToolStripMenuItem.Click += new System.EventHandler(this.数据备份ToolStripMenuItem_Click);
+            this.数据备份ToolStripMenuItem.Click += new System.EventHandler(this.数据备份ToolStripMenuItemClick);
             // 
             // 数据恢复ToolStripMenuItem
             // 
@@ -288,7 +288,7 @@
             this.数据清除ToolStripMenuItem.Name = "数据清除ToolStripMenuItem";
             this.数据清除ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.数据清除ToolStripMenuItem.Text = "数据清除";
-            this.数据清除ToolStripMenuItem.Click += new System.EventHandler(this.数据清除ToolStripMenuItem_Click);
+            this.数据清除ToolStripMenuItem.Click += new System.EventHandler(this.数据清除ToolStripMenuItemClick);
             // 
             // 历史数据ToolStripMenuItem
             // 
@@ -304,14 +304,14 @@
             this.统计要素历史数据ToolStripMenuItem.Name = "统计要素历史数据ToolStripMenuItem";
             this.统计要素历史数据ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.统计要素历史数据ToolStripMenuItem.Text = "统计要素历史数据";
-            this.统计要素历史数据ToolStripMenuItem.Click += new System.EventHandler(this.统计要素历史数据ToolStripMenuItem_Click);
+            this.统计要素历史数据ToolStripMenuItem.Click += new System.EventHandler(this.统计要素历史数据ToolStripMenuItemClick);
             // 
             // 显示要素历史数据ToolStripMenuItem
             // 
             this.显示要素历史数据ToolStripMenuItem.Name = "显示要素历史数据ToolStripMenuItem";
             this.显示要素历史数据ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.显示要素历史数据ToolStripMenuItem.Text = "显示要素历史数据";
-            this.显示要素历史数据ToolStripMenuItem.Click += new System.EventHandler(this.显示要素历史数据ToolStripMenuItem_Click);
+            this.显示要素历史数据ToolStripMenuItem.Click += new System.EventHandler(this.显示要素历史数据ToolStripMenuItemClick);
             // 
             // 帮助ToolStripMenuItem
             // 
@@ -321,7 +321,7 @@
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
             this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.帮助ToolStripMenuItem.Text = "帮助";
-            this.帮助ToolStripMenuItem.Click += new System.EventHandler(this.帮助ToolStripMenuItem_Click);
+            this.帮助ToolStripMenuItem.Click += new System.EventHandler(this.帮助ToolStripMenuItemClick);
             // 
             // 帮助ToolStripMenuItem1
             // 
@@ -413,7 +413,7 @@
             this.button1.TabIndex = 51;
             this.button1.Text = "详细";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.Button1Click1);
             // 
             // groupBox8
             // 
@@ -719,7 +719,7 @@
             this.button2.TabIndex = 6;
             this.button2.Text = "详细";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2Click);
             // 
             // groupBox13
             // 
@@ -858,7 +858,7 @@
             this.btnProduceData.TabIndex = 28;
             this.btnProduceData.Text = "产生数据.....";
             this.btnProduceData.UseVisualStyleBackColor = false;
-            this.btnProduceData.Click += new System.EventHandler(this.btnProduceData_Click);
+            this.btnProduceData.Click += new System.EventHandler(this.BtnProduceDataClick);
             // 
             // btn_Atach
             // 
@@ -869,7 +869,7 @@
             this.btn_Atach.TabIndex = 30;
             this.btn_Atach.Text = "添加处理";
             this.btn_Atach.UseVisualStyleBackColor = true;
-            this.btn_Atach.Click += new System.EventHandler(this.btn_Atach_Click);
+            this.btn_Atach.Click += new System.EventHandler(this.BtnAtachClick);
             // 
             // btn_Detach
             // 
@@ -880,25 +880,25 @@
             this.btn_Detach.TabIndex = 31;
             this.btn_Detach.Text = "分离处理";
             this.btn_Detach.UseVisualStyleBackColor = true;
-            this.btn_Detach.Click += new System.EventHandler(this.btn_Detach_Click);
+            this.btn_Detach.Click += new System.EventHandler(this.BtnDetachClick);
             // 
             // timer3
             // 
-            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            this.timer3.Tick += new System.EventHandler(this.Timer3Tick);
             // 
             // timer2
             // 
             this.timer2.Interval = 10000;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            this.timer2.Tick += new System.EventHandler(this.Timer2Tick);
             // 
             // timerProduce
             // 
             this.timerProduce.Interval = 10000;
-            this.timerProduce.Tick += new System.EventHandler(this.timerProduce_Tick);
+            this.timerProduce.Tick += new System.EventHandler(this.TimerProduceTick);
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Tick += new System.EventHandler(this.Timer1Tick);
             // 
             // imageList1
             // 
@@ -983,12 +983,12 @@
             this.btnBindingTest.TabIndex = 32;
             this.btnBindingTest.Text = "绑定测试";
             this.btnBindingTest.UseVisualStyleBackColor = true;
-            this.btnBindingTest.Click += new System.EventHandler(this.btnBindingTest_Click);
+            this.btnBindingTest.Click += new System.EventHandler(this.BtnBindingTestClick);
             // 
             // timerStore2Db
             // 
             this.timerStore2Db.Interval = 10000;
-            this.timerStore2Db.Tick += new System.EventHandler(this.timerStore2Db_Tick);
+            this.timerStore2Db.Tick += new System.EventHandler(this.TimerStore2DbTick);
             // 
             // btnStore2Db
             // 
@@ -998,7 +998,7 @@
             this.btnStore2Db.TabIndex = 33;
             this.btnStore2Db.Text = "记录数据";
             this.btnStore2Db.UseVisualStyleBackColor = true;
-            this.btnStore2Db.Click += new System.EventHandler(this.btnStore2Db_Click);
+            this.btnStore2Db.Click += new System.EventHandler(this.BtnStore2DbClick);
             // 
             // checkBox_store
             // 
@@ -1009,7 +1009,7 @@
             this.checkBox_store.TabIndex = 34;
             this.checkBox_store.Text = "定时记录";
             this.checkBox_store.UseVisualStyleBackColor = true;
-            this.checkBox_store.CheckedChanged += new System.EventHandler(this.checkBox_store_CheckedChanged);
+            this.checkBox_store.CheckedChanged += new System.EventHandler(this.CheckBoxStoreCheckedChanged);
             // 
             // checkBox_Produce
             // 
@@ -1020,7 +1020,7 @@
             this.checkBox_Produce.TabIndex = 34;
             this.checkBox_Produce.Text = "定时产生";
             this.checkBox_Produce.UseVisualStyleBackColor = true;
-            this.checkBox_Produce.CheckedChanged += new System.EventHandler(this.checkBox_Produce_CheckedChanged);
+            this.checkBox_Produce.CheckedChanged += new System.EventHandler(this.CheckBoxProduceCheckedChanged);
             // 
             // button3
             // 
@@ -1030,7 +1030,7 @@
             this.button3.TabIndex = 35;
             this.button3.Text = "2";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            this.button3.Click += new System.EventHandler(this.Button3Click1);
             // 
             // F_Main
             // 
@@ -1053,9 +1053,9 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "F_Main";
             this.Text = "安徽泰格太阳能供水评测系统V2.0";
-            this.Closing += new System.ComponentModel.CancelEventHandler(this.F_Main_Closing);
-            this.Closed += new System.EventHandler(this.F_Main_Closed);
-            this.Load += new System.EventHandler(this.F_Main_Load);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.FMainClosing);
+            this.Closed += new System.EventHandler(this.FMainClosed);
+            this.Load += new System.EventHandler(this.FMainLoad);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel3)).EndInit();

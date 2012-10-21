@@ -1,6 +1,6 @@
 ﻿namespace Tiger
 {
-    partial class F_Backup
+    partial class FBackup
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_Backup));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FBackup));
             this.button_Backup = new System.Windows.Forms.Button();
             this.button_Restore = new System.Windows.Forms.Button();
             this.textBox_FileExtension = new System.Windows.Forms.TextBox();
@@ -203,7 +203,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "数据库备份恢复";
-            this.Load += new System.EventHandler(this.F_Backup_Load);
+            this.Load += new System.EventHandler(this.FBackupLoad);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);

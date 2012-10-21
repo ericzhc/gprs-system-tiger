@@ -81,6 +81,123 @@ namespace Tiger.Properties {
         }
         
         /// <summary>
+        ///   查找类似 确定退出吗？ 的本地化字符串。
+        /// </summary>
+        internal static string FMain_FMainClosing_ {
+            get {
+                return ResourceManager.GetString("FMain_FMainClosing_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 信息 的本地化字符串。
+        /// </summary>
+        internal static string FMain_Timer3Tick_信息 {
+            get {
+                return ResourceManager.GetString("FMain_Timer3Tick_信息", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 参数查询成功 的本地化字符串。
+        /// </summary>
+        internal static string FMain_Timer3Tick_参数查询成功 {
+            get {
+                return ResourceManager.GetString("FMain_Timer3Tick_参数查询成功", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 参数设置成功 的本地化字符串。
+        /// </summary>
+        internal static string FMain_Timer3Tick_参数设置成功 {
+            get {
+                return ResourceManager.GetString("FMain_Timer3Tick_参数设置成功", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 提示 的本地化字符串。
+        /// </summary>
+        internal static string FMain_中心参数设置ToolStripMenuItemClick_提示 {
+            get {
+                return ResourceManager.GetString("FMain_中心参数设置ToolStripMenuItemClick_提示", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请先关闭服务! 的本地化字符串。
+        /// </summary>
+        internal static string FMain_中心参数设置ToolStripMenuItemClick_请先关闭服务_ {
+            get {
+                return ResourceManager.GetString("FMain_中心参数设置ToolStripMenuItemClick_请先关闭服务_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 服务停止 的本地化字符串。
+        /// </summary>
+        internal static string FMain_停止服务ToolStripMenuItemClick_服务停止 {
+            get {
+                return ResourceManager.GetString("FMain_停止服务ToolStripMenuItemClick_服务停止", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 服务启动 的本地化字符串。
+        /// </summary>
+        internal static string FMain_启动数据中心ToolStripMenuItemClick_服务启动 {
+            get {
+                return ResourceManager.GetString("FMain_启动数据中心ToolStripMenuItemClick_服务启动", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 确认要清除数据库记录么？ 的本地化字符串。
+        /// </summary>
+        internal static string FMain_数据清除ToolStripMenuItemClick_ {
+            get {
+                return ResourceManager.GetString("FMain_数据清除ToolStripMenuItemClick_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 清除确认 的本地化字符串。
+        /// </summary>
+        internal static string FMain_数据清除ToolStripMenuItemClick_清除确认 {
+            get {
+                return ResourceManager.GetString("FMain_数据清除ToolStripMenuItemClick_清除确认", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 该采集点添加成功！ 的本地化字符串。
+        /// </summary>
+        internal static string FNodeManager_button_ADD_Click_ {
+            get {
+                return ResourceManager.GetString("FNodeManager_button_ADD_Click_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 该用户删除成功！ 的本地化字符串。
+        /// </summary>
+        internal static string FNodeManager_button_Del_Click_ {
+            get {
+                return ResourceManager.GetString("FNodeManager_button_Del_Click_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 该采集点名称修改成功！ 的本地化字符串。
+        /// </summary>
+        internal static string FNodeManager_button_Modify_Click_ {
+            get {
+                return ResourceManager.GetString("FNodeManager_button_Modify_Click_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap folder_open_sharp_thick {

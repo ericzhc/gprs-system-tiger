@@ -96,47 +96,59 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbTigerModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="FCenterConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FCenterConfig.Designer.cs">
+      <DependentUpon>FCenterConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FDbBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FDbBackup.designer.cs">
+      <DependentUpon>FDbBackup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FHistory.Designer.cs">
+      <DependentUpon>FHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FHistoryUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FHistoryUpdate.designer.cs">
+      <DependentUpon>FHistoryUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FLogin.Designer.cs">
+      <DependentUpon>FLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FNode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FNode.Designer.cs">
+      <DependentUpon>FNode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FNodeManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FNodeManager.Designer.cs">
+      <DependentUpon>FNodeManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FNodeState.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FNodeState.Designer.cs">
+      <DependentUpon>FNodeState.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="F_CenterConfig.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="F_CenterConfig.Designer.cs">
-      <DependentUpon>F_CenterConfig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="F_History.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="F_History.Designer.cs">
-      <DependentUpon>F_History.cs</DependentUpon>
-    </Compile>
-    <Compile Include="F_HistoryUpdate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="F_HistoryUpdate.designer.cs">
-      <DependentUpon>F_HistoryUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="F_Login.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="F_Login.Designer.cs">
-      <DependentUpon>F_Login.cs</DependentUpon>
-    </Compile>
-    <Compile Include="F_Node.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="F_Node.Designer.cs">
-      <DependentUpon>F_Node.cs</DependentUpon>
-    </Compile>
-    <Compile Include="F_DbBackup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="F_DbBackup.designer.cs">
-      <DependentUpon>F_DbBackup.cs</DependentUpon>
     </Compile>
     <Compile Include="FMain.cs">
       <SubType>Form</SubType>
@@ -144,29 +156,17 @@
     <Compile Include="FMain.Designer.cs">
       <DependentUpon>FMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="F_NodeState.cs">
+    <Compile Include="FServerInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="F_NodeState.Designer.cs">
-      <DependentUpon>F_NodeState.cs</DependentUpon>
+    <Compile Include="FServerInfo.Designer.cs">
+      <DependentUpon>FServerInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="F_ServerInfo.cs">
+    <Compile Include="FUserManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="F_ServerInfo.Designer.cs">
-      <DependentUpon>F_ServerInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="F_NodeManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="F_NodeManager.Designer.cs">
-      <DependentUpon>F_NodeManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="F_UserManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="F_UserManager.designer.cs">
-      <DependentUpon>F_UserManager.cs</DependentUpon>
+    <Compile Include="FUserManager.designer.cs">
+      <DependentUpon>FUserManager.cs</DependentUpon>
     </Compile>
     <Compile Include="GPRS\Gprs.cs" />
     <Compile Include="Helper\DoubleQueue.cs" />
@@ -188,42 +188,42 @@
     <Compile Include="unitstate.cs">
       <DependentUpon>DbTigerModel.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FCenterConfig.resx">
+      <DependentUpon>FCenterConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FDbBackup.resx">
+      <DependentUpon>FDbBackup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FHistory.resx">
+      <DependentUpon>FHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FHistoryUpdate.resx">
+      <DependentUpon>FHistoryUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FLogin.resx">
+      <DependentUpon>FLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FNode.resx">
+      <DependentUpon>FNode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FNodeManager.resx">
+      <DependentUpon>FNodeManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FNodeState.resx">
+      <DependentUpon>FNodeState.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="F_CenterConfig.resx">
-      <DependentUpon>F_CenterConfig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="F_History.resx">
-      <DependentUpon>F_History.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="F_HistoryUpdate.resx">
-      <DependentUpon>F_HistoryUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="F_Login.resx">
-      <DependentUpon>F_Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="F_Node.resx">
-      <DependentUpon>F_Node.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="F_DbBackup.resx">
-      <DependentUpon>F_DbBackup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FMain.resx">
       <DependentUpon>FMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="F_NodeState.resx">
-      <DependentUpon>F_NodeState.cs</DependentUpon>
+    <EmbeddedResource Include="FServerInfo.resx">
+      <DependentUpon>FServerInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="F_ServerInfo.resx">
-      <DependentUpon>F_ServerInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="F_NodeManager.resx">
-      <DependentUpon>F_NodeManager.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="F_UserManager.resx">
-      <DependentUpon>F_UserManager.cs</DependentUpon>
+    <EmbeddedResource Include="FUserManager.resx">
+      <DependentUpon>FUserManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

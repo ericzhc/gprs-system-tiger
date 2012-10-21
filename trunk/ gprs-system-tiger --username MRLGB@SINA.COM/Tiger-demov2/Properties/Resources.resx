@@ -154,4 +154,43 @@
   <data name="MySqlBackupRestore_NewProgressForm_Progress___">
     <value xml:space="preserve">Progress...</value>
   </data>
+  <data name="FNodeManager_button_Del_Click_">
+    <value xml:space="preserve">该用户删除成功！</value>
+  </data>
+  <data name="FNodeManager_button_Modify_Click_">
+    <value xml:space="preserve">该采集点名称修改成功！</value>
+  </data>
+  <data name="FNodeManager_button_ADD_Click_">
+    <value xml:space="preserve">该采集点添加成功！</value>
+  </data>
+  <data name="FMain_数据清除ToolStripMenuItemClick_">
+    <value xml:space="preserve">确认要清除数据库记录么？</value>
+  </data>
+  <data name="FMain_数据清除ToolStripMenuItemClick_清除确认">
+    <value xml:space="preserve">清除确认</value>
+  </data>
+  <data name="FMain_启动数据中心ToolStripMenuItemClick_服务启动">
+    <value xml:space="preserve">服务启动</value>
+  </data>
+  <data name="FMain_停止服务ToolStripMenuItemClick_服务停止">
+    <value xml:space="preserve">服务停止</value>
+  </data>
+  <data name="FMain_中心参数设置ToolStripMenuItemClick_请先关闭服务_">
+    <value xml:space="preserve">请先关闭服务!</value>
+  </data>
+  <data name="FMain_中心参数设置ToolStripMenuItemClick_提示">
+    <value xml:space="preserve">提示</value>
+  </data>
+  <data name="FMain_FMainClosing_">
+    <value xml:space="preserve">确定退出吗？</value>
+  </data>
+  <data name="FMain_Timer3Tick_参数设置成功">
+    <value xml:space="preserve">参数设置成功</value>
+  </data>
+  <data name="FMain_Timer3Tick_信息">
+    <value xml:space="preserve">信息</value>
+  </data>
+  <data name="FMain_Timer3Tick_参数查询成功">
+    <value xml:space="preserve">参数查询成功</value>
+  </data>
 </root>

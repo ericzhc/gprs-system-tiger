@@ -1,21 +1,15 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using MySql.Data.MySqlClient;
-using System.Configuration;
 using Tiger.Database;
 
 namespace Tiger
 {
-    public partial class F_Backup : Form
+    public partial class FBackup : Form
     {
-        public bool Construct_SQL_In_One_Line_From_Same_Table = true;
+        public bool ConstructSQLInOneLineFromSameTable = true;
         public bool DropAndRecreateTable = false;
         public bool DropAndRecreateDatabase = false;
         public bool AddDateToFilename = false;
@@ -24,15 +18,15 @@ namespace Tiger
         public string FileExtension = "";
 
         //public F_Backup(string[] args)
-        public F_Backup()
+        public FBackup()
         {
             InitializeComponent();
-            textBox_filename.TextChanged += new EventHandler(textBox_TextChanged);
-            textBox_FileExtension.TextChanged += new EventHandler(textBox_TextChanged);          
-            checkBox_AddDate.CheckedChanged += new EventHandler(checkBox_CheckedChanged);          
+            textBox_filename.TextChanged += TextBoxTextChanged;
+            textBox_FileExtension.TextChanged += TextBoxTextChanged;          
+            checkBox_AddDate.CheckedChanged += CheckBoxCheckedChanged;          
         }
 
-        private void F_Backup_Load(object sender, EventArgs e)
+        private void FBackupLoad(object sender, EventArgs e)
         {
             LoadParameters();
             if (textBox_FileExtension.Text.Length == 0)
@@ -40,7 +34,7 @@ namespace Tiger
 
         }
 
-        void checkBox_Save_CheckedChanged(object sender, EventArgs e)
+        void CheckBoxSaveCheckedChanged(object sender, EventArgs e)
         {
             //if (checkBox_Save.Checked) SaveParameters();
             //else
@@ -51,12 +45,12 @@ namespace Tiger
             }
         }
 
-        void checkBox_CheckedChanged(object sender, EventArgs e)
+        void CheckBoxCheckedChanged(object sender, EventArgs e)
         {
             RefreshData();
         }
 
-        void textBox_TextChanged(object sender, EventArgs e)
+        void TextBoxTextChanged(object sender, EventArgs e)
         {
             RefreshData();
         }
@@ -202,7 +196,7 @@ namespace Tiger
                 MySqlBackupRestore mb = new MySqlBackupRestore();
                 mb.DropAndRecreateDatabase = DropAndRecreateDatabase;
                 mb.DropAndRecreateTable = DropAndRecreateTable;
-                mb.ConstructSQLInOneLineFromSameTable = Construct_SQL_In_One_Line_From_Same_Table;
+                mb.ConstructSQLInOneLineFromSameTable = ConstructSQLInOneLineFromSameTable;
 
                 mb.Backup(backupFile);
 

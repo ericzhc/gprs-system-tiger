@@ -1,28 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Tiger.Helper;
+using Tiger.Properties;
 
 namespace Tiger
 {
     public partial class FNodeManager : Form
     {
-        private bool _ValidForm;
+        private bool _validForm;
         public FNodeManager()
         {
             InitializeComponent();
-            textBox_Unitid.Validating += new CancelEventHandler(ValidateTextBox);
-            textBox_Alias.Validating += new CancelEventHandler(ValidateTextBox);
-            textBox_AreaIrr.Validating += new CancelEventHandler(ValidateTextBox);
-            textBox_Flow_CollectorSys.Validating += new CancelEventHandler(ValidateTextBox);
-            textBox_Flow_HeatUsing.Validating += new CancelEventHandler(ValidateTextBox);
-            textBox_Auxiliary_power.Validating += new CancelEventHandler(ValidateTextBox);
-            textBox_VolumHeat.Validating += new CancelEventHandler(ValidateTextBox);
+            textBox_Unitid.Validating += ValidateTextBox;
+            textBox_Alias.Validating += ValidateTextBox;
+            textBox_AreaIrr.Validating += ValidateTextBox;
+            textBox_Flow_CollectorSys.Validating += ValidateTextBox;
+            textBox_Flow_HeatUsing.Validating += ValidateTextBox;
+            textBox_Auxiliary_power.Validating += ValidateTextBox;
+            textBox_VolumHeat.Validating += ValidateTextBox;
         }
 
         private void F_SystemConfig_Load(object sender, EventArgs e)
@@ -47,7 +44,7 @@ namespace Tiger
 
         private void button_ADD_Click(object sender, EventArgs e)
         {
-            if (_ValidForm) 
+            if (_validForm) 
             {
                 if ((textBox_Alias.Text != "") && (textBox_Unitid.Text != ""))
                 {
@@ -55,11 +52,11 @@ namespace Tiger
                     {
                         try
                         {
-                            DateTime now = DateTime.Now;
+                            var now = DateTime.Now;
                             //DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
                             //format.DateSeparator = "-";
                             //format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
-                            union unit = new union
+                            var unit = new union
                             {
                                 UnitId = textBox_Unitid.Text,
                                 alias = textBox_Alias.Text,
@@ -81,7 +78,7 @@ namespace Tiger
                     }
                 }
 
-                MessageBox.Show("该采集点添加成功！");
+                MessageBox.Show(Resources.FNodeManager_button_ADD_Click_);
                 LoadData();
             }
             
@@ -89,13 +86,13 @@ namespace Tiger
 
         private void button_Modify_Click(object sender, EventArgs e)
         {
-            if (_ValidForm) 
+            if (_validForm) 
             {
                 using (var context = new DbTigerEntities())
                 {
                     try
                     {
-                        union c = context.unions.First(i => i.UnitId == textBox_Unitid.Text);
+                        var c = context.unions.First(i => i.UnitId == textBox_Unitid.Text);
                         c.alias = textBox_Alias.Text;
                         c.Aera_IrradiatedSum = float.Parse(textBox_AreaIrr.Text);
                         c.Flow_CollectorSys = float.Parse(textBox_Flow_CollectorSys.Text);
@@ -121,7 +118,7 @@ namespace Tiger
                     }
 
                 }
-                MessageBox.Show("该采集点名称修改成功！");
+                MessageBox.Show(Resources.FNodeManager_button_Modify_Click_);
                 LoadData();     
             }
            
@@ -129,38 +126,35 @@ namespace Tiger
 
         private void button_Del_Click(object sender, EventArgs e)
         {
-            if (_ValidForm) 
+            if (!_validForm) return;
+            var currenuser = textBox_Unitid.Text;
+            if (currenuser != "")
             {
-                string currenuser = textBox_Unitid.Text;
-                if (currenuser != "")
+                try
                 {
-                    try
+                    using (var context = new DbTigerEntities())
                     {
-                        using (var context = new DbTigerEntities())
+                        try
                         {
-                            try
-                            {
-                                union unit = context.unions
-                                                       .First(i => i.UnitId == currenuser);
-                                context.unions.Remove(unit);
-                                context.SaveChanges();
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.InnerException.ToString());
-                            }
-
+                            var unit = context.unions
+                                .First(i => i.UnitId == currenuser);
+                            context.unions.Remove(unit);
+                            context.SaveChanges();
                         }
-                    }
-                    catch (Exception)
-                    {
-                        //MessageBox.Show(ex.InnerException.ToString());
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.InnerException.ToString());
+                        }
+
                     }
                 }
-                MessageBox.Show("该用户删除成功！");
-                LoadData();
+                catch (Exception)
+                {
+                    //MessageBox.Show(ex.InnerException.ToString());
+                }
             }
-            
+            MessageBox.Show(Resources.FNodeManager_button_Del_Click_);
+            LoadData();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -176,7 +170,7 @@ namespace Tiger
                 textBox_Auxiliary_power.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
                 textBox_SystemHeat.Text = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
 
             }
@@ -186,22 +180,22 @@ namespace Tiger
 
         private void ValidateTextBox(object sender, CancelEventArgs e)
         {
-           bool NameValid = true, NikNameValid = true, PasswordValid = true;
+           bool nameValid = true, nikNameValid = true, passwordValid = true;
            if (String.IsNullOrEmpty(((TextBox)sender).Text))
            {
                switch (Convert.ToByte(((TextBox)sender).Tag))
                {
                    case 0:
                        errorProvider1.SetError(textBox_Unitid, "Please, enter your name");
-                       NameValid = false;
+                       nameValid = false;
                        break;
                    case 1:
                        errorProvider1.SetError(textBox_Alias, "Please, enter your nikname");
-                       NikNameValid = false;
+                       nikNameValid = false;
                        break;
                    case 2:
                        errorProvider1.SetError(textBox_AreaIrr, "Please, enter your password");
-                       PasswordValid = false;
+                       passwordValid = false;
                        break;
                }
            }
@@ -217,7 +211,7 @@ namespace Tiger
                        break;
                }
            }
-           _ValidForm = NameValid && NikNameValid && PasswordValid;
+           _validForm = nameValid && nikNameValid && passwordValid;
         }
 
         #endregion

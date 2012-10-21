@@ -1,13 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Data.Common;
 using System.Configuration;
 using MySql.Data.MySqlClient;
 
-namespace Tiger
+namespace Tiger.Database
 {
     class DataAccess
     {
@@ -48,21 +45,21 @@ namespace Tiger
         /// <returns></returns>
         public string GetConnectionString(string ConfigString)
         {
-            ConnectionStringSettingsCollection ConfigStringCollention = ConfigurationManager.ConnectionStrings;
-            if (ConfigStringCollention == null || ConfigStringCollention.Count <= 0)
+            ConnectionStringSettingsCollection configStringCollention = ConfigurationManager.ConnectionStrings;
+            if (configStringCollention == null || configStringCollention.Count <= 0)
             {
                 throw new Exception("app.config 中无连接字符串!");
             }
-            ConnectionStringSettings StringSettings = null;
+            ConnectionStringSettings stringSettings = null;
             if (ConfigString == string.Empty)
             {
-                StringSettings = ConfigurationManager.ConnectionStrings["ConnectionString"];
+                stringSettings = ConfigurationManager.ConnectionStrings["ConnectionString"];
             }
             else
             {
-                StringSettings = ConfigurationManager.ConnectionStrings[ConfigString];
+                stringSettings = ConfigurationManager.ConnectionStrings[ConfigString];
             }
-            return StringSettings.ConnectionString;
+            return stringSettings.ConnectionString;
 
         }
         public string GetConnectionString()
@@ -116,12 +113,9 @@ namespace Tiger
         /// <returns>数据适配器实例</returns>
         public DbDataAdapter CreateAdapter(string sql)
         {
-            MySqlConnection _connection = CreateConnection();
-            MySqlCommand _command = new MySqlCommand();
-            _command.Connection = _connection;
-            _command.CommandText = sql;
-            MySqlDataAdapter da = new MySqlDataAdapter();
-            da.SelectCommand = _command;
+            var connection = CreateConnection();
+            var command = new MySqlCommand {Connection = connection, CommandText = sql};
+            var da = new MySqlDataAdapter {SelectCommand = command};
 
             return da;
         }
@@ -138,12 +132,12 @@ namespace Tiger
         /// <returns>受影响记录行数</returns>
         public int ExecuteCommand(string sql)
         {
-            int _result = 0;
-            MySqlCommand _command = CreateCommand(sql);
+            int result = 0;
+            var command = CreateCommand(sql);
             try
             {
-                _command.Connection.Open();
-                _result = _command.ExecuteNonQuery();
+                command.Connection.Open();
+                result = command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -152,9 +146,9 @@ namespace Tiger
             }
             finally
             {
-                _command.Connection.Close();
+                command.Connection.Close();
             }
-            return _result;
+            return result;
         }
         #endregion
 
@@ -170,12 +164,12 @@ namespace Tiger
         /// <returns>Object</returns>
         public object ExecuteScalar(string sql)
         {
-            object _result = null;
-            DbCommand _command = CreateCommand(sql);
+            object result = null;
+            DbCommand command = CreateCommand(sql);
             try
             {
-                _command.Connection.Open();
-                _result = _command.ExecuteScalar();
+                command.Connection.Open();
+                result = command.ExecuteScalar();
             }
             catch
             {
@@ -183,9 +177,9 @@ namespace Tiger
             }
             finally
             {
-                _command.Connection.Close();
+                command.Connection.Close();
             }
-            return _result;
+            return result;
         }
         #endregion
 
@@ -200,12 +194,12 @@ namespace Tiger
         /// <returns>IDataReader</returns>
         public DbDataReader ExecuteReader(string sql)
         {
-            DbDataReader _result;
-            DbCommand _command = CreateCommand(sql);
+            DbDataReader result;
+            DbCommand command = CreateCommand(sql);
             try
             {
-                _command.Connection.Open();
-                _result = _command.ExecuteReader(CommandBehavior.CloseConnection);
+                command.Connection.Open();
+                result = command.ExecuteReader(CommandBehavior.CloseConnection);
             }
             catch
             {
@@ -215,7 +209,7 @@ namespace Tiger
             {
 
             }
-            return _result;
+            return result;
         }
         #endregion
 
@@ -230,11 +224,11 @@ namespace Tiger
         /// <returns>DataSet</returns>
         public DataSet GetDataSet(string sql)
         {
-            DataSet _result = new DataSet();
-            IDataAdapter _dataAdapter = CreateAdapter(sql);
+            var result = new DataSet();
+            IDataAdapter dataAdapter = CreateAdapter(sql);
             try
             {
-                _dataAdapter.Fill(_result);
+                dataAdapter.Fill(result);
             }
             catch
             {
@@ -243,7 +237,7 @@ namespace Tiger
             finally
             {
             }
-            return _result;
+            return result;
 
         }
         #endregion
@@ -277,7 +271,7 @@ namespace Tiger
         /// <returns>DataTable</returns>
         public DataTable GetDataTable(string sql)
         {
-            DataTable dt = GetDataSet(sql).Tables[0];
+            var dt = GetDataSet(sql).Tables[0];
             return dt;
         }
         #endregion

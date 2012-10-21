@@ -18,18 +18,18 @@ namespace Tiger
         }
 
         //add main ui control binding
-        private void InitUIDataBinding(string unitid)
+        private void InitUIDataBinding()
         {
             //add data binding
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TreeView1AfterSelect(object sender, TreeViewEventArgs e)
         {
-            var uinitid = (string)(treeView1.SelectedNode.Tag);
-            InitUIDataBinding(uinitid);
+            //var uinitid = (string)(treeView1.SelectedNode.Tag);
+            InitUIDataBinding();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1Click(object sender, EventArgs e)
         {
             //if (!treeView1.SelectedNode.FirstNode.Equals(null))
             //{

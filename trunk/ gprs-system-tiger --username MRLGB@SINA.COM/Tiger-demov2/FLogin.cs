@@ -1,15 +1,8 @@
-﻿#region Using Statements
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using Tiger.Helper;
-#endregion
 
 namespace Tiger
 {
@@ -25,10 +18,10 @@ namespace Tiger
     private int _countLogFailed;
 
     // the value of permissions on the error at one login procedure 
-    private int _logins;
+    private readonly int _logins;
 
     // the flag of validate
-    private bool _ValidForm;
+    private bool _validForm;
 
     #endregion
 
@@ -43,7 +36,7 @@ namespace Tiger
       tbPassword.Validating += new CancelEventHandler(ValidateTextBox);
     }
 
-    private void frmLogIn_Load( object sender, EventArgs e )
+    private void FrmLogInLoad( object sender, EventArgs e )
     {
         Loginwork.Initialization();
     }
@@ -54,7 +47,7 @@ namespace Tiger
 
     private void ValidateTextBox( object sender, CancelEventArgs e )
     {
-      bool NameValid = true, PasswordValid = true;
+      bool nameValid = true, passwordValid = true;
 
       if (String.IsNullOrEmpty(((TextBox)sender).Text))
       {
@@ -62,11 +55,11 @@ namespace Tiger
         {
           case 0:
             errorProvider1.SetError(tbName, "Please, enter your name");
-            NameValid = false;
+            nameValid = false;
             break;
           case 1:
             errorProvider1.SetError(tbPassword, "Please, enter your password");
-            PasswordValid = false;
+            passwordValid = false;
             break;
         }
       }
@@ -81,16 +74,16 @@ namespace Tiger
             break;
         }
       }
-      _ValidForm = NameValid && PasswordValid;
+      _validForm = nameValid && passwordValid;
     }
 
     #endregion
 
     #region Events Click
-    private void btnLogin_Click( object sender, EventArgs e )
+    private void BtnLoginClick( object sender, EventArgs e )
     {
 
-      if (_ValidForm)
+      if (_validForm)
       {
         //Check the nikname and the password
           Loginwork.DoLogin(tbName.Text, tbPassword.Text);
@@ -121,7 +114,7 @@ namespace Tiger
 
     }
 
-    private void btnCancel_Click( object sender, EventArgs e )
+    private void BtnCancelClick( object sender, EventArgs e )
     {
       this.Close();
     }

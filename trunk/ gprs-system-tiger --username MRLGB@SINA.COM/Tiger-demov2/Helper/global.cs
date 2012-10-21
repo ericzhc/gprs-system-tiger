@@ -272,13 +272,13 @@ namespace Tiger.Helper
 						 {		
                             string strpa = Global.Patternstrfloat[(ushort)s];
                             var rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-							Match matchetemp = rx.Match(hexString);
+							var matchetemp = rx.Match(hexString);
 
 							_cacheLock.EnterWriteLock();
 
 							try
 							{
-                                float x= float.Parse(matchetemp.Groups[s.ToString()].Value);
+                                var x= float.Parse(matchetemp.Groups[s.ToString()].Value);
                                 var y = (ushort)s;
                                 Field1[y] = x;
 							}
@@ -299,12 +299,12 @@ namespace Tiger.Helper
                         {
                             string strpa = Global.Patternstrint[(ushort)s];
                             var rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-                            Match matchetemp = rx.Match(hexString);
+                            var matchetemp = rx.Match(hexString);
 
                             _cacheLock.EnterWriteLock();
                             try
                             {
-                                ushort x = ushort.Parse(matchetemp.Groups[s.ToString()].Value);
+                                var x = ushort.Parse(matchetemp.Groups[s.ToString()].Value);
                                 var y = (ushort)s;
                                 Field2[y] = x;
                             }
@@ -323,14 +323,14 @@ namespace Tiger.Helper
                     {
                         if (!s.Equals(FieldTimeNo.MAX))
                         {
-                            string strpa = Global.Patternstrdatatime[(ushort)s];
+                            var strpa = Global.Patternstrdatatime[(ushort)s];
                             var rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
                             var matchetemp = rx.Match(hexString);
 
                             _cacheLock.EnterWriteLock();
                             try
                             {
-                                DateTime x = DateTime.Parse(matchetemp.Groups[s.ToString()].Value);
+                                var x = DateTime.Parse(matchetemp.Groups[s.ToString()].Value);
                                 var y = (ushort)s;
                                 FieldTime[y] = x;
                             }
@@ -349,7 +349,7 @@ namespace Tiger.Helper
             _cacheLock.EnterWriteLock();
             try
             {
-                DateTime x = DateTime.ParseExact(recvMessage.m_recv_date, "yyyy/MM/dd/hh/mm/ss", new CultureInfo("en-US"));
+                var x = DateTime.ParseExact(recvMessage.m_recv_date, "yyyy/MM/dd/hh/mm/ss", new CultureInfo("en-US"));
                 FieldTime[(ushort)FieldTimeNo.RecvTime] = x;
                 RecvDate = x;
                 Global.ParameterList[recvMessage.m_userid].DeltaTime = (x - Global.ParameterList[recvMessage.m_userid].LastUpdatTime).Seconds;
@@ -431,9 +431,8 @@ namespace Tiger.Helper
             get { return _systemHeat; }
             set
             {
-                //if (!(Math.Abs(_systemHeat - value) > EPSILON)) return;
                 _systemHeat = value;
-                OnPropertyChanged("System_heat");
+                OnPropertyChanged("SystemHeat");
             }
         }
 
@@ -450,7 +449,7 @@ namespace Tiger.Helper
             set
             {
                 _conventionalEnergy = value;
-                OnPropertyChanged("Conventional_energy");
+                OnPropertyChanged("ConventionalEnergy");
             }
         }
         private float _storageTank; //贮热水箱热损系数3
@@ -460,7 +459,7 @@ namespace Tiger.Helper
             set
             {
                 _storageTank = value;
-                OnPropertyChanged("Storage_tank");
+                OnPropertyChanged("StorageTank");
             }
         }
         private float _systemEfficiency;  //集热系统效率4
@@ -471,7 +470,7 @@ namespace Tiger.Helper
             set
             {
                 _systemEfficiency = value;
-                OnPropertyChanged("System_efficiency");
+                OnPropertyChanged("SystemEfficiency");
             }
         }
         private float _solarAssuranceDay;  //日太阳能保证率5
@@ -479,56 +478,56 @@ namespace Tiger.Helper
         public float SolarAssuranceDay
         {
             get { return _solarAssuranceDay; }
-            set { _solarAssuranceDay = value; OnPropertyChanged("Solar_assurance_day"); }
+            set { _solarAssuranceDay = value; OnPropertyChanged("SolarAssuranceDay"); }
         }
         private float _solarAssuranceYear;  //全年太阳能保证率6
 
         public float SolarAssuranceYear
         {
             get { return _solarAssuranceYear; }
-            set { _solarAssuranceYear = value; OnPropertyChanged("Solar_assurance_year"); }
+            set { _solarAssuranceYear = value; OnPropertyChanged("SolarAssuranceYear"); }
         }
         private float _energyAlternative;  //常规能源替代量7
 
         public float EnergyAlternative
         {
             get { return _energyAlternative; }
-            set { _energyAlternative = value; OnPropertyChanged("Energy_alternative"); }
+            set { _energyAlternative = value; OnPropertyChanged("EnergyAlternative"); }
         }
         private float _carbonEmission; //二氧化碳减排量8
 
         public float CarbonEmission
         {
             get { return _carbonEmission; }
-            set { _carbonEmission = value; OnPropertyChanged("Carbon_emission"); }
+            set { _carbonEmission = value; OnPropertyChanged("CarbonEmission"); }
         }
         private float _sulfurEmission; //二氧化硫减排量9
 
         public float SulfurEmission
         {
             get { return _sulfurEmission; }
-            set { _sulfurEmission = value; OnPropertyChanged("Sulfur_emission"); }
+            set { _sulfurEmission = value; OnPropertyChanged("SulfurEmission"); }
         }
         private float _dustEmission;  //粉尘减排量10
 
         public float DustEmission
         {
             get { return _dustEmission; }
-            set { _dustEmission = value; OnPropertyChanged("Dust_emission"); }
+            set { _dustEmission = value; OnPropertyChanged("DustEmission"); }
         }
         private float _feeEffect; //项目费效比11
 
         public float FeeEffect
         {
             get { return _feeEffect; }
-            set { _feeEffect = value; OnPropertyChanged("Fee_effect"); }
+            set { _feeEffect = value; OnPropertyChanged("FeeEffect"); }
         }
         private float _auxiliaryHeat;//辅助热源加热量12
 
         public float AuxiliaryHeat
         {
             get { return _auxiliaryHeat; }
-            set { _auxiliaryHeat = value; OnPropertyChanged("Auxiliary_heat"); }
+            set { _auxiliaryHeat = value; OnPropertyChanged("AuxiliaryHeat"); }
         }
 
 
@@ -593,7 +592,7 @@ namespace Tiger.Helper
             get { return _conventionalEnergy; }
             set { 
                     _conventionalEnergy = value;
-                    OnPropertyChanged("Conventional_energy");
+                    OnPropertyChanged("ConventionalEnergy");
                 }
         }
         private float _storageTank; //贮热水箱热损系数3
@@ -602,7 +601,7 @@ namespace Tiger.Helper
             get { return _storageTank; }
             set { 
                     _storageTank = value;
-                    OnPropertyChanged("Storage_tank");
+                    OnPropertyChanged("StorageTtank");
                 }
         }
         private float _systemEfficiency;  //集热系统效率4
@@ -612,7 +611,7 @@ namespace Tiger.Helper
             get { return _systemEfficiency; }
             set { 
                     _systemEfficiency = value;
-                    OnPropertyChanged("System_efficiency");
+                    OnPropertyChanged("System_Efficiency");
                 }
         }
         private float _solarAssuranceDay;  //日太阳能保证率5
@@ -620,56 +619,56 @@ namespace Tiger.Helper
         public float SolarAssuranceDay
         {
             get { return _solarAssuranceDay; }
-            set { _solarAssuranceDay = value; OnPropertyChanged("Solar_assurance_day"); }
+            set { _solarAssuranceDay = value; OnPropertyChanged("SolarAssuranceDay"); }
         }
         private float _solarAssuranceYear;  //全年太阳能保证率6
 
         public float SolarAssuranceYear
         {
             get { return _solarAssuranceYear; }
-            set { _solarAssuranceYear = value; OnPropertyChanged("Solar_assurance_year"); }
+            set { _solarAssuranceYear = value; OnPropertyChanged("SolarAssuranceYear"); }
         }
         private float _energyAlternative;  //常规能源替代量7
 
         public float EnergyAlternative
         {
             get { return _energyAlternative; }
-            set { _energyAlternative = value; OnPropertyChanged("Energy_alternative"); }
+            set { _energyAlternative = value; OnPropertyChanged("EnergyAlternative"); }
         }
         private float _carbonEmission; //二氧化碳减排量8
 
         public float CarbonEmission
         {
             get { return _carbonEmission; }
-            set { _carbonEmission = value; OnPropertyChanged("Carbon_emission"); }
+            set { _carbonEmission = value; OnPropertyChanged("CarbonEmission"); }
         }
         private float _sulfurEmission; //二氧化硫减排量9
 
         public float SulfurEmission
         {
             get { return _sulfurEmission; }
-            set { _sulfurEmission = value; OnPropertyChanged("Sulfur_emission"); }
+            set { _sulfurEmission = value; OnPropertyChanged("SulfurEmission"); }
         }
         private float _dustEmission;  //粉尘减排量10
 
         public float DustEmission
         {
             get { return _dustEmission; }
-            set { _dustEmission = value; OnPropertyChanged("Dust_emission"); }
+            set { _dustEmission = value; OnPropertyChanged("DustEmission"); }
         }
         private float _feeEffect; //项目费效比11
 
         public float FeeEffect
         {
             get { return _feeEffect; }
-            set { _feeEffect = value; OnPropertyChanged("Fee_effect"); }
+            set { _feeEffect = value; OnPropertyChanged("FeeEffect"); }
         }
         private float _auxiliaryHeat;//辅助热源加热量12
 
         public float AuxiliaryHeat
         {
             get { return _auxiliaryHeat; }
-            set { _auxiliaryHeat = value; OnPropertyChanged("Auxiliary_heat"); }
+            set { _auxiliaryHeat = value; OnPropertyChanged("AuxiliaryHeat"); }
         }
 
         public ushort Id { get; set; } //ID
