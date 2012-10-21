@@ -13,8 +13,8 @@ namespace Tiger
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new FMain());
-            Application.Run(new LoginContext());
+            Application.Run(new FMain());
+            //Application.Run(new LoginContext());
         }
     }
 }

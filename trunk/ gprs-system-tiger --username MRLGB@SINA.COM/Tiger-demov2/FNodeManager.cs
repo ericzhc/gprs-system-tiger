@@ -65,7 +65,7 @@ namespace Tiger
                                 Flow_HeatUsing = float.Parse(textBox_Flow_HeatUsing.Text),
                                 Auxiliary_power = float.Parse(textBox_Auxiliary_power.Text),
                                 Volumn_HeatingBox = float.Parse(textBox_VolumHeat.Text),
-                                System_heat = float.Parse(textBox_SystemHeat.Text),
+                                Sum_SystemHeat = float.Parse(textBox_SystemHeat.Text),
                             };
                             context.unions.Add(unit);
                             context.SaveChanges();

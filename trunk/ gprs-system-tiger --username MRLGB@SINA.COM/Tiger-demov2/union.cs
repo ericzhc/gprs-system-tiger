@@ -21,8 +21,8 @@ namespace Tiger
         public float Flow_CollectorSys { get; set; }
         public float Flow_HeatUsing { get; set; }
         public float Auxiliary_power { get; set; }
-        public float System_heat { get; set; }
-        public Nullable<short> Gprsstate { get; set; }
+        public float Sum_SystemHeat { get; set; }
+        public Nullable<short> gprsstate { get; set; }
         public Nullable<System.DateTime> Star_time { get; set; }
         public Nullable<int> time_online { get; set; }
     }

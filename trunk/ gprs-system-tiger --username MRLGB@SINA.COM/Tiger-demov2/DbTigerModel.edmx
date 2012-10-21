@@ -69,8 +69,8 @@
           <Property Name="Flow_CollectorSys" Type="float" Nullable="false" />
           <Property Name="Flow_HeatUsing" Type="float" Nullable="false" />
           <Property Name="Auxiliary_power" Type="float" Nullable="false" />
-          <Property Name="System_heat" Type="float" Nullable="false" />
-          <Property Name="Gprsstate" Type="smallint" />
+          <Property Name="Sum_SystemHeat" Type="float" Nullable="false" />
+          <Property Name="gprsstate" Type="smallint" />
           <Property Name="Star_time" Type="datetime" />
           <Property Name="time_online" Type="int" />
         </EntityType>
@@ -102,9 +102,9 @@
         <EntityContainer Name="DbTigerEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="logininfors" EntityType="DbTigerModel.logininfor" />
           <EntitySet Name="unitstates" EntityType="DbTigerModel.unitstate" />
-          <EntitySet Name="unions" EntityType="DbTigerModel.union" />
           <EntitySet Name="allunitstatistics" EntityType="DbTigerModel.allunitstatistic" />
           <EntitySet Name="singleunitstatistics" EntityType="DbTigerModel.singleunitstatistic" />
+          <EntitySet Name="unions" EntityType="DbTigerModel.union" />
         </EntityContainer>
         <EntityType Name="logininfor">
           <Key>
@@ -134,22 +134,6 @@
           <Property Type="Single" Name="Amount_Irradiated" />
           <Property Type="Single" Name="Amount_IrradiatedSum" />
           <Property Type="Int32" Name="Delta_Time" Nullable="false" />
-        </EntityType>
-        <EntityType Name="union">
-          <Key>
-            <PropertyRef Name="UnitId" />
-          </Key>
-          <Property Type="String" Name="UnitId" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="alias" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Type="Single" Name="Aera_IrradiatedSum" Nullable="false" />
-          <Property Type="Single" Name="Volumn_HeatingBox" Nullable="false" />
-          <Property Type="Single" Name="Flow_CollectorSys" Nullable="false" />
-          <Property Type="Single" Name="Flow_HeatUsing" Nullable="false" />
-          <Property Type="Single" Name="Auxiliary_power" Nullable="false" />
-          <Property Type="Single" Name="System_heat" Nullable="false" />
-          <Property Type="Int16" Name="Gprsstate" />
-          <Property Type="DateTime" Name="Star_time" Precision="3" />
-          <Property Type="Int32" Name="time_online" />
         </EntityType>
         <EntityType Name="allunitstatistic">
           <Key>
@@ -189,6 +173,22 @@
           <Property Type="Single" Name="Dust_emission" />
           <Property Type="Single" Name="Fee_effect" />
         </EntityType>
+        <EntityType Name="union">
+          <Key>
+            <PropertyRef Name="UnitId" />
+          </Key>
+          <Property Type="String" Name="UnitId" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="alias" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Type="Single" Name="Aera_IrradiatedSum" Nullable="false" />
+          <Property Type="Single" Name="Volumn_HeatingBox" Nullable="false" />
+          <Property Type="Single" Name="Flow_CollectorSys" Nullable="false" />
+          <Property Type="Single" Name="Flow_HeatUsing" Nullable="false" />
+          <Property Type="Single" Name="Auxiliary_power" Nullable="false" />
+          <Property Type="Single" Name="Sum_SystemHeat" Nullable="false" />
+          <Property Type="Int16" Name="gprsstate" />
+          <Property Type="DateTime" Name="Star_time" Precision="3" />
+          <Property Type="Int32" Name="time_online" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -220,23 +220,6 @@
                 <ScalarProperty Name="Temp_CollectorBox" ColumnName="Temp_CollectorBox" />
                 <ScalarProperty Name="Temp_HeatingBox" ColumnName="Temp_HeatingBox" />
                 <ScalarProperty Name="DateTime_RecvDate" ColumnName="DateTime_RecvDate" />
-                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="unions">
-            <EntityTypeMapping TypeName="DbTigerModel.union">
-              <MappingFragment StoreEntitySet="union">
-                <ScalarProperty Name="time_online" ColumnName="time_online" />
-                <ScalarProperty Name="Star_time" ColumnName="Star_time" />
-                <ScalarProperty Name="Gprsstate" ColumnName="Gprsstate" />
-                <ScalarProperty Name="System_heat" ColumnName="System_heat" />
-                <ScalarProperty Name="Auxiliary_power" ColumnName="Auxiliary_power" />
-                <ScalarProperty Name="Flow_HeatUsing" ColumnName="Flow_HeatUsing" />
-                <ScalarProperty Name="Flow_CollectorSys" ColumnName="Flow_CollectorSys" />
-                <ScalarProperty Name="Volumn_HeatingBox" ColumnName="Volumn_HeatingBox" />
-                <ScalarProperty Name="Aera_IrradiatedSum" ColumnName="Aera_IrradiatedSum" />
-                <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -275,6 +258,23 @@
                 <ScalarProperty Name="Conventional_energy" ColumnName="Conventional_energy" />
                 <ScalarProperty Name="System_heat" ColumnName="System_heat" />
                 <ScalarProperty Name="DateTime_Statics" ColumnName="DateTime_Statics" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="unions">
+            <EntityTypeMapping TypeName="DbTigerModel.union">
+              <MappingFragment StoreEntitySet="union">
+                <ScalarProperty Name="time_online" ColumnName="time_online" />
+                <ScalarProperty Name="Star_time" ColumnName="Star_time" />
+                <ScalarProperty Name="gprsstate" ColumnName="gprsstate" />
+                <ScalarProperty Name="Sum_SystemHeat" ColumnName="Sum_SystemHeat" />
+                <ScalarProperty Name="Auxiliary_power" ColumnName="Auxiliary_power" />
+                <ScalarProperty Name="Flow_HeatUsing" ColumnName="Flow_HeatUsing" />
+                <ScalarProperty Name="Flow_CollectorSys" ColumnName="Flow_CollectorSys" />
+                <ScalarProperty Name="Volumn_HeatingBox" ColumnName="Volumn_HeatingBox" />
+                <ScalarProperty Name="Aera_IrradiatedSum" ColumnName="Aera_IrradiatedSum" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />
               </MappingFragment>
             </EntityTypeMapping>

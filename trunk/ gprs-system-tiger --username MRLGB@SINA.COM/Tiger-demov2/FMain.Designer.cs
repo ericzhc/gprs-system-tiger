@@ -389,7 +389,7 @@
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Size = new System.Drawing.Size(1008, 667);
-            this.splitContainer1.SplitterDistance = 461;
+            this.splitContainer1.SplitterDistance = 501;
             this.splitContainer1.TabIndex = 3;
             // 
             // groupBox1
@@ -405,7 +405,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(461, 667);
+            this.groupBox1.Size = new System.Drawing.Size(501, 667);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -431,7 +431,7 @@
             this.groupBox8.Controls.Add(this.label30);
             this.groupBox8.Location = new System.Drawing.Point(65, 395);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(332, 68);
+            this.groupBox8.Size = new System.Drawing.Size(372, 68);
             this.groupBox8.TabIndex = 49;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "项目费效比：";
@@ -464,7 +464,7 @@
             this.groupBox9.Controls.Add(this.label20);
             this.groupBox9.Location = new System.Drawing.Point(65, 333);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(332, 69);
+            this.groupBox9.Size = new System.Drawing.Size(372, 69);
             this.groupBox9.TabIndex = 48;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "常规能源替代量：";
@@ -499,7 +499,7 @@
             this.groupBox7.Controls.Add(this.label15);
             this.groupBox7.Location = new System.Drawing.Point(65, 244);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(332, 92);
+            this.groupBox7.Size = new System.Drawing.Size(372, 92);
             this.groupBox7.TabIndex = 47;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "系统太阳能保证率:";
@@ -555,7 +555,7 @@
             this.groupBox5.Controls.Add(this.label28);
             this.groupBox5.Location = new System.Drawing.Point(65, 128);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(332, 110);
+            this.groupBox5.Size = new System.Drawing.Size(372, 110);
             this.groupBox5.TabIndex = 44;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "环境效益";
@@ -626,7 +626,7 @@
             this.groupBox4.Controls.Add(this.label19);
             this.groupBox4.Location = new System.Drawing.Point(65, 72);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(332, 64);
+            this.groupBox4.Size = new System.Drawing.Size(372, 64);
             this.groupBox4.TabIndex = 45;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "太阳能集热系统效率:";
@@ -659,7 +659,7 @@
             this.groupBox6.Controls.Add(this.label14);
             this.groupBox6.Location = new System.Drawing.Point(65, 18);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(332, 65);
+            this.groupBox6.Size = new System.Drawing.Size(372, 65);
             this.groupBox6.TabIndex = 46;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "系统有用得热量:";
@@ -700,7 +700,7 @@
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(543, 667);
+            this.groupBox2.Size = new System.Drawing.Size(503, 667);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
@@ -720,7 +720,7 @@
             this.buttonNodeState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNodeState.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.buttonNodeState.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.buttonNodeState.Location = new System.Drawing.Point(435, 571);
+            this.buttonNodeState.Location = new System.Drawing.Point(343, 571);
             this.buttonNodeState.Name = "buttonNodeState";
             this.buttonNodeState.Size = new System.Drawing.Size(80, 28);
             this.buttonNodeState.TabIndex = 6;

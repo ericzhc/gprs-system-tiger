@@ -29,17 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("采集器节点0");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("采集器节点01");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("采集器节点02");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("采集器节点03");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("采集器节点04");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("采集器节点0");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("采集器节点01");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("采集器节点02");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("采集器节点03");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("采集器节点04");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FNodeState));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.txt_Fee_effect1 = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
@@ -101,22 +100,22 @@
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            treeNode6.Name = "节点0";
-            treeNode6.Text = "采集器节点0";
-            treeNode7.Name = "节点1";
-            treeNode7.Text = "采集器节点01";
-            treeNode8.Name = "节点2";
-            treeNode8.Text = "采集器节点02";
-            treeNode9.Name = "节点3";
-            treeNode9.Text = "采集器节点03";
-            treeNode10.Name = "节点4";
-            treeNode10.Text = "采集器节点04";
+            treeNode1.Name = "节点0";
+            treeNode1.Text = "采集器节点0";
+            treeNode2.Name = "节点1";
+            treeNode2.Text = "采集器节点01";
+            treeNode3.Name = "节点2";
+            treeNode3.Text = "采集器节点02";
+            treeNode4.Name = "节点3";
+            treeNode4.Text = "采集器节点03";
+            treeNode5.Name = "节点4";
+            treeNode5.Text = "采集器节点04";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode7,
-            treeNode8,
-            treeNode9,
-            treeNode10});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(274, 600);
             this.treeView1.TabIndex = 3;
@@ -130,7 +129,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.groupBox8);
             this.groupBox1.Controls.Add(this.groupBox9);
             this.groupBox1.Controls.Add(this.groupBox7);
@@ -143,16 +141,6 @@
             this.groupBox1.Size = new System.Drawing.Size(738, 280);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(622, 189);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 53;
-            this.button1.Text = "Test";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1Click);
             // 
             // groupBox8
             // 
@@ -406,7 +394,7 @@
             this.label14.TabIndex = 0;
             this.label14.Text = "太阳能集热系统有用得热量:";
             // 
-            // F_Node_State
+            // FNodeState
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -468,6 +456,5 @@
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.TextBox txt_Energy_alternative1;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Button button1;
     }
 }

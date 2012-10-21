@@ -52,7 +52,6 @@ namespace Tiger
             InitUIDataBinding();
         }
 
-
         private void LoadConfiguration()
         {
             //Path.Combine(Directory.GetCurrentDirectory(), "logs");
@@ -114,7 +113,7 @@ namespace Tiger
                 if (!Global.ParameterList.ContainsKey(unit.UnitId))
                 {
                     var parao = new ParameterObject(unit.UnitId, unit.Aera_IrradiatedSum, unit.Auxiliary_power, unit.Flow_CollectorSys, unit.Flow_HeatUsing, unit.Volumn_HeatingBox)
-                                    {SystemHeat = unit.System_heat};
+                                    {SystemHeat = unit.Sum_SystemHeat};
                     Global.ParameterList.Add(parao.Id, parao);
                 }
 
@@ -126,7 +125,7 @@ namespace Tiger
 
                 if (!Global.SatisticList.ContainsKey(unit.UnitId))
                 {
-                    var dtustatistic = new StatisticObject(unit.UnitId) { SystemHeat = unit.System_heat };
+                    var dtustatistic = new StatisticObject(unit.UnitId) { SystemHeat = unit.Sum_SystemHeat };
                     Global.SatisticList.Add(dtustatistic.Id, dtustatistic);
                 }
             
@@ -161,7 +160,7 @@ namespace Tiger
             var gprsrecord = (GprsDataRecord)message;
             Global.DtuList[gprsrecord.m_userid].UpdateDtuStateObject(gprsrecord);//更新DTUList实时状态
             ComputeEveryStatistic();//统计各DTU统计要素
-            ComputeAllStatistic();//统计q全部DTU统计要素
+            ComputeAllStatistic();//统计全部DTU统计要素
             StoreDtuState2Db();//记录各DTU状态数据
         }
 
@@ -243,8 +242,7 @@ namespace Tiger
         //*****************************************
         private void ToolStripMenuItemStateHistoryClick(object sender, EventArgs e)
         {
-            var fHistoryView = new FHistoryUpdate();
-            fHistoryView.ShowDialog();
+            
         }
         //*****************************************
         //Add User
@@ -517,8 +515,8 @@ namespace Tiger
                     {
                         try
                         {
-                            union c = context.unions.First(i => i.UnitId == item.Key);
-                            c.System_heat = Global.SatisticList[item.Key].SystemHeat;//记录上次保存数据
+                            var c = context.unions.First(i => i.UnitId == item.Key);
+                            c.Sum_SystemHeat = Global.SatisticList[item.Key].SystemHeat;//记录每个DTU本次数据到数据库
                             context.SaveChanges();
 
                         }
@@ -1153,7 +1151,8 @@ namespace Tiger
  
         private void ButtonStatisticClick(object sender, EventArgs e)
         {
-
+            var fnodestate = new FNodeState();
+            fnodestate.ShowDialog();
         }
 
         private void ButtonNodeStateClick(object sender, EventArgs e)

@@ -114,12 +114,6 @@
     <Compile Include="FHistory.Designer.cs">
       <DependentUpon>FHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="FHistoryUpdate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FHistoryUpdate.designer.cs">
-      <DependentUpon>FHistoryUpdate.cs</DependentUpon>
-    </Compile>
     <Compile Include="FLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,9 +196,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FHistory.resx">
       <DependentUpon>FHistory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FHistoryUpdate.resx">
-      <DependentUpon>FHistoryUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
