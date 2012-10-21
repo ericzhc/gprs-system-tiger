@@ -346,7 +346,7 @@ namespace Tiger.Helper
             _cacheLock.EnterWriteLock();
             try
             {
-                var x = DateTime.ParseExact(recvMessage.m_recv_date, "yyyy/MM/dd/hh/mm/ss", new CultureInfo("en-US"));
+                var x = DateTime.ParseExact(recvMessage.m_recv_date, "yyyy/MM/dd/HH/mm/ss", new CultureInfo("en-US"));
                 FieldTime[(ushort)FieldTimeNo.RecvTime] = x;
                 RecvDate = x;
                 Global.ParameterList[recvMessage.m_userid].DeltaTime = (x - Global.ParameterList[recvMessage.m_userid].LastUpdatTime).Seconds;

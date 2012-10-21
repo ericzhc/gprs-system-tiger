@@ -947,7 +947,7 @@ namespace Tiger
                     DateTime now = DateTime.Now;
                     DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
                     format.DateSeparator = "/";
-                    format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
+                    format.ShortDatePattern = @"yyyy/MM/dd/HH/mm/ss";
                     record.m_recv_date = now.ToString("d", format);//消息数据包设置上报时间
                     item.Value.RecvDate = now;//产生数据时时间
 
@@ -1137,28 +1137,6 @@ namespace Tiger
                     }
 
                 }
-
-                //所有DTU状态统计要素累积
-                //foreach (KeyValuePair<string, DtuStateObject> item in global.DTUList)
-                //{
-                //    global.osystem.System_heat += global.SatisticList[item.Key].System_heat;
-                    
-                //}
-                //try
-                //{
-                //    allunitstatistic all = new allunitstatistic
-                //    {
-                //        DateTime_Statics = System.DateTime.Now,//产生数据时时间
-                //        System_heat = global.osystem.System_heat,
-
-                //    };
-                //    context.allunitstatistics.Add(all);
-                //    context.SaveChanges();
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show(ex.InnerException.ToString());
-                //}
 
             }
             stopWatch.Stop();
