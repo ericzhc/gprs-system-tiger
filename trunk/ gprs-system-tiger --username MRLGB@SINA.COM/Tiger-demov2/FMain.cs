@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 using System.Text;
@@ -33,12 +32,12 @@ namespace Tiger
         public Thread ThreadBlock;
 
         private readonly Random _rand = new Random();//Produce Data test
-        private DoubleQueue _dqueue;
+        
         //protected static readonly log4net.ILog m_Log =LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected log4net.ILog MLog;
 
-        //BindingSource _bsSystem = new BindingSource(); // System object
-        //BindingSource bsP = new BindingSource(); // Passengers
+        public delegate void UpdateSytemHeat(float reading);
+        public UpdateSytemHeat SytemHeatDelegate;
 
         private readonly ReaderWriterLockSlim _cacheLock = new ReaderWriterLockSlim();//
         #endregion
@@ -52,6 +51,7 @@ namespace Tiger
             //staticcount = 0;
             InitUIDataBinding();
         }
+
 
         private void LoadConfiguration()
         {
@@ -74,16 +74,15 @@ namespace Tiger
 
         public void InitQueue()
         {
-            _dqueue = new DoubleQueue();
-            _dqueue.OnResponseData += DoubleQueue_OnResponseData;
-            _dqueue.Run();
+            Global.Dqueue = new DoubleQueue();
+            Global.Dqueue.OnResponseData+= DoubleQueue_OnResponseData;
+            Global.Dqueue.Run();
 
             Global.Attached = true;
             btn_Atach.Enabled = false;
             
         }
 
-        //add main ui control binding
         private void InitUIDataBinding()
         {
             //add data binding
@@ -96,6 +95,13 @@ namespace Tiger
             txt_Solar_assurance_day.DataBindings.Add(new Binding("Text", Global.Osystem, "SolarAssuranceDay", false, DataSourceUpdateMode.Never));
             txt_Energy_alternative.DataBindings.Add(new Binding("Text", Global.Osystem, "EnergyAlternative", false, DataSourceUpdateMode.Never));
             txt_Fee_effect.DataBindings.Add(new Binding("Text", Global.Osystem, "FeeEffect", false, DataSourceUpdateMode.Never));
+
+            SytemHeatDelegate = new UpdateSytemHeat(UpdateSystemHeatMethod);
+        }
+        //-----------------------------------------------------------------------------------------------------------------------//
+        public void UpdateSystemHeatMethod(float reading)
+        {
+            txt_System_heat.Text = reading.ToString(CultureInfo.InvariantCulture);
         }
 
         private static void UpdateDtuListFromDB()
@@ -114,13 +120,13 @@ namespace Tiger
 
                 if (!Global.DtuList.ContainsKey(unit.UnitId))
                 {
-                    var dtu = new DtuObject(unit.UnitId);
+                    var dtu = new DtuStateObject(unit.UnitId);
                       Global.DtuList.Add(dtu.Id, dtu);
                 }
 
                 if (!Global.SatisticList.ContainsKey(unit.UnitId))
                 {
-                    var dtustatistic = new StatisticObject(unit.UnitId) {SystemHeat = unit.System_heat};
+                    var dtustatistic = new StatisticObject(unit.UnitId) { SystemHeat = unit.System_heat };
                     Global.SatisticList.Add(dtustatistic.Id, dtustatistic);
                 }
             
@@ -147,23 +153,30 @@ namespace Tiger
 
         }
 
-        // This thread procedure performs the task specified by the 
-        // ThreadPool.QueueUserWorkItem
+        //*****************************************
+        //工作线程-
+        //*****************************************
         public void ThreadPoolTask(object message)
         {
             var gprsrecord = (GprsDataRecord)message;
-            Global.DtuList[gprsrecord.m_userid].UpdateDtuObject(gprsrecord);//更新DTUList实时状态
-            ComputeStatistic();//统计统计要素
-            StoreDtuState2Db();//记录状态数据
+            Global.DtuList[gprsrecord.m_userid].UpdateDtuStateObject(gprsrecord);//更新DTUList实时状态
+            ComputeEveryStatistic();//统计各DTU统计要素
+            ComputeAllStatistic();//统计q全部DTU统计要素
+            StoreDtuState2Db();//记录各DTU状态数据
         }
 
-        private void 数据备份ToolStripMenuItemClick(object sender, EventArgs e)
+        //*****************************************
+        //数据备份
+        //*****************************************
+        private void ToolStripMenuItemDataBackupClick(object sender, EventArgs e)
         {
             var fBackup = new FBackup();
             fBackup.ShowDialog();
         }
-
-        private void 数据清除ToolStripMenuItemClick(object sender, EventArgs e)
+        //*****************************************
+        //数据清除
+        //*****************************************
+        private void ToolStripMenuItemDataClearClick(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show(this, Resources.FMain_数据清除ToolStripMenuItemClick_, Resources.FMain_数据清除ToolStripMenuItemClick_清除确认, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -189,42 +202,54 @@ namespace Tiger
                 //}
             }
         }
-
-        private void ToolStripMenuItem2Click(object sender, EventArgs e)
+        //Restart System
+        private void ToolStripMenuItemRestartSystemClick(object sender, EventArgs e)
         {
             Application.Restart();
         }
-
-        private void 系统退出ToolStripMenuItemClick(object sender, EventArgs e)
+        //*****************************************
+        //Exit System
+        //*****************************************
+        private void ToolStripMenuItemExitSystemClick(object sender, EventArgs e)
         {
             Environment.Exit(0);
         }
-
-        private void 系统配置ToolStripMenuItemClick(object sender, EventArgs e)
+        //*****************************************
+        //System Config
+        //*****************************************
+        private void ToolStripMenuItemSystemConfigClick(object sender, EventArgs e)
         {
             //F_SystemSet f_systemset = new F_SystemSet();
             var fSystemconfig = new FNodeManager();
             fSystemconfig.ShowDialog();
         }
-
-        private void 统计要素历史数据ToolStripMenuItemClick(object sender, EventArgs e)
+        //*****************************************
+        //Statistic History
+        //*****************************************
+        private void ToolStripMenuItemStatisticHistoryClick(object sender, EventArgs e)
         {
             var fHistoryView = new FHistory();
             fHistoryView.ShowDialog();
         }
-
-        private void 帮助ToolStripMenuItemClick(object sender, EventArgs e)
+        //*****************************************
+        //Help
+        //*****************************************
+        private void ToolStripMenuItemHelpClick(object sender, EventArgs e)
         {
 
         }
-
-        private void 显示要素历史数据ToolStripMenuItemClick(object sender, EventArgs e)
+        //*****************************************
+        //State History
+        //*****************************************
+        private void ToolStripMenuItemStateHistoryClick(object sender, EventArgs e)
         {
             var fHistoryView = new FHistoryUpdate();
             fHistoryView.ShowDialog();
         }
-
-        private void 用户添加ToolStripMenuItemClick(object sender, EventArgs e)
+        //*****************************************
+        //Add User
+        //*****************************************
+        private void ToolStripMenuItemAddUserClick(object sender, EventArgs e)
         {
             var fuser = new FUserManager();
             fuser.ShowDialog();
@@ -249,7 +274,7 @@ namespace Tiger
         //**********************************
         //启动服务
         //**********************************
-        private void 启动数据中心ToolStripMenuItemClick(object sender, EventArgs e)
+        private void ToolStripMenuItemStartServiceClick(object sender, EventArgs e)
         {
             Sign = 9999;
             Gprs.Gprs.SetCustomIP(Gprs.Gprs.inet_addr(ServIp));
@@ -278,9 +303,9 @@ namespace Tiger
                 timer2.Interval = RefreshTime * 1000;
                 timer2.Enabled = true;
                 ServStart = 1;
-                启动数据中心ToolStripMenuItem.Enabled = false;
-                停止服务ToolStripMenuItem.Enabled = true;
-                分离DTUToolStripMenuItem.Enabled = true;
+                ToolStripMenuItemStartService.Enabled = false;
+                ToolStripMenuItemStopService.Enabled = true;
+                ToolStripMenuItemDetachDtu.Enabled = true;
                 //toolBarButton1.Enabled = false;
                 //toolBarButton2.Enabled = true;
                 //toolBarButton3.Enabled = true;
@@ -325,7 +350,7 @@ namespace Tiger
         //*********************************
         //停止服务
         //*********************************
-        private void 停止服务ToolStripMenuItemClick(object sender, EventArgs e)
+        private void ToolStripMenuItemStopServiceClick(object sender, EventArgs e)
         {
             var mess = new StringBuilder(1000);
             //停止服务
@@ -344,9 +369,9 @@ namespace Tiger
                 //界面处理
                 ServStart = 0;
                 //RefreshList();
-                启动数据中心ToolStripMenuItem.Enabled = true;
-                停止服务ToolStripMenuItem.Enabled = false;
-                分离DTUToolStripMenuItem.Enabled = false;
+                ToolStripMenuItemStartService.Enabled = true;
+                ToolStripMenuItemStopService.Enabled = false;
+                ToolStripMenuItemDetachDtu.Enabled = false;
                 //toolBarButton1.Enabled = true;
                 //toolBarButton2.Enabled = false;
                 //toolBarButton3.Enabled = false;
@@ -359,7 +384,7 @@ namespace Tiger
         //*****************************************
         //分离终端菜单响应函数
         //*****************************************
-        private void 分离dtuToolStripMenuItemClick(object sender, EventArgs e)
+        private void ToolStripMenuItemDetachDtuClick(object sender, EventArgs e)
         {
             //StringBuilder mess = new StringBuilder(500);
             //if (textBox2.Text.Length == 11)
@@ -377,7 +402,7 @@ namespace Tiger
         //*************************************
         //中心参数配置菜单响应函数
         //*************************************
-        private void 中心参数设置ToolStripMenuItemClick(object sender, EventArgs e)
+        private void ToolStripMenuItemCenterParaSetClick(object sender, EventArgs e)
         {
             if (ServStart == 0)
             {
@@ -423,7 +448,7 @@ namespace Tiger
         //****************************************
         //远程参数配置菜单响应函数
         //****************************************
-        private void 服务参数设置ToolStripMenuItemClick(object sender, EventArgs e)
+        private void ToolStripMenuItemRemoteParaSetClick(object sender, EventArgs e)
         {
             uint i;
             var userInfo = new GprsUserInfo();
@@ -462,6 +487,9 @@ namespace Tiger
             //add data binding
             //txt_System_heat.DataBindings.Add(new Binding("Text", global.osystem, "System_heat", false, DataSourceUpdateMode.Never));
             //this.StartPosition = FormStartPosition.CenterScreen;
+
+            // //添加数据绑定的绑定对象
+            Global.Osystem.AddObserver(this);
         }
 
         //********************************************
@@ -477,8 +505,11 @@ namespace Tiger
                 //如果服务正在启动，调用开发包函数使所有DTU下线并关闭服务
                 if (ServStart == 1)
                 {
-                   停止服务ToolStripMenuItem.PerformClick(); 
+                   ToolStripMenuItemStopService.PerformClick(); 
                 }
+                //减少数据绑定的绑定对象
+                Global.Osystem.RemoveObserver(this);
+
                 //遍历所有list元素
                 foreach (var item in Global.DtuList)
                 {
@@ -798,7 +829,7 @@ namespace Tiger
                             //16进制显示收到的数据
                             //if (checkBox1.Checked)
                             {
-                                //DTUObject state = new DTUObject();
+                                //DtuStateObject state = new DtuStateObject();
                                 //state.Aera_IrradiatedSum = 10;
                                 //Dqueue.EnQueueItem(state);
                                 //logger.Info("Receive a message from Gprs Modules!.");
@@ -806,7 +837,7 @@ namespace Tiger
                                 //    + StrToHex(recdPtr.m_data_buf, recdPtr.m_data_len) + "\r\n");
                                 //    
 
-                                _dqueue.EnQueueItem(recdPtr);
+                                Global.Dqueue.EnQueueItem(recdPtr);
                             }
                             // else
                             //显示数据
@@ -898,19 +929,9 @@ namespace Tiger
             //    txt_Gprscontent.Text = "";
             //txt_Gprscontent.AppendText(str);
         }
-
-        private void Button2Click(object sender, EventArgs e)
-        {
-            var fnode = new FNode();
-            fnode.ShowDialog();
-        }
-
-        private void Button1Click1(object sender, EventArgs e)
-        {
-            //F_Node_State fnode = new F_Node_State();
-            //fnode.ShowDialog();
-        }
-
+        //************************************
+        //produce data by timer
+        //************************************
         private void TimerProduceTick(object sender, EventArgs e)
         {
             var stopWatch = new Stopwatch();
@@ -953,156 +974,20 @@ namespace Tiger
                 {
                     _cacheLock.ExitWriteLock();
                 }
-                _dqueue.EnQueueItem(record);
+                Global.Dqueue.EnQueueItem(record);
 
             }
             stopWatch.Stop();
-            // Get the elapsed time as a TimeSpan value.
-
-            //Format and display the TimeSpan value. 
-            //string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-            //    ts.Hours, ts.Minutes, ts.Seconds,
-            //    ts.Milliseconds / 10);
-            //MessageBox.Show("produce time:"+elapsedTime.ToString());
-            BtnBindingTestClick(null, null);
         }
-
+        //************************************
+        //produce data 
+        //************************************
         private void BtnProduceDataClick(object sender, EventArgs e)
         {
-            //timerProduce.Enabled = !timerProduce.Enabled;
             TimerProduceTick(null, null);
         }
 
-        private void BtnAtachClick(object sender, EventArgs e)
-        {
-            _dqueue.OnResponseData += DoubleQueue_OnResponseData;
-            Global.Attached = true;
-            btn_Atach.Enabled = false;
-            btn_Detach.Enabled = true;
-        }
-
-        private void BtnDetachClick(object sender, EventArgs e)
-        {
-            _dqueue.OnResponseData -= DoubleQueue_OnResponseData;
-            Global.Attached = false;
-            btn_Atach.Enabled = true;
-            btn_Detach.Enabled = false;
-        }
-
-
-        private void CheckBoxStoreCheckedChanged(object sender, EventArgs e)
-        { 
-            timerStore2Db.Enabled = checkBox_store.Checked;
-        }
-
-        private void CheckBoxProduceCheckedChanged(object sender, EventArgs e)
-        {
-            timerProduce.Enabled = checkBox_Produce.Checked;
-        }
-
-        private static void StoreDtuState2Db()
-        {
-            var stopWatch = new Stopwatch();
-            stopWatch.Start();
-            using (var context = new DbTigerEntities())
-            {
-                //遍历所有list元素
-                foreach (var item in Global.DtuList)
-                {
-                    try
-                    {
-                        //DateTime now = DateTime.Now;
-                        //DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
-                        //format.DateSeparator = "-";
-                        //format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
-
-                        var unitstate = new unitstate
-                        {
-                            UnitId = item.Key,
-                            DateTime_RecvDate = item.Value.RecvDate,//产生数据时时间
-                            Temp_HeatingBox = item.Value.Field1[(ushort)(Field1No.TempHeatingBox)],
-                            Temp_CollectorBox = item.Value.Field1[(ushort)(Field1No.TempCollectorBox)],
-                            Temp_CollectorIn = item.Value.Field1[(ushort)(Field1No.TempCollectorIn)],
-                            Temp_CollectorOut = item.Value.Field1[(ushort)(Field1No.TempCollectorOut)],
-                            Temp_Ambient = item.Value.Field1[(ushort)(Field1No.TempAmbient)],
-                            Humidity_Ambient = item.Value.Field1[(ushort)(Field1No.HumidityAmbient)],
-                            //Flow_CollectorSys = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_CollectorSys)]),
-                            //Flow_HeatUsing = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_HeatUsing)]),
-                            Amount_Irradiated = item.Value.Field1[(ushort)(Field1No.AmountIrradiated)],
-                            Amount_IrradiatedSum = item.Value.Field1[(ushort)(Field1No.AmountIrradiatedSum)],
-                            //Aera_IrradiatedSum = (decimal)(item.Value.Field1[(ushort)(Field1NO.Aera_IrradiatedSum)]),
-                            Speed_Wind = item.Value.Field1[(ushort)(Field1No.SpeedWind)],
-                            //Volumn_HeatingBox = (decimal)(item.Value.Field1[(ushort)(Field1NO.Volumn_HeatingBox)])
-
-                        };
-                        context.unitstates.Add(unitstate);
-                        context.SaveChanges();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.InnerException.ToString());
-                    }
-
-                }
-            }
-            stopWatch.Stop();
-        }
-
-        private static void ComputeStatistic() 
-        {
-            var stopWatch = new Stopwatch();
-            stopWatch.Start();
-            using (var context = new DbTigerEntities())
-            {
-                //遍历所有list元素
-                foreach (var item in Global.DtuList)
-                {
-                    try
-                    {
-                        var single = new singleunitstatistic
-                        {
-                            UnitId = item.Key,
-                            DateTime_Statics = item.Value.RecvDate,//产生数据时时间
-                            System_heat = (Global.ParameterList[item.Key].SystemHeat)+(Global.ParameterList[item.Key].DeltaTime)*(Global.DtuList[item.Key].Field1[(ushort)Field1No.FlowCollectorSys]),
-
-                        };
-                        Global.SatisticList[item.Key].SystemHeat = single.System_heat;//保存统计数据到全局状态表
-                        context.singleunitstatistics.Add(single);
-                        context.SaveChanges();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.InnerException.ToString());
-                    }
-
-                }
-
-                //所有DTU状态统计要素累积
-                //foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
-                //{
-                //    global.osystem.System_heat += global.SatisticList[item.Key].System_heat;
-                    
-                //}
-                //try
-                //{
-                //    allunitstatistic all = new allunitstatistic
-                //    {
-                //        DateTime_Statics = System.DateTime.Now,//产生数据时时间
-                //        System_heat = global.osystem.System_heat,
-
-                //    };
-                //    context.allunitstatistics.Add(all);
-                //    context.SaveChanges();
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show(ex.InnerException.ToString());
-                //}
-
-            }
-            stopWatch.Stop();
-        }
-
+/*
         private void BtnStore2DbClick(object sender, EventArgs e)
         {
             var stopWatch = new Stopwatch();
@@ -1150,89 +1035,170 @@ namespace Tiger
             }
             stopWatch.Stop();
         }
-
-        private void BtnBindingTestClick(object sender, EventArgs e)
+*/
+        //************************************
+        //attach process
+        //************************************
+        private void BtnAtachClick(object sender, EventArgs e)
         {
-            Global.Osystem.SystemHeat = (ushort)_rand.Next(0, 100);
-            Global.Osystem.SystemHeat = (ushort)_rand.Next(0, 100);//供热水箱温度
-            Global.Osystem.ConventionalEnergy = (ushort)_rand.Next(0, 100);  //系统常规热源耗能量
-            Global.Osystem.StorageTank = (ushort)_rand.Next(0, 100); //贮热水箱热损系数
-            Global.Osystem.SystemEfficiency = (ushort)_rand.Next(0, 100);  //集热系统效率
-            Global.Osystem.SolarAssuranceDay = (ushort)_rand.Next(0, 100);  //日太阳能保证率
-            Global.Osystem.SolarAssuranceYear = (ushort)_rand.Next(0, 100);  //全年太阳能保证率
-            Global.Osystem.EnergyAlternative = (ushort)_rand.Next(0, 100);  //常规能源替代量
-            Global.Osystem.CarbonEmission = (ushort)_rand.Next(0, 100);  //二氧化碳减排量
-            Global.Osystem.SulfurEmission = (ushort)_rand.Next(0, 100); //二氧化硫减排量
-            Global.Osystem.DustEmission = (ushort)_rand.Next(0, 100);  //粉尘减排量
-            Global.Osystem.FeeEffect = (ushort)_rand.Next(0, 100);   //项目费效比
-            Global.Osystem.AuxiliaryHeat = (ushort)_rand.Next(0, 100);//辅助热源加热量
+            Global.Dqueue.OnResponseData += DoubleQueue_OnResponseData;
+            Global.Attached = true;
+            btn_Atach.Enabled = false;
+            btn_Detach.Enabled = true;
+        }
+        //************************************
+        //detach process
+        //************************************
+        private void BtnDetachClick(object sender, EventArgs e)
+        {
+            Global.Dqueue.OnResponseData -= DoubleQueue_OnResponseData;
+            Global.Attached = false;
+            btn_Atach.Enabled = true;
+            btn_Detach.Enabled = false;
+        }
+
+        private void CheckBoxStoreCheckedChanged(object sender, EventArgs e)
+        { 
+            timerStore2Db.Enabled = checkBox_store.Checked;
+        }
+
+        private void CheckBoxProduceCheckedChanged(object sender, EventArgs e)
+        {
+            timerProduce.Enabled = checkBox_Produce.Checked;
+        }
+
+        private static void StoreDtuState2Db()
+        {
+            using (var context = new DbTigerEntities())
+            {
+                //遍历所有list元素
+                foreach (var item in Global.DtuList)
+                {
+                    try
+                    {
+                        //DateTime now = DateTime.Now;
+                        //DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
+                        //format.DateSeparator = "-";
+                        //format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
+
+                        var unitstate = new unitstate
+                        {
+                            UnitId = item.Key,
+                            DateTime_RecvDate = item.Value.RecvDate,//产生数据时时间
+                            Temp_HeatingBox = item.Value.Field1[(ushort)(Field1No.TempHeatingBox)],
+                            Temp_CollectorBox = item.Value.Field1[(ushort)(Field1No.TempCollectorBox)],
+                            Temp_CollectorIn = item.Value.Field1[(ushort)(Field1No.TempCollectorIn)],
+                            Temp_CollectorOut = item.Value.Field1[(ushort)(Field1No.TempCollectorOut)],
+                            Temp_Ambient = item.Value.Field1[(ushort)(Field1No.TempAmbient)],
+                            Humidity_Ambient = item.Value.Field1[(ushort)(Field1No.HumidityAmbient)],
+                            Amount_Irradiated = item.Value.Field1[(ushort)(Field1No.AmountIrradiated)],
+                            Amount_IrradiatedSum = item.Value.Field1[(ushort)(Field1No.AmountIrradiatedSum)],
+                            Speed_Wind = item.Value.Field1[(ushort)(Field1No.SpeedWind)],
+                        };
+                        context.unitstates.Add(unitstate);
+                        context.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.InnerException.ToString());
+                    }
+
+                }
+            }
+        }
+
+        private static void ComputeEveryStatistic() 
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            using (var context = new DbTigerEntities())
+            {
+                //遍历所有list元素
+                foreach (var item in Global.DtuList)
+                {
+                    try
+                    {
+                        var single = new singleunitstatistic
+                        {
+                            UnitId = item.Key,
+                            DateTime_Statics = item.Value.RecvDate,//产生数据时时间
+                            //c*m*delta(T)
+                            System_heat = (Global.ParameterList[item.Key].SystemHeat)+
+                            (Global.ParameterList[item.Key].DeltaTime)*(Global.DtuList[item.Key].Field1[(ushort)Field1No.FlowCollectorSys]),
+
+                        };
+                        Global.SatisticList[item.Key].SystemHeat = single.System_heat;//保存统计数据到全局状态表
+                        context.singleunitstatistics.Add(single);
+                        context.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.InnerException.ToString());
+                    }
+
+                }
+
+                //所有DTU状态统计要素累积
+                //foreach (KeyValuePair<string, DtuStateObject> item in global.DTUList)
+                //{
+                //    global.osystem.System_heat += global.SatisticList[item.Key].System_heat;
+                    
+                //}
+                //try
+                //{
+                //    allunitstatistic all = new allunitstatistic
+                //    {
+                //        DateTime_Statics = System.DateTime.Now,//产生数据时时间
+                //        System_heat = global.osystem.System_heat,
+
+                //    };
+                //    context.allunitstatistics.Add(all);
+                //    context.SaveChanges();
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.InnerException.ToString());
+                //}
+
+            }
+            stopWatch.Stop();
+        }
+
+        private static void ComputeAllStatistic()
+        {
+            //所有DTU状态统计要素累积
+            foreach (var item in Global.DtuList)
+            {
+                Global.Osystem.SystemHeat += Global.SatisticList[item.Key].SystemHeat;
+            }
+        }
+ 
+        private void ButtonStatisticClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonNodeStateClick(object sender, EventArgs e)
+        {
+            var fnode = new FNode();
+            fnode.ShowDialog();
+        }
+
+        private void BtnStore2DbClick(object sender, EventArgs e)
+        {
+            TimerStore2DbTick(null,null);
         }
 
         private void TimerStore2DbTick(object sender, EventArgs e)
         {
-            // btnStore2Db_Click(null, null);
+
         }
 
-        private void Button3Click1(object sender, EventArgs e)
+        private void ToolStripMenuItemTestClick(object sender, EventArgs e)
         {
-            var stopWatch = new Stopwatch();
-            stopWatch.Start();
-            DateTime now = DateTime.Now;
-            foreach (var item in Global.DtuList)
-            {
-                var record = new GprsDataRecord();
-                _cacheLock.EnterWriteLock();
-                try
-                {
-                    record.Initialize();
-                    record.m_userid = item.Key;//消息数据包设置Gprs号码
-                    
-                    DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
-                    format.DateSeparator = "-";
-                    format.ShortDatePattern = @"yyyy/MM/dd/hh/mm/ss";
-                    record.m_recv_date = now.ToString("d", format);//消息数据包设置上报时间
-                    item.Value.RecvDate = now;//产生数据时时间
-
-                    string allstring = "T1-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "T2-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "T3-" + ((ushort)_rand.Next(1, 100) * 0.8).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "T4-" + ((ushort)_rand.Next(1, 100) * 0.79).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "T5-" + ((ushort)_rand.Next(1, 100) * 0.99).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "T6-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "F1-" + ((ushort)_rand.Next(1000, 30000) * 6.7).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "F2-" + ((ushort)_rand.Next(2000, 7700) * 0.89).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "A1-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "A2-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "A3-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "P1-" + ((ushort)_rand.Next(1, 1000) * 0.89).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "W1-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString(CultureInfo.InvariantCulture) + " ";
-                    allstring += "v1-" + ((ushort)_rand.Next(1, 10000) * 0.89).ToString(CultureInfo.InvariantCulture) + " ";
-                    record.m_data_len = (ushort)allstring.Length;
-                    //byte[] byteArray =;
-                    record.m_data_buf = System.Text.Encoding.Default.GetBytes(string.Copy(allstring));
-
-                }
-
-                finally
-                {
-                    _cacheLock.ExitWriteLock();
-                }
-                _dqueue.EnQueueItem(record);
-
-                now = now.AddSeconds(1);
-            }
-            stopWatch.Stop();
-            // Get the elapsed time as a TimeSpan value.
-
-            //Format and display the TimeSpan value. 
-            //string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-            //    ts.Hours, ts.Minutes, ts.Seconds,
-            //    ts.Milliseconds / 10);
-            //MessageBox.Show("produce time:"+elapsedTime.ToString());
-            BtnBindingTestClick(null, null);
+            var ftest = new FTest();
+            ftest.ShowDialog();
         }
-
-       
 
     }
 }

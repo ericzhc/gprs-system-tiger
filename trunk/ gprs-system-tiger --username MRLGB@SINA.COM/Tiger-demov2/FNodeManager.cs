@@ -22,7 +22,7 @@ namespace Tiger
             textBox_VolumHeat.Validating += ValidateTextBox;
         }
 
-        private void F_SystemConfig_Load(object sender, EventArgs e)
+        private void FSystemConfigLoad(object sender, EventArgs e)
         {
             LoadData();
         }
@@ -35,14 +35,14 @@ namespace Tiger
             }
         }
 
-        private void button_ok_Click(object sender, EventArgs e)
+        private void ButtonOkClick(object sender, EventArgs e)
         {
             Global.TimerStore = (ushort)((numericUpDown1.Value > 0) ? numericUpDown1.Value * 1000 : 60 * 1000);
             Global.TimerStatistic=(ushort)((numericUpDown2.Value > 0) ? numericUpDown2.Value * 1000 : 60 * 1000);
             this.Close();
         }
 
-        private void button_ADD_Click(object sender, EventArgs e)
+        private void ButtonAddClick(object sender, EventArgs e)
         {
             if (_validForm) 
             {
@@ -84,7 +84,7 @@ namespace Tiger
             
         }
 
-        private void button_Modify_Click(object sender, EventArgs e)
+        private void ButtonModifyClick(object sender, EventArgs e)
         {
             if (_validForm) 
             {
@@ -124,7 +124,7 @@ namespace Tiger
            
         }
 
-        private void button_Del_Click(object sender, EventArgs e)
+        private void ButtonDelClick(object sender, EventArgs e)
         {
             if (!_validForm) return;
             var currenuser = textBox_Unitid.Text;
@@ -157,7 +157,7 @@ namespace Tiger
             LoadData();
         }
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        private void DataGridView1SelectionChanged(object sender, EventArgs e)
         {
             try
             {

@@ -5,7 +5,7 @@ using Tiger.Gprs;
 
 namespace Tiger.Helper
 {
-    class DoubleQueue
+    public class DoubleQueue
     {
         public Queue<GprsDataRecord> MQ1;
         public Queue<GprsDataRecord> MQ2;

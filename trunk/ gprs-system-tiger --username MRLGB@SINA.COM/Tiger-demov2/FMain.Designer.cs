@@ -32,35 +32,36 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FMain));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.系统管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.系统配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.数据中心配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.中心参数设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.启动数据中心ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.停止服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.分离DTUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.服务参数设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.刷新信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.系统退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.用户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.用户添加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemSystemConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemDataCenterConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemCenerParameterSet = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemStartService = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemStopService = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemDetachDtu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemRemoteParameterSet = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRestartSystem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemRefeshInfor = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemExitSystem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemUserManager = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemUserInforManager = new System.Windows.Forms.ToolStripMenuItem();
             this.数据库管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.数据备份ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.数据恢复ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.数据清除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemDataBackup = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemDataRecovery = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemDataClear = new System.Windows.Forms.ToolStripMenuItem();
             this.历史数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.统计要素历史数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.显示要素历史数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemStatiscicHistory = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemStateHistory = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemTest = new System.Windows.Forms.ToolStripMenuItem();
             this.statusBarPanel3 = new System.Windows.Forms.StatusBarPanel();
             this.statusBarPanel2 = new System.Windows.Forms.StatusBarPanel();
             this.statusBarPanel1 = new System.Windows.Forms.StatusBarPanel();
             this.statusBar1 = new System.Windows.Forms.StatusBar();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonStatistic = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.txt_Fee_effect = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
@@ -87,7 +88,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonNodeState = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
@@ -114,12 +115,10 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.btnBindingTest = new System.Windows.Forms.Button();
             this.timerStore2Db = new System.Windows.Forms.Timer(this.components);
             this.btnStore2Db = new System.Windows.Forms.Button();
             this.checkBox_store = new System.Windows.Forms.CheckBox();
             this.checkBox_Produce = new System.Windows.Forms.CheckBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel2)).BeginInit();
@@ -149,10 +148,11 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.系统管理ToolStripMenuItem,
-            this.用户管理ToolStripMenuItem,
+            this.ToolStripMenuItemUserManager,
             this.数据库管理ToolStripMenuItem,
             this.历史数据ToolStripMenuItem,
-            this.帮助ToolStripMenuItem});
+            this.ToolStripMenuItemHelp,
+            this.ToolStripMenuItemTest});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1008, 24);
@@ -162,166 +162,166 @@
             // 系统管理ToolStripMenuItem
             // 
             this.系统管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.系统配置ToolStripMenuItem,
-            this.数据中心配置ToolStripMenuItem,
-            this.toolStripMenuItem2,
-            this.刷新信息ToolStripMenuItem,
-            this.系统退出ToolStripMenuItem});
+            this.ToolStripMenuItemSystemConfig,
+            this.ToolStripMenuItemDataCenterConfig,
+            this.toolStripMenuItemRestartSystem,
+            this.ToolStripMenuItemRefeshInfor,
+            this.ToolStripMenuItemExitSystem});
             this.系统管理ToolStripMenuItem.Name = "系统管理ToolStripMenuItem";
             this.系统管理ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.系统管理ToolStripMenuItem.Text = "系统管理";
             // 
-            // 系统配置ToolStripMenuItem
+            // ToolStripMenuItemSystemConfig
             // 
-            this.系统配置ToolStripMenuItem.Name = "系统配置ToolStripMenuItem";
-            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.系统配置ToolStripMenuItem.Text = "系统配置";
-            this.系统配置ToolStripMenuItem.Click += new System.EventHandler(this.系统配置ToolStripMenuItemClick);
+            this.ToolStripMenuItemSystemConfig.Name = "ToolStripMenuItemSystemConfig";
+            this.ToolStripMenuItemSystemConfig.Size = new System.Drawing.Size(122, 22);
+            this.ToolStripMenuItemSystemConfig.Text = "系统配置";
+            this.ToolStripMenuItemSystemConfig.Click += new System.EventHandler(this.ToolStripMenuItemSystemConfigClick);
             // 
-            // 数据中心配置ToolStripMenuItem
+            // ToolStripMenuItemDataCenterConfig
             // 
-            this.数据中心配置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.中心参数设置ToolStripMenuItem,
-            this.启动数据中心ToolStripMenuItem,
-            this.停止服务ToolStripMenuItem,
-            this.分离DTUToolStripMenuItem,
-            this.服务参数设置ToolStripMenuItem});
-            this.数据中心配置ToolStripMenuItem.Name = "数据中心配置ToolStripMenuItem";
-            this.数据中心配置ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.数据中心配置ToolStripMenuItem.Text = "数据中心";
+            this.ToolStripMenuItemDataCenterConfig.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemCenerParameterSet,
+            this.ToolStripMenuItemStartService,
+            this.ToolStripMenuItemStopService,
+            this.ToolStripMenuItemDetachDtu,
+            this.ToolStripMenuItemRemoteParameterSet});
+            this.ToolStripMenuItemDataCenterConfig.Name = "ToolStripMenuItemDataCenterConfig";
+            this.ToolStripMenuItemDataCenterConfig.Size = new System.Drawing.Size(122, 22);
+            this.ToolStripMenuItemDataCenterConfig.Text = "数据中心";
             // 
-            // 中心参数设置ToolStripMenuItem
+            // ToolStripMenuItemCenerParameterSet
             // 
-            this.中心参数设置ToolStripMenuItem.Name = "中心参数设置ToolStripMenuItem";
-            this.中心参数设置ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.中心参数设置ToolStripMenuItem.Text = "中心参数设置";
-            this.中心参数设置ToolStripMenuItem.Click += new System.EventHandler(this.中心参数设置ToolStripMenuItemClick);
+            this.ToolStripMenuItemCenerParameterSet.Name = "ToolStripMenuItemCenerParameterSet";
+            this.ToolStripMenuItemCenerParameterSet.Size = new System.Drawing.Size(146, 22);
+            this.ToolStripMenuItemCenerParameterSet.Text = "中心参数设置";
+            this.ToolStripMenuItemCenerParameterSet.Click += new System.EventHandler(this.ToolStripMenuItemCenterParaSetClick);
             // 
-            // 启动数据中心ToolStripMenuItem
+            // ToolStripMenuItemStartService
             // 
-            this.启动数据中心ToolStripMenuItem.Name = "启动数据中心ToolStripMenuItem";
-            this.启动数据中心ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.启动数据中心ToolStripMenuItem.Text = "启动服务";
-            this.启动数据中心ToolStripMenuItem.Click += new System.EventHandler(this.启动数据中心ToolStripMenuItemClick);
+            this.ToolStripMenuItemStartService.Name = "ToolStripMenuItemStartService";
+            this.ToolStripMenuItemStartService.Size = new System.Drawing.Size(146, 22);
+            this.ToolStripMenuItemStartService.Text = "启动服务";
+            this.ToolStripMenuItemStartService.Click += new System.EventHandler(this.ToolStripMenuItemStartServiceClick);
             // 
-            // 停止服务ToolStripMenuItem
+            // ToolStripMenuItemStopService
             // 
-            this.停止服务ToolStripMenuItem.Name = "停止服务ToolStripMenuItem";
-            this.停止服务ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.停止服务ToolStripMenuItem.Text = "停止服务";
-            this.停止服务ToolStripMenuItem.Click += new System.EventHandler(this.停止服务ToolStripMenuItemClick);
+            this.ToolStripMenuItemStopService.Name = "ToolStripMenuItemStopService";
+            this.ToolStripMenuItemStopService.Size = new System.Drawing.Size(146, 22);
+            this.ToolStripMenuItemStopService.Text = "停止服务";
+            this.ToolStripMenuItemStopService.Click += new System.EventHandler(this.ToolStripMenuItemStopServiceClick);
             // 
-            // 分离DTUToolStripMenuItem
+            // ToolStripMenuItemDetachDtu
             // 
-            this.分离DTUToolStripMenuItem.Name = "分离DTUToolStripMenuItem";
-            this.分离DTUToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.分离DTUToolStripMenuItem.Text = "分离DTU";
-            this.分离DTUToolStripMenuItem.Click += new System.EventHandler(this.分离dtuToolStripMenuItemClick);
+            this.ToolStripMenuItemDetachDtu.Name = "ToolStripMenuItemDetachDtu";
+            this.ToolStripMenuItemDetachDtu.Size = new System.Drawing.Size(146, 22);
+            this.ToolStripMenuItemDetachDtu.Text = "分离DTU";
+            this.ToolStripMenuItemDetachDtu.Click += new System.EventHandler(this.ToolStripMenuItemDetachDtuClick);
             // 
-            // 服务参数设置ToolStripMenuItem
+            // ToolStripMenuItemRemoteParameterSet
             // 
-            this.服务参数设置ToolStripMenuItem.Name = "服务参数设置ToolStripMenuItem";
-            this.服务参数设置ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.服务参数设置ToolStripMenuItem.Text = "远程参数配置";
-            this.服务参数设置ToolStripMenuItem.Click += new System.EventHandler(this.服务参数设置ToolStripMenuItemClick);
+            this.ToolStripMenuItemRemoteParameterSet.Name = "ToolStripMenuItemRemoteParameterSet";
+            this.ToolStripMenuItemRemoteParameterSet.Size = new System.Drawing.Size(146, 22);
+            this.ToolStripMenuItemRemoteParameterSet.Text = "远程参数配置";
+            this.ToolStripMenuItemRemoteParameterSet.Click += new System.EventHandler(this.ToolStripMenuItemRemoteParaSetClick);
             // 
-            // toolStripMenuItem2
+            // toolStripMenuItemRestartSystem
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(122, 22);
-            this.toolStripMenuItem2.Text = "系统重启";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.ToolStripMenuItem2Click);
+            this.toolStripMenuItemRestartSystem.Name = "toolStripMenuItemRestartSystem";
+            this.toolStripMenuItemRestartSystem.Size = new System.Drawing.Size(122, 22);
+            this.toolStripMenuItemRestartSystem.Text = "系统重启";
+            this.toolStripMenuItemRestartSystem.Click += new System.EventHandler(this.ToolStripMenuItemRestartSystemClick);
             // 
-            // 刷新信息ToolStripMenuItem
+            // ToolStripMenuItemRefeshInfor
             // 
-            this.刷新信息ToolStripMenuItem.Name = "刷新信息ToolStripMenuItem";
-            this.刷新信息ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.刷新信息ToolStripMenuItem.Text = "刷新信息";
+            this.ToolStripMenuItemRefeshInfor.Name = "ToolStripMenuItemRefeshInfor";
+            this.ToolStripMenuItemRefeshInfor.Size = new System.Drawing.Size(122, 22);
+            this.ToolStripMenuItemRefeshInfor.Text = "刷新信息";
             // 
-            // 系统退出ToolStripMenuItem
+            // ToolStripMenuItemExitSystem
             // 
-            this.系统退出ToolStripMenuItem.Name = "系统退出ToolStripMenuItem";
-            this.系统退出ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.系统退出ToolStripMenuItem.Text = "系统退出";
-            this.系统退出ToolStripMenuItem.Click += new System.EventHandler(this.系统退出ToolStripMenuItemClick);
+            this.ToolStripMenuItemExitSystem.Name = "ToolStripMenuItemExitSystem";
+            this.ToolStripMenuItemExitSystem.Size = new System.Drawing.Size(122, 22);
+            this.ToolStripMenuItemExitSystem.Text = "系统退出";
+            this.ToolStripMenuItemExitSystem.Click += new System.EventHandler(this.ToolStripMenuItemExitSystemClick);
             // 
-            // 用户管理ToolStripMenuItem
+            // ToolStripMenuItemUserManager
             // 
-            this.用户管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.用户添加ToolStripMenuItem});
-            this.用户管理ToolStripMenuItem.Name = "用户管理ToolStripMenuItem";
-            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.用户管理ToolStripMenuItem.Text = "用户管理";
+            this.ToolStripMenuItemUserManager.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemUserInforManager});
+            this.ToolStripMenuItemUserManager.Name = "ToolStripMenuItemUserManager";
+            this.ToolStripMenuItemUserManager.Size = new System.Drawing.Size(67, 20);
+            this.ToolStripMenuItemUserManager.Text = "用户管理";
             // 
-            // 用户添加ToolStripMenuItem
+            // ToolStripMenuItemUserInforManager
             // 
-            this.用户添加ToolStripMenuItem.Name = "用户添加ToolStripMenuItem";
-            this.用户添加ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.用户添加ToolStripMenuItem.Text = "用户信息管理";
-            this.用户添加ToolStripMenuItem.Click += new System.EventHandler(this.用户添加ToolStripMenuItemClick);
+            this.ToolStripMenuItemUserInforManager.Name = "ToolStripMenuItemUserInforManager";
+            this.ToolStripMenuItemUserInforManager.Size = new System.Drawing.Size(146, 22);
+            this.ToolStripMenuItemUserInforManager.Text = "用户信息管理";
+            this.ToolStripMenuItemUserInforManager.Click += new System.EventHandler(this.ToolStripMenuItemAddUserClick);
             // 
             // 数据库管理ToolStripMenuItem
             // 
             this.数据库管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.数据备份ToolStripMenuItem,
-            this.数据恢复ToolStripMenuItem,
-            this.数据清除ToolStripMenuItem});
+            this.ToolStripMenuItemDataBackup,
+            this.ToolStripMenuItemDataRecovery,
+            this.ToolStripMenuItemDataClear});
             this.数据库管理ToolStripMenuItem.Name = "数据库管理ToolStripMenuItem";
             this.数据库管理ToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.数据库管理ToolStripMenuItem.Text = "数据库管理";
             // 
-            // 数据备份ToolStripMenuItem
+            // ToolStripMenuItemDataBackup
             // 
-            this.数据备份ToolStripMenuItem.Name = "数据备份ToolStripMenuItem";
-            this.数据备份ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.数据备份ToolStripMenuItem.Text = "数据备份";
-            this.数据备份ToolStripMenuItem.Click += new System.EventHandler(this.数据备份ToolStripMenuItemClick);
+            this.ToolStripMenuItemDataBackup.Name = "ToolStripMenuItemDataBackup";
+            this.ToolStripMenuItemDataBackup.Size = new System.Drawing.Size(122, 22);
+            this.ToolStripMenuItemDataBackup.Text = "数据备份";
+            this.ToolStripMenuItemDataBackup.Click += new System.EventHandler(this.ToolStripMenuItemDataBackupClick);
             // 
-            // 数据恢复ToolStripMenuItem
+            // ToolStripMenuItemDataRecovery
             // 
-            this.数据恢复ToolStripMenuItem.Name = "数据恢复ToolStripMenuItem";
-            this.数据恢复ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.数据恢复ToolStripMenuItem.Text = "数据恢复";
+            this.ToolStripMenuItemDataRecovery.Name = "ToolStripMenuItemDataRecovery";
+            this.ToolStripMenuItemDataRecovery.Size = new System.Drawing.Size(122, 22);
+            this.ToolStripMenuItemDataRecovery.Text = "数据恢复";
             // 
-            // 数据清除ToolStripMenuItem
+            // ToolStripMenuItemDataClear
             // 
-            this.数据清除ToolStripMenuItem.Name = "数据清除ToolStripMenuItem";
-            this.数据清除ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.数据清除ToolStripMenuItem.Text = "数据清除";
-            this.数据清除ToolStripMenuItem.Click += new System.EventHandler(this.数据清除ToolStripMenuItemClick);
+            this.ToolStripMenuItemDataClear.Name = "ToolStripMenuItemDataClear";
+            this.ToolStripMenuItemDataClear.Size = new System.Drawing.Size(122, 22);
+            this.ToolStripMenuItemDataClear.Text = "数据清除";
+            this.ToolStripMenuItemDataClear.Click += new System.EventHandler(this.ToolStripMenuItemDataClearClick);
             // 
             // 历史数据ToolStripMenuItem
             // 
             this.历史数据ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.统计要素历史数据ToolStripMenuItem,
-            this.显示要素历史数据ToolStripMenuItem});
+            this.ToolStripMenuItemStatiscicHistory,
+            this.ToolStripMenuItemStateHistory});
             this.历史数据ToolStripMenuItem.Name = "历史数据ToolStripMenuItem";
             this.历史数据ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.历史数据ToolStripMenuItem.Text = "历史数据";
             // 
-            // 统计要素历史数据ToolStripMenuItem
+            // ToolStripMenuItemStatiscicHistory
             // 
-            this.统计要素历史数据ToolStripMenuItem.Name = "统计要素历史数据ToolStripMenuItem";
-            this.统计要素历史数据ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.统计要素历史数据ToolStripMenuItem.Text = "统计要素历史数据";
-            this.统计要素历史数据ToolStripMenuItem.Click += new System.EventHandler(this.统计要素历史数据ToolStripMenuItemClick);
+            this.ToolStripMenuItemStatiscicHistory.Name = "ToolStripMenuItemStatiscicHistory";
+            this.ToolStripMenuItemStatiscicHistory.Size = new System.Drawing.Size(170, 22);
+            this.ToolStripMenuItemStatiscicHistory.Text = "统计要素历史数据";
+            this.ToolStripMenuItemStatiscicHistory.Click += new System.EventHandler(this.ToolStripMenuItemStatisticHistoryClick);
             // 
-            // 显示要素历史数据ToolStripMenuItem
+            // ToolStripMenuItemStateHistory
             // 
-            this.显示要素历史数据ToolStripMenuItem.Name = "显示要素历史数据ToolStripMenuItem";
-            this.显示要素历史数据ToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.显示要素历史数据ToolStripMenuItem.Text = "显示要素历史数据";
-            this.显示要素历史数据ToolStripMenuItem.Click += new System.EventHandler(this.显示要素历史数据ToolStripMenuItemClick);
+            this.ToolStripMenuItemStateHistory.Name = "ToolStripMenuItemStateHistory";
+            this.ToolStripMenuItemStateHistory.Size = new System.Drawing.Size(170, 22);
+            this.ToolStripMenuItemStateHistory.Text = "显示要素历史数据";
+            this.ToolStripMenuItemStateHistory.Click += new System.EventHandler(this.ToolStripMenuItemStateHistoryClick);
             // 
-            // 帮助ToolStripMenuItem
+            // ToolStripMenuItemHelp
             // 
-            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.帮助ToolStripMenuItem1,
             this.关于ToolStripMenuItem});
-            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.帮助ToolStripMenuItem.Text = "帮助";
-            this.帮助ToolStripMenuItem.Click += new System.EventHandler(this.帮助ToolStripMenuItemClick);
+            this.ToolStripMenuItemHelp.Name = "ToolStripMenuItemHelp";
+            this.ToolStripMenuItemHelp.Size = new System.Drawing.Size(43, 20);
+            this.ToolStripMenuItemHelp.Text = "帮助";
+            this.ToolStripMenuItemHelp.Click += new System.EventHandler(this.ToolStripMenuItemHelpClick);
             // 
             // 帮助ToolStripMenuItem1
             // 
@@ -334,6 +334,13 @@
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
             this.关于ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.关于ToolStripMenuItem.Text = "关于";
+            // 
+            // ToolStripMenuItemTest
+            // 
+            this.ToolStripMenuItemTest.Name = "ToolStripMenuItemTest";
+            this.ToolStripMenuItemTest.Size = new System.Drawing.Size(43, 20);
+            this.ToolStripMenuItemTest.Text = "测试";
+            this.ToolStripMenuItemTest.Click += new System.EventHandler(this.ToolStripMenuItemTestClick);
             // 
             // statusBarPanel3
             // 
@@ -356,7 +363,7 @@
             // 
             // statusBar1
             // 
-            this.statusBar1.Location = new System.Drawing.Point(0, 708);
+            this.statusBar1.Location = new System.Drawing.Point(0, 707);
             this.statusBar1.Name = "statusBar1";
             this.statusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.statusBarPanel1,
@@ -381,14 +388,14 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(1008, 668);
-            this.splitContainer1.SplitterDistance = 455;
+            this.splitContainer1.Size = new System.Drawing.Size(1008, 667);
+            this.splitContainer1.SplitterDistance = 461;
             this.splitContainer1.TabIndex = 3;
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.buttonStatistic);
             this.groupBox1.Controls.Add(this.groupBox8);
             this.groupBox1.Controls.Add(this.groupBox9);
             this.groupBox1.Controls.Add(this.groupBox7);
@@ -398,22 +405,22 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(455, 668);
+            this.groupBox1.Size = new System.Drawing.Size(461, 667);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // button1
+            // buttonStatistic
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.button1.Location = new System.Drawing.Point(290, 472);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(101, 38);
-            this.button1.TabIndex = 51;
-            this.button1.Text = "详细";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1Click1);
+            this.buttonStatistic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonStatistic.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonStatistic.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.buttonStatistic.Location = new System.Drawing.Point(332, 571);
+            this.buttonStatistic.Name = "buttonStatistic";
+            this.buttonStatistic.Size = new System.Drawing.Size(80, 28);
+            this.buttonStatistic.TabIndex = 51;
+            this.buttonStatistic.Text = "详细";
+            this.buttonStatistic.UseVisualStyleBackColor = true;
+            this.buttonStatistic.Click += new System.EventHandler(this.ButtonStatisticClick);
             // 
             // groupBox8
             // 
@@ -424,7 +431,7 @@
             this.groupBox8.Controls.Add(this.label30);
             this.groupBox8.Location = new System.Drawing.Point(65, 395);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(326, 68);
+            this.groupBox8.Size = new System.Drawing.Size(332, 68);
             this.groupBox8.TabIndex = 49;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "项目费效比：";
@@ -457,7 +464,7 @@
             this.groupBox9.Controls.Add(this.label20);
             this.groupBox9.Location = new System.Drawing.Point(65, 333);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(326, 69);
+            this.groupBox9.Size = new System.Drawing.Size(332, 69);
             this.groupBox9.TabIndex = 48;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "常规能源替代量：";
@@ -492,7 +499,7 @@
             this.groupBox7.Controls.Add(this.label15);
             this.groupBox7.Location = new System.Drawing.Point(65, 244);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(326, 92);
+            this.groupBox7.Size = new System.Drawing.Size(332, 92);
             this.groupBox7.TabIndex = 47;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "系统太阳能保证率:";
@@ -548,7 +555,7 @@
             this.groupBox5.Controls.Add(this.label28);
             this.groupBox5.Location = new System.Drawing.Point(65, 128);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(326, 110);
+            this.groupBox5.Size = new System.Drawing.Size(332, 110);
             this.groupBox5.TabIndex = 44;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "环境效益";
@@ -619,7 +626,7 @@
             this.groupBox4.Controls.Add(this.label19);
             this.groupBox4.Location = new System.Drawing.Point(65, 72);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(326, 64);
+            this.groupBox4.Size = new System.Drawing.Size(332, 64);
             this.groupBox4.TabIndex = 45;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "太阳能集热系统效率:";
@@ -652,7 +659,7 @@
             this.groupBox6.Controls.Add(this.label14);
             this.groupBox6.Location = new System.Drawing.Point(65, 18);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(326, 65);
+            this.groupBox6.Size = new System.Drawing.Size(332, 65);
             this.groupBox6.TabIndex = 46;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "系统有用得热量:";
@@ -684,7 +691,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.buttonNodeState);
             this.groupBox2.Controls.Add(this.groupBox13);
             this.groupBox2.Controls.Add(this.groupBox14);
             this.groupBox2.Controls.Add(this.groupBox11);
@@ -693,7 +700,7 @@
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(549, 668);
+            this.groupBox2.Size = new System.Drawing.Size(543, 667);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
@@ -708,18 +715,18 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "正常";
             // 
-            // button2
+            // buttonNodeState
             // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.button2.Location = new System.Drawing.Point(379, 449);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(129, 39);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "详细";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2Click);
+            this.buttonNodeState.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNodeState.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonNodeState.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.buttonNodeState.Location = new System.Drawing.Point(435, 571);
+            this.buttonNodeState.Name = "buttonNodeState";
+            this.buttonNodeState.Size = new System.Drawing.Size(80, 28);
+            this.buttonNodeState.TabIndex = 6;
+            this.buttonNodeState.Text = "详细";
+            this.buttonNodeState.UseVisualStyleBackColor = true;
+            this.buttonNodeState.Click += new System.EventHandler(this.ButtonNodeStateClick);
             // 
             // groupBox13
             // 
@@ -851,12 +858,12 @@
             // 
             this.btnProduceData.BackColor = System.Drawing.Color.Transparent;
             this.btnProduceData.ForeColor = System.Drawing.Color.Maroon;
-            this.btnProduceData.Location = new System.Drawing.Point(332, 31);
+            this.btnProduceData.Location = new System.Drawing.Point(335, 33);
             this.btnProduceData.Margin = new System.Windows.Forms.Padding(2);
             this.btnProduceData.Name = "btnProduceData";
-            this.btnProduceData.Size = new System.Drawing.Size(105, 24);
+            this.btnProduceData.Size = new System.Drawing.Size(77, 24);
             this.btnProduceData.TabIndex = 28;
-            this.btnProduceData.Text = "产生数据.....";
+            this.btnProduceData.Text = "产生数据";
             this.btnProduceData.UseVisualStyleBackColor = false;
             this.btnProduceData.Click += new System.EventHandler(this.BtnProduceDataClick);
             // 
@@ -975,16 +982,6 @@
             this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton5.ToolTipText = "退出系统";
             // 
-            // btnBindingTest
-            // 
-            this.btnBindingTest.Location = new System.Drawing.Point(866, 33);
-            this.btnBindingTest.Name = "btnBindingTest";
-            this.btnBindingTest.Size = new System.Drawing.Size(114, 23);
-            this.btnBindingTest.TabIndex = 32;
-            this.btnBindingTest.Text = "绑定测试";
-            this.btnBindingTest.UseVisualStyleBackColor = true;
-            this.btnBindingTest.Click += new System.EventHandler(this.BtnBindingTestClick);
-            // 
             // timerStore2Db
             // 
             this.timerStore2Db.Interval = 10000;
@@ -992,7 +989,7 @@
             // 
             // btnStore2Db
             // 
-            this.btnStore2Db.Location = new System.Drawing.Point(564, 32);
+            this.btnStore2Db.Location = new System.Drawing.Point(564, 34);
             this.btnStore2Db.Name = "btnStore2Db";
             this.btnStore2Db.Size = new System.Drawing.Size(75, 23);
             this.btnStore2Db.TabIndex = 33;
@@ -1022,27 +1019,15 @@
             this.checkBox_Produce.UseVisualStyleBackColor = true;
             this.checkBox_Produce.CheckedChanged += new System.EventHandler(this.CheckBoxProduceCheckedChanged);
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(442, 33);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(37, 23);
-            this.button3.TabIndex = 35;
-            this.button3.Text = "2";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3Click1);
-            // 
-            // F_Main
+            // FMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 730);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(1008, 729);
             this.Controls.Add(this.checkBox_Produce);
             this.Controls.Add(this.checkBox_store);
             this.Controls.Add(this.btnProduceData);
             this.Controls.Add(this.btnStore2Db);
-            this.Controls.Add(this.btnBindingTest);
             this.Controls.Add(this.btn_Detach);
             this.Controls.Add(this.btn_Atach);
             this.Controls.Add(this.statusBar1);
@@ -1051,7 +1036,8 @@
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
-            this.Name = "F_Main";
+            this.Name = "FMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "安徽泰格太阳能供水评测系统V2.0";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.FMainClosing);
             this.Closed += new System.EventHandler(this.FMainClosed);
@@ -1105,21 +1091,21 @@
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ToolStripMenuItem 系统管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 系统配置ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 数据中心配置ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem 刷新信息ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 系统退出ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 用户管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 用户添加ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemSystemConfig;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDataCenterConfig;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRestartSystem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemRefeshInfor;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemExitSystem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemUserManager;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemUserInforManager;
         private System.Windows.Forms.ToolStripMenuItem 数据库管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 数据备份ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 数据恢复ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 数据清除ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDataBackup;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDataRecovery;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDataClear;
         private System.Windows.Forms.ToolStripMenuItem 历史数据ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 统计要素历史数据ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 显示要素历史数据ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemStatiscicHistory;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemStateHistory;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemHelp;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1164,12 +1150,12 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ToolStripMenuItem 启动数据中心ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 停止服务ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 分离DTUToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 服务参数设置ToolStripMenuItem;
+        private System.Windows.Forms.Button buttonNodeState;
+        private System.Windows.Forms.Button buttonStatistic;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemStartService;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemStopService;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDetachDtu;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemRemoteParameterSet;
         private System.Windows.Forms.Button btnProduceData;
         private System.Windows.Forms.Button btn_Atach;
         private System.Windows.Forms.Button btn_Detach;
@@ -1184,14 +1170,13 @@
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripMenuItem 中心参数设置ToolStripMenuItem;
-        private System.Windows.Forms.Button btnBindingTest;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCenerParameterSet;
         private System.Windows.Forms.Timer timerStore2Db;
         private System.Windows.Forms.Button btnStore2Db;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox checkBox_store;
         private System.Windows.Forms.CheckBox checkBox_Produce;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemTest;
     }
 }
 

@@ -18,7 +18,7 @@ namespace Tiger
         private void FNode_Load(object sender, EventArgs e)
         {
             _module.TreeInit(treeView1);
-            _bs = new BindingSource {DataSource = typeof (DtuObject)};
+            _bs = new BindingSource {DataSource = typeof (DtuStateObject)};
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)

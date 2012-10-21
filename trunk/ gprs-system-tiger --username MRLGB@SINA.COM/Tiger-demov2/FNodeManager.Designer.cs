@@ -72,7 +72,7 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(732, 150);
             this.dataGridView1.TabIndex = 12;
-            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.DataGridView1SelectionChanged);
             // 
             // label6
             // 
@@ -98,7 +98,7 @@
             this.button_ok.TabIndex = 15;
             this.button_ok.Text = "ok";
             this.button_ok.UseVisualStyleBackColor = true;
-            this.button_ok.Click += new System.EventHandler(this.button_ok_Click);
+            this.button_ok.Click += new System.EventHandler(this.ButtonOkClick);
             // 
             // groupBox1
             // 
@@ -192,7 +192,7 @@
             this.button_Del.TabIndex = 39;
             this.button_Del.Text = "删除";
             this.button_Del.UseVisualStyleBackColor = true;
-            this.button_Del.Click += new System.EventHandler(this.button_Del_Click);
+            this.button_Del.Click += new System.EventHandler(this.ButtonDelClick);
             // 
             // button_Modify
             // 
@@ -202,7 +202,7 @@
             this.button_Modify.TabIndex = 38;
             this.button_Modify.Text = "修改信息";
             this.button_Modify.UseVisualStyleBackColor = true;
-            this.button_Modify.Click += new System.EventHandler(this.button_Modify_Click);
+            this.button_Modify.Click += new System.EventHandler(this.ButtonModifyClick);
             // 
             // button_ADD
             // 
@@ -212,7 +212,7 @@
             this.button_ADD.TabIndex = 37;
             this.button_ADD.Text = "添加";
             this.button_ADD.UseVisualStyleBackColor = true;
-            this.button_ADD.Click += new System.EventHandler(this.button_ADD_Click);
+            this.button_ADD.Click += new System.EventHandler(this.ButtonAddClick);
             // 
             // textBox_VolumHeat
             // 
@@ -338,7 +338,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "F_NodeManager";
             this.Text = "F_SystemConfig";
-            this.Load += new System.EventHandler(this.F_SystemConfig_Load);
+            this.Load += new System.EventHandler(this.FSystemConfigLoad);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox1.ResumeLayout(false);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.IO;
@@ -15,10 +16,6 @@ using Tiger.Properties;
 
 namespace Tiger.Helper
 {
-    /// <summary>
-    /// IniFile 的摘要说明。
-    /// </summary>
-
     //*********************************************
     //ini文件操作类，调用该类中函数操作配置文件，
     //用来保存和读取服务参数
@@ -71,6 +68,13 @@ namespace Tiger.Helper
         {
             return File.Exists(Inipath);
         }
+    }
+
+    public enum UserRole
+    {
+        Administrator = 0,
+        RegionAdmin,
+        RegionReader
     }
 
     public enum Field1No
@@ -126,14 +130,7 @@ namespace Tiger.Helper
         MAX
     }
 
-    public enum UserRole
-    {
-        Administrator = 0,
-        RegionAdmin,
-        RegionReader
-    }
-
-    public class DtuObject
+    public class DtuStateObject
     {
         private readonly ReaderWriterLockSlim _cacheLock = new ReaderWriterLockSlim();
         public float[] Field1;
@@ -181,7 +178,7 @@ namespace Tiger.Helper
 
         public DateTime RecvDate { get; set; }
 
-        public DtuObject(string useid) 
+        public DtuStateObject(string useid) 
         {
             Id = useid;
             Field1 = new float[(ushort)Field1No.MAX];
@@ -255,14 +252,14 @@ namespace Tiger.Helper
 
         }
 
-        public void UpdateDtuObject(GprsDataRecord recvMessage)
+        public void UpdateDtuStateObject(GprsDataRecord recvMessage)
         {
-            var stopWatch = new Stopwatch();
-            stopWatch.Start();
+            //var stopWatch = new Stopwatch();
+            //stopWatch.Start();
           
             if (!recvMessage.Equals(null))
             {
-                //解析消息，构建DTUObject
+                //解析消息，构建DtuStateObject
                 // 
                     //string HexString = StrToHex(RecvMessage.m_data_buf, RecvMessage.m_data_len);
                     string hexString = Encoding.Default.GetString(recvMessage.m_data_buf);
@@ -364,14 +361,7 @@ namespace Tiger.Helper
                 _cacheLock.ExitWriteLock();
             }
 
-            stopWatch.Stop();
-            // Get the elapsed time as a TimeSpan value.
-
-            // Format and display the TimeSpan value. 
-            //string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-            //    ts.Hours, ts.Minutes, ts.Seconds,
-            //    ts.Milliseconds / 10);
-            //MessageBox.Show(elapsedTime.ToString());
+            //stopWatch.Stop();
         }
     }
 
@@ -418,12 +408,11 @@ namespace Tiger.Helper
         }
     }
 
-    public class StatisticObject : INotifyPropertyChanged
+    public class StatisticObject : INotifyPropertyChanged, IDisposable 
     {
-        private readonly ReaderWriterLockSlim _cacheLock = new ReaderWriterLockSlim();
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Id { get; set; }
+        readonly ArrayList _observers = new ArrayList();
 
         private float _systemHeat;  //集热系统得热量1
         public float SystemHeat
@@ -431,247 +420,197 @@ namespace Tiger.Helper
             get { return _systemHeat; }
             set
             {
-                _systemHeat = value;
-                OnPropertyChanged("SystemHeat");
+                {_systemHeat = value; UpdateObservers("SystemHeat", _systemHeat);}
             }
-        }
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
+        } 
 
         private float _conventionalEnergy;  //系统常规热源耗能量2
         public float ConventionalEnergy
         {
             get { return _conventionalEnergy; }
-            set
-            {
-                _conventionalEnergy = value;
-                OnPropertyChanged("ConventionalEnergy");
-            }
+            set { _conventionalEnergy = value; UpdateObservers("ConventionalEnergy", _conventionalEnergy);}
         }
         private float _storageTank; //贮热水箱热损系数3
         public float StorageTank
         {
             get { return _storageTank; }
-            set
-            {
-                _storageTank = value;
-                OnPropertyChanged("StorageTank");
-            }
+            set { _storageTank = value;UpdateObservers("StorageTank", _storageTank);}
         }
         private float _systemEfficiency;  //集热系统效率4
 
         public float SystemEfficiency
         {
             get { return _systemEfficiency; }
-            set
-            {
-                _systemEfficiency = value;
-                OnPropertyChanged("SystemEfficiency");
-            }
+            set { _systemEfficiency = value;UpdateObservers("SystemEfficiency", _systemEfficiency); }
         }
         private float _solarAssuranceDay;  //日太阳能保证率5
 
         public float SolarAssuranceDay
         {
             get { return _solarAssuranceDay; }
-            set { _solarAssuranceDay = value; OnPropertyChanged("SolarAssuranceDay"); }
+            set { _solarAssuranceDay = value;UpdateObservers("SolarAssuranceDay", _solarAssuranceDay);}
         }
         private float _solarAssuranceYear;  //全年太阳能保证率6
 
         public float SolarAssuranceYear
         {
             get { return _solarAssuranceYear; }
-            set { _solarAssuranceYear = value; OnPropertyChanged("SolarAssuranceYear"); }
+            set {_solarAssuranceYear = value; UpdateObservers("SolarAssuranceYear", _solarAssuranceYear); }
         }
         private float _energyAlternative;  //常规能源替代量7
 
         public float EnergyAlternative
         {
             get { return _energyAlternative; }
-            set { _energyAlternative = value; OnPropertyChanged("EnergyAlternative"); }
+            set {_energyAlternative = value; UpdateObservers("EnergyAlternative", _energyAlternative); }
         }
         private float _carbonEmission; //二氧化碳减排量8
 
         public float CarbonEmission
         {
             get { return _carbonEmission; }
-            set { _carbonEmission = value; OnPropertyChanged("CarbonEmission"); }
+            set { _carbonEmission = value; UpdateObservers("CarbonEmission", _carbonEmission);}
         }
         private float _sulfurEmission; //二氧化硫减排量9
 
         public float SulfurEmission
         {
             get { return _sulfurEmission; }
-            set { _sulfurEmission = value; OnPropertyChanged("SulfurEmission"); }
+            set { _sulfurEmission = value; UpdateObservers("SulfurEmission", _sulfurEmission);}
         }
         private float _dustEmission;  //粉尘减排量10
 
         public float DustEmission
         {
             get { return _dustEmission; }
-            set { _dustEmission = value; OnPropertyChanged("DustEmission"); }
+            set { _dustEmission = value; UpdateObservers("DustEmission", _dustEmission);}
         }
         private float _feeEffect; //项目费效比11
 
         public float FeeEffect
         {
             get { return _feeEffect; }
-            set { _feeEffect = value; OnPropertyChanged("FeeEffect"); }
+            set { _feeEffect = value;  UpdateObservers("FeeEffect", _feeEffect);}
         }
         private float _auxiliaryHeat;//辅助热源加热量12
 
         public float AuxiliaryHeat
         {
             get { return _auxiliaryHeat; }
-            set { _auxiliaryHeat = value; OnPropertyChanged("AuxiliaryHeat"); }
+            set { _auxiliaryHeat = value; UpdateObservers("AuxiliaryHeat", _auxiliaryHeat);}
         }
 
+        public string Id { get; set; } //ID
 
-        public StatisticObject()
+        //-----------------------------------------------------------------------------------------------------------------------//
+        public void AddObserver(Control paramControl)
         {
+            lock (_observers.SyncRoot)
+            {
+                if (paramControl != null)
+                    if (!_observers.Contains(paramControl))
+                        _observers.Add(paramControl);
+            }
         }
+
+        //-----------------------------------------------------------------------------------------------------------------------//
+        public void RemoveObserver(Control paramControl)
+        {
+            lock (_observers.SyncRoot)
+            {
+                if (paramControl != null)
+                    if (_observers.Contains(paramControl))
+                        _observers.Remove(paramControl);
+            }
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------//
+        private void UpdateObservers(string propertyName, object value)
+        {
+            Array copy;
+            lock (_observers.SyncRoot)
+            {
+                copy = _observers.ToArray();
+            }
+
+            //for (int n = 0; n < copy.Length; n++)
+            //{
+            //    Control control = (Control)copy.GetValue(n);
+            //    if (control == null) throw new ArgumentNullException("control");
+
+            //    // Handle must exist.
+            //    if (!control.IsHandleCreated)
+            //        continue;
+
+            //    if (control.IsDisposed)
+            //        continue;
+
+            //    switch (propertyName)
+            //    {
+            //        case "Power":
+
+            //            control.Invoke(((MainForm)control).PowerDelegate, new object[] { (double)value });
+            //            break;
+
+            //        case "StateFlag":
+            //            control.Invoke(((MainForm)control).PowerButtonDelegate, new object[] { (bool)value });
+            //            break;
+            //    }
+
+            // }
+
+            // Original version.
+            //
+            for (int n = 0; n < copy.Length; n++)
+            {
+                try
+                {
+                    var control = (Control)copy.GetValue(n);
+
+                    if (PropertyChanged != null)
+                    {
+                        if (control.InvokeRequired)
+                        {
+                            switch (propertyName)
+                            {
+                                case "SystemHeat":
+                                    control.Invoke(((FMain)control).SytemHeatDelegate, new object[] { (float)value });
+                                    break;
+                              
+                                default:
+                                    control.Invoke(PropertyChanged, new object[] { this, new PropertyChangedEventArgs(propertyName) });
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
+        } // UpdateObservers
 
         public StatisticObject(string unitid)
         {
             Id=unitid;
         }
 
-        public void UpdateSystemObject(SystemObject inobject)
+
+        #region IDisposable Members
+
+        public void Dispose()
         {
-            _cacheLock.EnterWriteLock();
-            try
-            {
-                
-            }
-            finally
-            {
-                _cacheLock.ExitWriteLock();
-            }
+           
 
         }
-       
-    }
 
-    public class SystemObject : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private float _systemHeat;  //集热系统得热量1
-        public float SystemHeat
-        {
-            get { return _systemHeat; }
-            set
-            {
-                //if (Math.Abs(_systemHeat - value) > EPSILON)
-                {
-                    _systemHeat = value;
-                    //OnPropertyChanged("System_heat");
-                }
-            }
-        } 
-
-        private void OnPropertyChanged(string propertyName)
-        {
-
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-            //if (PropertyChanged != null)
-            //    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private float _conventionalEnergy;  //系统常规热源耗能量2
-        public float ConventionalEnergy
-        {
-            get { return _conventionalEnergy; }
-            set { 
-                    _conventionalEnergy = value;
-                    OnPropertyChanged("ConventionalEnergy");
-                }
-        }
-        private float _storageTank; //贮热水箱热损系数3
-        public float StorageTank
-        {
-            get { return _storageTank; }
-            set { 
-                    _storageTank = value;
-                    OnPropertyChanged("StorageTtank");
-                }
-        }
-        private float _systemEfficiency;  //集热系统效率4
-
-        public float SystemEfficiency
-        {
-            get { return _systemEfficiency; }
-            set { 
-                    _systemEfficiency = value;
-                    OnPropertyChanged("System_Efficiency");
-                }
-        }
-        private float _solarAssuranceDay;  //日太阳能保证率5
-
-        public float SolarAssuranceDay
-        {
-            get { return _solarAssuranceDay; }
-            set { _solarAssuranceDay = value; OnPropertyChanged("SolarAssuranceDay"); }
-        }
-        private float _solarAssuranceYear;  //全年太阳能保证率6
-
-        public float SolarAssuranceYear
-        {
-            get { return _solarAssuranceYear; }
-            set { _solarAssuranceYear = value; OnPropertyChanged("SolarAssuranceYear"); }
-        }
-        private float _energyAlternative;  //常规能源替代量7
-
-        public float EnergyAlternative
-        {
-            get { return _energyAlternative; }
-            set { _energyAlternative = value; OnPropertyChanged("EnergyAlternative"); }
-        }
-        private float _carbonEmission; //二氧化碳减排量8
-
-        public float CarbonEmission
-        {
-            get { return _carbonEmission; }
-            set { _carbonEmission = value; OnPropertyChanged("CarbonEmission"); }
-        }
-        private float _sulfurEmission; //二氧化硫减排量9
-
-        public float SulfurEmission
-        {
-            get { return _sulfurEmission; }
-            set { _sulfurEmission = value; OnPropertyChanged("SulfurEmission"); }
-        }
-        private float _dustEmission;  //粉尘减排量10
-
-        public float DustEmission
-        {
-            get { return _dustEmission; }
-            set { _dustEmission = value; OnPropertyChanged("DustEmission"); }
-        }
-        private float _feeEffect; //项目费效比11
-
-        public float FeeEffect
-        {
-            get { return _feeEffect; }
-            set { _feeEffect = value; OnPropertyChanged("FeeEffect"); }
-        }
-        private float _auxiliaryHeat;//辅助热源加热量12
-
-        public float AuxiliaryHeat
-        {
-            get { return _auxiliaryHeat; }
-            set { _auxiliaryHeat = value; OnPropertyChanged("AuxiliaryHeat"); }
-        }
-
-        public ushort Id { get; set; } //ID
+        #endregion
     }
 
     public class ThreadIdentity
@@ -684,8 +623,6 @@ namespace Tiger.Helper
         }
     }
 
-
-
     public static class Global
     {
        public static bool Attached=true;
@@ -694,12 +631,11 @@ namespace Tiger.Helper
        public static ushort TimerStatistic = 60;
        public static ushort TimerSum = 60;
 
+       public static DoubleQueue Dqueue;
        public static SortedList<string, ParameterObject> ParameterList = new SortedList<string, ParameterObject>();//实时输入参数LIST
-       public static SortedList<string, DtuObject> DtuList = new SortedList<string, DtuObject>();//实时状态LIST
-
+       public static SortedList<string, DtuStateObject> DtuList = new SortedList<string, DtuStateObject>();//实时状态LIST
        public static SortedList<string, StatisticObject> SatisticList = new SortedList<string, StatisticObject>();//实时统计数据LIST
-
-       public static SystemObject Osystem = new SystemObject();//实时汇总统计对象
+       public static StatisticObject Osystem = new StatisticObject("all");//实时汇总统计对象
 
        public static void CheckTemp(string instr)//验证温度值
        {
