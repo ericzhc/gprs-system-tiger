@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace Tiger
+namespace Tiger.Helper
 {
     class Module
     {
@@ -22,9 +17,8 @@ namespace Tiger
                 //    Select all products without any constraints
                 foreach (var union in odbEntities.unions)
                 {
-                    TreeNode nod = new TreeNode(union.alias);
+                    var nod = new TreeNode(union.alias) {Tag = union.UnitId};
                     //增加节点TAG属性
-                    nod.Tag = union.UnitId;
                     tv.Nodes.Add(nod);              
                 }
              }

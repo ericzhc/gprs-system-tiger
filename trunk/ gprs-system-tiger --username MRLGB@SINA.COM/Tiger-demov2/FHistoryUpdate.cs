@@ -10,7 +10,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Tiger
 {
-    public partial class F_HistoryUpdate : Form
+    public partial class FHistoryUpdate : Form
     {
         private DbTigerEntities context;//数据库的上下文
         private bool[] selectflag;
@@ -23,7 +23,7 @@ namespace Tiger
             T_Ambient
         }
         private decimal[] T;
-        public F_HistoryUpdate()
+        public FHistoryUpdate()
         {
             InitializeComponent();
             context = new DbTigerEntities();

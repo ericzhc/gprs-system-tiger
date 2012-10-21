@@ -1,6 +1,6 @@
 ﻿namespace Tiger
 {
-    partial class F_Configuration
+    partial class FCenterConfig
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_Configuration));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FCenterConfig));
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -439,7 +439,7 @@
             this.radioButton1.Size = new System.Drawing.Size(64, 25);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "GPRS";
+            this.radioButton1.Text = "Gprs";
             // 
             // tabPage2
             // 

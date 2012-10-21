@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Tiger
 {
-    public partial class F_Configuration : Form
+    public partial class FServerInfo : Form
     {
-        public F_Configuration()
+        public FServerInfo()
         {
             InitializeComponent();
         }

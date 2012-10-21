@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Data;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.ComponentModel;
-using System.Linq.Expressions;
 using System.Linq;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using Tiger.Gprs;
+using Tiger.Properties;
 
-namespace Tiger
+namespace Tiger.Helper
 {
     /// <summary>
     /// IniFile 的摘要说明。
@@ -25,42 +25,43 @@ namespace Tiger
     //*********************************************
     public class IniFile
     {
-        public string inipath;
+        public string Inipath;
         [DllImport("kernel32")]
-        private static extern long WritePrivateProfileString(string Section, string key, string val, string filePath);
+        private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
         [DllImport("kernel32")]
-        private static extern int GetPrivateProfileString(string Section, string key, string def, StringBuilder retVal, int size, string filePath);
+        private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
         /// <summary> 
         /// 构造方法 
         /// </summary> 
-        /// <param name="INIPath">文件路径</param> 
-        public IniFile(string INIPath)
+        /// <param name="iniPath">文件路径</param> 
+        public IniFile(string iniPath)
         {
-            inipath = INIPath;
+            Inipath = iniPath;
         }
         /// <summary> 
         /// 写入INI文件 
         /// </summary> 
-        /// <param name="Section">项目名称(如 [TypeName] )</param> 
-        /// <param name="Key">键</param> 
-        /// <param name="Value">值</param> 
-        public void IniWriteValue(string Section, string Key, string Value)
+        /// <param name="section">项目名称(如 [TypeName] )</param> 
+        /// <param name="key">键</param> 
+        /// <param name="value">值</param> 
+        public void IniWriteValue(string section, string key, string value)
         {
-            WritePrivateProfileString(Section, Key, Value, this.inipath);
+            WritePrivateProfileString(section, key, value, Inipath);
         }
+
         /// <summary> 
         /// 读出INI文件 
         /// </summary> 
-        /// <param name="Section">项目名称(如 [TypeName] )</param> 
-        /// <param name="Key">键</param> 
-        public string IniReadValue(string Section, string Key, string Value)
+        /// <param name="section">项目名称(如 [TypeName] )</param> 
+        /// <param name="key">键</param>
+        /// <param name="value"> </param> 
+        public string IniReadValue(string section, string key, string value)
         {
-            StringBuilder temp = new StringBuilder(500);
-            int i = GetPrivateProfileString(Section, Key, "", temp, 500, this.inipath);
+            var temp = new StringBuilder(500);
+            int i = GetPrivateProfileString(section, key, "", temp, 500, Inipath);
             if (i == 0)
-                return Value;
-            else
-                return temp.ToString();
+                return value;
+            return temp.ToString();
         }
         /// <summary> 
         /// 验证文件是否存在 
@@ -68,44 +69,44 @@ namespace Tiger
         /// <returns>布尔值</returns> 
         public bool ExistINIFile()
         {
-            return File.Exists(inipath);
+            return File.Exists(Inipath);
         }
     }
 
-    public enum Field1NO
+    public enum Field1No
     {
         T1=0,
-        Temp_HeatingBox = T1,
+        TempHeatingBox = T1,
         T2,
-        Temp_CollectorBox = T2,
+        TempCollectorBox = T2,
         T3,
-        Temp_CollectorIn = T3,
+        TempCollectorIn = T3,
         T4,
-        Temp_CollectorOut = T4,
+        TempCollectorOut = T4,
         T5,
-        Temp_Ambient = T5,
+        TempAmbient = T5,
         T6,
-        Humidity_Ambient = T6,
+        HumidityAmbient = T6,
         F1,
-        Flow_CollectorSys = F1,
+        FlowCollectorSys = F1,
         F2,
-        Flow_HeatUsing = F2,
+        FlowHeatUsing = F2,
         A1,
-        Amount_Irradiated = A1,
+        AmountIrradiated = A1,
         A2,
-        Amount_IrradiatedSum = A2,
+        AmountIrradiatedSum = A2,
         A3,
-        Aera_IrradiatedSum = A3,
+        AeraIrradiatedSum = A3,
         P1,
-        Auxiliary_power = P1,
+        AuxiliaryPower = P1,
         W1,
-        Speed_Wind = W1,
+        SpeedWind = W1,
         V1,
-        Volumn_HeatingBox = V1,
+        VolumnHeatingBox = V1,
         MAX
     }
 
-    public enum Field2NO
+    public enum Field2No
     {
         S1 = 0,
         SystemState = S1,
@@ -114,14 +115,14 @@ namespace Tiger
         MAX
     }
 
-    public enum FieldTimeNO
+    public enum FieldTimeNo
     {
-        Recv_Time=0,
-        D0 = Recv_Time,
-        Start_Time,
-        D1=Start_Time,
-        Stop_Time, 
-        D2=Stop_Time,
+        RecvTime=0,
+        D0 = RecvTime,
+        StartTime,
+        D1=StartTime,
+        StopTime, 
+        D2=StopTime,
         MAX
     }
 
@@ -132,161 +133,80 @@ namespace Tiger
         RegionReader
     }
 
-    public class DTUObject
+    public class DtuObject
     {
-        private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
+        private readonly ReaderWriterLockSlim _cacheLock = new ReaderWriterLockSlim();
         public float[] Field1;
         public ushort[] Field2;
         public DateTime[] FieldTime;
 
-        private string _Id;//ID
-        public string Id
-        {
-            get { return _Id; }
-            set { _Id = value; }
-        }
+        public string Id { get; set; }
 
-        private bool online;
-        public bool Online
-        {
-            get { return online; }
-            set { online = value; }
-        }
+        public bool Online { get; set; }
 
-        private float _Temp_HeatingBox;//供热水箱温度1-T1
-        public float Temp_HeatingBox
-        {
-            get { return _Temp_HeatingBox; }
-            set { _Temp_HeatingBox = value; }
-        }
-        private float _Temp_CollectorBox;//集热水箱温度2-T2
-        public float Temp_CollectorBox
-        {
-            get { return _Temp_CollectorBox; }
-            set { _Temp_CollectorBox = value; }
-        }
-        private float _Temp_CollectorIn;//集热系统进口温度3-T3
-        public float Temp_CollectorIn
-        {
-            get { return _Temp_CollectorIn; }
-            set { _Temp_CollectorIn = value; }
-        }
-        private float _Temp_CollectorOut;//集热系统出口温度4-T4
-        public float Temp_CollectorOut
-        {
-            get { return _Temp_CollectorOut; }
-            set { _Temp_CollectorOut = value; }
-        }
-        private float _Temp_Ambient;//环境温度-T5
-        public float Temp_Ambient
-        {
-            get { return _Temp_Ambient; }
-            set { _Temp_Ambient = value; }
-        }
-        private float _Humidity_Ambient; //环境湿度6-T6
-        public float Humidity_Ambient
-        {
-            get { return _Humidity_Ambient; }
-            set { _Humidity_Ambient = value; }
-        }
-        private float _Flow_CollectorSys;//集热系统流量7-F1
-        public float Flow_CollectorSys
-        {
-            get { return _Flow_CollectorSys; }
-            set { _Flow_CollectorSys = value; }
-        }
-        private float _Flow_HeatUsing;//热用户端出水流量8-F2
-        public float Flow_HeatUsing
-        {
-            get { return _Flow_HeatUsing; }
-            set { _Flow_HeatUsing = value; }
-        }
-        private float _Amount_Irradiated;//太阳能辐照量9-A1
-        public float Amount_Irradiated
-        {
-            get { return _Amount_Irradiated; }
-            set { _Amount_Irradiated = value; }
-        }
-        private float _Amount_IrradiatedSum;//总辐照量10-A2
-        public float Amount_IrradiatedSum
-        {
-            get { return _Amount_IrradiatedSum; }
-            set { _Amount_IrradiatedSum = value; }
-        }
-        private float _Speed_Wind;// 风速11-W1  
-        public float Speed_Wind
-        {
-            get { return _Speed_Wind; }
-            set { _Speed_Wind = value; }
-        }
-        private float _Auxiliary_power;//功率12-P1
-        public float Auxiliary_power
-        {
-            get { return _Auxiliary_power; }
-            set { _Auxiliary_power = value; }
-        }
+        public float TempHeatingBox { get; set; }
 
-        public ushort  _SystemState;//系统状态13-S1
-        public ushort _ErrorState;//系统故障状态14 -E1   
+        public float TempCollectorBox { get; set; }
+
+        public float TempCollectorIn { get; set; }
+
+        public float TempCollectorOut { get; set; }
+
+        public float TempAmbient { get; set; }
+
+        public float HumidityAmbient { get; set; }
+
+        public float FlowCollectorSys { get; set; }
+
+        public float FlowHeatUsing { get; set; }
+
+        public float AmountIrradiated { get; set; }
+
+        public float AmountIrradiatedSum { get; set; }
+
+        public float SpeedWind { get; set; }
+
+        public float AuxiliaryPower { get; set; }
+
+        public ushort  SystemState;//系统状态13-S1
+        public ushort ErrorState;//系统故障状态14 -E1   
         //用户输入参数
-        private float _Aera_IrradiatedSum;// 集热器面积-A3
-        public float Aera_IrradiatedSum
-        {
-            get { return _Aera_IrradiatedSum; }
-            set { _Aera_IrradiatedSum = value; }
-        }
-        private float _Volumn_HeatingBox;//贮热水箱容量（供热水箱）-V1
-        public float Volumn_HeatingBox
-        {
-            get { return _Volumn_HeatingBox; }
-            set { _Volumn_HeatingBox = value; }
-        }
-        private DateTime _starttest;//降温时间起始时间3
-        public DateTime Starttest
-        {
-            get { return _starttest; }
-            set { _starttest = value; }
-        }
-        private DateTime _stoptest;//降温时间停止时间4
-        public DateTime Stoptest
-        {
-            get { return _stoptest; }
-            set { _stoptest = value; }
-        }
+        public float AeraIrradiatedSum { get; set; }
 
-        private DateTime _RecvDate;//接收时间
-        public DateTime RecvDate
-        {
-            get { return _RecvDate; }
-            set { _RecvDate = value; }
-        }
+        public float VolumnHeatingBox { get; set; }
 
-        public DTUObject(string useid) 
+        public DateTime Starttest { get; set; }
+
+        public DateTime Stoptest { get; set; }
+
+        public DateTime RecvDate { get; set; }
+
+        public DtuObject(string useid) 
         {
             Id = useid;
-            Field1 = new float[(ushort)Field1NO.MAX];
-            Field2 = new ushort[(ushort)Field2NO.MAX];
-            FieldTime = new DateTime[(ushort)FieldTimeNO.MAX];
+            Field1 = new float[(ushort)Field1No.MAX];
+            Field2 = new ushort[(ushort)Field2No.MAX];
+            FieldTime = new DateTime[(ushort)FieldTimeNo.MAX];
         }
-        public void UpdateDTUOnline(bool on)
+        public void UpdateDtuOnline(bool on)
         {
-            cacheLock.EnterWriteLock();
+            _cacheLock.EnterWriteLock();
             try
             {
                 Online = on;
             }
             finally
             {
-                cacheLock.ExitWriteLock();
+                _cacheLock.ExitWriteLock();
             }
            
         }
 
-        public bool UpdateAll(float[] InputArr1 = null, ushort[] InputArr2 = null, DateTime[] InputArr3 = null)
+        public bool UpdateAll(float[] inputArr1 = null, ushort[] inputArr2 = null, DateTime[] inputArr3 = null)
         {
-            if ((InputArr1 == null) || (InputArr2 == null) || (InputArr3 == null))
+            if ((inputArr1 == null) || (inputArr2 == null) || (inputArr3 == null))
             {
-                cacheLock.EnterWriteLock();
+                _cacheLock.EnterWriteLock();
                 try
                 {
                     Array.Clear(Field1, 0, Field1.Length);
@@ -295,21 +215,21 @@ namespace Tiger
                 }
                 finally
                 {
-                    cacheLock.ExitWriteLock();
+                    _cacheLock.ExitWriteLock();
                 }
                 return false;
             }
 
-            cacheLock.EnterWriteLock();
+            _cacheLock.EnterWriteLock();
             try
             {
-                Array.Copy(InputArr1, Field1, InputArr1.Length);
-                Array.Copy(InputArr2, Field2, InputArr2.Length);
-                Array.Copy(InputArr3, FieldTime, InputArr3.Length);
+                Array.Copy(inputArr1, Field1, inputArr1.Length);
+                Array.Copy(inputArr2, Field2, inputArr2.Length);
+                Array.Copy(inputArr3, FieldTime, inputArr3.Length);
             }
             finally
             {
-                cacheLock.ExitWriteLock();
+                _cacheLock.ExitWriteLock();
             }
             return true;
 
@@ -318,122 +238,122 @@ namespace Tiger
         public bool UpdateField()
         {
             //not null
-            Aera_IrradiatedSum = Field1[(ushort)Field1NO.Aera_IrradiatedSum];
-            Amount_Irradiated = Field1[(ushort)Field1NO.Amount_Irradiated];
-            Auxiliary_power = Field1[(ushort)Field1NO.Auxiliary_power];
-            Flow_CollectorSys = Field1[(ushort)Field1NO.Flow_CollectorSys];
-            Flow_HeatUsing = Field1[(ushort)Field1NO.Flow_HeatUsing];
-            Humidity_Ambient = Field1[(ushort)Field1NO.Humidity_Ambient];
-            Speed_Wind = Field1[(ushort)Field1NO.Speed_Wind];
-            Temp_Ambient = Field1[(ushort)Field1NO.Temp_Ambient];
-            Temp_CollectorBox = Field1[(ushort)Field1NO.Temp_CollectorBox];
-            Temp_CollectorIn = Field1[(ushort)Field1NO.Temp_CollectorIn];
-            Temp_CollectorOut = Field1[(ushort)Field1NO.Temp_CollectorOut];
-            Temp_HeatingBox = Field1[(ushort)Field1NO.Temp_HeatingBox];
-            Volumn_HeatingBox = Field1[(ushort)Field1NO.Volumn_HeatingBox];
+            AeraIrradiatedSum = Field1[(ushort)Field1No.AeraIrradiatedSum];
+            AmountIrradiated = Field1[(ushort)Field1No.AmountIrradiated];
+            AuxiliaryPower = Field1[(ushort)Field1No.AuxiliaryPower];
+            FlowCollectorSys = Field1[(ushort)Field1No.FlowCollectorSys];
+            FlowHeatUsing = Field1[(ushort)Field1No.FlowHeatUsing];
+            HumidityAmbient = Field1[(ushort)Field1No.HumidityAmbient];
+            SpeedWind = Field1[(ushort)Field1No.SpeedWind];
+            TempAmbient = Field1[(ushort)Field1No.TempAmbient];
+            TempCollectorBox = Field1[(ushort)Field1No.TempCollectorBox];
+            TempCollectorIn = Field1[(ushort)Field1No.TempCollectorIn];
+            TempCollectorOut = Field1[(ushort)Field1No.TempCollectorOut];
+            TempHeatingBox = Field1[(ushort)Field1No.TempHeatingBox];
+            VolumnHeatingBox = Field1[(ushort)Field1No.VolumnHeatingBox];
             return true;
 
         }
 
-        public void UpdateDTUObject(GPRS_DATA_RECORD RecvMessage)
+        public void UpdateDtuObject(GprsDataRecord recvMessage)
         {
-            Stopwatch stopWatch = new Stopwatch();
+            var stopWatch = new Stopwatch();
             stopWatch.Start();
           
-            if (!RecvMessage.Equals(null))
+            if (!recvMessage.Equals(null))
             {
                 //解析消息，构建DTUObject
                 // 
                     //string HexString = StrToHex(RecvMessage.m_data_buf, RecvMessage.m_data_len);
-                    string HexString = System.Text.Encoding.Default.GetString(RecvMessage.m_data_buf);
-                    foreach (Field1NO s in Enum.GetValues(typeof(Field1NO)))//枚举所有字段-有冗余!!!
+                    string hexString = Encoding.Default.GetString(recvMessage.m_data_buf);
+                    foreach (Field1No s in Enum.GetValues(typeof(Field1No)))//枚举所有字段-有冗余!!!
                     {
-						 if (!s.Equals(Field1NO.MAX))
+						 if (!s.Equals(Field1No.MAX))
 						 {		
-                            string strpa = global.patternstrfloat[(ushort)s];
-                            Regex rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-							Match matchetemp = rx.Match(HexString);
+                            string strpa = Global.Patternstrfloat[(ushort)s];
+                            var rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+							Match matchetemp = rx.Match(hexString);
 
-							cacheLock.EnterWriteLock();
+							_cacheLock.EnterWriteLock();
 
 							try
 							{
                                 float x= float.Parse(matchetemp.Groups[s.ToString()].Value);
-                                ushort y = (ushort)s;
+                                var y = (ushort)s;
                                 Field1[y] = x;
 							}
-							catch 
+							catch (Exception)
 							{
-                            //
+							    //
 							}
 							finally
 							{
-								cacheLock.ExitWriteLock();
+								_cacheLock.ExitWriteLock();
 							}
 						 }                      
                     }
 
-                    foreach (Field2NO s in Enum.GetValues(typeof(Field2NO)))//枚举所有字段-有冗余!!!
+                    foreach (Field2No s in Enum.GetValues(typeof(Field2No)))//枚举所有字段-有冗余!!!
                     {
-                        if (!s.Equals(Field2NO.MAX))
+                        if (!s.Equals(Field2No.MAX))
                         {
-                            string strpa = global.patternstrint[(ushort)s];
-                            Regex rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-                            Match matchetemp = rx.Match(HexString);
+                            string strpa = Global.Patternstrint[(ushort)s];
+                            var rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                            Match matchetemp = rx.Match(hexString);
 
-                            cacheLock.EnterWriteLock();
+                            _cacheLock.EnterWriteLock();
                             try
                             {
                                 ushort x = ushort.Parse(matchetemp.Groups[s.ToString()].Value);
-                                ushort y = (ushort)s;
+                                var y = (ushort)s;
                                 Field2[y] = x;
                             }
-                            catch
+                            catch (Exception)
                             {
                                 //
                             }
                             finally
                             {
-                                cacheLock.ExitWriteLock();
+                                _cacheLock.ExitWriteLock();
                             }
                         }
                     }
 
-                    foreach (FieldTimeNO s in Enum.GetValues(typeof(FieldTimeNO)))//枚举所有字段-有冗余!!!
+                    foreach (FieldTimeNo s in Enum.GetValues(typeof(FieldTimeNo)))//枚举所有字段-有冗余!!!
                     {
-                        if (!s.Equals(FieldTimeNO.MAX))
+                        if (!s.Equals(FieldTimeNo.MAX))
                         {
-                            string strpa = global.patternstrdatatime[(ushort)s];
-                            Regex rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-                            Match matchetemp = rx.Match(HexString);
+                            string strpa = Global.Patternstrdatatime[(ushort)s];
+                            var rx = new Regex(strpa, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                            var matchetemp = rx.Match(hexString);
 
-                            cacheLock.EnterWriteLock();
+                            _cacheLock.EnterWriteLock();
                             try
                             {
                                 DateTime x = DateTime.Parse(matchetemp.Groups[s.ToString()].Value);
-                                ushort y = (ushort)s;
+                                var y = (ushort)s;
                                 FieldTime[y] = x;
                             }
-                            catch
+                            catch (Exception)
                             {
                                 //
                             }
                             finally
                             {
-                                cacheLock.ExitWriteLock();
+                                _cacheLock.ExitWriteLock();
                             }
                         }
                     }
             }
             //赋值消息接收时间
-            cacheLock.EnterWriteLock();
+            _cacheLock.EnterWriteLock();
             try
             {
-                DateTime x = DateTime.ParseExact(RecvMessage.m_recv_date, "yyyy/MM/dd/hh/mm/ss", new CultureInfo("en-US"));
-                FieldTime[(ushort)FieldTimeNO.Recv_Time] = x;
+                DateTime x = DateTime.ParseExact(recvMessage.m_recv_date, "yyyy/MM/dd/hh/mm/ss", new CultureInfo("en-US"));
+                FieldTime[(ushort)FieldTimeNo.RecvTime] = x;
                 RecvDate = x;
-                global.ParameterList[RecvMessage.m_userid].Delta_time = (x - global.ParameterList[RecvMessage.m_userid].LastUpdatTime).Seconds;
-                global.ParameterList[RecvMessage.m_userid].LastUpdatTime = x;
+                Global.ParameterList[recvMessage.m_userid].DeltaTime = (x - Global.ParameterList[recvMessage.m_userid].LastUpdatTime).Seconds;
+                Global.ParameterList[recvMessage.m_userid].LastUpdatTime = x;
             }
             catch (Exception ex)
             {
@@ -441,12 +361,11 @@ namespace Tiger
             }
             finally
             {
-                cacheLock.ExitWriteLock();
+                _cacheLock.ExitWriteLock();
             }
 
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
-            TimeSpan ts = stopWatch.Elapsed;
 
             // Format and display the TimeSpan value. 
             //string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
@@ -454,154 +373,67 @@ namespace Tiger
             //    ts.Milliseconds / 10);
             //MessageBox.Show(elapsedTime.ToString());
         }
-
-        private string StrToHex(byte[] str, int len)//将BYTE数组里的数据转换为16进制，参数是BYTE数组，和数组里的数据长度
-        {
-            string hex = "";
-            string s;
-            int asc;
-            for (int i = 0; i < len; i++)
-            {
-                s = "";
-                asc = str[i];
-                //hex = hex + System.Convert.ToString(asc,16);
-                s = System.Convert.ToString(asc, 16);
-                for (int j = 0; j < s.Length; j++)
-                {
-                    if (s.Length == 1)
-                        hex = hex + '0';
-                    if (s[j] == 'a')
-                        hex = hex + 'A';
-                    else if (s[j] == 'b')
-                        hex = hex + 'B';
-                    else if (s[j] == 'c')
-                        hex = hex + 'C';
-                    else if (s[j] == 'd')
-                        hex = hex + 'D';
-                    else if (s[j] == 'e')
-                        hex = hex + 'E';
-                    else if (s[j] == 'f')
-                        hex = hex + 'F';
-                    else
-                        hex = hex + s[j];
-                }
-                if (i < (len - 1))
-                    hex = hex + " ";
-            }
-            return hex;
-        }
     }
 
     public class ParameterObject 
     {
-        private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
-        private string _Id;//ID
-        public string Id
-        {
-            get { return _Id; }
-            set { _Id = value; }
-        }
+        private readonly ReaderWriterLockSlim _cacheLock = new ReaderWriterLockSlim();
+        public string Id { get; set; }
 
-        private float _Flow_CollectorSys;//集热系统流量7-F1
-        public float Flow_CollectorSys
-        {
-            get { return _Flow_CollectorSys; }
-            set { _Flow_CollectorSys = value; }
-        }
-        private float _Flow_HeatUsing;//热用户端出水流量8-F2
-        public float Flow_HeatUsing
-        {
-            get { return _Flow_HeatUsing; }
-            set { _Flow_HeatUsing = value; }
-        }
-        private float _Auxiliary_power;//功率-P1
-        public float Auxiliary_power
-        {
-            get { return _Auxiliary_power; }
-            set { _Auxiliary_power = value; }
-        }
+        public float FlowCollectorSys { get; set; }
 
-        private float _Aera_IrradiatedSum;// 集热器面积-A3
-        public float Aera_IrradiatedSum
-        {
-            get { return _Aera_IrradiatedSum; }
-            set { _Aera_IrradiatedSum = value; }
-        }
-        private float _Volumn_HeatingBox;//贮热水箱容量（供热水箱）-V1
-        public float Volumn_HeatingBox
-        {
-            get { return _Volumn_HeatingBox; }
-            set { _Volumn_HeatingBox = value; }
-        }
+        public float FlowHeatUsing { get; set; }
 
-        private DateTime _time;//time
-        public DateTime LastUpdatTime
-        {
-            get { return _time; }
-            set { _time = value; }
-        }
+        public float AuxiliaryPower { get; set; }
 
-        private int _delta_time;//time
+        public float AeraIrradiatedSum { get; set; }
 
-        public int Delta_time
-        {
-            get { return _delta_time; }
-            set { _delta_time = value; }
-        }
+        public float VolumnHeatingBox { get; set; }
 
-        private float _system_heat;//stattistic item1
+        public DateTime LastUpdatTime { get; set; }
 
-        public float System_heat
-        {
-            get { return _system_heat; }
-            set { _system_heat = value; }
-        }
+        public int DeltaTime { get; set; }
 
-        public ParameterObject(string useid,float A3,float P1,float F1,float F2,float V1) 
+        public float SystemHeat { get; set; }
+
+        public ParameterObject(string useid,float a3,float p1,float f1,float f2,float v1) 
         {
             Id = useid;
-            Flow_CollectorSys = F1;
-            Flow_HeatUsing = F2;
-            Auxiliary_power = P1;
-            Aera_IrradiatedSum = A3;
-            Volumn_HeatingBox = V1;
+            FlowCollectorSys = f1;
+            FlowHeatUsing = f2;
+            AuxiliaryPower = p1;
+            AeraIrradiatedSum = a3;
+            VolumnHeatingBox = v1;
         }
-        public void UpateParameterObject(string useid, float A3, float P1, float F1, float F2, float V1)
+        public void UpateParameterObject(string useid, float a3, float p1, float f1, float f2, float v1)
         {
-            cacheLock.EnterWriteLock();
+            _cacheLock.EnterWriteLock();
             Id = useid;
-            Flow_CollectorSys = F1;
-            Flow_HeatUsing = F2;
-            Auxiliary_power = P1;
-            Aera_IrradiatedSum = A3;
-            Volumn_HeatingBox = V1;
-            cacheLock.ExitWriteLock();
+            FlowCollectorSys = f1;
+            FlowHeatUsing = f2;
+            AuxiliaryPower = p1;
+            AeraIrradiatedSum = a3;
+            VolumnHeatingBox = v1;
+            _cacheLock.ExitWriteLock();
         }
     }
 
     public class StatisticObject : INotifyPropertyChanged
     {
-        private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
+        private readonly ReaderWriterLockSlim _cacheLock = new ReaderWriterLockSlim();
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string _Id;//ID
-        public string Id
-        {
-            get { return _Id; }
-            set { _Id = value; }
-        }
+        public string Id { get; set; }
 
-        private float _System_heat;  //集热系统得热量1
-        public float System_heat
+        private float _systemHeat;  //集热系统得热量1
+        public float SystemHeat
         {
-            get { return _System_heat; }
+            get { return _systemHeat; }
             set
             {
-                if (_System_heat != value)
-                {
-                    _System_heat = value;
-                    OnPropertyChanged("System_heat");
-                }
+                //if (!(Math.Abs(_systemHeat - value) > EPSILON)) return;
+                _systemHeat = value;
+                OnPropertyChanged("System_heat");
             }
         }
 
@@ -611,98 +443,97 @@ namespace Tiger
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private float _Conventional_energy;  //系统常规热源耗能量2
-        public float Conventional_energy
+        private float _conventionalEnergy;  //系统常规热源耗能量2
+        public float ConventionalEnergy
         {
-            get { return _Conventional_energy; }
+            get { return _conventionalEnergy; }
             set
             {
-                _Conventional_energy = value;
+                _conventionalEnergy = value;
                 OnPropertyChanged("Conventional_energy");
             }
         }
-        private float _Storage_tank; //贮热水箱热损系数3
-        public float Storage_tank
+        private float _storageTank; //贮热水箱热损系数3
+        public float StorageTank
         {
-            get { return _Storage_tank; }
+            get { return _storageTank; }
             set
             {
-                _Storage_tank = value;
+                _storageTank = value;
                 OnPropertyChanged("Storage_tank");
             }
         }
-        private float _System_efficiency;  //集热系统效率4
+        private float _systemEfficiency;  //集热系统效率4
 
-        public float System_efficiency
+        public float SystemEfficiency
         {
-            get { return _System_efficiency; }
+            get { return _systemEfficiency; }
             set
             {
-                _System_efficiency = value;
+                _systemEfficiency = value;
                 OnPropertyChanged("System_efficiency");
             }
         }
-        private float _Solar_assurance_day;  //日太阳能保证率5
+        private float _solarAssuranceDay;  //日太阳能保证率5
 
-        public float Solar_assurance_day
+        public float SolarAssuranceDay
         {
-            get { return _Solar_assurance_day; }
-            set { _Solar_assurance_day = value; OnPropertyChanged("Solar_assurance_day"); }
+            get { return _solarAssuranceDay; }
+            set { _solarAssuranceDay = value; OnPropertyChanged("Solar_assurance_day"); }
         }
-        private float _Solar_assurance_year;  //全年太阳能保证率6
+        private float _solarAssuranceYear;  //全年太阳能保证率6
 
-        public float Solar_assurance_year
+        public float SolarAssuranceYear
         {
-            get { return _Solar_assurance_year; }
-            set { _Solar_assurance_year = value; OnPropertyChanged("Solar_assurance_year"); }
+            get { return _solarAssuranceYear; }
+            set { _solarAssuranceYear = value; OnPropertyChanged("Solar_assurance_year"); }
         }
-        private float _Energy_alternative;  //常规能源替代量7
+        private float _energyAlternative;  //常规能源替代量7
 
-        public float Energy_alternative
+        public float EnergyAlternative
         {
-            get { return _Energy_alternative; }
-            set { _Energy_alternative = value; OnPropertyChanged("Energy_alternative"); }
+            get { return _energyAlternative; }
+            set { _energyAlternative = value; OnPropertyChanged("Energy_alternative"); }
         }
-        private float _Carbon_emission; //二氧化碳减排量8
+        private float _carbonEmission; //二氧化碳减排量8
 
-        public float Carbon_emission
+        public float CarbonEmission
         {
-            get { return _Carbon_emission; }
-            set { _Carbon_emission = value; OnPropertyChanged("Carbon_emission"); }
+            get { return _carbonEmission; }
+            set { _carbonEmission = value; OnPropertyChanged("Carbon_emission"); }
         }
-        private float _Sulfur_emission; //二氧化硫减排量9
+        private float _sulfurEmission; //二氧化硫减排量9
 
-        public float Sulfur_emission
+        public float SulfurEmission
         {
-            get { return _Sulfur_emission; }
-            set { _Sulfur_emission = value; OnPropertyChanged("Sulfur_emission"); }
+            get { return _sulfurEmission; }
+            set { _sulfurEmission = value; OnPropertyChanged("Sulfur_emission"); }
         }
-        private float _Dust_emission;  //粉尘减排量10
+        private float _dustEmission;  //粉尘减排量10
 
-        public float Dust_emission
+        public float DustEmission
         {
-            get { return _Dust_emission; }
-            set { _Dust_emission = value; OnPropertyChanged("Dust_emission"); }
+            get { return _dustEmission; }
+            set { _dustEmission = value; OnPropertyChanged("Dust_emission"); }
         }
-        private float _Fee_effect; //项目费效比11
+        private float _feeEffect; //项目费效比11
 
-        public float Fee_effect
+        public float FeeEffect
         {
-            get { return _Fee_effect; }
-            set { _Fee_effect = value; OnPropertyChanged("Fee_effect"); }
+            get { return _feeEffect; }
+            set { _feeEffect = value; OnPropertyChanged("Fee_effect"); }
         }
-        private float _Auxiliary_heat;//辅助热源加热量12
+        private float _auxiliaryHeat;//辅助热源加热量12
 
-        public float Auxiliary_heat
+        public float AuxiliaryHeat
         {
-            get { return _Auxiliary_heat; }
-            set { _Auxiliary_heat = value; OnPropertyChanged("Auxiliary_heat"); }
+            get { return _auxiliaryHeat; }
+            set { _auxiliaryHeat = value; OnPropertyChanged("Auxiliary_heat"); }
         }
 
 
         public StatisticObject()
         {
-            ;
         }
 
         public StatisticObject(string unitid)
@@ -710,16 +541,16 @@ namespace Tiger
             Id=unitid;
         }
 
-        public void UpdateSystemObject(SystemObject Inobject)
+        public void UpdateSystemObject(SystemObject inobject)
         {
-            cacheLock.EnterWriteLock();
+            _cacheLock.EnterWriteLock();
             try
             {
                 
             }
             finally
             {
-                cacheLock.ExitWriteLock();
+                _cacheLock.ExitWriteLock();
             }
 
         }
@@ -727,204 +558,200 @@ namespace Tiger
     }
 
     public class SystemObject : INotifyPropertyChanged
-    { 
-        private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
+    {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private float _System_heat;  //集热系统得热量1
-        public float System_heat
+        private float _systemHeat;  //集热系统得热量1
+        public float SystemHeat
         {
-            get { return _System_heat; }
+            get { return _systemHeat; }
             set
             {
-                if (_System_heat != value)
+                //if (Math.Abs(_systemHeat - value) > EPSILON)
                 {
-                    _System_heat = value;
-                    OnPropertyChanged("System_heat");
+                    _systemHeat = value;
+                    //OnPropertyChanged("System_heat");
                 }
             }
-        }
+        } 
 
         private void OnPropertyChanged(string propertyName)
         {
+
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
             //if (PropertyChanged != null)
             //    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private float _Conventional_energy;  //系统常规热源耗能量2
-        public float Conventional_energy
+        private float _conventionalEnergy;  //系统常规热源耗能量2
+        public float ConventionalEnergy
         {
-            get { return _Conventional_energy; }
+            get { return _conventionalEnergy; }
             set { 
-                    _Conventional_energy = value;
+                    _conventionalEnergy = value;
                     OnPropertyChanged("Conventional_energy");
                 }
         }
-        private float _Storage_tank; //贮热水箱热损系数3
-        public float Storage_tank
+        private float _storageTank; //贮热水箱热损系数3
+        public float StorageTank
         {
-            get { return _Storage_tank; }
+            get { return _storageTank; }
             set { 
-                    _Storage_tank = value;
+                    _storageTank = value;
                     OnPropertyChanged("Storage_tank");
                 }
         }
-        private float _System_efficiency;  //集热系统效率4
+        private float _systemEfficiency;  //集热系统效率4
 
-        public float System_efficiency
+        public float SystemEfficiency
         {
-            get { return _System_efficiency; }
+            get { return _systemEfficiency; }
             set { 
-                    _System_efficiency = value;
+                    _systemEfficiency = value;
                     OnPropertyChanged("System_efficiency");
                 }
         }
-        private float _Solar_assurance_day;  //日太阳能保证率5
+        private float _solarAssuranceDay;  //日太阳能保证率5
 
-        public float Solar_assurance_day
+        public float SolarAssuranceDay
         {
-            get { return _Solar_assurance_day; }
-            set { _Solar_assurance_day = value; OnPropertyChanged("Solar_assurance_day"); }
+            get { return _solarAssuranceDay; }
+            set { _solarAssuranceDay = value; OnPropertyChanged("Solar_assurance_day"); }
         }
-        private float _Solar_assurance_year;  //全年太阳能保证率6
+        private float _solarAssuranceYear;  //全年太阳能保证率6
 
-        public float Solar_assurance_year
+        public float SolarAssuranceYear
         {
-            get { return _Solar_assurance_year; }
-            set { _Solar_assurance_year = value; OnPropertyChanged("Solar_assurance_year"); }
+            get { return _solarAssuranceYear; }
+            set { _solarAssuranceYear = value; OnPropertyChanged("Solar_assurance_year"); }
         }
-        private float _Energy_alternative;  //常规能源替代量7
+        private float _energyAlternative;  //常规能源替代量7
 
-        public float Energy_alternative
+        public float EnergyAlternative
         {
-            get { return _Energy_alternative; }
-            set { _Energy_alternative = value; OnPropertyChanged("Energy_alternative"); }
+            get { return _energyAlternative; }
+            set { _energyAlternative = value; OnPropertyChanged("Energy_alternative"); }
         }
-        private float _Carbon_emission; //二氧化碳减排量8
+        private float _carbonEmission; //二氧化碳减排量8
 
-        public float Carbon_emission
+        public float CarbonEmission
         {
-            get { return _Carbon_emission; }
-            set { _Carbon_emission = value; OnPropertyChanged("Carbon_emission"); }
+            get { return _carbonEmission; }
+            set { _carbonEmission = value; OnPropertyChanged("Carbon_emission"); }
         }
-        private float _Sulfur_emission; //二氧化硫减排量9
+        private float _sulfurEmission; //二氧化硫减排量9
 
-        public float Sulfur_emission
+        public float SulfurEmission
         {
-            get { return _Sulfur_emission; }
-            set { _Sulfur_emission = value; OnPropertyChanged("Sulfur_emission"); }
+            get { return _sulfurEmission; }
+            set { _sulfurEmission = value; OnPropertyChanged("Sulfur_emission"); }
         }
-        private float _Dust_emission;  //粉尘减排量10
+        private float _dustEmission;  //粉尘减排量10
 
-        public float Dust_emission
+        public float DustEmission
         {
-            get { return _Dust_emission; }
-            set { _Dust_emission = value; OnPropertyChanged("Dust_emission"); }
+            get { return _dustEmission; }
+            set { _dustEmission = value; OnPropertyChanged("Dust_emission"); }
         }
-        private float _Fee_effect; //项目费效比11
+        private float _feeEffect; //项目费效比11
 
-        public float Fee_effect
+        public float FeeEffect
         {
-            get { return _Fee_effect; }
-            set { _Fee_effect = value; OnPropertyChanged("Fee_effect"); }
+            get { return _feeEffect; }
+            set { _feeEffect = value; OnPropertyChanged("Fee_effect"); }
         }
-        private float _Auxiliary_heat;//辅助热源加热量12
+        private float _auxiliaryHeat;//辅助热源加热量12
 
-        public float Auxiliary_heat
+        public float AuxiliaryHeat
         {
-            get { return _Auxiliary_heat; }
-            set { _Auxiliary_heat = value; OnPropertyChanged("Auxiliary_heat"); }
+            get { return _auxiliaryHeat; }
+            set { _auxiliaryHeat = value; OnPropertyChanged("Auxiliary_heat"); }
         }
 
         public ushort Id { get; set; } //ID
-
-        public SystemObject() 
-        {
-            
-        }
-
     }
 
     public class ThreadIdentity
     {
-        public string threadName;
+        public string ThreadName;
 
         public ThreadIdentity(string threadName)
         {
-            this.threadName = threadName;
+            ThreadName = threadName;
         }
     }
 
 
 
-    public static class global
+    public static class Global
     {
-       public static bool attached=true;
-       public static string currentuser;
-       public static ushort Timer_store = 60;
-       public static ushort Timer_Statistic = 60;
-       public static ushort Timer_Sum = 60;
+       public static bool Attached=true;
+       public static string Currentuser;
+       public static ushort TimerStore = 60;
+       public static ushort TimerStatistic = 60;
+       public static ushort TimerSum = 60;
 
        public static SortedList<string, ParameterObject> ParameterList = new SortedList<string, ParameterObject>();//实时输入参数LIST
-       public static SortedList<string, DTUObject> DTUList = new SortedList<string, DTUObject>();//实时状态LIST
+       public static SortedList<string, DtuObject> DtuList = new SortedList<string, DtuObject>();//实时状态LIST
 
        public static SortedList<string, StatisticObject> SatisticList = new SortedList<string, StatisticObject>();//实时统计数据LIST
 
-       public static SystemObject osystem = new SystemObject();//实时汇总统计对象
+       public static SystemObject Osystem = new SystemObject();//实时汇总统计对象
 
-       public static void checkTemp(string instr)//验证温度值
+       public static void CheckTemp(string instr)//验证温度值
        {
            if (Convert.ToInt16(instr) < 0 || Convert.ToInt16(instr) > 100)
            {
-               MessageBox.Show("温度值需在范围（0-100）！");
+               MessageBox.Show(Resources.Global_CheckTemp_);
            }
        }
 
-       public static void checkHour(string instr)//验证时间小时值
+       public static void CheckHour(string instr)//验证时间小时值
        {
            if (Convert.ToInt16(instr) < 0 || Convert.ToInt16(instr) > 23)
            {
-               MessageBox.Show("时间小时值需在范围（0-23）！");
+               MessageBox.Show(Resources.Global_checkHour_);
            }
        }
 
-       public static void checkMinute(string instr)//验证时间分钟值
+       public static void CheckMinute(string instr)//验证时间分钟值
        {
            if (Convert.ToInt16(instr) < 0 || Convert.ToInt16(instr) > 59)
            {
-               MessageBox.Show("时间分钟值需在范围（0-59）！");
+               MessageBox.Show(Resources.Global_CheckMinute_);
            }
        }
 
        public static string StrToHex(byte[] str, int len)//将BYTE数组里的数据转换为16进制，参数是BYTE数组，和数组里的数据长度
        {
            string hex = "";
-           string s;
-           int asc;
            for (int i = 0; i < len; i++)
            {
-               s = "";
-               asc = str[i];
+               int asc = str[i];
                //hex = hex + System.Convert.ToString(asc,16);
-               s = System.Convert.ToString(asc, 16);
-               for (int j = 0; j < s.Length; j++)
+               string s = Convert.ToString(asc, 16);
+               foreach (char t in s)
                {
                    if (s.Length == 1)
                        hex = hex + '0';
-                   if (s[j] == 'a')
+                   if (t == 'a')
                        hex = hex + 'A';
-                   else if (s[j] == 'b')
+                   else if (t == 'b')
                        hex = hex + 'B';
-                   else if (s[j] == 'c')
+                   else if (t == 'c')
                        hex = hex + 'C';
-                   else if (s[j] == 'd')
+                   else if (t == 'd')
                        hex = hex + 'D';
-                   else if (s[j] == 'e')
+                   else if (t == 'e')
                        hex = hex + 'E';
-                   else if (s[j] == 'f')
+                   else if (t == 'f')
                        hex = hex + 'F';
                    else
-                       hex = hex + s[j];
+                       hex = hex + t;
                }
                if (i < (len - 1))
                    hex = hex + " ";
@@ -932,7 +759,7 @@ namespace Tiger
            return hex;
        }
 
-       public static string[]  patternstrfloat=
+       public static string[]  Patternstrfloat=
        {
             @"[T][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//T1
             @"[T][2][-]+(?<T2>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//T2
@@ -950,20 +777,20 @@ namespace Tiger
             @"[V][1][-]+(?<V1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))"//V1
        };
 
-       public static string[] patternstrint =
+       public static string[] Patternstrint =
        {
             @"[S][1][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//S1
             @"[E][1][-]+(?<T2>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))"//E1
        };
 
-       public static string[] patternstrdatatime =
+       public static string[] Patternstrdatatime =
        {
             @"[D][0][-]+(?<T1>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//D0
             @"[D][1][-]+(?<T2>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))",//D1
             @"[D][2][-]+(?<T3>([1-9]\d*\.\d*|0\.\d*[1-9]\d*\s))"//D2
        };
 
-       public static string[] userrolestring =
+       public static string[] Userrolestring =
        {
             "超级管理员",//D0
             "区域管理员",//D1
@@ -977,14 +804,8 @@ namespace Tiger
     {
         public static IList<union> GetAllUnits()
         {
-            ///BlogDBEntities是继承于ObjectContext类，自动生成
-            ///可以打开Blog.Desgner.cs文件找到
-            ///原型： public partial class BlogDBEntities : ObjectContext
-            ///可以理解为 他代表了当前数据库环境对象
-            ///同时，在Blog.Desgner.cs里还可以找到两个实体BlogUser及Post
-            DbTigerEntities unitDB = new DbTigerEntities();
-            ///采用Linq语法读取数据
-            IList<union> units = unitDB.unions.ToList<union>();
+            var unitDB = new DbTigerEntities();
+            IList<union> units = unitDB.unions.ToList();
             return units;
         }
 

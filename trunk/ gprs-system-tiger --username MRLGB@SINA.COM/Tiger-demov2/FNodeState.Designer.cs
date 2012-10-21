@@ -1,6 +1,6 @@
 ﻿namespace Tiger
 {
-    partial class F_Node_State
+    partial class FNodeState
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,7 @@
             System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("采集器节点02");
             System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("采集器节点03");
             System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("采集器节点04");
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_Node_State));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FNodeState));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -126,7 +126,7 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "GPRS_32.ico");
+            this.imageList1.Images.SetKeyName(0, "Gprs_32.ico");
             // 
             // groupBox1
             // 
@@ -413,9 +413,9 @@
             this.ClientSize = new System.Drawing.Size(1016, 600);
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "F_Node_State";
+            this.Name = "FNodeState";
             this.Text = "节点状态";
-            this.Load += new System.EventHandler(this.F_Node_State_Load);
+            this.Load += new System.EventHandler(this.FNodeStateLoad);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

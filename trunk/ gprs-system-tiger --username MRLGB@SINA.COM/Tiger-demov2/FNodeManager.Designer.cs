@@ -1,6 +1,6 @@
 ﻿namespace Tiger
 {
-    partial class F_NodeManager
+    partial class FNodeManager
     {
         /// <summary>
         /// Required designer variable.

@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
-using System.Data;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Net;
-using System.Collections.Generic;
 
-namespace Tiger
+namespace Tiger.Gprs
 {
     //结构定义
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct GPRS_DATA_RECORD
+    public struct GprsDataRecord
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 12)]
         public string m_userid;							//终端模块号码
@@ -31,7 +24,7 @@ namespace Tiger
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public struct GPRS_USER_INFO
+    public struct GprsUserInfo
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 12)]
         public string m_userid;				//终端模块号码	
@@ -52,13 +45,13 @@ namespace Tiger
         }
     }
 
-    public static class GPRS
+    public static class Gprs
     {      
         //定义接口函数		
 
         //启动服务
         [DllImport(".\\wcomm_dll.dll")]
-        public static extern int start_gprs_server(
+        public static extern int start_Gprs_server(
             IntPtr hWnd,
             int wMsg,
             int nServerPort,
@@ -75,7 +68,7 @@ namespace Tiger
 
         //停止服务
         [DllImport(".\\wcomm_dll.dll")]
-        public static extern int stop_gprs_server(
+        public static extern int stop_Gprs_server(
             [MarshalAs(UnmanagedType.LPStr)]
 			StringBuilder mess);
         //停止服务
@@ -87,7 +80,7 @@ namespace Tiger
         //读取数据
         [DllImport(".\\wcomm_dll.dll")]
         public static extern int do_read_proc(
-            ref GPRS_DATA_RECORD recdPtr,
+            ref GprsDataRecord recdPtr,
             [MarshalAs(UnmanagedType.LPStr)]
 			StringBuilder mess,
             bool reply);
@@ -109,7 +102,7 @@ namespace Tiger
         public static extern int get_user_info(
             [MarshalAs(UnmanagedType.LPStr)]
 			string userid,
-            ref GPRS_USER_INFO infoPtr);
+            ref GprsUserInfo infoPtr);
 
         //设置服务模式
         [DllImport(".\\wcomm_dll.dll")]
@@ -153,7 +146,7 @@ namespace Tiger
 
         //指定服务IP
         [DllImport(".\\wcomm_dll.dll")]
-        public static extern void SetCustomIP(int IP);
+        public static extern void SetCustomIP(int ip);
 
         //获得最大DTU连接数量
         [DllImport(".\\wcomm_dll.dll")]
@@ -161,7 +154,7 @@ namespace Tiger
 
         //获取终端信息
         [DllImport(".\\wcomm_dll.dll")]
-        public static extern int get_user_at(uint index, ref GPRS_USER_INFO infoPtr);
+        public static extern int get_user_at(uint index, ref GprsUserInfo infoPtr);
 
         //定义一些SOCKET API函数
         [DllImport("Ws2_32.dll")]
@@ -177,6 +170,6 @@ namespace Tiger
         [DllImport("Ws2_32.dll")]
         public static extern ushort ntohs(ushort ip);
 
-        public const int WM_DTU = 0x400 + 100;
+        public const int WmDtu = 0x400 + 100;
     }
 }

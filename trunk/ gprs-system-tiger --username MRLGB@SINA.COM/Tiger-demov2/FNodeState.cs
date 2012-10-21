@@ -1,25 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Tiger.Helper;
 
 namespace Tiger
 {
-    public partial class F_Node_State : Form
+    public partial class FNodeState : Form
     {
-        Module module = new Module();
-        public F_Node_State()
+        readonly Module _module = new Module();
+        public FNodeState()
         {
             InitializeComponent();
         }
 
-        private void F_Node_State_Load(object sender, EventArgs e)
+        private void FNodeStateLoad(object sender, EventArgs e)
         {
-            module.TreeInit(treeView1);
+            _module.TreeInit(treeView1);
         }
 
         //add main ui control binding
@@ -30,7 +25,7 @@ namespace Tiger
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            string uinitid = (string)(treeView1.SelectedNode.Tag);
+            var uinitid = (string)(treeView1.SelectedNode.Tag);
             InitUIDataBinding(uinitid);
         }
 

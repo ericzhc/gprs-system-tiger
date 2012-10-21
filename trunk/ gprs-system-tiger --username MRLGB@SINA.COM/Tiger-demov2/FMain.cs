@@ -1,109 +1,103 @@
 ﻿using System;
-using System.Drawing;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
-using System.Data;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Net;
 using System.Threading;
 using System.Linq;
 using System.Globalization;
 using System.Diagnostics;
-using log4net;
-using log4net.Config;
+using Tiger.Helper;
+using Tiger.Gprs;
 
 namespace Tiger
 {
-    public partial class F_Main : Form
+    public partial class FMain : Form
     {
         #region 主窗口全局变量
-        DataAccess da = new DataAccess();
-        public F_ServerInfo serviceinfo = new F_ServerInfo();
-        public F_CenterConfig config;
-        public string serv_ip;
-        public int connect_time;
-        public int refresh_time;
-        public int serv_port;
-        public int serv_type;
-        public int serv_mode;      
-        public int serv_start = 0;
-        public int sign;
+        DataAccess _da = new DataAccess();
+        public FServerInfo Serviceinfo = new FServerInfo();
+        public FCenterConfig Config;
+        public string ServIp;
+        public int ConnectTime;
+        public int RefreshTime;
+        public int ServPort;
+        public int ServType;
+        public int ServMode;      
+        public int ServStart = 0;
+        public int Sign;
         //private static int staticcount = 0;
         //public int Timer_store = 60*1000;
         //public int Timer_Statistic = 60*1000;
         //public int Timer_Sum = 60*1000;
 
-        public bool recvdata;
-        public bool threadrun;//控制线程
-        public Thread thread_block;
+        public bool Recvdata;
+        public bool Threadrun;//控制线程
+        public Thread ThreadBlock;
 
-        private Random rand = new Random();//Produce Data test
-        private DoubleQueue Dqueue;
+        private readonly Random _rand = new Random();//Produce Data test
+        private DoubleQueue _dqueue;
         //protected static readonly log4net.ILog m_Log =LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        protected log4net.ILog m_Log;
-        private string logPath;
+        protected log4net.ILog MLog;
+        private string _logPath;
 
-        BindingSource bsSystem = new BindingSource(); // System object
+        BindingSource _bsSystem = new BindingSource(); // System object
         //BindingSource bsP = new BindingSource(); // Passengers
 
-        private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();//
+        private readonly ReaderWriterLockSlim _cacheLock = new ReaderWriterLockSlim();//
         #endregion
 
-        public F_Main()
+        public FMain()
         {
             InitializeComponent();
             LoadConfiguration();
             InitQueue();
             UpdateDTUListFromDB();
             //staticcount = 0;
-            InitUIDataBinding();
+            //InitUIDataBinding();
         }
 
         private void LoadConfiguration()
         {
-            logPath = Path.Combine(Directory.GetCurrentDirectory(), "logs");
+            _logPath = Path.Combine(Directory.GetCurrentDirectory(), "logs");
 
-            m_Log = log4net.LogManager.GetLogger(this.GetType().FullName);
+            MLog = log4net.LogManager.GetLogger(this.GetType().FullName);
             string path = Directory.GetCurrentDirectory();
             string filename = Path.Combine(path, "App.config");
-            FileInfo file = new FileInfo(filename);
+            var file = new FileInfo(filename);
 
             //log4net.Config.XmlConfigurator.Configure(file);
             //m_Log.InfoFormat("Application Configuration Completed at {0}", DateTime.Now);
             //m_Log.InfoFormat("The logs will be placed in '{0}'.", logPath);
-            m_Log.InfoFormat("________________________________");
-            m_Log.InfoFormat("Application Star logging  at {0}", DateTime.Now);
+            MLog.InfoFormat("________________________________");
+            MLog.InfoFormat("Application Star logging  at {0}", DateTime.Now);
 
-            timerStore2Db.Interval = global.Timer_store; //记录实时状态到数据库的时间间隔
+            timerStore2Db.Interval = Global.TimerStore; //记录实时状态到数据库的时间间隔
 
         }
 
         public void InitQueue()
         {
-            Dqueue = new DoubleQueue();
-            Dqueue.OnResponseData += new DoubleQueue.ResponseData(DoubleQueue_OnResponseData);
-            global.attached = true;
+            _dqueue = new DoubleQueue();
+            _dqueue.OnResponseData += new DoubleQueue.ResponseData(DoubleQueue_OnResponseData);
+            Global.Attached = true;
             btn_Atach.Enabled = false;
-            Dqueue.Run();
+            _dqueue.Run();
         }
 
         //add main ui control binding
         private void InitUIDataBinding()
         {
             //add data binding
-            txt_System_heat.DataBindings.Add(new Binding("Text", global.osystem, "System_heat", false, DataSourceUpdateMode.Never));
-            txt_System_efficiency.DataBindings.Add(new Binding("Text", global.osystem, "System_efficiency", false, DataSourceUpdateMode.Never));
-            txt_Carbon_emission.DataBindings.Add(new Binding("Text", global.osystem, "Carbon_emission", false, DataSourceUpdateMode.Never));
-            txt_Sulfur_emission.DataBindings.Add(new Binding("Text", global.osystem, "Sulfur_emission", false, DataSourceUpdateMode.Never));
-            txt_Dust_emission.DataBindings.Add(new Binding("Text", global.osystem, "Dust_emission", false, DataSourceUpdateMode.Never));
-            txt_Solar_assurance_year.DataBindings.Add(new Binding("Text", global.osystem, "Solar_assurance_year", false, DataSourceUpdateMode.Never));
-            txt_Solar_assurance_day.DataBindings.Add(new Binding("Text", global.osystem, "Solar_assurance_day", false, DataSourceUpdateMode.Never));
-            txt_Energy_alternative.DataBindings.Add(new Binding("Text", global.osystem, "Energy_alternative", false, DataSourceUpdateMode.Never));
-            txt_Fee_effect.DataBindings.Add(new Binding("Text", global.osystem, "Fee_effect", false, DataSourceUpdateMode.Never));
+            txt_System_heat.DataBindings.Add(new Binding("Text", Global.Osystem, "System_heat", false, DataSourceUpdateMode.Never));
+            txt_System_efficiency.DataBindings.Add(new Binding("Text", Global.Osystem, "System_efficiency", false, DataSourceUpdateMode.Never));
+            txt_Carbon_emission.DataBindings.Add(new Binding("Text", Global.Osystem, "Carbon_emission", false, DataSourceUpdateMode.Never));
+            txt_Sulfur_emission.DataBindings.Add(new Binding("Text", Global.Osystem, "Sulfur_emission", false, DataSourceUpdateMode.Never));
+            txt_Dust_emission.DataBindings.Add(new Binding("Text", Global.Osystem, "Dust_emission", false, DataSourceUpdateMode.Never));
+            txt_Solar_assurance_year.DataBindings.Add(new Binding("Text", Global.Osystem, "Solar_assurance_year", false, DataSourceUpdateMode.Never));
+            txt_Solar_assurance_day.DataBindings.Add(new Binding("Text", Global.Osystem, "Solar_assurance_day", false, DataSourceUpdateMode.Never));
+            txt_Energy_alternative.DataBindings.Add(new Binding("Text", Global.Osystem, "Energy_alternative", false, DataSourceUpdateMode.Never));
+            txt_Fee_effect.DataBindings.Add(new Binding("Text", Global.Osystem, "Fee_effect", false, DataSourceUpdateMode.Never));
         }
 
         void UpdateDTUListFromDB()
@@ -113,31 +107,30 @@ namespace Tiger
             ///遍历所有查询结果
             foreach (var Unit in Union)
             {
-                if (!global.ParameterList.ContainsKey(Unit.UnitId))
+                if (!Global.ParameterList.ContainsKey(Unit.UnitId))
                 {
-                    ParameterObject parao = new ParameterObject(Unit.UnitId, Unit.Aera_IrradiatedSum, Unit.Auxiliary_power, Unit.Flow_CollectorSys, Unit.Flow_HeatUsing, Unit.Volumn_HeatingBox);
-                    parao.System_heat = Unit.System_heat;//赋给统计初值
-                    global.ParameterList.Add(parao.Id, parao);
+                    var parao = new ParameterObject(Unit.UnitId, Unit.Aera_IrradiatedSum, Unit.Auxiliary_power, Unit.Flow_CollectorSys, Unit.Flow_HeatUsing, Unit.Volumn_HeatingBox)
+                                    {SystemHeat = Unit.System_heat};
+                    Global.ParameterList.Add(parao.Id, parao);
                 }
 
-                if (!global.DTUList.ContainsKey(Unit.UnitId))
+                if (!Global.DtuList.ContainsKey(Unit.UnitId))
                 {
-                    DTUObject dtu = new DTUObject(Unit.UnitId);
-                      global.DTUList.Add(dtu.Id, dtu);
+                    var dtu = new DtuObject(Unit.UnitId);
+                      Global.DtuList.Add(dtu.Id, dtu);
                 }
 
-                if (!global.SatisticList.ContainsKey(Unit.UnitId))
+                if (!Global.SatisticList.ContainsKey(Unit.UnitId))
                 {
-                    StatisticObject dtustatistic = new StatisticObject(Unit.UnitId);
-                    dtustatistic.System_heat = Unit.System_heat;
-                    global.SatisticList.Add(dtustatistic.Id, dtustatistic);
+                    var dtustatistic = new StatisticObject(Unit.UnitId) {SystemHeat = Unit.System_heat};
+                    Global.SatisticList.Add(dtustatistic.Id, dtustatistic);
                 }
             
             }
    
         }
 
-        private void DoubleQueue_OnResponseData(ushort ID, GPRS_DATA_RECORD values)
+        private void DoubleQueue_OnResponseData(ushort id, GprsDataRecord values)
         {
             //消息经过缓冲处理后的处理函数。（显示、存储）
             //Registers a task that will wait for a WaitHandle and will wait forever (-1 means
@@ -151,7 +144,7 @@ namespace Tiger
             //m_Log.Info(values.m_userid + "---" + values.m_recv_date + "---" + values.m_data_len.ToString() + "\r\n" + global.StrToHex(values.m_data_buf, values.m_data_len) + "\r\n");//LOG4 
 
 
-            ThreadPool.QueueUserWorkItem(new WaitCallback(ThreadPoolTask), values);
+            ThreadPool.QueueUserWorkItem(ThreadPoolTask, values);
             ////++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         }
@@ -160,8 +153,8 @@ namespace Tiger
         // ThreadPool.QueueUserWorkItem
         public void ThreadPoolTask(object message)
         {
-            GPRS_DATA_RECORD gprsrecord = (GPRS_DATA_RECORD)message;
-            global.DTUList[gprsrecord.m_userid].UpdateDTUObject(gprsrecord);//更新DTUList实时状态
+            var gprsrecord = (GprsDataRecord)message;
+            Global.DtuList[gprsrecord.m_userid].UpdateDtuObject(gprsrecord);//更新DTUList实时状态
             ComputeStatistic();
             btnStore2Db_Click(null, null);//Testing+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //Thread.Sleep(2000);
@@ -177,14 +170,14 @@ namespace Tiger
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            F_Node fnode = new F_Node();
+            FNode fnode = new FNode();
             fnode.ShowDialog();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            F_Node_State fnode = new F_Node_State();
-            fnode.ShowDialog();
+            //F_Node_State fnode = new F_Node_State();
+            //fnode.ShowDialog();
         }
 
         private void 数据备份ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -233,7 +226,7 @@ namespace Tiger
         private void 系统配置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //F_SystemSet f_systemset = new F_SystemSet();
-            F_NodeManager f_systemconfig = new F_NodeManager();
+            FNodeManager f_systemconfig = new FNodeManager();
             f_systemconfig.ShowDialog();
         }
 
@@ -257,33 +250,33 @@ namespace Tiger
         //**********************************
         private void 启动数据中心ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            sign = 9999;
-            GPRS.SetCustomIP(GPRS.inet_addr(serv_ip));
-            GPRS.SetWorkMode(serv_mode);//开发包函数，设置服务模式：2-消息，0-阻塞，1-非阻塞
-            GPRS.SelectProtocol(serv_type);//开发包函数，设置服务类型：0-UDP，1-TCP
+            Sign = 9999;
+            Gprs.Gprs.SetCustomIP(Gprs.Gprs.inet_addr(ServIp));
+            Gprs.Gprs.SetWorkMode(ServMode);//开发包函数，设置服务模式：2-消息，0-阻塞，1-非阻塞
+            Gprs.Gprs.SelectProtocol(ServType);//开发包函数，设置服务类型：0-UDP，1-TCP
             StringBuilder mess = new StringBuilder(1000);
-            if (serv_mode == 2)
-                sign = GPRS.start_net_service(this.Handle, GPRS.WM_DTU, serv_port, mess);//开发包函数，消息模式启动服务
+            if (ServMode == 2)
+                Sign = Gprs.Gprs.start_net_service(this.Handle, Gprs.Gprs.WmDtu, ServPort, mess);//开发包函数，消息模式启动服务
             else
             {
-                sign = GPRS.start_net_service(this.Handle, 0, serv_port, mess);//开发包函数，非消息模式启动服务
+                Sign = Gprs.Gprs.start_net_service(this.Handle, 0, ServPort, mess);//开发包函数，非消息模式启动服务
                 timer3.Interval = 100;
                 timer3.Enabled = true;//启动非消息模式下数据读取和处理定时器
             }
-            if (serv_mode == 0)
+            if (ServMode == 0)
             {
                 timer3.Enabled = false;
-                threadrun = true;
-                recvdata = false;
-                thread_block = new Thread(new ThreadStart(pressdata));//创建新的阻塞模式下读取数据线程
-                thread_block.Start(); //启动阻塞模式下读取数据线程
+                Threadrun = true;
+                Recvdata = false;
+                ThreadBlock = new Thread(new ThreadStart(pressdata));//创建新的阻塞模式下读取数据线程
+                ThreadBlock.Start(); //启动阻塞模式下读取数据线程
             }
-            if (sign == 0)
+            if (Sign == 0)
             {
                 //服务启动后，主窗口设置
-                timer2.Interval = refresh_time * 1000;
+                timer2.Interval = RefreshTime * 1000;
                 timer2.Enabled = true;
-                serv_start = 1;
+                ServStart = 1;
                 启动数据中心ToolStripMenuItem.Enabled = false;
                 停止服务ToolStripMenuItem.Enabled = true;
                 分离DTUToolStripMenuItem.Enabled = true;
@@ -292,21 +285,21 @@ namespace Tiger
                 //toolBarButton3.Enabled = true;
                 //toolBarButton8.Enabled = true;
                 statusBar1.Panels[1].Text = "服务启动";
-                if (serv_type == 0)
+                if (ServType == 0)
                 {
-                    if (serv_mode == 0) AddText("UDP:阻塞模式" + "\r\n");
-                    else if (serv_mode == 1) AddText("UDP:非阻塞模式" + "\r\n");
-                    else if (serv_mode == 2) AddText("UDP:消息模式" + "\r\n");
+                    if (ServMode == 0) AddText("UDP:阻塞模式" + "\r\n");
+                    else if (ServMode == 1) AddText("UDP:非阻塞模式" + "\r\n");
+                    else if (ServMode == 2) AddText("UDP:消息模式" + "\r\n");
                 }
-                else if (serv_type == 1)
+                else if (ServType == 1)
                 {
-                    if (serv_mode == 0) AddText("TCP:阻塞模式" + "\r\n");
-                    else if (serv_mode == 1) AddText("TCP:非阻塞模式" + "\r\n");
-                    else if (serv_mode == 2) AddText("TCP:消息模式" + "\r\n");
+                    if (ServMode == 0) AddText("TCP:阻塞模式" + "\r\n");
+                    else if (ServMode == 1) AddText("TCP:非阻塞模式" + "\r\n");
+                    else if (ServMode == 2) AddText("TCP:消息模式" + "\r\n");
                 }
             }
             else
-                serv_start = 0;
+                ServStart = 0;
             AddText(mess.ToString() + "\n");
         }
 
@@ -317,20 +310,20 @@ namespace Tiger
         {
             StringBuilder mess = new StringBuilder(1000);
             //停止服务
-            GPRS.do_close_all_user2(mess);//开发包函数，使所有DTU下线
+            Gprs.Gprs.do_close_all_user2(mess);//开发包函数，使所有DTU下线
             timer2.Enabled = false;
-            if (serv_mode != 2)
+            if (ServMode != 2)
                 timer3.Enabled = false;
-            if (serv_mode == 0)
+            if (ServMode == 0)
             {
-                GPRS.cancel_read_block();//阻塞模式下取消阻塞读取
-                threadrun = false;//退出线程处理函数
-                thread_block.Abort();//终止线程
+                Gprs.Gprs.cancel_read_block();//阻塞模式下取消阻塞读取
+                Threadrun = false;//退出线程处理函数
+                ThreadBlock.Abort();//终止线程
             }
-            if (GPRS.stop_net_service(mess) == 0)//开发包函数，停止服务
+            if (Gprs.Gprs.stop_net_service(mess) == 0)//开发包函数，停止服务
             {
                 //界面处理
-                serv_start = 0;
+                ServStart = 0;
                 //RefreshList();
                 启动数据中心ToolStripMenuItem.Enabled = true;
                 停止服务ToolStripMenuItem.Enabled = false;
@@ -353,7 +346,7 @@ namespace Tiger
             //if (textBox2.Text.Length == 11)
             //{
             //    if (MessageBox.Show("确定使该DTU下线？", "确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
-            //        if (GPRS.do_close_one_user2(textBox2.Text, mess) == 0)//开发包函数，使某个DTU下线并发下线指令
+            //        if (Gprs.Gprs.do_close_one_user2(textBox2.Text, mess) == 0)//开发包函数，使某个DTU下线并发下线指令
             //        {
             //            RefreshList();//刷新终端登陆列表
             //        }
@@ -367,42 +360,42 @@ namespace Tiger
         //*************************************
         private void 中心参数设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (serv_start == 0)
+            if (ServStart == 0)
             {
                 //AddIP(serviceinfo.comboBox1);
                // serviceinfo.comboBox1.SelectedIndex = 0;
-                serviceinfo.comboBox2.Text = connect_time.ToString();
-                serviceinfo.comboBox3.Text = refresh_time.ToString();
-                serviceinfo.textBox1.Text = serv_port.ToString();
-                if (serv_type == 0)
-                    serviceinfo.radioButton2.Checked = true;
-                else if (serv_type == 1)
-                    serviceinfo.radioButton1.Checked = true;
-                if (serv_mode == 0)
-                    serviceinfo.radioButton4.Checked = true;
-                else if (serv_mode == 1)
-                    serviceinfo.radioButton5.Checked = true;
-                else if (serv_type == 2)
-                    serviceinfo.radioButton3.Checked = true;
-                if (serviceinfo.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                Serviceinfo.comboBox2.Text = ConnectTime.ToString();
+                Serviceinfo.comboBox3.Text = RefreshTime.ToString();
+                Serviceinfo.textBox1.Text = ServPort.ToString();
+                if (ServType == 0)
+                    Serviceinfo.radioButton2.Checked = true;
+                else if (ServType == 1)
+                    Serviceinfo.radioButton1.Checked = true;
+                if (ServMode == 0)
+                    Serviceinfo.radioButton4.Checked = true;
+                else if (ServMode == 1)
+                    Serviceinfo.radioButton5.Checked = true;
+                else if (ServType == 2)
+                    Serviceinfo.radioButton3.Checked = true;
+                if (Serviceinfo.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    serv_ip = serviceinfo.comboBox1.Text;
-                    connect_time = int.Parse(serviceinfo.comboBox2.Text);
-                    refresh_time = int.Parse(serviceinfo.comboBox3.Text);
-                    serv_port = int.Parse(serviceinfo.textBox1.Text);
-                    if (serviceinfo.radioButton2.Checked)
-                        serv_type = 0;
-                    else if (serviceinfo.radioButton1.Checked)
-                        serv_type = 1;
-                    if (serviceinfo.radioButton4.Checked)
-                        serv_mode = 0;
-                    else if (serviceinfo.radioButton5.Checked)
-                        serv_mode = 1;
-                    else if (serviceinfo.radioButton3.Checked)
-                        serv_mode = 2;
+                    ServIp = Serviceinfo.comboBox1.Text;
+                    ConnectTime = int.Parse(Serviceinfo.comboBox2.Text);
+                    RefreshTime = int.Parse(Serviceinfo.comboBox3.Text);
+                    ServPort = int.Parse(Serviceinfo.textBox1.Text);
+                    if (Serviceinfo.radioButton2.Checked)
+                        ServType = 0;
+                    else if (Serviceinfo.radioButton1.Checked)
+                        ServType = 1;
+                    if (Serviceinfo.radioButton4.Checked)
+                        ServMode = 0;
+                    else if (Serviceinfo.radioButton5.Checked)
+                        ServMode = 1;
+                    else if (Serviceinfo.radioButton3.Checked)
+                        ServMode = 2;
                 }
             }
-            if (serv_start == 1)
+            if (ServStart == 1)
             {
                 MessageBox.Show("请先关闭服务!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -414,19 +407,19 @@ namespace Tiger
         private void 服务参数设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             uint i, iDtuAmount;
-            GPRS_USER_INFO user_info = new GPRS_USER_INFO();
-            config = new F_CenterConfig();
-            iDtuAmount = GPRS.get_max_user_amount();
+            GprsUserInfo user_info = new GprsUserInfo();
+            Config = new FCenterConfig();
+            iDtuAmount = Gprs.Gprs.get_max_user_amount();
             for (i = 0; i < iDtuAmount; i++)
             {
-                GPRS.get_user_at(i, ref user_info);//开发包函数，通过DTU顺序号获得DTU信息
+                Gprs.Gprs.get_user_at(i, ref user_info);//开发包函数，通过DTU顺序号获得DTU信息
                 if (user_info.m_status == 1)//在线
                 {
                     //向列表框添加ID号
-                    config.comboBox8.Items.Add(user_info.m_userid);
+                    Config.comboBox8.Items.Add(user_info.m_userid);
                 }
             }
-            config.ShowDialog();
+            Config.ShowDialog();
         }
 
         //***************************************************
@@ -436,16 +429,16 @@ namespace Tiger
         {
             //从配置文件Sysconfig.ini读取各项参数到服务参数变量
             //thread = new Thread(new ThreadStart( pressdata ));
-            serv_start = 0;
+            ServStart = 0;
             string path = System.IO.Directory.GetCurrentDirectory();
             path = path + "\\Sysconfig.ini";
             IniFile ini = new IniFile(path);
-            serv_ip = ini.IniReadValue("ServerConfig", "serv_ip", "127.0.0.1");
-            connect_time = int.Parse(ini.IniReadValue("ServerConfig", "connect_time", "30"));
-            refresh_time = int.Parse(ini.IniReadValue("ServerConfig", "refresh_time", "3"));
-            serv_port = int.Parse(ini.IniReadValue("ServerConfig", "serv_port", "5002"));
-            serv_type = int.Parse(ini.IniReadValue("ServerConfig", "serv_type", "0"));
-            serv_mode = int.Parse(ini.IniReadValue("ServerConfig", "serv_mode", "2"));
+            ServIp = ini.IniReadValue("ServerConfig", "serv_ip", "127.0.0.1");
+            ConnectTime = int.Parse(ini.IniReadValue("ServerConfig", "connect_time", "30"));
+            RefreshTime = int.Parse(ini.IniReadValue("ServerConfig", "refresh_time", "3"));
+            ServPort = int.Parse(ini.IniReadValue("ServerConfig", "serv_port", "5002"));
+            ServType = int.Parse(ini.IniReadValue("ServerConfig", "serv_type", "0"));
+            ServMode = int.Parse(ini.IniReadValue("ServerConfig", "serv_mode", "2"));
             
             //add data binding
             //txt_System_heat.DataBindings.Add(new Binding("Text", global.osystem, "System_heat", false, DataSourceUpdateMode.Never));
@@ -460,26 +453,26 @@ namespace Tiger
             StringBuilder mess = new StringBuilder(500);
             if (MessageBox.Show("确定退出吗？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
             {
-                m_Log.InfoFormat("Application Stop logging  at {0}", DateTime.Now);
-                m_Log.InfoFormat("________________________________");
+                MLog.InfoFormat("Application Stop logging  at {0}", DateTime.Now);
+                MLog.InfoFormat("________________________________");
                 //如果服务正在启动，调用开发包函数使所有DTU下线并关闭服务
-                if (serv_start == 1)
+                if (ServStart == 1)
                 {
                    停止服务ToolStripMenuItem.PerformClick(); 
                 }
                 ///遍历所有list元素
-                foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
+                foreach (KeyValuePair<string, DtuObject> item in Global.DtuList)
                 {
                     using (var context = new DbTigerEntities())
                     {
                         try
                         {
                             union c = context.unions.First(i => i.UnitId == item.Key);
-                            c.System_heat = global.SatisticList[item.Key].System_heat;//记录上次保存数据
+                            c.System_heat = Global.SatisticList[item.Key].SystemHeat;//记录上次保存数据
                             context.SaveChanges();
 
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
 
                         }
@@ -501,12 +494,12 @@ namespace Tiger
             string path = System.IO.Directory.GetCurrentDirectory();
             path = path + "\\Sysconfig.ini";
             IniFile ini = new IniFile(path);
-            ini.IniWriteValue("ServerConfig", "serv_ip", serv_ip);
-            ini.IniWriteValue("ServerConfig", "connect_time", connect_time.ToString());
-            ini.IniWriteValue("ServerConfig", "refresh_time", refresh_time.ToString());
-            ini.IniWriteValue("ServerConfig", "serv_port", serv_port.ToString());
-            ini.IniWriteValue("ServerConfig", "serv_type", serv_type.ToString());
-            ini.IniWriteValue("ServerConfig", "serv_mode", serv_mode.ToString());
+            ini.IniWriteValue("ServerConfig", "serv_ip", ServIp);
+            ini.IniWriteValue("ServerConfig", "connect_time", ConnectTime.ToString());
+            ini.IniWriteValue("ServerConfig", "refresh_time", RefreshTime.ToString());
+            ini.IniWriteValue("ServerConfig", "serv_port", ServPort.ToString());
+            ini.IniWriteValue("ServerConfig", "serv_type", ServType.ToString());
+            ini.IniWriteValue("ServerConfig", "serv_mode", ServMode.ToString());
 
            
            
@@ -517,14 +510,14 @@ namespace Tiger
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
-            foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
+            foreach (KeyValuePair<string, DtuObject> item in Global.DtuList)
             {
-                GPRS_DATA_RECORD record = new GPRS_DATA_RECORD();
-                cacheLock.EnterWriteLock();
+                GprsDataRecord record = new GprsDataRecord();
+                _cacheLock.EnterWriteLock();
                 try
                 {
                     record.Initialize();
-                    record.m_userid = item.Key;//消息数据包设置GPRS号码
+                    record.m_userid = item.Key;//消息数据包设置Gprs号码
                     DateTime now = DateTime.Now;
                     DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
                     format.DateSeparator = "/";
@@ -532,20 +525,20 @@ namespace Tiger
                     record.m_recv_date = now.ToString("d", format);//消息数据包设置上报时间
                     item.Value.RecvDate = now;//产生数据时时间
 
-                    string allstring = "T1-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "T2-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "T3-" + ((ushort)rand.Next(1, 100) * 0.8).ToString() + " ";
-                    allstring += "T4-" + ((ushort)rand.Next(1, 100) * 0.79).ToString() + " ";
-                    allstring += "T5-" + ((ushort)rand.Next(1, 100) * 0.99).ToString() + " ";
-                    allstring += "T6-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "F1-" + ((ushort)rand.Next(1000, 30000) * 6.7).ToString() + " ";
-                    allstring += "F2-" + ((ushort)rand.Next(2000, 7700) * 0.89).ToString() + " ";
-                    allstring += "A1-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "A2-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "A3-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "P1-" + ((ushort)rand.Next(1, 1000) * 0.89).ToString() + " ";
-                    allstring += "W1-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "v1-" + ((ushort)rand.Next(1, 10000) * 0.89).ToString() + " ";
+                    string allstring = "T1-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "T2-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "T3-" + ((ushort)_rand.Next(1, 100) * 0.8).ToString() + " ";
+                    allstring += "T4-" + ((ushort)_rand.Next(1, 100) * 0.79).ToString() + " ";
+                    allstring += "T5-" + ((ushort)_rand.Next(1, 100) * 0.99).ToString() + " ";
+                    allstring += "T6-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "F1-" + ((ushort)_rand.Next(1000, 30000) * 6.7).ToString() + " ";
+                    allstring += "F2-" + ((ushort)_rand.Next(2000, 7700) * 0.89).ToString() + " ";
+                    allstring += "A1-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "A2-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "A3-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "P1-" + ((ushort)_rand.Next(1, 1000) * 0.89).ToString() + " ";
+                    allstring += "W1-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "v1-" + ((ushort)_rand.Next(1, 10000) * 0.89).ToString() + " ";
                     record.m_data_len = (ushort)allstring.Length;
                     //byte[] byteArray =;
                     record.m_data_buf = System.Text.Encoding.Default.GetBytes(string.Copy(allstring));
@@ -553,9 +546,9 @@ namespace Tiger
 
                 finally
                 {
-                    cacheLock.ExitWriteLock();
+                    _cacheLock.ExitWriteLock();
                 }
-                Dqueue.EnQueueItem(record);
+                _dqueue.EnQueueItem(record);
             
             }
             stopWatch.Stop();
@@ -589,14 +582,14 @@ namespace Tiger
             //        len = HexToStr(textBox3.Text, bc);
             //        str = System.Text.Encoding.Default.GetString(bc, 0, len);	//将该字节数组转换到字符串进行传送
             //        if (len > 0)
-            //            if (GPRS.do_send_user_data(textBox2.Text, bc, len, mess) == 0)//开发包函数，发送数据到DTU
+            //            if (Gprs.Gprs.do_send_user_data(textBox2.Text, bc, len, mess) == 0)//开发包函数，发送数据到DTU
             //            {
             //                msg = "\n向 ";
             //                msg = msg + textBox2.Text + " 16进制发送数据:" + textBox3.Text + "\r\n";
             //                AddText(msg);
             //            }
             //    }
-            //    //else if (GPRS.do_send_user_data(textBox2.Text, bc, textBox3.TextLength, mess) == 0)
+            //    //else if (Gprs.Gprs.do_send_user_data(textBox2.Text, bc, textBox3.TextLength, mess) == 0)
             //    //{
             //    //    msg = "\n向 ";
             //    //    msg = msg + textBox2.Text + " 发送数据:" + textBox3.Text + "\r\n";
@@ -618,22 +611,22 @@ namespace Tiger
         private void timer3_Tick(object sender, EventArgs e)
         {
             //int i;
-            GPRS_DATA_RECORD recdPtr = new GPRS_DATA_RECORD();
+            GprsDataRecord recdPtr = new GprsDataRecord();
             StringBuilder mess = new StringBuilder(100);
 
             //读取DTU数据		
-            if (serv_mode == 1)
+            if (ServMode == 1)
             {
-                if (GPRS.do_read_proc(ref recdPtr, mess, true/*checkBox2.Checked*/) >= 0)
+                if (Gprs.Gprs.do_read_proc(ref recdPtr, mess, true/*checkBox2.Checked*/) >= 0)
                 {
                     byte a = recdPtr.m_data_type;
                     //RefreshList();
                     switch (recdPtr.m_data_type)
                     {
                         case 0x01:	//注册包												
-                            GPRS_USER_INFO user_info = new GPRS_USER_INFO();
+                            GprsUserInfo user_info = new GprsUserInfo();
                             //ushort usPort;
-                            if (GPRS.get_user_info(recdPtr.m_userid, ref user_info) == 0)
+                            if (Gprs.Gprs.get_user_info(recdPtr.m_userid, ref user_info) == 0)
                             {
                                 //已经注册过	
                                 AddText("\n" + recdPtr.m_userid + "---注册" + "\r\n");
@@ -642,10 +635,10 @@ namespace Tiger
                                 //    {		
                                 //        listView1.Items[i].SubItems.Add(user_info.m_logon_date);
                                 //        listView1.Items[i].SubItems.Add(user_info.m_update_time.ToString());
-                                //        listView1.Items[i].SubItems.Add(GPRS.inet_ntoa(GPRS.ntohl(user_info.m_sin_addr)));
+                                //        listView1.Items[i].SubItems.Add(Gprs.Gprs.inet_ntoa(Gprs.Gprs.ntohl(user_info.m_sin_addr)));
                                 //        usPort = user_info.m_sin_port;
                                 //        listView1.Items[i].SubItems.Add(usPort.ToString());
-                                //        listView1.Items[i].SubItems.Add(GPRS.inet_ntoa(GPRS.ntohl(user_info.m_local_addr)));
+                                //        listView1.Items[i].SubItems.Add(Gprs.Gprs.inet_ntoa(Gprs.Gprs.ntohl(user_info.m_local_addr)));
                                 //        usPort = user_info.m_local_port;
                                 //        listView1.Items[i].SubItems.Add(usPort.ToString());										
                                 //        return;
@@ -711,27 +704,27 @@ namespace Tiger
         protected void pressdata()
         {
             //int i;
-            GPRS_DATA_RECORD recdPtr = new GPRS_DATA_RECORD();
+            GprsDataRecord recdPtr = new GprsDataRecord();
             StringBuilder mess = new StringBuilder(100);
-            GPRS_USER_INFO user_info = new GPRS_USER_INFO();
+            GprsUserInfo user_info = new GprsUserInfo();
             //ushort usPort;
 
             //读取DTU数据				
-            while (threadrun)
+            while (Threadrun)
             {
-                if (recvdata)
+                if (Recvdata)
                     continue;
-                if (threadrun == false)
+                if (Threadrun == false)
                     break;
-                if (GPRS.do_read_proc(ref recdPtr, mess, true/*checkBox2.Checked*/) >= 0)
+                if (Gprs.Gprs.do_read_proc(ref recdPtr, mess, true/*checkBox2.Checked*/) >= 0)
                 {
                     //byte a = recdPtr.m_data_type;
                     //RefreshList();
-                    recvdata = true;
+                    Recvdata = true;
                     switch (recdPtr.m_data_type)
                     {
                         case 0x01:	//注册包												
-                            if (GPRS.get_user_info(recdPtr.m_userid, ref user_info) == 0)
+                            if (Gprs.Gprs.get_user_info(recdPtr.m_userid, ref user_info) == 0)
                             {
                                 //已经注册过	
                                 //AddText("\n"+recdPtr.m_userid + "---注册"+"\r\n");					
@@ -740,10 +733,10 @@ namespace Tiger
                                 //    {		
                                 //        listView1.Items[i].SubItems.Add(user_info.m_logon_date);
                                 //        listView1.Items[i].SubItems.Add(user_info.m_update_time.ToString());
-                                //        listView1.Items[i].SubItems.Add(GPRS.inet_ntoa(GPRS.ntohl(user_info.m_sin_addr)));
+                                //        listView1.Items[i].SubItems.Add(Gprs.Gprs.inet_ntoa(Gprs.Gprs.ntohl(user_info.m_sin_addr)));
                                 //        usPort = user_info.m_sin_port;
                                 //        listView1.Items[i].SubItems.Add(usPort.ToString());
-                                //        listView1.Items[i].SubItems.Add(GPRS.inet_ntoa(GPRS.ntohl(user_info.m_local_addr)));
+                                //        listView1.Items[i].SubItems.Add(Gprs.Gprs.inet_ntoa(Gprs.Gprs.ntohl(user_info.m_local_addr)));
                                 //        usPort = user_info.m_local_port;
                                 //        listView1.Items[i].SubItems.Add(usPort.ToString());										
                                 //    }	
@@ -801,7 +794,7 @@ namespace Tiger
                         default:
                             break;
                     }
-                    recvdata = false;
+                    Recvdata = false;
                 }
             }
             //	thread.Abort();
@@ -815,22 +808,22 @@ namespace Tiger
             //int i;
 
             //响应DTU消息
-            if (m.Msg == GPRS.WM_DTU)
+            if (m.Msg == Gprs.Gprs.WmDtu)
             {
-                GPRS_DATA_RECORD recdPtr = new GPRS_DATA_RECORD();
-                StringBuilder mess = new StringBuilder(100);
+                var recdPtr = new GprsDataRecord();
+                var mess = new StringBuilder(100);
 
                 //开发包函数，读取DTU数据				
-                if (GPRS.do_read_proc(ref recdPtr, mess, true/*checkBox2.Checked*/) >= 0)
+                if (Gprs.Gprs.do_read_proc(ref recdPtr, mess, true/*checkBox2.Checked*/) >= 0)
                 {
                     byte a = recdPtr.m_data_type;
                     //RefreshList();
                     switch (recdPtr.m_data_type)
                     {
                         case 0x01:	//注册包												
-                            GPRS_USER_INFO user_info = new GPRS_USER_INFO();
+                            GprsUserInfo user_info = new GprsUserInfo();
                             //ushort usPort;
-                            if (GPRS.get_user_info(recdPtr.m_userid, ref user_info) == 0)//开发包函数，通过ID获取DTU信息
+                            if (Gprs.Gprs.get_user_info(recdPtr.m_userid, ref user_info) == 0)//开发包函数，通过ID获取DTU信息
                             {
                                 //已经注册过	
                                 //AddText("\n"+recdPtr.m_userid + "---注册"+"\r\n");					
@@ -856,12 +849,12 @@ namespace Tiger
                                 //DTUObject state = new DTUObject();
                                 //state.Aera_IrradiatedSum = 10;
                                 //Dqueue.EnQueueItem(state);
-                                //logger.Info("Receive a message from GPRS Modules!.");
+                                //logger.Info("Receive a message from Gprs Modules!.");
                                 //AddText("\r\n" + recdPtr.m_userid + "---" + recdPtr.m_recv_date + "---" + recdPtr.m_data_len.ToString() + "\r\n"
                                 //    + StrToHex(recdPtr.m_data_buf, recdPtr.m_data_len) + "\r\n");
                                 //    
 
-                                Dqueue.EnQueueItem(recdPtr);
+                                _dqueue.EnQueueItem(recdPtr);
                             }
                             // else
                             //显示数据
@@ -915,16 +908,16 @@ namespace Tiger
 
         private void btn_Atach_Click(object sender, EventArgs e)
         {
-            Dqueue.OnResponseData += new DoubleQueue.ResponseData(DoubleQueue_OnResponseData);
-            global.attached = true;
+            _dqueue.OnResponseData += new DoubleQueue.ResponseData(DoubleQueue_OnResponseData);
+            Global.Attached = true;
             btn_Atach.Enabled = false;
             btn_Detach.Enabled = true;
         }
 
         private void btn_Detach_Click(object sender, EventArgs e)
         {
-            Dqueue.OnResponseData -= new DoubleQueue.ResponseData(DoubleQueue_OnResponseData);
-            global.attached = false;
+            _dqueue.OnResponseData -= new DoubleQueue.ResponseData(DoubleQueue_OnResponseData);
+            Global.Attached = false;
             btn_Atach.Enabled = true;
             btn_Detach.Enabled = false;
         }
@@ -938,13 +931,13 @@ namespace Tiger
             //string str = "";
             //long t_update, t_now;
             //StringBuilder mess = new StringBuilder(1000);
-            //GPRS_USER_INFO user_info = new GPRS_USER_INFO();
+            //Gprs_USER_INFO user_info = new Gprs_USER_INFO();
             ////listView1.Items.Clear();//清空终端登陆列表
             //str = str + 0x00 + 0x00 + 0x00;
-            //iDtuAmount = GPRS.get_max_user_amount();//开发包函数，返回中心最大连接DTU数量
+            //iDtuAmount = Gprs.Gprs.get_max_user_amount();//开发包函数，返回中心最大连接DTU数量
             //for (i = 0; i < iDtuAmount; i++)
             //{
-            //    GPRS.get_user_at(i, ref user_info);//开发包函数，通过DTU顺序号获取DTU信息
+            //    Gprs.Gprs.get_user_at(i, ref user_info);//开发包函数，通过DTU顺序号获取DTU信息
             //    if (user_info.m_status == 1)
             //    {
             //        t_update = (long)(user_info.m_update_time[0])
@@ -955,7 +948,7 @@ namespace Tiger
             //        t_now = (long)Math.Round((DateTime.Now.ToOADate() - 25569) * 3600 * 24);
             //        if ((t_now - t_update) > connect_time * 60)//判断DTU最后注册时间与现在时间的差值是否超过设置的超时时间
             //        {										//若超时则认为该DTU不在线，调用开发包函数使其下线
-            //            GPRS.do_close_one_user2(user_info.m_userid, mess);//开发包函数，使某个DTU下线并发下线指令
+            //            Gprs.Gprs.do_close_one_user2(user_info.m_userid, mess);//开发包函数，使某个DTU下线并发下线指令
             //            continue;
             //        }
             //        ListInsert(user_info, t_update);
@@ -973,14 +966,14 @@ namespace Tiger
         //-------------------my 
         public void AddText(string str)
         {
-            //if (txt_gprscontent.Text.Length >= textBox1.MaxLength)
-            //    txt_gprscontent.Text = "";
-            //txt_gprscontent.AppendText(str);
+            //if (txt_Gprscontent.Text.Length >= textBox1.MaxLength)
+            //    txt_Gprscontent.Text = "";
+            //txt_Gprscontent.AppendText(str);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            m_Log.Info("click once!.");
+            MLog.Info("click once!.");
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -996,7 +989,7 @@ namespace Tiger
 
         private void 统计要素历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            F_History f_history_view = new F_History();
+            FHistory f_history_view = new FHistory();
             f_history_view.ShowDialog();
         }
 
@@ -1007,7 +1000,7 @@ namespace Tiger
 
         private void 显示要素历史数据ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            F_HistoryUpdate f_history_view = new F_HistoryUpdate();
+            FHistoryUpdate f_history_view = new FHistoryUpdate();
             f_history_view.ShowDialog();
         }
 
@@ -1028,7 +1021,7 @@ namespace Tiger
 
         private void 用户添加ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            F_UserManager fuser = new F_UserManager();
+            FUserManager fuser = new FUserManager();
             fuser.ShowDialog();
         }
 
@@ -1039,7 +1032,7 @@ namespace Tiger
             using (var context = new DbTigerEntities())
             {
                 ///遍历所有list元素
-                foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
+                foreach (KeyValuePair<string, DtuObject> item in Global.DtuList)
                 {
                     try
                     {
@@ -1052,18 +1045,18 @@ namespace Tiger
                         {
                             UnitId = item.Key,
                             DateTime_RecvDate = item.Value.RecvDate,//产生数据时时间
-                            Temp_HeatingBox = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_HeatingBox)]),
-                            Temp_CollectorBox = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorBox)]),
-                            Temp_CollectorIn = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorIn)]),
-                            Temp_CollectorOut = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorOut)]),
-                            Temp_Ambient = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_Ambient)]),
-                            Humidity_Ambient = (float)(item.Value.Field1[(ushort)(Field1NO.Humidity_Ambient)]),
+                            Temp_HeatingBox = (float)(item.Value.Field1[(ushort)(Field1No.TempHeatingBox)]),
+                            Temp_CollectorBox = (float)(item.Value.Field1[(ushort)(Field1No.TempCollectorBox)]),
+                            Temp_CollectorIn = (float)(item.Value.Field1[(ushort)(Field1No.TempCollectorIn)]),
+                            Temp_CollectorOut = (float)(item.Value.Field1[(ushort)(Field1No.TempCollectorOut)]),
+                            Temp_Ambient = (float)(item.Value.Field1[(ushort)(Field1No.TempAmbient)]),
+                            Humidity_Ambient = (float)(item.Value.Field1[(ushort)(Field1No.HumidityAmbient)]),
                             //Flow_CollectorSys = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_CollectorSys)]),
                             //Flow_HeatUsing = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_HeatUsing)]),
-                            Amount_Irradiated = (float)(item.Value.Field1[(ushort)(Field1NO.Amount_Irradiated)]),
-                            Amount_IrradiatedSum = (float)(item.Value.Field1[(ushort)(Field1NO.Amount_IrradiatedSum)]),
+                            Amount_Irradiated = (float)(item.Value.Field1[(ushort)(Field1No.AmountIrradiated)]),
+                            Amount_IrradiatedSum = (float)(item.Value.Field1[(ushort)(Field1No.AmountIrradiatedSum)]),
                             //Aera_IrradiatedSum = (decimal)(item.Value.Field1[(ushort)(Field1NO.Aera_IrradiatedSum)]),
-                            Speed_Wind = (float)(item.Value.Field1[(ushort)(Field1NO.Speed_Wind)]),
+                            Speed_Wind = (float)(item.Value.Field1[(ushort)(Field1No.SpeedWind)]),
                             //Volumn_HeatingBox = (decimal)(item.Value.Field1[(ushort)(Field1NO.Volumn_HeatingBox)])
 
                         };
@@ -1095,7 +1088,7 @@ namespace Tiger
             using (var context = new DbTigerEntities())
             {
                 ///遍历所有list元素
-                foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
+                foreach (KeyValuePair<string, DtuObject> item in Global.DtuList)
                 {
                     try
                     {
@@ -1103,10 +1096,10 @@ namespace Tiger
                         {
                             UnitId = item.Key,
                             DateTime_Statics = item.Value.RecvDate,//产生数据时时间
-                            System_heat = (global.ParameterList[item.Key].System_heat)+(global.ParameterList[item.Key].Delta_time)*(global.DTUList[item.Key].Field1[(ushort)Field1NO.Flow_CollectorSys]),
+                            System_heat = (Global.ParameterList[item.Key].SystemHeat)+(Global.ParameterList[item.Key].DeltaTime)*(Global.DtuList[item.Key].Field1[(ushort)Field1No.FlowCollectorSys]),
 
                         };
-                        global.SatisticList[item.Key].System_heat = single.System_heat;//保存统计数据到全局状态表
+                        Global.SatisticList[item.Key].SystemHeat = single.System_heat;//保存统计数据到全局状态表
                         context.singleunitstatistics.Add(single);
                         context.SaveChanges();
                     }
@@ -1150,7 +1143,7 @@ namespace Tiger
             using (var context = new DbTigerEntities())
             {
                 ///遍历所有list元素
-                foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
+                foreach (KeyValuePair<string, DtuObject> item in Global.DtuList)
                 {
                     try
                     {
@@ -1163,19 +1156,19 @@ namespace Tiger
                         {
                             UnitId = item.Key,
                             DateTime_RecvDate = item.Value.RecvDate,//产生数据时时间
-                            Temp_HeatingBox = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_HeatingBox)]),
-                            Temp_CollectorBox = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorBox)]),
-                            Temp_CollectorIn = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorIn)]),
-                            Temp_CollectorOut = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_CollectorOut)]),
-                            Temp_Ambient = (float)(item.Value.Field1[(ushort)(Field1NO.Temp_Ambient)]),
-                            Humidity_Ambient = (float)(item.Value.Field1[(ushort)(Field1NO.Humidity_Ambient)]),
+                            Temp_HeatingBox = (float)(item.Value.Field1[(ushort)(Field1No.TempHeatingBox)]),
+                            Temp_CollectorBox = (float)(item.Value.Field1[(ushort)(Field1No.TempCollectorBox)]),
+                            Temp_CollectorIn = (float)(item.Value.Field1[(ushort)(Field1No.TempCollectorIn)]),
+                            Temp_CollectorOut = (float)(item.Value.Field1[(ushort)(Field1No.TempCollectorOut)]),
+                            Temp_Ambient = (float)(item.Value.Field1[(ushort)(Field1No.TempAmbient)]),
+                            Humidity_Ambient = (float)(item.Value.Field1[(ushort)(Field1No.HumidityAmbient)]),
                             //Flow_CollectorSys = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_CollectorSys)]),
                             //Flow_HeatUsing = (decimal)(item.Value.Field1[(ushort)(Field1NO.Flow_HeatUsing)]),
-                            Amount_Irradiated = (float)(item.Value.Field1[(ushort)(Field1NO.Amount_Irradiated)]),
-                            Amount_IrradiatedSum = (float)(item.Value.Field1[(ushort)(Field1NO.Amount_IrradiatedSum)]),
+                            Amount_Irradiated = (float)(item.Value.Field1[(ushort)(Field1No.AmountIrradiated)]),
+                            Amount_IrradiatedSum = (float)(item.Value.Field1[(ushort)(Field1No.AmountIrradiatedSum)]),
                             //Aera_IrradiatedSum = (decimal)(item.Value.Field1[(ushort)(Field1NO.Aera_IrradiatedSum)]),
-                            Speed_Wind = (float)(item.Value.Field1[(ushort)(Field1NO.Speed_Wind)]),
-                            Delta_Time = global.ParameterList[item.Key].Delta_time,
+                            Speed_Wind = (float)(item.Value.Field1[(ushort)(Field1No.SpeedWind)]),
+                            Delta_Time = Global.ParameterList[item.Key].DeltaTime,
 
                         };
                         context.unitstates.Add(unitstate);
@@ -1201,19 +1194,19 @@ namespace Tiger
 
         private void btnBindingTest_Click(object sender, EventArgs e)
         {
-            global.osystem.System_heat = (ushort)rand.Next(0, 100);
-            global.osystem.System_heat = (ushort)rand.Next(0, 100);//供热水箱温度
-            global.osystem.Conventional_energy = (ushort)rand.Next(0, 100);  //系统常规热源耗能量
-            global.osystem.Storage_tank = (ushort)rand.Next(0, 100); //贮热水箱热损系数
-            global.osystem.System_efficiency = (ushort)rand.Next(0, 100);  //集热系统效率
-            global.osystem.Solar_assurance_day = (ushort)rand.Next(0, 100);  //日太阳能保证率
-            global.osystem.Solar_assurance_year = (ushort)rand.Next(0, 100);  //全年太阳能保证率
-            global.osystem.Energy_alternative = (ushort)rand.Next(0, 100);  //常规能源替代量
-            global.osystem.Carbon_emission = (ushort)rand.Next(0, 100);  //二氧化碳减排量
-            global.osystem.Sulfur_emission = (ushort)rand.Next(0, 100); //二氧化硫减排量
-            global.osystem.Dust_emission = (ushort)rand.Next(0, 100);  //粉尘减排量
-            global.osystem.Fee_effect = (ushort)rand.Next(0, 100);   //项目费效比
-            global.osystem.Auxiliary_heat = (ushort)rand.Next(0, 100);//辅助热源加热量
+            Global.Osystem.SystemHeat = (ushort)_rand.Next(0, 100);
+            Global.Osystem.SystemHeat = (ushort)_rand.Next(0, 100);//供热水箱温度
+            Global.Osystem.ConventionalEnergy = (ushort)_rand.Next(0, 100);  //系统常规热源耗能量
+            Global.Osystem.StorageTank = (ushort)_rand.Next(0, 100); //贮热水箱热损系数
+            Global.Osystem.SystemEfficiency = (ushort)_rand.Next(0, 100);  //集热系统效率
+            Global.Osystem.SolarAssuranceDay = (ushort)_rand.Next(0, 100);  //日太阳能保证率
+            Global.Osystem.SolarAssuranceYear = (ushort)_rand.Next(0, 100);  //全年太阳能保证率
+            Global.Osystem.EnergyAlternative = (ushort)_rand.Next(0, 100);  //常规能源替代量
+            Global.Osystem.CarbonEmission = (ushort)_rand.Next(0, 100);  //二氧化碳减排量
+            Global.Osystem.SulfurEmission = (ushort)_rand.Next(0, 100); //二氧化硫减排量
+            Global.Osystem.DustEmission = (ushort)_rand.Next(0, 100);  //粉尘减排量
+            Global.Osystem.FeeEffect = (ushort)_rand.Next(0, 100);   //项目费效比
+            Global.Osystem.AuxiliaryHeat = (ushort)_rand.Next(0, 100);//辅助热源加热量
         }
 
         private void timerStore2Db_Tick(object sender, EventArgs e)
@@ -1227,14 +1220,14 @@ namespace Tiger
             stopWatch.Start();
             DateTime now;
             now = DateTime.Now;
-            foreach (KeyValuePair<string, DTUObject> item in global.DTUList)
+            foreach (KeyValuePair<string, DtuObject> item in Global.DtuList)
             {
-                GPRS_DATA_RECORD record = new GPRS_DATA_RECORD();
-                cacheLock.EnterWriteLock();
+                GprsDataRecord record = new GprsDataRecord();
+                _cacheLock.EnterWriteLock();
                 try
                 {
                     record.Initialize();
-                    record.m_userid = item.Key;//消息数据包设置GPRS号码
+                    record.m_userid = item.Key;//消息数据包设置Gprs号码
                     
                     DateTimeFormatInfo format = CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat;
                     format.DateSeparator = "-";
@@ -1242,20 +1235,20 @@ namespace Tiger
                     record.m_recv_date = now.ToString("d", format);//消息数据包设置上报时间
                     item.Value.RecvDate = now;//产生数据时时间
 
-                    string allstring = "T1-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "T2-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "T3-" + ((ushort)rand.Next(1, 100) * 0.8).ToString() + " ";
-                    allstring += "T4-" + ((ushort)rand.Next(1, 100) * 0.79).ToString() + " ";
-                    allstring += "T5-" + ((ushort)rand.Next(1, 100) * 0.99).ToString() + " ";
-                    allstring += "T6-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "F1-" + ((ushort)rand.Next(1000, 30000) * 6.7).ToString() + " ";
-                    allstring += "F2-" + ((ushort)rand.Next(2000, 7700) * 0.89).ToString() + " ";
-                    allstring += "A1-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "A2-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "A3-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "P1-" + ((ushort)rand.Next(1, 1000) * 0.89).ToString() + " ";
-                    allstring += "W1-" + ((ushort)rand.Next(1, 100) * 0.89).ToString() + " ";
-                    allstring += "v1-" + ((ushort)rand.Next(1, 10000) * 0.89).ToString() + " ";
+                    string allstring = "T1-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "T2-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "T3-" + ((ushort)_rand.Next(1, 100) * 0.8).ToString() + " ";
+                    allstring += "T4-" + ((ushort)_rand.Next(1, 100) * 0.79).ToString() + " ";
+                    allstring += "T5-" + ((ushort)_rand.Next(1, 100) * 0.99).ToString() + " ";
+                    allstring += "T6-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "F1-" + ((ushort)_rand.Next(1000, 30000) * 6.7).ToString() + " ";
+                    allstring += "F2-" + ((ushort)_rand.Next(2000, 7700) * 0.89).ToString() + " ";
+                    allstring += "A1-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "A2-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "A3-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "P1-" + ((ushort)_rand.Next(1, 1000) * 0.89).ToString() + " ";
+                    allstring += "W1-" + ((ushort)_rand.Next(1, 100) * 0.89).ToString() + " ";
+                    allstring += "v1-" + ((ushort)_rand.Next(1, 10000) * 0.89).ToString() + " ";
                     record.m_data_len = (ushort)allstring.Length;
                     //byte[] byteArray =;
                     record.m_data_buf = System.Text.Encoding.Default.GetBytes(string.Copy(allstring));
@@ -1264,9 +1257,9 @@ namespace Tiger
 
                 finally
                 {
-                    cacheLock.ExitWriteLock();
+                    _cacheLock.ExitWriteLock();
                 }
-                Dqueue.EnQueueItem(record);
+                _dqueue.EnQueueItem(record);
 
                 now.AddSeconds(1);
             }

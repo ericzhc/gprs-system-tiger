@@ -1,6 +1,6 @@
 ﻿namespace Tiger
 {
-    partial class F_History
+    partial class FHistory
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_History));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FHistory));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -177,7 +177,7 @@
             this.checkBoxID.Name = "checkBoxID";
             this.checkBoxID.Size = new System.Drawing.Size(90, 16);
             this.checkBoxID.TabIndex = 0;
-            this.checkBoxID.Text = "GPRS 号码：";
+            this.checkBoxID.Text = "Gprs 号码：";
             this.checkBoxID.UseVisualStyleBackColor = true;
             // 
             // groupBox2

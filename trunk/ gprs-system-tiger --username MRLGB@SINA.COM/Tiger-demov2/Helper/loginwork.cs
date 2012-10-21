@@ -3,35 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
-using System.Security.Authentication;
 using System.Xml.Serialization;
 using System.IO;
-using System.Windows.Forms;
 
 namespace Tiger.Helper
 {
-    public static class loginwork
+    public static class Loginwork
     {
 
         #region Fields & Properties
 
         //this field should set in settings application
-        private static string _FileName = @"UserData.xml";
+        private const string FileName = @"UserData.xml";
 
         //the login flag (true if the user is logged)
-        private static bool _LoggedDefault;
-        private static bool _LoggedDb;
-        private static bool _Logged;
-        public static bool Logged
-        {
-            get { return _Logged; }
-        }
+        private static bool _loggedDefault;
+        private static bool _loggedDb;
+        public static bool Logged { get; private set; }
 
         // this list store the all registered users
-        private static List<UserData> _UserDataList = new List<UserData>();
+        private static List<UserData> _userDataList = new List<UserData>();
 
         // the user data who is logged
-        private static UserData _user = new UserData();
+        private static UserData _user;
 
         public static UserData User
         {
@@ -46,24 +40,21 @@ namespace Tiger.Helper
         /// <summary>
         /// Check exist this nikname in the users list
         /// </summary>
-        /// <param name="NikName">Nikname of the user</param>
+        /// <param name="nikName">Nikname of the user</param>
         /// <returns></returns>
-        private static bool IsExistNikName(string NikName)
+        private static bool IsExistNikName(string nikName)
         {
 
-            if (_UserDataList.Count == 0)
+            if (_userDataList.Count == 0)
             {
                 return false;
             }
-            else
-            {
-                // here I use a lambda expression for the searching the nikname in the user data list
-                _user = _UserDataList.FirstOrDefault(UserData => UserData.Nikname == NikName);
+            // here I use a lambda expression for the searching the nikname in the user data list
+            _user = _userDataList.FirstOrDefault(userData => userData.Nikname == nikName);
 
-                if (String.IsNullOrEmpty(_user.Nikname))
-                {
-                    return false;
-                }
+            if (String.IsNullOrEmpty(_user.Nikname))
+            {
+                return false;
             }
 
             return true;
@@ -77,13 +68,13 @@ namespace Tiger.Helper
         private static List<UserData> Load()
         {
 
-            List<UserData> returnUserData = new List<UserData>();
+            var returnUserData = new List<UserData>();
 
-            if (File.Exists(_FileName))
+            if (File.Exists(FileName))
             {
-                using (Stream fileStream = File.OpenRead(_FileName))
+                using (Stream fileStream = File.OpenRead(FileName))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<UserData>));
+                    var serializer = new XmlSerializer(typeof(List<UserData>));
                     returnUserData = (List<UserData>)serializer.Deserialize(fileStream);
                 }
             }
@@ -111,7 +102,7 @@ namespace Tiger.Helper
             byte[] result = md5.ComputeHash(data);
 
             //do hexadecimal-formatted string
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             foreach (byte item in result)
             {
                 sb.Append(item.ToString("X"));
@@ -123,22 +114,22 @@ namespace Tiger.Helper
 
         public static void Initialization()
         {
-            _UserDataList = Load();
+            _userDataList = Load();
         }
 
         /// <summary>
         /// Check the nikname and the password in the users list
         /// </summary>
-        /// <param name="NikName"></param>
-        /// <param name="Password"></param>
-        public static void DoLogin(string NikName, string Password)
+        /// <param name="nikName"></param>
+        /// <param name="password"></param>
+        public static void DoLogin(string nikName, string password)
         {
 
-          if (IsExistNikName(NikName))
+          if (IsExistNikName(nikName))
           {
-            if (_user.Password == HashString(Password))
+            if (_user.Password == HashString(password))
             {
-              _LoggedDefault = true;
+              _loggedDefault = true;
             }
           }
 
@@ -147,29 +138,29 @@ namespace Tiger.Helper
               try
               {
                   logininfor c = context.logininfors
-                                 .First(i => i.username == NikName);
+                                 .First(i => i.username == nikName);
                   if (c.Equals(null))
                   {
-                      _LoggedDb = false;
+                      _loggedDb = false;
                   }
                   else
-                  if (c.password == Password)
+                  if (c.password == password)
                   {
-                          global.currentuser = c.username;
-                          _LoggedDb = true;
+                          Global.Currentuser = c.username;
+                          _loggedDb = true;
                    }
                    else
                    {
-                       _LoggedDb = false;
+                       _loggedDb = false;
                    }
               }
-              catch (Exception ex)
+              catch (Exception)
               {
                   
               }
           }
 
-          _Logged = (_LoggedDefault || _LoggedDb);
+          Logged = (_loggedDefault || _loggedDb);
 
     }
 
@@ -184,12 +175,12 @@ namespace Tiger.Helper
             if (!IsExistNikName(user.Nikname))
             {
 
-                _UserDataList.Add(user);
+                _userDataList.Add(user);
 
-                using (Stream fileStream = File.Create(_FileName))
+                using (Stream fileStream = File.Create(FileName))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<UserData>));
-                    serializer.Serialize(fileStream, _UserDataList);
+                    var serializer = new XmlSerializer(typeof(List<UserData>));
+                    serializer.Serialize(fileStream, _userDataList);
                 }
 
                 return true;
@@ -210,29 +201,10 @@ namespace Tiger.Helper
     [Serializable]
     public struct UserData
     {
-        private string _Name;
+        public string Name { get; set; }
 
-        public string Name
-        {
-            get { return _Name; }
-            set { _Name = value; }
-        }
+        public string Nikname { get; set; }
 
-        private string _Nikname;
-
-        public string Nikname
-        {
-            get { return _Nikname; }
-            set { _Nikname = value; }
-        }
-
-        private string _Password;
-
-        public string Password
-        {
-            get { return _Password; }
-            set { _Password = value; }
-        }
-
+        public string Password { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Tiger
 {
-    partial class F_UserManager
+    partial class FUserManager
     {
         /// <summary>
         /// Required designer variable.

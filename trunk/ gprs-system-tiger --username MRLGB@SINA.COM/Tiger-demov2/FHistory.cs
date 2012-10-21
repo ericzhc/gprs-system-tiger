@@ -11,7 +11,7 @@ using System.Data.Objects;
 
 namespace Tiger
 {
-    public partial class F_History : Form
+    public partial class FHistory : Form
     {
         private DbTigerEntities context;//数据库的上下文。
         private bool[] selectflag;
@@ -26,7 +26,7 @@ namespace Tiger
         }
         private decimal[] T;
 
-        public F_History()
+        public FHistory()
         {
             InitializeComponent();
             selectflag = new bool[5];

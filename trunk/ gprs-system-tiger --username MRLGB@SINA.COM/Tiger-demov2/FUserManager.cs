@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Tiger.Helper;
 
 namespace Tiger
 {
-    public partial class F_UserManager : Form
+    public partial class FUserManager : Form
     {
         //private BindingSource bs;
-        public F_UserManager()
+        public FUserManager()
         {
             InitializeComponent();
         }
@@ -22,7 +23,7 @@ namespace Tiger
             LoadData();
             foreach (UserRole role in Enum.GetValues(typeof(UserRole))) 
             {
-                string temp = global.userrolestring[(ushort)role];
+                string temp = Global.Userrolestring[(ushort)role];
                 comboBox_role.Items.Add(temp);
             }
             
@@ -91,7 +92,7 @@ namespace Tiger
                         c.password = textBox_password.Text;
                         context.SaveChanges();
                     }
-                     catch (Exception ex)
+                     catch (Exception)
                     {
                         
                     }
@@ -125,7 +126,7 @@ namespace Tiger
 
                      }
                  }
-                 catch (Exception ex)
+                 catch (Exception)
                  {
                      //MessageBox.Show(ex.InnerException.ToString());
                  }
@@ -141,9 +142,9 @@ namespace Tiger
                 textBox_name.Text = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
                 textBox_password.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
                 //MessageBox.Show(global.userrolestring[int.Parse(dataGridView1.SelectedRows[0].Cells[2].Value.ToString())]);
-                comboBox_role.Text = global.userrolestring[int.Parse(dataGridView1.SelectedRows[0].Cells[2].Value.ToString())];
+                comboBox_role.Text = Global.Userrolestring[int.Parse(dataGridView1.SelectedRows[0].Cells[2].Value.ToString())];
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
             	
             }
@@ -161,7 +162,7 @@ namespace Tiger
                     c.role =(short)comboBox_role.SelectedIndex;
                     context.SaveChanges();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }

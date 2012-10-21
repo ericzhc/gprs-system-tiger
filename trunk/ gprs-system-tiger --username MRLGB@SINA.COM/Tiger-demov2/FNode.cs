@@ -1,30 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Tiger.Helper;
 
 namespace Tiger
 {
-    public partial class F_Node : Form
+    public partial class FNode : Form
     {
-        Module module = new Module();
-        private string unitid;
-        private BindingSource bs;
+        readonly Module _module = new Module();
+        private string _unitid;
+        private BindingSource _bs;
 
-        public F_Node()
+        public FNode()
         {
             InitializeComponent();
         }
 
         private void FNode_Load(object sender, EventArgs e)
         {
-            module.TreeInit(treeView1);
-            bs = new BindingSource();
-            bs.DataSource=typeof(DTUObject);
+            _module.TreeInit(treeView1);
+            _bs = new BindingSource {DataSource = typeof (DtuObject)};
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -33,24 +27,24 @@ namespace Tiger
             {
                 if (!treeView1.SelectedNode.Tag.Equals(null))
                 {
-                    unitid=(string)treeView1.SelectedNode.Tag;
+                    _unitid=(string)treeView1.SelectedNode.Tag;
                 }
                 else
                 {
                     MessageBox.Show("选择项不是！");
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 string errorMessage = "System error.\r\n\r\n" + ex.ToString();
                 MessageBox.Show(errorMessage, "Error");
             }
 
             //dataGridView1.Columns.Add("111");
-            global.DTUList[unitid].UpdateField();//从状态数组（归类后的数据）赋值给具体成员变量
-            bs.Clear();
-            bs.Add(global.DTUList[unitid]);
-            dataGridView1.DataSource = bs;
+            Global.DtuList[_unitid].UpdateField();//从状态数组（归类后的数据）赋值给具体成员变量
+            _bs.Clear();
+            _bs.Add(Global.DtuList[_unitid]);
+            dataGridView1.DataSource = _bs;
             //dataGridView1.DataSource = global.DTUList[unitid];
         }
 

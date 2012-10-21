@@ -1,6 +1,6 @@
 ﻿namespace Tiger
 {
-    partial class F_Node
+    partial class FNode
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,7 @@
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("采集器节点02");
             System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("采集器节点03");
             System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("采集器节点04");
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(F_Node));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FNode));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -134,7 +134,7 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "GPRS_32.ico");
+            this.imageList1.Images.SetKeyName(0, "Gprs_32.ico");
             // 
             // splitContainer3
             // 

@@ -1,6 +1,6 @@
 ﻿namespace Tiger
 {
-    partial class F_Login
+    partial class FLogin
   {
     /// <summary>
     /// Required designer variable.

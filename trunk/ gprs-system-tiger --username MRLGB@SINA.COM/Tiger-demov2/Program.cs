@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Tiger
@@ -8,15 +6,15 @@ namespace Tiger
     static class Program
     {
         /// <summary>
-        /// 应用程序的主入口点。http://code.google.com/p/gprs-system-tiger/source/checkout
+        /// 应用程序的主入口点。http://code.google.com/p/Gprs-system-tiger/source/checkout
         /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new F_Main());
-            //Application.Run(new LoginContext());
+            //Application.Run(new FMain());
+            Application.Run(new LoginContext());
         }
     }
 }

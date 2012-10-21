@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Tiger.Helper;
 
 namespace Tiger
 {
-    public partial class F_NodeManager : Form
+    public partial class FNodeManager : Form
     {
         private bool _ValidForm;
-        public F_NodeManager()
+        public FNodeManager()
         {
             InitializeComponent();
             textBox_Unitid.Validating += new CancelEventHandler(ValidateTextBox);
@@ -39,8 +40,8 @@ namespace Tiger
 
         private void button_ok_Click(object sender, EventArgs e)
         {
-            global.Timer_store = (ushort)((numericUpDown1.Value > 0) ? numericUpDown1.Value * 1000 : 60 * 1000);
-            global.Timer_Statistic=(ushort)((numericUpDown2.Value > 0) ? numericUpDown2.Value * 1000 : 60 * 1000);
+            Global.TimerStore = (ushort)((numericUpDown1.Value > 0) ? numericUpDown1.Value * 1000 : 60 * 1000);
+            Global.TimerStatistic=(ushort)((numericUpDown2.Value > 0) ? numericUpDown2.Value * 1000 : 60 * 1000);
             this.Close();
         }
 
@@ -104,13 +105,13 @@ namespace Tiger
                         context.SaveChanges();
                        
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                     }
                     finally
                     {
-                        global.ParameterList[(textBox_Unitid.Text)].UpateParameterObject(textBox_Unitid.Text,
+                        Global.ParameterList[(textBox_Unitid.Text)].UpateParameterObject(textBox_Unitid.Text,
                                                                                          float.Parse(textBox_AreaIrr.Text),
                                                                                          float.Parse(textBox_Auxiliary_power.Text),
                                                                                          float.Parse(textBox_Flow_CollectorSys.Text),
@@ -151,7 +152,7 @@ namespace Tiger
 
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //MessageBox.Show(ex.InnerException.ToString());
                     }
@@ -175,7 +176,7 @@ namespace Tiger
                 textBox_Auxiliary_power.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
                 textBox_SystemHeat.Text = dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
 
             }

@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Tiger
 {
-    public partial class F_CenterConfig : Form
+    public partial class FCenterConfig : Form
     {
-        public F_CenterConfig()
+        public FCenterConfig()
         {
             InitializeComponent();
         }

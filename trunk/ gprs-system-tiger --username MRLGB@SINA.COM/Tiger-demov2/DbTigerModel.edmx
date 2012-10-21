@@ -70,7 +70,7 @@
           <Property Name="Flow_HeatUsing" Type="float" Nullable="false" />
           <Property Name="Auxiliary_power" Type="float" Nullable="false" />
           <Property Name="System_heat" Type="float" Nullable="false" />
-          <Property Name="gprsstate" Type="smallint" />
+          <Property Name="Gprsstate" Type="smallint" />
           <Property Name="Star_time" Type="datetime" />
           <Property Name="time_online" Type="int" />
         </EntityType>
@@ -147,7 +147,7 @@
           <Property Type="Single" Name="Flow_HeatUsing" Nullable="false" />
           <Property Type="Single" Name="Auxiliary_power" Nullable="false" />
           <Property Type="Single" Name="System_heat" Nullable="false" />
-          <Property Type="Int16" Name="gprsstate" />
+          <Property Type="Int16" Name="Gprsstate" />
           <Property Type="DateTime" Name="Star_time" Precision="3" />
           <Property Type="Int32" Name="time_online" />
         </EntityType>
@@ -229,7 +229,7 @@
               <MappingFragment StoreEntitySet="union">
                 <ScalarProperty Name="time_online" ColumnName="time_online" />
                 <ScalarProperty Name="Star_time" ColumnName="Star_time" />
-                <ScalarProperty Name="gprsstate" ColumnName="gprsstate" />
+                <ScalarProperty Name="Gprsstate" ColumnName="Gprsstate" />
                 <ScalarProperty Name="System_heat" ColumnName="System_heat" />
                 <ScalarProperty Name="Auxiliary_power" ColumnName="Auxiliary_power" />
                 <ScalarProperty Name="Flow_HeatUsing" ColumnName="Flow_HeatUsing" />

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using MySql.Data.MySqlClient;
 using System.Configuration;
+using Tiger.Database;
 
 namespace Tiger
 {
@@ -201,7 +202,7 @@ namespace Tiger
                 MySqlBackupRestore mb = new MySqlBackupRestore();
                 mb.DropAndRecreateDatabase = DropAndRecreateDatabase;
                 mb.DropAndRecreateTable = DropAndRecreateTable;
-                mb.Construct_SQL_In_One_Line_From_Same_Table = Construct_SQL_In_One_Line_From_Same_Table;
+                mb.ConstructSQLInOneLineFromSameTable = Construct_SQL_In_One_Line_From_Same_Table;
 
                 mb.Backup(backupFile);
 

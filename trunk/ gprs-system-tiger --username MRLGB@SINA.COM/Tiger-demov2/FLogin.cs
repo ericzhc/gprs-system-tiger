@@ -16,7 +16,7 @@ namespace Tiger
   /// <summary>
   /// The login form
   /// </summary>
-  public partial class F_Login: Form
+  public partial class FLogin: Form
   {
 
     #region Fields
@@ -34,7 +34,7 @@ namespace Tiger
 
     #region Initialization
 
-    public F_Login()
+    public FLogin()
     {
       InitializeComponent();
       _countLogFailed = 0;
@@ -45,7 +45,7 @@ namespace Tiger
 
     private void frmLogIn_Load( object sender, EventArgs e )
     {
-        loginwork.Initialization();
+        Loginwork.Initialization();
     }
 
     #endregion
@@ -93,9 +93,9 @@ namespace Tiger
       if (_ValidForm)
       {
         //Check the nikname and the password
-          loginwork.DoLogin(tbName.Text, tbPassword.Text);
+          Loginwork.DoLogin(tbName.Text, tbPassword.Text);
 
-          if (loginwork.Logged) //check the logged flag
+          if (Loginwork.Logged) //check the logged flag
         {
           this.Close();
         }

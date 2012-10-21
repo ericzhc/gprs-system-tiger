@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using Tiger.Helper;
 
@@ -15,8 +13,8 @@ namespace Tiger
     #region Private fields
     // here we can declare the all forms application and manage it directly
     //(show, close, set as MainForm and so on) 
-    private F_Login fLogin;
-    private F_Main fMain;
+    private FLogin _fLogin;
+    private FMain _fMain;
 
     #endregion
 
@@ -34,44 +32,17 @@ namespace Tiger
 
     #region Private Methods
 
-    /// <summary>
-    ///  The Splash form 
-    ///  initialization, show and close
-    /// </summary>
-    private static void CreateSplashForm()
-    {
-
-      Form fSplash = new Form();
-      //fSplash.BackgroundImage = System.Drawing.Image.FromFile(@"backg.bmp");
-
-      fSplash.BackgroundImageLayout = ImageLayout.Center;
-      fSplash.FormBorderStyle = FormBorderStyle.None;
-      fSplash.StartPosition = FormStartPosition.CenterScreen;
-      fSplash.TopMost = true;
-
-      fSplash.TransparencyKey = System.Drawing.Color.White;// it sets transparency for the background of image
-
-      // Set the splash form size and we are shure the image fit to the form
-      //fSplash.Width = (int)fSplash.BackgroundImage.PhysicalDimension.Width;
-      //fSplash.Height = (int)fSplash.BackgroundImage.PhysicalDimension.Height;
-
-      fSplash.Show();
-      System.Threading.Thread.Sleep(2000);
-      fSplash.Close();
-
-    }
-
-    /// <summary>
+      /// <summary>
     /// The Login form
     /// initialization and show
     /// </summary>
     private void CreateLoginForm()
     {
 
-      fLogin = new F_Login();
-      fLogin.Closed += new EventHandler(fLogin_Closed);
-      this.MainForm = fLogin;
-      fLogin.Show();
+      _fLogin = new FLogin();
+      _fLogin.Closed += fLogin_Closed;
+      MainForm = _fLogin;
+      _fLogin.Show();
 
     }
 
@@ -88,11 +59,11 @@ namespace Tiger
     /// <param name="e"></param>
     void fLogin_Closed( object sender, EventArgs e )
     {
-        if (loginwork.Logged) //if the user is logged
+        if (Loginwork.Logged) //if the user is logged
       {
-        fMain = new F_Main();
-        this.MainForm = fMain; //set the main message loop applicaton in this form
-        fMain.Show();
+        _fMain = new FMain();
+        MainForm = _fMain; //set the main message loop applicaton in this form
+        _fMain.Show();
       }
       else
       {
